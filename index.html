@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Solicitud de Crédito Vehicular – AVA</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<!-- ═══════════════════════════════════════════════════════════════
+     reCAPTCHA v3
+     Site Key:   6Lc9zGUsAAAAAG2K5TAav3VrS9obGfFqXO5cnOkV
+     Secret Key: 6Lc9zGUsAAAAAHifaydBuJYHlSEX77P_6zCtACum
+     ═══════════════════════════════════════════════════════════════ -->
+<script src="https://www.google.com/recaptcha/api.js?render=6Lc9zGUsAAAAAG2K5TAav3VrS9obGfFqXO5cnOkV" async defer></script>
 <style>
 :root{--p:#0A1F44;--a:#165DFF;--e:#E53935;--bd:#E0E0E0;--bg:#F8FAFC;--mid:#666;--lt:#999}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -30,7 +36,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#333;min-height
 .step.active .sl,.step.done .sl{color:var(--a)}
 
 /* CARD */
-.card{background:#fff;border-radius:9px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:hidden;margin-bottom:0}
+.card{background:#fff;border-radius:9px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:hidden}
 
 /* SECCIONES */
 .sec{padding:2rem;display:none}
@@ -124,13 +130,29 @@ textarea{resize:vertical;min-height:76px}
 .f-sz{color:var(--mid);white-space:nowrap}
 .f-ok{font-size:.68rem;color:var(--a);font-weight:600}
 .f-rm{background:none;border:none;color:var(--e);cursor:pointer;font-size:.95rem;padding:.1rem .28rem;border-radius:4px}
+
 /* SUMMARY */
 .sumbox{background:var(--bg);border:1.5px solid var(--bd);border-radius:9px;padding:1.1rem;margin-bottom:1.4rem}
 .sum-ttl{font-size:.84rem;font-weight:600;color:var(--p);margin-bottom:.65rem}
 .sum-row{display:flex;gap:.45rem;font-size:.79rem;line-height:1.85}
 .sum-k{color:var(--p);font-weight:600;min-width:160px;flex-shrink:0}
 .sum-sep{border:none;border-top:1px solid #EEF2F7;margin:.4rem 0}
-/* NAV — parte del card, sin separación */
+
+/* DECLARACIÓN CHECKBOX */
+.decl-box{border:2px solid var(--bd);border-radius:9px;padding:1.25rem 1.4rem;margin-top:1.5rem;background:#fff;transition:border-color .2s,background .2s}
+.decl-box.ok{border-color:var(--a);background:rgba(22,93,255,.03)}
+.decl-box.bad{border-color:var(--e);background:rgba(229,57,53,.03)}
+.decl-head{font-size:.78rem;font-weight:700;color:var(--p);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.45rem}
+.decl-head::before{content:'';display:inline-block;width:3px;height:14px;background:var(--a);border-radius:2px;flex-shrink:0}
+.decl-row{display:flex;align-items:flex-start;gap:.9rem;cursor:pointer;user-select:none}
+.chk-vis{width:20px;height:20px;min-width:20px;border:2px solid var(--bd);border-radius:5px;display:flex;align-items:center;justify-content:center;transition:all .18s;background:#fff;margin-top:.12rem}
+.chk-vis.on{background:var(--a);border-color:var(--a)}
+.chk-vis svg{width:11px;height:11px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .15s}
+.chk-vis.on svg{opacity:1}
+.decl-text{font-size:.82rem;color:#444;line-height:1.72;font-style:italic}
+.decl-req{font-size:.7rem;font-weight:600;color:var(--a);background:rgba(22,93,255,.07);border-radius:4px;padding:.12rem .42rem;margin-left:.35rem;vertical-align:middle}
+
+/* NAV */
 .nav{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.35rem 2rem;background:#FAFBFD;border-top:1px solid #EEF2F7}
 .btn{display:inline-flex;align-items:center;gap:.42rem;padding:.6rem 1.6rem;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:.87rem;font-weight:600;cursor:pointer;border:2px solid transparent;transition:all .18s;user-select:none}
 .btn-p{background:var(--p);color:#fff;border-color:var(--p)}
@@ -138,8 +160,10 @@ textarea{resize:vertical;min-height:76px}
 .btn-p:disabled{background:var(--bd);color:var(--lt);border-color:var(--bd);cursor:not-allowed}
 .btn-s{background:var(--p);color:#fff;border-color:var(--p);font-size:.9rem;padding:.68rem 1.9rem;letter-spacing:.04em;text-transform:uppercase}
 .btn-s:hover:not(:disabled){background:var(--a);border-color:var(--a);box-shadow:0 4px 16px rgba(22,93,255,.3)}
+.btn-s:disabled{background:var(--bd);color:var(--lt);border-color:var(--bd);cursor:not-allowed}
 .btn svg{width:14px;height:14px;fill:currentColor}
 .step-ind{font-size:.79rem;color:var(--mid);font-weight:500}
+
 /* MODAL */
 .modal{position:fixed;inset:0;background:rgba(10,31,68,.5);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:9999;padding:1.5rem;opacity:0;visibility:hidden;transition:.3s}
 .modal.on{opacity:1;visibility:visible}
@@ -152,6 +176,14 @@ textarea{resize:vertical;min-height:76px}
 .m-m strong{color:var(--a)}
 .m-btn{background:var(--p);color:#fff;border:none;padding:.6rem 1.65rem;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:.87rem;font-weight:600;cursor:pointer;transition:background .18s}
 .m-btn:hover{background:var(--a)}
+
+/* SENDING OVERLAY */
+.s-ov{position:fixed;inset:0;background:rgba(10,31,68,.62);backdrop-filter:blur(5px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.1rem;z-index:9998;opacity:0;visibility:hidden;transition:.25s}
+.s-ov.on{opacity:1;visibility:visible}
+.s-ring{width:46px;height:46px;border:4px solid rgba(255,255,255,.22);border-top-color:#fff;border-radius:50%;animation:ringspin .7s linear infinite}
+@keyframes ringspin{to{transform:rotate(360deg)}}
+.s-msg{font-size:.95rem;font-weight:600;color:#fff;letter-spacing:.03em}
+
 @media(max-width:600px){
   .nav{padding:1rem 1.25rem;flex-wrap:wrap}
   .sec{padding:1.25rem}
@@ -174,7 +206,23 @@ textarea{resize:vertical;min-height:76px}
   <div class="step" data-s="4"><div class="sc">4</div><span class="sl">Docs y<br>Envío</span></div>
 </nav>
 
-<form id="frm" novalidate>
+<!-- ═══════════════════════════════════════════════════════════════
+     SUBMITFORM
+     Destino: info@anpai.com.mx
+     Documentación: https://submitform.io
+     El action envía todos los campos + archivos adjuntos (multipart/form-data)
+     ═══════════════════════════════════════════════════════════════ -->
+<form id="frm" novalidate
+      action="https://api.submitform.io/forms/info@anpai.com.mx"
+      method="POST"
+      enctype="multipart/form-data">
+
+  <!-- Campos de control SubmitForm -->
+  <input type="hidden" name="_subject"  value="Solicitud de Crédito Vehicular — AVA">
+  <input type="hidden" name="_from"     value="AVA Formulario">
+  <!-- Token reCAPTCHA v3 — se inyecta por JS antes del submit -->
+  <input type="hidden" id="rcToken"     name="g-recaptcha-response" value="">
+
 <div class="card">
 
 <!-- ═══ S1 — DATOS PERSONALES ═══ -->
@@ -184,7 +232,6 @@ textarea{resize:vertical;min-height:76px}
     <h1 class="sec-title">DATOS PERSONALES</h1>
   </div>
   <div class="grid">
-
     <div class="fg">
       <label class="lbl req" for="pNombre">Primer Nombre</label>
       <input id="pNombre" name="pNombre" type="text" placeholder="Tu primer nombre">
@@ -204,7 +251,6 @@ textarea{resize:vertical;min-height:76px}
       <input id="sApellido" name="sApellido" type="text" placeholder="Tu segundo apellido">
       <span class="em" id="esApellido"></span>
     </div>
-
     <div class="fg">
       <label class="lbl req" for="genero">Género</label>
       <select id="genero" name="genero">
@@ -222,8 +268,6 @@ textarea{resize:vertical;min-height:76px}
       <label class="lbl" for="edad">Edad <span class="note">(auto)</span></label>
       <input id="edad" name="edad" type="text" readonly disabled placeholder="—">
     </div>
-
-    <!-- ESTADO CIVIL -->
     <div class="fg">
       <label class="lbl req" for="estCivil">Estado Civil</label>
       <select id="estCivil" name="estCivil">
@@ -233,8 +277,6 @@ textarea{resize:vertical;min-height:76px}
       </select>
       <span class="em" id="eestCivil"></span>
     </div>
-
-    <!-- RÉGIMEN (oculto hasta Casado) -->
     <div class="fg cond-block" id="regimenBlk">
       <label class="lbl req" for="regimen">Régimen Matrimonial</label>
       <select id="regimen" name="regimen" disabled>
@@ -244,15 +286,13 @@ textarea{resize:vertical;min-height:76px}
       </select>
       <span class="em" id="eregimen"></span>
     </div>
-
-    <!-- RFC -->
     <div class="fg">
       <label class="lbl req" for="rfc">RFC <span class="note">ej: ABC123456XYZ</span></label>
       <input id="rfc" name="rfc" type="text" placeholder="ABC123456XYZ0" maxlength="13" style="text-transform:uppercase">
       <span class="em" id="erfc"></span>
     </div>
 
-    <!-- CURP + validación COPOMEX -->
+    <!-- ═══ CURP — valida-curp.com.mx ═══ -->
     <div class="fg">
       <label class="lbl req" for="curp">CURP</label>
       <input id="curp" name="curp" type="text" placeholder="ABCD123456HDFLRN01" maxlength="18" style="text-transform:uppercase" autocomplete="off">
@@ -263,7 +303,6 @@ textarea{resize:vertical;min-height:76px}
       <span class="em" id="ecurp"></span>
     </div>
 
-    <!-- DEPENDIENTES -->
     <div class="fg">
       <label class="lbl req" for="tieneDep">¿Tiene Dependientes Económicos?</label>
       <select id="tieneDep" name="tieneDep">
@@ -273,18 +312,14 @@ textarea{resize:vertical;min-height:76px}
       </select>
       <span class="em" id="etieneDep"></span>
     </div>
-
-    <!-- BLOQUE DEPENDIENTES -->
     <div class="full cond-block" id="depBlk">
       <div class="grid" style="margin-bottom:.85rem">
         <div class="fg">
           <label class="lbl req" for="numDep">Número de Dependientes</label>
           <select id="numDep" name="numDep" disabled>
             <option value="" disabled selected>Número de dependientes</option>
-            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-            <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-            <option value="7">7</option><option value="8">8</option><option value="9">9</option>
-            <option value="10">10</option>
+            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
           </select>
           <span class="em" id="enumDep"></span>
         </div>
@@ -313,8 +348,6 @@ textarea{resize:vertical;min-height:76px}
         <span id="cpCiuWrap" class="cp-tag" style="display:none">Ciudad: <strong id="cpCiu"></strong></span>
       </div>
     </div>
-
-    <!-- COLONIA -->
     <div class="fg" id="colBlk" style="display:none">
       <label class="lbl req" for="colonia">
         Colonia <span id="colCnt" style="font-size:.68rem;font-weight:500;color:var(--a);background:rgba(22,93,255,.08);border-radius:8px;padding:.07rem .48rem;margin-left:.3rem"></span>
@@ -329,7 +362,6 @@ textarea{resize:vertical;min-height:76px}
       <input type="hidden" id="hEst" name="estado">
       <input type="hidden" id="hCiu" name="ciudad">
     </div>
-
   </div>
 </div><!-- /s1 -->
 
@@ -433,29 +465,57 @@ textarea{resize:vertical;min-height:76px}
   </div>
 </div><!-- /s3 -->
 
-<!-- ═══ S4 — DOCUMENTOS ═══ -->
+<!-- ═══ S4 — DOCUMENTOS Y ENVÍO ═══ -->
 <div class="sec" id="s4">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg></div>
     <h2 class="sec-title">DOCUMENTOS Y ENVÍO</h2>
   </div>
+
+  <!-- ADJUNTAR DOCUMENTOS -->
   <div class="fg" style="margin-bottom:1.5rem">
     <label class="lbl">Adjuntar Documentos</label>
     <div class="up-area" id="upA">
-      <input type="file" id="upI" multiple accept=".pdf,.jpg,.jpeg,.png,.docx">
+      <!-- name="documentos[]" para que SubmitForm reciba los archivos -->
+      <input type="file" id="upI" name="documentos[]" multiple accept=".pdf,.jpg,.jpeg,.png,.docx">
       <div class="up-main">Arrastra archivos o haz clic para seleccionar</div>
-      <div class="up-sub">PDF, JPG, PNG, DOCX · Máx <strong>5 MB</strong></div>
+      <div class="up-sub">PDF, JPG, PNG, DOCX · Máx <strong>5 MB</strong> por archivo</div>
     </div>
     <div class="f-list" id="fList"></div>
     <span class="em" id="eupErr"></span>
   </div>
+
+  <!-- RESUMEN -->
   <div class="sumbox" id="sumBox" style="display:none">
     <div class="sum-ttl">RESUMEN DE SOLICITUD</div>
     <div id="sumCont"></div>
   </div>
+
+  <!-- ═══ DECLARACIÓN JURADA (CHECKBOX OBLIGATORIO) ═══ -->
+  <div class="decl-box" id="declBox">
+    <div class="decl-head">
+      Declaración y Aceptación
+      <span class="decl-req">Obligatorio</span>
+    </div>
+    <div class="decl-row" id="declRow" role="checkbox" aria-checked="false" tabindex="0">
+      <div class="chk-vis" id="chkVis">
+        <svg viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1"/></svg>
+      </div>
+      <span class="decl-text">
+        Declaro bajo mi exclusiva responsabilidad que toda la información y los documentos
+        proporcionados en esta solicitud son veraces, completos y auténticos. Al marcar esta
+        casilla, ratifico que acepto los términos y condiciones del proceso, y reconozco que
+        este acto tiene la misma validez legal que una firma autógrafa.
+      </span>
+    </div>
+    <!-- Campo oculto que se envía con el formulario -->
+    <input type="hidden" id="declVal" name="declaracion_aceptada" value="">
+    <span class="em" id="edecl" style="margin-top:.55rem;display:block"></span>
+  </div>
+
 </div><!-- /s4 -->
 
-<!-- NAV — dentro del card, parte del mismo bloque visual -->
+<!-- NAV -->
 <div class="nav">
   <button type="button" class="btn btn-p" id="btnPrev" disabled>
     <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>Anterior
@@ -465,7 +525,7 @@ textarea{resize:vertical;min-height:76px}
     Siguiente<svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
   </button>
   <button type="submit" class="btn btn-s" id="btnSub" style="display:none">
-    <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>ENVIAR SOLICITUD
+    <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>ENVIAR SOLICITUD
   </button>
 </div>
 
@@ -473,21 +533,46 @@ textarea{resize:vertical;min-height:76px}
 </form>
 </div><!-- /wrap -->
 
-<!-- MODAL -->
+<!-- MODAL ÉXITO -->
 <div class="modal" id="modal">
   <div class="mbox">
     <div class="m-ico"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
     <div class="m-t">¡Solicitud Enviada!</div>
-    <div class="m-m"><strong>Solicitud enviada con éxito.</strong><br>Nos pondremos en contacto contigo pronto para continuar con tu crédito vehicular.</div>
+    <div class="m-m"><strong>Tu solicitud fue enviada con éxito.</strong><br>Nos pondremos en contacto contigo pronto para continuar con tu crédito vehicular.</div>
     <button class="m-btn" id="mClose">Aceptar</button>
   </div>
+</div>
+
+<!-- OVERLAY ENVIANDO -->
+<div class="s-ov" id="sOv">
+  <div class="s-ring"></div>
+  <div class="s-msg">Enviando solicitud…</div>
 </div>
 
 <script>
 (function(){
 'use strict';
 
-// ── HELPERS ──────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+//  CONFIGURACIÓN — modifica solo estos valores si es necesario
+// ═══════════════════════════════════════════════════════════════════
+
+// reCAPTCHA v3
+// Site Key:   6Lc9zGUsAAAAAG2K5TAav3VrS9obGfFqXO5cnOkV  (frontend)
+// Secret Key: 6Lc9zGUsAAAAAHifaydBuJYHlSEX77P_6zCtACum  (backend — NO exponer en cliente)
+var RECAPTCHA_SITE_KEY = '6Lc9zGUsAAAAAG2K5TAav3VrS9obGfFqXO5cnOkV';
+
+// Validación CURP — https://api.valida-curp.com.mx
+// Endpoint: GET https://api.valida-curp.com.mx/validar?curp=CURP&token=TOKEN
+// Respuesta: { valido: true|false, nombre: "...", ... }
+var CURP_TOKEN = '22a42fe7-6d79-42c2-84e8-99ffaf77653d';
+
+// COPOMEX — Código Postal
+var CP_TOKEN = '36da398a-1848-44f3-a952-06c9bfb02cc8';
+
+// ═══════════════════════════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════════════════════════
 function Q(id){ return document.getElementById(id); }
 function V(id){ var e=Q(id); return e?e.value:''; }
 function SHOW(id){ Q(id).style.display=''; }
@@ -503,14 +588,14 @@ function clrErr(id){
   var i=Q(id); if(i){ i.classList.remove('bad'); if(i.value&&i.value.trim()) i.classList.add('ok'); }
 }
 
-// ── NAVEGACIÓN POR SECCIONES ──────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+//  NAVEGACIÓN
+// ═══════════════════════════════════════════════════════════════════
 var cur=1, TOTAL=4;
 
 function slideTo(n){
-  // Ocultar sección actual, mostrar la nueva
   document.querySelectorAll('.sec').forEach(function(s){ s.classList.remove('active'); });
   Q('s'+n).classList.add('active');
-  // Actualizar progress bar
   document.querySelectorAll('.step').forEach(function(s,i){
     s.classList.remove('active','done');
     if(i+1<n) s.classList.add('done');
@@ -528,25 +613,27 @@ function slideTo(n){
 
 Q('btnNext').addEventListener('click',function(){
   if(validateSection(cur)){ if(cur<TOTAL) slideTo(cur+1); }
-  else { var f=Q('s'+cur).querySelector('.bad'); if(f) f.scrollIntoView({behavior:'smooth',block:'center'}); }
+  else{ var f=Q('s'+cur).querySelector('.bad'); if(f) f.scrollIntoView({behavior:'smooth',block:'center'}); }
 });
 Q('btnPrev').addEventListener('click',function(){ if(cur>1) slideTo(cur-1); });
 document.querySelectorAll('.step').forEach(function(s){
   s.addEventListener('click',function(){ var t=parseInt(s.dataset.s); if(t<=cur) slideTo(t); });
 });
 
-// ── YEAR SELECTOR ────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+//  YEAR SELECTOR
+// ═══════════════════════════════════════════════════════════════════
 (function(){
-  var s=Q('anio'),y=new Date().getFullYear();
+  var s=Q('anio'), y=new Date().getFullYear();
   for(var i=y;i>=2000;i--){ var o=document.createElement('option'); o.value=i; o.textContent=i; s.appendChild(o); }
 })();
 
-// ── RFC/CURP UPPERCASE ───────────────────────────────────────────
+// RFC/CURP uppercase
 ['rfc','curp'].forEach(function(id){
   Q(id).addEventListener('input',function(){ this.value=this.value.toUpperCase(); });
 });
 
-// ── EDAD AUTO ────────────────────────────────────────────────────
+// Edad automática
 Q('fNac').addEventListener('change',function(){
   if(!this.value){ Q('edad').value=''; return; }
   var b=new Date(this.value),t=new Date(),a=t.getFullYear()-b.getFullYear();
@@ -554,141 +641,109 @@ Q('fNac').addEventListener('change',function(){
   Q('edad').value=a>=0?a+' años':'';
 });
 
-// ══════════════════════════════════════════════════════════════════
-//  CURP — Validación COPOMEX
-//  Endpoint: GET /query/validar_curp/{CURP}?token=...
-//  Respuesta: { message:{...}, error:false }
-// ══════════════════════════════════════════════════════════════════
-var CURP_TOKEN='22a42fe7-6d79-42c2-84e8-99ffaf77653d';
+// ═══════════════════════════════════════════════════════════════════
+//  VALIDACIÓN CURP — api.valida-curp.com.mx
+//  GET /validar?curp={CURP}&token={TOKEN}
+//  Respuesta: { valido: true/false, nombre: "...", ... }
+// ═══════════════════════════════════════════════════════════════════
 var curpTimer=null;
-var curpValid=false;
 
-function curpSetStatus(type, msg, showSpin){
+function curpSetStatus(type,msg,spin){
   var st=Q('curpStatus');
   st.className='curp-status';
-  if(type){ st.classList.add(type); }
-  Q('curpSpinEl').style.display=showSpin?'inline-block':'none';
+  if(type) st.classList.add(type);
+  Q('curpSpinEl').style.display=spin?'inline-block':'none';
   Q('curpMsg').textContent=msg;
 }
-
 function curpClear(){
-  curpValid=false;
-  Q('curpStatus').className='curp-status'; // oculto
+  Q('curpStatus').className='curp-status';
   Q('curpSpinEl').style.display='none';
   Q('curpMsg').textContent='';
-  var inp=Q('curp'); inp.classList.remove('ok','bad');
+  Q('curp').classList.remove('ok','bad');
   var e=Q('ecurp'); if(e) e.textContent='';
 }
-
 function curpValidate(val){
   if(val.length!==18){ curpClear(); return; }
-  // Formato básico primero
   if(!/^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]{2}$/.test(val)){
     curpSetStatus('err-s','Formato de CURP inválido',false);
     Q('curp').classList.add('bad'); Q('curp').classList.remove('ok');
     return;
   }
-  curpSetStatus('load-s','Verificando CURP...', true);
-  fetch('https://api.copomex.com/query/validar_curp/'+val+'?token='+CURP_TOKEN)
+  curpSetStatus('load-s','Verificando CURP…',true);
+  fetch('https://api.valida-curp.com.mx/validar?curp='+encodeURIComponent(val)+'&token='+encodeURIComponent(CURP_TOKEN))
     .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
     .then(function(data){
-      // COPOMEX responde { error:false, message:{...datos...} }
-      // Si error:true o message.error, la CURP no existe
-      if(data.error===true||data.error==='true'||(data.message&&data.message.error)){
-        curpValid=false;
+      if(data.valido===true||data.valido==='true'){
+        var n=data.nombre||data.nombres||data.name||'';
+        curpSetStatus('ok-s','✓ CURP válida'+(n?' — '+n:''),false);
+        Q('curp').classList.add('ok'); Q('curp').classList.remove('bad');
+        var e=Q('ecurp'); if(e) e.textContent='';
+      } else {
         curpSetStatus('err-s','⚠ CURP no encontrada en el RENAPO',false);
         Q('curp').classList.add('bad'); Q('curp').classList.remove('ok');
-        return;
       }
-      var m=data.message||{};
-      // Nombre de la persona (opcional, para mostrar)
-      var nombre='';
-      if(m.nombre||m.nombres||m.primerApellido){
-        nombre=' — '+(m.nombres||m.nombre||'')+' '+(m.primerApellido||'')+' '+(m.segundoApellido||'');
-        nombre=nombre.replace(/\s+/g,' ').trim();
-        if(nombre==='-') nombre='';
-      }
-      curpValid=true;
-      curpSetStatus('ok-s','✓ CURP válida'+nombre,false);
-      Q('curp').classList.add('ok'); Q('curp').classList.remove('bad');
-      var e=Q('ecurp'); if(e) e.textContent='';
     })
-    .catch(function(err){
-      // Si hay error de red, no bloqueamos — solo avisamos
-      curpValid=false;
-      curpSetStatus('err-s','Sin conexión al verificar CURP (revisa tu internet)',false);
+    .catch(function(){
+      // Error de red — avisa pero no bloquea el formulario
+      curpSetStatus('err-s','Sin conexión al verificar CURP',false);
       Q('curp').classList.remove('ok');
     });
 }
 
 Q('curp').addEventListener('input',function(){
   this.value=this.value.toUpperCase();
-  curpClear();
-  clearTimeout(curpTimer);
+  curpClear(); clearTimeout(curpTimer);
   var v=this.value;
-  if(v.length===18){
-    curpTimer=setTimeout(function(){ curpValidate(v); },600);
-  }
+  if(v.length===18) curpTimer=setTimeout(function(){ curpValidate(v); },600);
 });
 Q('curp').addEventListener('blur',function(){
   clearTimeout(curpTimer);
-  var v=this.value;
-  if(v.length===18) curpValidate(v);
+  if(this.value.length===18) curpValidate(this.value);
 });
 
-// ── ESTADO CIVIL ─────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+//  ESTADO CIVIL / RÉGIMEN
+// ═══════════════════════════════════════════════════════════════════
 Q('estCivil').addEventListener('change',function(){
-  var blk=Q('regimenBlk'), sel=Q('regimen');
-  if(this.value==='Casado(a)'){
-    blk.classList.add('open'); sel.disabled=false;
-  } else {
-    blk.classList.remove('open'); sel.disabled=true; sel.value='';
-    sel.classList.remove('ok','bad'); var e=Q('eregimen'); if(e) e.textContent='';
-  }
+  var blk=Q('regimenBlk'),sel=Q('regimen');
+  if(this.value==='Casado(a)'){ blk.classList.add('open'); sel.disabled=false; }
+  else{ blk.classList.remove('open'); sel.disabled=true; sel.value=''; sel.classList.remove('ok','bad'); var e=Q('eregimen'); if(e) e.textContent=''; }
   clrErr('estCivil');
 });
 
-// ── DEPENDIENTES ─────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+//  DEPENDIENTES
+// ═══════════════════════════════════════════════════════════════════
 var RANGOS=['0–5 años','6–12 años','13–18 años','19+ años'];
-
 function buildDepFields(n){
   var c=Q('depAges'); c.innerHTML=''; Q('edepAges').textContent='';
   for(var i=1;i<=n;i++){
     var id='depAge'+i;
     var item=document.createElement('div'); item.className='dep-item';
-    item.innerHTML=
-      '<label class="dep-lbl" for="'+id+'">Dependiente '+i+'</label>'+
-      '<select id="'+id+'" name="'+id+'">'+
-        '<option value="" disabled selected>Rango de edad</option>'+
-        RANGOS.map(function(r){return '<option value="'+r+'">'+r+'</option>';}).join('')+
-        '<option value="manual">Ingresar edad...</option>'+
-      '</select>'+
+    item.innerHTML='<label class="dep-lbl" for="'+id+'">Dependiente '+i+'</label>'+
+      '<select id="'+id+'" name="'+id+'"><option value="" disabled selected>Rango de edad</option>'+
+      RANGOS.map(function(r){return '<option value="'+r+'">'+r+'</option>';}).join('')+
+      '<option value="manual">Ingresar edad…</option></select>'+
       '<input type="number" id="'+id+'M" name="'+id+'M" min="0" max="99" placeholder="Edad exacta" style="display:none;margin-top:.35rem">'+
       '<span class="em" id="e'+id+'"></span>';
     c.appendChild(item);
     (function(sId,mId){
       Q(sId).addEventListener('change',function(){
-        if(this.value==='manual'){ SHOW(mId); Q(mId).focus(); }
-        else{ HIDE(mId); Q(mId).value=''; }
+        if(this.value==='manual'){ SHOW(mId); Q(mId).focus(); } else{ HIDE(mId); Q(mId).value=''; }
       });
     })(id,id+'M');
   }
 }
-
 Q('tieneDep').addEventListener('change',function(){
-  var blk=Q('depBlk'), num=Q('numDep'); clrErr('tieneDep');
+  var blk=Q('depBlk'),num=Q('numDep'); clrErr('tieneDep');
   if(this.value==='Si'){ blk.classList.add('open'); num.disabled=false; }
-  else{
-    blk.classList.remove('open'); num.disabled=true; num.value='';
-    Q('depAges').innerHTML=''; num.classList.remove('ok','bad');
-    Q('edepAges').textContent=''; var e=Q('enumDep'); if(e) e.textContent='';
-  }
+  else{ blk.classList.remove('open'); num.disabled=true; num.value=''; Q('depAges').innerHTML=''; num.classList.remove('ok','bad'); Q('edepAges').textContent=''; var e=Q('enumDep'); if(e) e.textContent=''; }
 });
 Q('numDep').addEventListener('change',function(){
   var n=parseInt(this.value); if(n>0) buildDepFields(n); clrErr('numDep');
 });
 
-// ── PAYMENT RADIO ────────────────────────────────────────────────
+// PAYMENT RADIO
 document.querySelectorAll('input[name=tipoPago]').forEach(function(r){
   r.addEventListener('change',function(){
     HIDE('payH');
@@ -697,22 +752,18 @@ document.querySelectorAll('input[name=tipoPago]').forEach(function(r){
   });
 });
 
-// ══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
 //  COPOMEX — Código Postal
-// ══════════════════════════════════════════════════════════════════
-var CP_TOKEN='36da398a-1848-44f3-a952-06c9bfb02cc8';
-
+// ═══════════════════════════════════════════════════════════════════
 function cpClear(){
   HIDE('cpSpin'); Q('cp').disabled=false;
-  HIDE('cpErrBox'); Q('cpErrBox').textContent=''; HIDE('cpRetry');
-  HIDE('cpBadges');
+  HIDE('cpErrBox'); Q('cpErrBox').textContent=''; HIDE('cpRetry'); HIDE('cpBadges');
   Q('cpMun').textContent=''; Q('cpEst').textContent=''; Q('cpCiu').textContent=''; HIDE('cpCiuWrap');
   HIDE('colBlk');
   Q('colonia').innerHTML='<option value="" disabled selected>Selecciona tu colonia</option>';
   Q('colonia').classList.remove('ok','bad'); Q('colCnt').textContent='';
   HIDE('colRegLbl'); HIDE('colSel'); Q('colSel').value='';
-  Q('hMun').value=''; Q('hEst').value=''; Q('hCiu').value='';
-  clrErr('cp');
+  Q('hMun').value=''; Q('hEst').value=''; Q('hCiu').value=''; clrErr('cp');
 }
 function cpFail(msg){
   HIDE('cpSpin'); Q('cp').disabled=false;
@@ -728,7 +779,7 @@ function cpFetch(cp){
       var first=data[0];
       if(first.error===true||first.error==='true'){ cpFail(first.error_message||'C.P. no encontrado.'); return; }
       var resp=first.response||{};
-      var mun=resp.municipio||'', est=resp.estado||'', ciu=resp.ciudad||'';
+      var mun=resp.municipio||'',est=resp.estado||'',ciu=resp.ciudad||'';
       Q('cpMun').textContent=mun||'—'; Q('cpEst').textContent=est||'—';
       if(ciu){ Q('cpCiu').textContent=ciu; SHOW('cpCiuWrap'); }
       SHOWF('cpBadges');
@@ -766,17 +817,43 @@ Q('cp').addEventListener('input',function(){
   cpClear(); this.classList.remove('ok','bad');
 });
 Q('cpRetry').addEventListener('click',function(){ var v=Q('cp').value.replace(/\D/g,''); if(v.length===5) cpFetch(v); });
-
 Q('colonia').addEventListener('change',function(){
   if(this.value){
     this.classList.add('ok'); this.classList.remove('bad');
     Q('colSel').value=this.value; SHOW('colRegLbl'); SHOW('colSel'); clrErr('colonia');
-  } else { Q('colSel').value=''; HIDE('colRegLbl'); HIDE('colSel'); }
+  } else{ Q('colSel').value=''; HIDE('colRegLbl'); HIDE('colSel'); }
 });
 
-// ══════════════════════════════════════════════════════════════════
-//  VALIDACIONES
-// ══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
+//  CHECKBOX DE DECLARACIÓN JURADA
+// ═══════════════════════════════════════════════════════════════════
+var declChecked=false;
+
+function toggleDecl(){
+  declChecked=!declChecked;
+  var vis=Q('chkVis'), box=Q('declBox'), row=Q('declRow');
+  if(declChecked){
+    vis.classList.add('on');
+    box.classList.add('ok'); box.classList.remove('bad');
+    Q('declVal').value='Acepto';
+    row.setAttribute('aria-checked','true');
+    var e=Q('edecl'); if(e) e.textContent='';
+  } else{
+    vis.classList.remove('on');
+    box.classList.remove('ok');
+    Q('declVal').value='';
+    row.setAttribute('aria-checked','false');
+  }
+}
+
+Q('declRow').addEventListener('click', toggleDecl);
+Q('declRow').addEventListener('keydown',function(e){
+  if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggleDecl(); }
+});
+
+// ═══════════════════════════════════════════════════════════════════
+//  VALIDACIONES POR SECCIÓN
+// ═══════════════════════════════════════════════════════════════════
 function isEmpty(v){ return !v||!String(v).trim(); }
 function isName(v){ return /^[a-záéíóúüñA-ZÁÉÍÓÚÜÑ\s]{2,}$/.test((v||'').trim()); }
 function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v||'').trim()); }
@@ -786,6 +863,7 @@ function validateSection(n){
   if(n===1) return vSec1();
   if(n===2) return vSec2();
   if(n===3) return vSec3();
+  if(n===4) return vSec4();
   return true;
 }
 
@@ -809,15 +887,10 @@ function vSec1(){
   req('estCivil','Selecciona tu estado civil.');
   if(V('estCivil')==='Casado(a)') req('regimen','Selecciona el régimen matrimonial.');
 
-  if(!/^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/.test(V('rfc').toUpperCase())){
-    setErr('rfc','Formato inválido. Ej: ABC123456XYZ'); ok=false;
-  } else clrErr('rfc');
+  if(!/^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/.test(V('rfc').toUpperCase())){ setErr('rfc','Formato inválido. Ej: ABC123456XYZ'); ok=false; } else clrErr('rfc');
 
-  // CURP: formato + validación API (no bloquea si API no responde)
   var cv=V('curp').toUpperCase();
-  if(!/^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]{2}$/.test(cv)){
-    setErr('curp','Formato inválido. Ej: ABCD123456HDFLRN01'); ok=false;
-  } else { clrErr('curp'); }
+  if(!/^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]{2}$/.test(cv)){ setErr('curp','Formato inválido. Ej: ABCD123456HDFLRN01'); ok=false; } else clrErr('curp');
 
   req('tieneDep','Indica si tienes dependientes económicos.');
   if(V('tieneDep')==='Si'){
@@ -826,15 +899,14 @@ function vSec1(){
     if(n>0){
       var allOk=true;
       for(var i=1;i<=n;i++){
-        var sId='depAge'+i, mId='depAge'+i+'M';
-        var sEl=Q(sId), mEl=Q(mId);
+        var sId='depAge'+i,mId='depAge'+i+'M',sEl=Q(sId),mEl=Q(mId);
         if(!sEl) continue;
         if(sEl.value==='manual'){
           if(isEmpty(mEl?mEl.value:'')){ var e1=Q('e'+sId); if(e1) e1.textContent='Ingresa la edad.'; sEl.classList.add('bad'); allOk=false; }
           else{ var e2=Q('e'+sId); if(e2) e2.textContent=''; sEl.classList.remove('bad'); }
         } else if(isEmpty(sEl.value)){
           var e3=Q('e'+sId); if(e3) e3.textContent='Selecciona un rango.'; sEl.classList.add('bad'); allOk=false;
-        } else { var e4=Q('e'+sId); if(e4) e4.textContent=''; sEl.classList.remove('bad'); sEl.classList.add('ok'); }
+        } else{ var e4=Q('e'+sId); if(e4) e4.textContent=''; sEl.classList.remove('bad'); sEl.classList.add('ok'); }
       }
       if(!allOk){ Q('edepAges').textContent='Completa la edad de todos los dependientes.'; ok=false; }
       else Q('edepAges').textContent='';
@@ -875,7 +947,22 @@ function vSec3(){
   return ok;
 }
 
-// ── SUMMARY ──────────────────────────────────────────────────────
+// Sección 4: valida que el checkbox esté marcado
+function vSec4(){
+  if(!declChecked){
+    var e=Q('edecl'); if(e) e.textContent='Debes aceptar la declaración para poder enviar la solicitud.';
+    Q('declBox').classList.add('bad'); Q('declBox').classList.remove('ok');
+    Q('declRow').scrollIntoView({behavior:'smooth',block:'center'});
+    return false;
+  }
+  var e=Q('edecl'); if(e) e.textContent='';
+  Q('declBox').classList.remove('bad');
+  return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  RESUMEN
+// ═══════════════════════════════════════════════════════════════════
 function buildSummary(){
   var tp=document.querySelector('input[name=tipoPago]:checked');
   var pago=tp?(tp.value==='enganche'?'Enganche: '+V('valEng'):'Monto Inicial: MX$'+V('valMon')):'—';
@@ -885,7 +972,7 @@ function buildSummary(){
     if(nd>0){
       var ages=[];
       for(var i=1;i<=nd;i++){
-        var sv=V('depAge'+i), mv=V('depAge'+i+'M');
+        var sv=V('depAge'+i),mv=V('depAge'+i+'M');
         ages.push('Dep.'+i+': '+(sv==='manual'?(mv+' años'):sv));
       }
       depStr='Sí ('+nd+') — '+ages.join(', ');
@@ -911,76 +998,99 @@ function buildSummary(){
   Q('sumBox').style.display='block';
 }
 
-// ── UPLOAD ───────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+//  UPLOAD (UI visual — los archivos van en el input name="documentos[]")
+// ═══════════════════════════════════════════════════════════════════
 var upFiles=[];
 var upA=Q('upA'),upI=Q('upI'),fL=Q('fList');
 upA.addEventListener('dragover',function(e){e.preventDefault();upA.classList.add('drag');});
 upA.addEventListener('dragleave',function(){upA.classList.remove('drag');});
-upA.addEventListener('drop',function(e){e.preventDefault();upA.classList.remove('drag');doFiles(e.dataTransfer.files);});
-upI.addEventListener('change',function(){doFiles(upI.files);upI.value='';});
+upA.addEventListener('drop',function(e){
+  e.preventDefault(); upA.classList.remove('drag');
+  doFiles(e.dataTransfer.files);
+});
+upI.addEventListener('change',function(){ doFiles(upI.files); upI.value=''; });
+
 function doFiles(fl){
   var errs=[];
   Array.from(fl).forEach(function(f){
     if(upFiles.some(function(x){return x.name===f.name;})) return;
     var ext='.'+f.name.split('.').pop().toLowerCase();
-    if(!['.pdf','.jpg','.jpeg','.png','.docx'].includes(ext)){errs.push('"'+f.name+'" no permitido.');return;}
-    if(f.size>5242880){errs.push('"'+f.name+'" supera 5MB.');return;}
+    if(!['.pdf','.jpg','.jpeg','.png','.docx'].includes(ext)){errs.push('"'+f.name+'" tipo no permitido.');return;}
+    if(f.size>5242880){errs.push('"'+f.name+'" supera 5 MB.');return;}
     upFiles.push(f);
     var d=document.createElement('div'); d.className='f-item';
-    d.innerHTML='<span>📄</span><span class="f-nm">'+f.name+'</span><span class="f-sz">'+fmtSz(f.size)+'</span><span class="f-ok">✓</span><button type="button" class="f-rm">✕</button>';
+    d.innerHTML='<span>📄</span><span class="f-nm">'+f.name+'</span><span class="f-sz">'+fmtSz(f.size)+'</span><span class="f-ok">✓</span><button type="button" class="f-rm" title="Eliminar">✕</button>';
     d.querySelector('.f-rm').addEventListener('click',function(){upFiles=upFiles.filter(function(x){return x.name!==f.name;});d.remove();});
     fL.appendChild(d);
   });
   var eu=Q('eupErr');
   if(errs.length){eu.textContent=errs.join(' ');eu.style.display='block';} else eu.style.display='none';
 }
-function fmtSz(b){return b<1048576?(b/1024).toFixed(0)+'KB':(b/1048576).toFixed(1)+'MB';}
+function fmtSz(b){return b<1048576?(b/1024).toFixed(0)+' KB':(b/1048576).toFixed(1)+' MB';}
 
-// ── SUBMIT ───────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+//  SUBMIT — reCAPTCHA v3 + SubmitForm (multipart con archivos)
+// ═══════════════════════════════════════════════════════════════════
 Q('frm').addEventListener('submit',function(e){
   e.preventDefault();
-  for(var s=1;s<=3;s++){ if(!validateSection(s)){ slideTo(s); return; } }
-  var nm=[V('pNombre'),V('sNombre'),V('pApellido'),V('sApellido')].filter(Boolean).join(' ').replace(/\s+/,' ').trim();
-  var tp=document.querySelector('input[name=tipoPago]:checked');
-  var pago=tp?(tp.value==='enganche'?'Enganche: '+V('valEng'):'Monto Inicial: MX$'+V('valMon')):'';
-  var depStr='No';
-  if(V('tieneDep')==='Si'){
-    var nd=parseInt(V('numDep'))||0;
-    var ages2=[];
-    for(var i=1;i<=nd;i++){
-      var sv2=V('depAge'+i),mv2=V('depAge'+i+'M');
-      ages2.push('Dep.'+i+': '+(sv2==='manual'?(mv2+' años'):sv2));
+
+  // Validar todas las secciones antes de enviar
+  for(var s=1;s<=TOTAL;s++){
+    if(!validateSection(s)){
+      if(s!==cur) slideTo(s);
+      return;
     }
-    depStr='Sí ('+nd+') — '+ages2.join(', ');
   }
-  var body=[
-    'DATOS PERSONALES','─────────────────',
-    'Nombre: '+nm,'Género: '+V('genero'),'Fecha Nac.: '+V('fNac'),'Edad: '+V('edad'),
-    'Estado Civil: '+V('estCivil'),
-    V('estCivil')==='Casado(a)'?'Régimen Matrimonial: '+V('regimen'):'',
-    'Dependientes: '+depStr,
-    'RFC: '+V('rfc'),'CURP: '+V('curp'),
-    'C.P.: '+V('cp'),'Colonia: '+(V('colSel')||V('colonia')),
-    'Municipio: '+V('hMun'),'Estado: '+V('hEst'),
-    '','REFERENCIAS','─────────────────',
-    'Fam1: '+V('f1n')+' | Tel: '+V('f1t')+' | '+V('f1e'),'Dir: '+V('f1d'),
-    'Fam2: '+V('f2n')+' | Tel: '+V('f2t')+' | '+V('f2e'),'Dir: '+V('f2d'),
-    'Ami1: '+V('a1n')+' | Tel: '+V('a1t')+' | '+V('a1e'),'Dir: '+V('a1d'),
-    'Ami2: '+V('a2n')+' | Tel: '+V('a2t')+' | '+V('a2e'),'Dir: '+V('a2d'),
-    '','VEHÍCULO','─────────────────',
-    'Marca: '+V('marca'),'Versión: '+V('version'),'Año: '+V('anio'),
-    'Costo: MX$'+V('costo'),'Pago: '+pago,
-    'Archivos: '+(upFiles.length?upFiles.map(function(f){return f.name;}).join(', '):'Ninguno')
-  ].filter(function(l){return l!==undefined&&l!=='';}).join('\n');
-  window.location.href='mailto:info@anpai.com.mx?subject='+encodeURIComponent('SOLICITUD CRÉDITO VEHICULAR - '+nm)+'&body='+encodeURIComponent(body);
-  setTimeout(function(){ Q('modal').classList.add('on'); },600);
+
+  // Mostrar overlay y deshabilitar botón
+  Q('sOv').classList.add('on');
+  Q('btnSub').disabled=true;
+
+  // Obtener token reCAPTCHA v3 y luego enviar
+  if(typeof grecaptcha!=='undefined'){
+    grecaptcha.ready(function(){
+      grecaptcha.execute(RECAPTCHA_SITE_KEY,{action:'submit_credito_ava'})
+        .then(function(token){ Q('rcToken').value=token; submitForm(); })
+        .catch(function(){ submitForm(); }); // continúa aunque reCAPTCHA falle
+    });
+  } else {
+    submitForm(); // fallback si reCAPTCHA no carga
+  }
 });
 
+function submitForm(){
+  var fd=new FormData(Q('frm'));
+
+  // Agregar los archivos adjuntos (drag & drop) al FormData
+  upFiles.forEach(function(f,i){
+    fd.append('adjunto_'+(i+1), f, f.name);
+  });
+
+  // Subject dinámico con nombre del solicitante
+  var nm=[V('pNombre'),V('sNombre'),V('pApellido'),V('sApellido')].filter(Boolean).join(' ').replace(/\s+/,' ').trim();
+  fd.set('_subject','Solicitud Crédito Vehicular AVA — '+nm);
+
+  fetch(Q('frm').action,{method:'POST',body:fd})
+    .then(function(r){
+      Q('sOv').classList.remove('on');
+      Q('btnSub').disabled=false;
+      // SubmitForm retorna 200 (o 302 redirect); mostramos modal de éxito
+      Q('modal').classList.add('on');
+    })
+    .catch(function(){
+      Q('sOv').classList.remove('on');
+      Q('btnSub').disabled=false;
+      alert('Error al enviar la solicitud. Verifica tu conexión e intenta de nuevo.');
+    });
+}
+
+// MODAL
 Q('mClose').addEventListener('click',function(){Q('modal').classList.remove('on');});
 Q('modal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')Q('modal').classList.remove('on');});
 
-// ── INIT ─────────────────────────────────────────────────────────
+// INIT
 slideTo(1);
 
 })();
