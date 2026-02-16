@@ -180,10 +180,140 @@ textarea{resize:vertical;min-height:76px}
 @keyframes ringspin{to{transform:rotate(360deg)}}
 .s-msg{font-size:.95rem;font-weight:600;color:#fff;letter-spacing:.03em}
 
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════ */
+
+/* Tablet ancha (≤860px) — ya cubierto por max-width del .wrap */
+
+/* Tablet media (≤720px) */
+@media(max-width:720px){
+  .grid3{grid-template-columns:1fr 1fr}
+  .prog{padding:.8rem .7rem}
+  .sl{font-size:.56rem}
+  .sc{width:28px;height:28px;font-size:.7rem}
+  .step:not(:last-child)::after{left:calc(50% + 15px);width:calc(100% - 30px)}
+}
+
+/* Tablet chica / móvil grande (≤600px) */
 @media(max-width:600px){
-  .nav{padding:1rem 1.25rem;flex-wrap:wrap}
-  .sec{padding:1.25rem}
-  .dep-grid{grid-template-columns:1fr 1fr}
+  /* — Página — */
+  .wrap{padding:.85rem .65rem 3rem}
+
+  /* — Header — */
+  .hdr{padding:1.3rem 1rem;border-radius:7px;margin-bottom:1.2rem}
+  .hdr-logo{font-size:1.5rem}
+  .hdr-sub{font-size:.8rem;letter-spacing:.04em}
+
+  /* — Progress bar: 5 pasos compactos — */
+  .prog{padding:.6rem .4rem;border-radius:7px;margin-bottom:1.2rem;gap:0}
+  .sc{width:25px;height:25px;font-size:.64rem}
+  .sl{font-size:.5rem;line-height:1.1}
+  .step:not(:last-child)::after{left:calc(50% + 13px);width:calc(100% - 26px);top:12px}
+  .step.active .sc{box-shadow:0 0 0 3px rgba(22,93,255,.15)}
+
+  /* — Card — */
+  .card{border-radius:7px}
+
+  /* — Secciones — */
+  .sec{padding:1rem}
+  .sec-hdr{padding-top:.65rem;padding-bottom:.85rem;margin-bottom:1.1rem;gap:.5rem}
+  .sec-ico{width:29px;height:29px;border-radius:6px}
+  .sec-ico svg{width:16px;height:16px}
+  .sec-title{font-size:.95rem}
+
+  /* — Grids → 1 columna — */
+  .grid,.grid3{grid-template-columns:1fr;gap:1rem}
+  .full{grid-column:1/-1}
+
+  /* — Campos — */
+  input,select,textarea{font-size:.84rem;padding:.5rem .7rem}
+  .lbl{font-size:.76rem}
+  .em{font-size:.7rem}
+  .note{font-size:.68rem}
+
+  /* — RFC / CURP: letra-spacing reducido en móvil — */
+  #rfc,#curp{letter-spacing:.02em}
+
+  /* — Dependientes — */
+  .dep-grid{grid-template-columns:1fr 1fr;gap:.6rem}
+
+  /* — Condicionales — */
+  .cond-block.open{max-height:800px}
+
+  /* — Referencias — */
+  .ref{padding:.9rem;border-radius:8px}
+  .ref-t{font-size:.82rem;margin-bottom:.7rem}
+  .sub-t{font-size:.98rem}
+
+  /* — Vehículo: pago inicial — */
+  .pay-box{padding:.9rem}
+  .pay-ttl{font-size:.79rem;margin-bottom:.7rem}
+  .pay-row{flex-direction:column;gap:.75rem}
+  .radios{flex-direction:row;flex-wrap:wrap;min-width:unset;gap:.45rem}
+  .rlbl{font-size:.79rem;padding:.36rem .58rem;border-radius:5px}
+  .pay-in{min-width:unset;width:100%}
+  #payH{font-size:.79rem}
+
+  /* — Enganche: botones más tocables — */
+  #engMinus,#engPlus{width:40px;height:40px;font-size:1.25rem;border-radius:8px}
+  #valEng{font-size:.88rem}
+
+  /* — CP badges — */
+  #cpBadges{flex-direction:column;gap:.28rem}
+  .cp-tag{font-size:.69rem}
+
+  /* — Upload — */
+  .up-area{padding:1rem .8rem;border-radius:8px}
+  .up-main{font-size:.83rem}
+  .up-req{font-size:.68rem}
+  .up-sub{font-size:.71rem}
+  .up-ine{font-size:.71rem;padding:.32rem .58rem;gap:.32rem}
+  .f-item{padding:.45rem .62rem;font-size:.76rem;gap:.45rem}
+  .f-nm{font-size:.75rem}
+  .f-sz{font-size:.7rem}
+
+  /* — Resumen — */
+  .sumbox{padding:.9rem}
+  .sum-ttl{font-size:.8rem}
+  .sum-row{flex-direction:column;gap:.04rem;line-height:1.55;padding:.15rem 0}
+  .sum-k{min-width:unset;font-size:.74rem;color:var(--a)}
+
+  /* — Declaración — */
+  .decl-box{padding:.95rem 1rem;margin-top:1.2rem;border-radius:8px}
+  .decl-head{font-size:.74rem;margin-bottom:.6rem}
+  .decl-text{font-size:.78rem;line-height:1.65}
+  .chk-vis{width:22px;height:22px;min-width:22px;border-radius:5px}
+  .decl-row{gap:.75rem}
+
+  /* — NAV — */
+  .nav{padding:.85rem .9rem;gap:.55rem;flex-wrap:wrap}
+  .step-ind{font-size:.72rem;order:-1;width:100%;text-align:center;margin-bottom:.1rem}
+  .btn{padding:.5rem 1rem;font-size:.81rem}
+  .btn-s{padding:.55rem 1.2rem;font-size:.81rem;letter-spacing:.02em}
+
+  /* — Modal — */
+  .mbox{padding:1.5rem 1.1rem;border-radius:11px}
+  .m-ico{width:52px;height:52px}
+  .m-ico svg{width:26px;height:26px}
+  .m-t{font-size:1.1rem}
+  .m-m{font-size:.84rem}
+  .m-btn{padding:.52rem 1.4rem;font-size:.83rem}
+}
+
+/* Móvil muy pequeño (≤380px) */
+@media(max-width:380px){
+  .wrap{padding:.65rem .5rem 2.5rem}
+  .hdr-logo{font-size:1.35rem}
+  .sl{font-size:.46rem}
+  .sc{width:23px;height:23px;font-size:.6rem}
+  .step:not(:last-child)::after{left:calc(50% + 12px);width:calc(100% - 24px)}
+  .sec{padding:.85rem}
+  .sec-title{font-size:.9rem}
+  .dep-grid{grid-template-columns:1fr}
+  .nav{padding:.75rem .8rem}
+  .btn{padding:.45rem .85rem;font-size:.78rem}
+  .btn-s{padding:.5rem 1rem;font-size:.78rem}
 }
 </style>
 </head>
@@ -294,15 +424,15 @@ textarea{resize:vertical;min-height:76px}
       <span class="em" id="eregimen"></span>
     </div>
     <div class="fg">
-      <label class="lbl req" for="rfc">RFC <span class="note">ej. ABCD123456XY0</span></label>
-      <input id="rfc" name="rfc" type="text" placeholder="ABCD123456XY0" maxlength="13" style="text-transform:uppercase" autocomplete="off">
+      <label class="lbl req" for="rfc">RFC <span class="note">13 caracteres con homoclave</span></label>
+      <input id="rfc" name="rfc" type="text" placeholder="ABCD123456AB1" maxlength="13" style="text-transform:uppercase;letter-spacing:.06em" autocomplete="off">
       <span class="em" id="erfc"></span>
     </div>
 
-    <!-- Fila 6: CURP (span full para darle prominencia) -->
-    <div class="fg full">
-      <label class="lbl req" for="curp">CURP <span class="note">18 caracteres — estructura RENAPO</span></label>
-      <input id="curp" name="curp" type="text" placeholder="ABCD123456HDFLRN01" maxlength="18" style="text-transform:uppercase;letter-spacing:.06em" autocomplete="off">
+    <!-- Fila 6: RFC / CURP — misma fila, misma anchura (no full) -->
+    <div class="fg">
+      <label class="lbl req" for="curp">CURP <span class="note">18 caracteres — RENAPO</span></label>
+      <input id="curp" name="curp" type="text" placeholder="ABCD123456HDFLRN01" maxlength="18" style="text-transform:uppercase;letter-spacing:.04em" autocomplete="off">
       <span class="em" id="ecurp"></span>
     </div>
 
@@ -763,7 +893,16 @@ document.querySelectorAll('.step').forEach(function(s){
   Q(id).addEventListener('input',function(){ this.value=this.value.toUpperCase(); });
 });
 
-// CURP — validación inline al escribir/salir
+// RFC — validación inline al salir del campo
+Q('rfc').addEventListener('blur', function(){
+  var v=this.value.toUpperCase().trim();
+  if(!v) return;
+  var ok=/^[A-ZÑ&]{3,4}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z\d]{3}$/.test(v);
+  if(!ok){ setErr('rfc','RFC inválido. Verifica: letras + fecha (AAMMDD) + homoclave (3 caracteres).'); }
+  else clrErr('rfc');
+});
+
+// CURP — validación inline al salir del campo
 Q('curp').addEventListener('blur', function(){
   var v=this.value.toUpperCase().trim();
   if(!v) return;
@@ -1036,8 +1175,16 @@ function vSec1(){
   req('estCivil','Selecciona tu estado civil.');
   if(V('estCivil')==='Casado(a)') req('regimen','Selecciona el régimen matrimonial.');
 
-  // RFC — formato alfanumérico 12-13 chars
-  if(!/^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/.test(V('rfc').toUpperCase())){ setErr('rfc','Formato inválido. Ej: ABCD123456XY0'); ok=false; } else clrErr('rfc');
+  // RFC — estructura SAT oficial:
+  //   Personas físicas:  4 letras (nombre+apellidos) + AAMMDD + 3 alfanum (homoclave) = 13 chars
+  //   Personas morales:  3 letras (razón social)     + AAMMDD + 3 alfanum (homoclave) = 12 chars
+  //   Fecha válida:      mes 01-12, día 01-31
+  //   Homoclave:         3 posiciones A-Z y 0-9 (cualquier combinación)
+  var rfcVal = V('rfc').toUpperCase();
+  var rfcOk = /^[A-ZÑ&]{3,4}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z\d]{3}$/.test(rfcVal);
+  if(!rfcOk){
+    setErr('rfc','RFC inválido. Verifica: letras iniciales + fecha (AAMMDD) + homoclave (3 caracteres).'); ok=false;
+  } else clrErr('rfc');
 
   // CURP — estructura RENAPO 18 chars
   var cv=V('curp').toUpperCase();
