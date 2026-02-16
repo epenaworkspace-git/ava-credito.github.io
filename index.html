@@ -5,18 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Solicitud de Crédito Vehicular – AVA</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
-<!-- ═══════════════════════════════════════════════════════════════
-     reCAPTCHA v3
-     Site Key:   6Lc9zGUsAAAAAG2K5TAav3VrS9obGfFqXO5cnOkV
-     Secret Key: 6Lc9zGUsAAAAAHifaydBuJYHlSEX77P_6zCtACum
-     ═══════════════════════════════════════════════════════════════ -->
 <script src="https://www.google.com/recaptcha/api.js?render=6Lc9zGUsAAAAAG2K5TAav3VrS9obGfFqXO5cnOkV" async defer></script>
 <style>
 :root{--p:#0A1F44;--a:#165DFF;--e:#E53935;--bd:#E0E0E0;--bg:#F8FAFC;--mid:#666;--lt:#999}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#333;min-height:100vh}
-.wrap{max-width:860px;margin:0 auto;padding:2rem 1.25rem 4rem}
+.wrap{max-width:880px;margin:0 auto;padding:2rem 1.25rem 4rem}
 
 /* HEADER */
 .hdr{background:var(--p);border-radius:9px;padding:2rem;text-align:center;margin-bottom:1.75rem;box-shadow:0 8px 28px rgba(10,31,68,.18)}
@@ -24,15 +19,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#333;min-height
 .hdr-logo span{color:#5B8EFF}
 .hdr-sub{font-size:.95rem;color:rgba(255,255,255,.7);margin-top:.3rem;letter-spacing:.06em;text-transform:uppercase}
 
-/* PROGRESS */
-.prog{background:#fff;border-radius:9px;padding:1.1rem 1.5rem;margin-bottom:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.07);display:flex;align-items:center}
-.step{flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem;position:relative;cursor:pointer}
-.step:not(:last-child)::after{content:'';position:absolute;top:15px;left:calc(50% + 17px);width:calc(100% - 34px);height:2px;background:var(--bd);z-index:0;transition:background .3s}
+/* PROGRESS — 5 pasos */
+.prog{background:#fff;border-radius:9px;padding:1rem 1.2rem;margin-bottom:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.07);display:flex;align-items:center}
+.step{flex:1;display:flex;flex-direction:column;align-items:center;gap:.28rem;position:relative;cursor:pointer}
+.step:not(:last-child)::after{content:'';position:absolute;top:15px;left:calc(50% + 16px);width:calc(100% - 32px);height:2px;background:var(--bd);z-index:0;transition:background .3s}
 .step.done:not(:last-child)::after{background:var(--a)}
-.sc{width:32px;height:32px;border-radius:50%;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:.76rem;font-weight:600;background:#fff;color:var(--lt);position:relative;z-index:1;transition:all .25s}
+.sc{width:30px;height:30px;border-radius:50%;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:600;background:#fff;color:var(--lt);position:relative;z-index:1;transition:all .25s}
 .step.active .sc{border-color:var(--a);background:var(--a);color:#fff;box-shadow:0 0 0 4px rgba(22,93,255,.15)}
 .step.done .sc{border-color:var(--a);background:var(--a);color:#fff}
-.sl{font-size:.64rem;font-weight:500;color:var(--lt);text-align:center;line-height:1.2;transition:color .2s}
+.sl{font-size:.6rem;font-weight:500;color:var(--lt);text-align:center;line-height:1.2;transition:color .2s}
 .step.active .sl,.step.done .sl{color:var(--a)}
 
 /* CARD */
@@ -46,11 +41,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#333;min-height
 .sec-hdr{display:flex;align-items:center;gap:.7rem;padding-bottom:1.2rem;border-bottom:1px solid #EEF2F7;margin-bottom:1.75rem;border-top:3px solid var(--a);padding-top:.85rem}
 .sec-ico{width:36px;height:36px;border-radius:8px;background:rgba(10,31,68,.06);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sec-ico svg{width:20px;height:20px;fill:var(--p)}
-.sec-title{font-size:1.25rem;font-weight:700;color:var(--p)}
+.sec-title{font-size:1.2rem;font-weight:700;color:var(--p)}
 
 /* GRID / FIELD */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem}
+@media(max-width:680px){.grid,.grid3{grid-template-columns:1fr}}
 .full{grid-column:1/-1}
 .fg{display:flex;flex-direction:column;gap:.32rem}
 .lbl{font-size:.8rem;font-weight:600;color:#333;letter-spacing:.02em}
@@ -65,8 +61,6 @@ input:disabled,select:disabled{background:var(--bg);color:var(--lt);cursor:not-a
 select{cursor:pointer;padding-right:2.2rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23999' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center}
 textarea{resize:vertical;min-height:76px}
 .em{font-size:.72rem;color:var(--e);font-weight:500;margin-top:.1rem}
-
-/* CURP — solo validación de formato, sin widget de estado */
 
 /* CONDITIONAL BLOCKS */
 .cond-block{overflow:hidden;transition:max-height .38s cubic-bezier(.4,0,.2,1),opacity .3s ease;max-height:0;opacity:0}
@@ -84,6 +78,9 @@ textarea{resize:vertical;min-height:76px}
 @keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
 .cp-tag{font-size:.7rem;font-weight:600;background:rgba(10,31,68,.05);color:var(--p);border-radius:4px;padding:.16rem .48rem}
 .cp-tag strong{color:var(--a)}
+
+/* CAMPO AUTORELLENO (municipio/estado desde COPOMEX) */
+.autofill{border-color:var(--a) !important;background:rgba(22,93,255,.04) !important;color:var(--p) !important;font-weight:600}
 
 /* REF */
 .ref{border:1.5px solid var(--bd);border-radius:9px;padding:1.1rem;margin-bottom:.85rem;transition:border-color .18s}
@@ -115,10 +112,14 @@ textarea{resize:vertical;min-height:76px}
 /* UPLOAD */
 .up-area{border:2px dashed var(--bd);border-radius:9px;padding:1.65rem;text-align:center;cursor:pointer;background:var(--bg);position:relative;transition:all .18s}
 .up-area:hover,.up-area.drag{border-color:var(--a);background:rgba(22,93,255,.03)}
+.up-area.bad-up{border-color:var(--e);background:rgba(229,57,53,.03)}
 .up-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
 .up-main{font-size:.9rem;font-weight:600;color:var(--p);margin-bottom:.28rem}
-.up-sub{font-size:.74rem;color:var(--mid)}
+.up-req{font-size:.72rem;font-weight:700;color:var(--a);background:rgba(22,93,255,.07);border-radius:4px;padding:.1rem .4rem;margin-left:.3rem}
+.up-sub{font-size:.74rem;color:var(--mid);margin-top:.22rem}
 .up-sub strong{color:var(--a)}
+.up-ine{font-size:.76rem;font-weight:600;color:var(--p);background:rgba(10,31,68,.05);border-radius:6px;padding:.42rem .75rem;margin-top:.55rem;display:flex;align-items:center;gap:.4rem}
+.up-ine::before{content:'🪪';font-size:.85rem}
 .f-list{margin-top:.8rem;display:flex;flex-direction:column;gap:.42rem}
 .f-item{display:flex;align-items:center;gap:.6rem;padding:.52rem .78rem;background:#fff;border:1.5px solid var(--bd);border-radius:7px;font-size:.79rem}
 .f-nm{flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -194,56 +195,56 @@ textarea{resize:vertical;min-height:76px}
   <div class="hdr-sub">Solicitud de Crédito Vehicular</div>
 </header>
 
+<!-- PROGRESS BAR — 5 secciones -->
 <nav class="prog" id="prog">
   <div class="step active" data-s="1"><div class="sc">1</div><span class="sl">Datos<br>Personales</span></div>
-  <div class="step" data-s="2"><div class="sc">2</div><span class="sl">Referencias</span></div>
-  <div class="step" data-s="3"><div class="sc">3</div><span class="sl">Vehículo<br>y Financ.</span></div>
-  <div class="step" data-s="4"><div class="sc">4</div><span class="sl">Docs y<br>Envío</span></div>
+  <div class="step" data-s="2"><div class="sc">2</div><span class="sl">Datos de<br>Domicilio</span></div>
+  <div class="step" data-s="3"><div class="sc">3</div><span class="sl">Referencias</span></div>
+  <div class="step" data-s="4"><div class="sc">4</div><span class="sl">Vehículo<br>y Financ.</span></div>
+  <div class="step" data-s="5"><div class="sc">5</div><span class="sl">Docs y<br>Envío</span></div>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     SUBMITFORM
-     Destino: info@anpai.com.mx
-     Documentación: https://submitform.io
-     El action envía todos los campos + archivos adjuntos (multipart/form-data)
-     ═══════════════════════════════════════════════════════════════ -->
+<!-- FormSubmit.co — action="https://formsubmit.co/info@anpai.com.mx" -->
 <form id="frm" novalidate
       action="https://formsubmit.co/info@anpai.com.mx"
       method="POST"
       enctype="multipart/form-data">
 
-  <!-- Campos de control FormSubmit.co -->
   <input type="hidden" name="_subject"  value="Solicitud de Crédito Vehicular — AVA">
-  <!-- Evitar redirección a página de agradecimiento de FormSubmit -->
   <input type="hidden" name="_next"     value="">
-  <!-- Honeypot antispam — debe permanecer vacío -->
   <input type="text"   name="_honey"    style="display:none" tabindex="-1" autocomplete="off">
-  <!-- Desactivar el CAPTCHA propio de FormSubmit (usamos reCAPTCHA v3) -->
   <input type="hidden" name="_captcha"  value="false">
-  <!-- Token reCAPTCHA v3 — se inyecta por JS antes del submit -->
   <input type="hidden" id="rcToken"     name="g-recaptcha-response" value="">
 
 <div class="card">
 
-<!-- ═══ S1 — DATOS PERSONALES ═══ -->
+<!-- ═══════════════════════════════════════════════════════
+     S1 — DATOS PERSONALES
+     Campos: Nombres, Apellidos, Género, F.Nac, Edad (auto),
+             Estado Civil, Régimen, RFC, CURP, Dependientes
+     ═══════════════════════════════════════════════════════ -->
 <div class="sec" id="s1">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v1h20v-1c0-3.3-6.7-5-10-5z"/></svg></div>
     <h1 class="sec-title">DATOS PERSONALES</h1>
   </div>
+
   <div class="grid">
+    <!-- Fila 1: Primer Nombre / Segundo Nombre -->
     <div class="fg">
       <label class="lbl req" for="pNombre">Primer Nombre</label>
-      <input id="pNombre" name="pNombre" type="text" placeholder="Tu primer nombre">
+      <input id="pNombre" name="pNombre" type="text" placeholder="Tu primer nombre" autocomplete="given-name">
       <span class="em" id="epNombre"></span>
     </div>
     <div class="fg">
       <label class="lbl" for="sNombre">Segundo Nombre <span class="note">(opcional)</span></label>
-      <input id="sNombre" name="sNombre" type="text" placeholder="Tu segundo nombre">
+      <input id="sNombre" name="sNombre" type="text" placeholder="Tu segundo nombre" autocomplete="additional-name">
     </div>
+
+    <!-- Fila 2: Primer Apellido / Segundo Apellido -->
     <div class="fg">
       <label class="lbl req" for="pApellido">Primer Apellido</label>
-      <input id="pApellido" name="pApellido" type="text" placeholder="Tu primer apellido">
+      <input id="pApellido" name="pApellido" type="text" placeholder="Tu primer apellido" autocomplete="family-name">
       <span class="em" id="epApellido"></span>
     </div>
     <div class="fg">
@@ -251,6 +252,8 @@ textarea{resize:vertical;min-height:76px}
       <input id="sApellido" name="sApellido" type="text" placeholder="Tu segundo apellido">
       <span class="em" id="esApellido"></span>
     </div>
+
+    <!-- Fila 3: Género / Fecha Nac -->
     <div class="fg">
       <label class="lbl req" for="genero">Género</label>
       <select id="genero" name="genero">
@@ -261,11 +264,13 @@ textarea{resize:vertical;min-height:76px}
     </div>
     <div class="fg">
       <label class="lbl req" for="fNac">Fecha de Nacimiento</label>
-      <input id="fNac" name="fNac" type="date">
+      <input id="fNac" name="fNac" type="date" autocomplete="bday">
       <span class="em" id="efNac"></span>
     </div>
+
+    <!-- Fila 4: Edad (auto) / Estado Civil -->
     <div class="fg">
-      <label class="lbl" for="edad">Edad <span class="note">(auto)</span></label>
+      <label class="lbl" for="edad">Edad <span class="note">(se calcula automáticamente)</span></label>
       <input id="edad" name="edad" type="text" readonly disabled placeholder="—">
     </div>
     <div class="fg">
@@ -277,32 +282,35 @@ textarea{resize:vertical;min-height:76px}
       </select>
       <span class="em" id="eestCivil"></span>
     </div>
+
+    <!-- Fila 5: Régimen Matrimonial (condicional) / RFC -->
     <div class="fg cond-block" id="regimenBlk">
       <label class="lbl req" for="regimen">Régimen Matrimonial</label>
       <select id="regimen" name="regimen" disabled>
-        <option value="" disabled selected>Selecciona el régimen matrimonial</option>
+        <option value="" disabled selected>Selecciona el régimen</option>
         <option value="Bienes Mancomunados">Bienes Mancomunados</option>
         <option value="Bienes Separados">Bienes Separados</option>
       </select>
       <span class="em" id="eregimen"></span>
     </div>
     <div class="fg">
-      <label class="lbl req" for="rfc">RFC <span class="note">ej: ABC123456XYZ</span></label>
-      <input id="rfc" name="rfc" type="text" placeholder="ABC123456XYZ0" maxlength="13" style="text-transform:uppercase">
+      <label class="lbl req" for="rfc">RFC <span class="note">ej. ABCD123456XY0</span></label>
+      <input id="rfc" name="rfc" type="text" placeholder="ABCD123456XY0" maxlength="13" style="text-transform:uppercase" autocomplete="off">
       <span class="em" id="erfc"></span>
     </div>
 
-    <!-- CURP — validación de formato únicamente -->
-    <div class="fg">
-      <label class="lbl req" for="curp">CURP</label>
-      <input id="curp" name="curp" type="text" placeholder="ABCD123456HDFLRN01" maxlength="18" style="text-transform:uppercase" autocomplete="off">
+    <!-- Fila 6: CURP (span full para darle prominencia) -->
+    <div class="fg full">
+      <label class="lbl req" for="curp">CURP <span class="note">18 caracteres — estructura RENAPO</span></label>
+      <input id="curp" name="curp" type="text" placeholder="ABCD123456HDFLRN01" maxlength="18" style="text-transform:uppercase;letter-spacing:.06em" autocomplete="off">
       <span class="em" id="ecurp"></span>
     </div>
 
+    <!-- Fila 7: Dependientes -->
     <div class="fg">
       <label class="lbl req" for="tieneDep">¿Tiene Dependientes Económicos?</label>
       <select id="tieneDep" name="tieneDep">
-        <option value="" disabled selected>¿Tienes dependientes económicos?</option>
+        <option value="" disabled selected>Selecciona una opción</option>
         <option value="No">No</option>
         <option value="Si">Sí</option>
       </select>
@@ -313,7 +321,7 @@ textarea{resize:vertical;min-height:76px}
         <div class="fg">
           <label class="lbl req" for="numDep">Número de Dependientes</label>
           <select id="numDep" name="numDep" disabled>
-            <option value="" disabled selected>Número de dependientes</option>
+            <option value="" disabled selected>Selecciona</option>
             <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
             <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
           </select>
@@ -326,27 +334,57 @@ textarea{resize:vertical;min-height:76px}
       <div class="dep-grid" id="depAges"></div>
       <span class="em" id="edepAges"></span>
     </div>
+  </div>
+</div><!-- /s1 -->
 
-    <!-- CÓDIGO POSTAL -->
+<!-- ═══════════════════════════════════════════════════════
+     S2 — DATOS DE DOMICILIO
+     Campos: Calle, Núm Ext, Núm Int, CP + COPOMEX,
+             Colonia (dropdown), Delegación/Municipio, Estado
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s2">
+  <div class="sec-hdr">
+    <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+    <h2 class="sec-title">DATOS DE DOMICILIO</h2>
+  </div>
+
+  <div class="grid">
+    <!-- 1. Calle o Avenida — full width -->
+    <div class="fg full">
+      <label class="lbl req" for="calle">Calle o Avenida</label>
+      <input id="calle" name="calle" type="text" placeholder="Nombre de la calle o avenida" autocomplete="street-address">
+      <span class="em" id="ecalle"></span>
+    </div>
+
+    <!-- 2. Número Exterior / 3. Número Interior -->
+    <div class="fg">
+      <label class="lbl req" for="numExt">Número Exterior</label>
+      <input id="numExt" name="numExt" type="text" placeholder="Ej. 142">
+      <span class="em" id="enumExt"></span>
+    </div>
+    <div class="fg">
+      <label class="lbl" for="numInt">Número Interior <span class="note">(opcional)</span></label>
+      <input id="numInt" name="numInt" type="text" placeholder="Ej. Depto. 3B">
+    </div>
+
+    <!-- 4. Código Postal + COPOMEX -->
     <div class="fg">
       <label class="lbl req" for="cp">Código Postal</label>
       <div class="cp-wr" id="cpWr">
-        <input id="cp" name="codigoPostal" type="text" placeholder="12345" maxlength="5" inputmode="numeric" autocomplete="off">
+        <input id="cp" name="codigoPostal" type="text" placeholder="12345" maxlength="5" inputmode="numeric" autocomplete="postal-code">
         <div class="cp-spin" id="cpSpin" style="display:none"></div>
       </div>
-      <small style="color:var(--mid);font-size:.69rem;margin-top:.12rem">Escribe el C.P. y presiona Tab o Enter</small>
+      <small style="color:var(--mid);font-size:.68rem;margin-top:.1rem">Escribe el C.P. y presiona Tab o Enter para buscar</small>
       <span class="em" id="ecp"></span>
       <div id="cpErrBox" style="display:none;font-size:.75rem;color:var(--e);font-weight:500;padding:.42rem .68rem;background:rgba(229,57,53,.05);border:1px solid rgba(229,57,53,.18);border-radius:6px;margin-top:.32rem"></div>
       <button type="button" id="cpRetry" style="display:none;margin-top:.38rem;padding:.32rem .85rem;border-radius:6px;background:var(--p);color:#fff;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600">↺ Reintentar</button>
-      <div id="cpBadges" style="display:none;flex-wrap:wrap;gap:.4rem;margin-top:.45rem">
-        <span class="cp-tag">Municipio: <strong id="cpMun"></strong></span>
-        <span class="cp-tag">Estado: <strong id="cpEst"></strong></span>
-        <span id="cpCiuWrap" class="cp-tag" style="display:none">Ciudad: <strong id="cpCiu"></strong></span>
-      </div>
     </div>
+
+    <!-- 5. Colonia (dropdown COPOMEX) -->
     <div class="fg" id="colBlk" style="display:none">
       <label class="lbl req" for="colonia">
-        Colonia <span id="colCnt" style="font-size:.68rem;font-weight:500;color:var(--a);background:rgba(22,93,255,.08);border-radius:8px;padding:.07rem .48rem;margin-left:.3rem"></span>
+        Colonia
+        <span id="colCnt" style="font-size:.68rem;font-weight:500;color:var(--a);background:rgba(22,93,255,.08);border-radius:8px;padding:.07rem .48rem;margin-left:.3rem"></span>
       </label>
       <select id="colonia" name="colonia">
         <option value="" disabled selected>Selecciona tu colonia</option>
@@ -354,15 +392,31 @@ textarea{resize:vertical;min-height:76px}
       <span class="em" id="ecolonia"></span>
       <div id="colRegLbl" style="display:none;font-size:.68rem;font-weight:700;color:var(--mid);letter-spacing:.05em;margin-top:.48rem;margin-bottom:.2rem">✓ COLONIA REGISTRADA</div>
       <input id="colSel" name="coloniaSeleccionada" type="text" readonly style="display:none;border:2px solid var(--a);background:rgba(22,93,255,.04);font-weight:600;color:var(--a);cursor:default" placeholder="Colonia registrada">
-      <input type="hidden" id="hMun" name="municipio">
-      <input type="hidden" id="hEst" name="estado">
-      <input type="hidden" id="hCiu" name="ciudad">
     </div>
-  </div>
-</div><!-- /s1 -->
 
-<!-- ═══ S2 — REFERENCIAS ═══ -->
-<div class="sec" id="s2">
+    <!-- 6. Delegación o Municipio — autorellena desde COPOMEX -->
+    <div class="fg">
+      <label class="lbl req" for="municipio">Delegación o Municipio</label>
+      <input id="municipio" name="municipio" type="text" placeholder="Se completa con el C.P." readonly>
+      <span class="em" id="emunicipio"></span>
+    </div>
+
+    <!-- 7. Estado de la República — autorellena desde COPOMEX -->
+    <div class="fg">
+      <label class="lbl req" for="estado">Estado de la República</label>
+      <input id="estado" name="estado" type="text" placeholder="Se completa con el C.P." readonly>
+      <span class="em" id="eestado"></span>
+    </div>
+
+    <!-- Campos ocultos auxiliares -->
+    <input type="hidden" id="hCiu" name="ciudad">
+  </div>
+</div><!-- /s2 -->
+
+<!-- ═══════════════════════════════════════════════════════
+     S3 — REFERENCIAS
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s3">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
     <h2 class="sec-title">REFERENCIAS</h2>
@@ -395,62 +449,91 @@ textarea{resize:vertical;min-height:76px}
     <div class="fg"><label class="lbl req" for="a2e">Correo</label><input id="a2e" name="a2e" type="email" placeholder="nombre@correo.com"><span class="em" id="ea2e"></span></div>
     <div class="fg full"><label class="lbl req" for="a2d">Dirección</label><textarea id="a2d" name="a2d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ea2d"></span></div>
   </div></div>
-</div><!-- /s2 -->
+</div><!-- /s3 -->
 
-<!-- ═══ S3 — VEHÍCULO ═══ -->
-<div class="sec" id="s3">
+<!-- ═══════════════════════════════════════════════════════
+     S4 — VEHÍCULO Y FINANCIAMIENTO
+     Marcas completas MX 2026, campo Otra, Enganche sin duplicado
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s4">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg></div>
     <h2 class="sec-title">VEHÍCULO Y FINANCIAMIENTO</h2>
   </div>
   <div class="grid">
-    <div class="fg"><label class="lbl req" for="marca">Marca</label>
+    <!-- Marca -->
+    <div class="fg">
+      <label class="lbl req" for="marca">Marca</label>
       <select id="marca" name="marca">
         <option value="" disabled selected>Selecciona marca</option>
-        <option>Acura</option><option>Alfa Romeo</option><option>Audi</option>
-        <option>BMW</option><option>BYD</option>
-        <option>Chevrolet</option><option>Chrysler</option><option>Citroën</option>
-        <option>Dodge</option>
-        <option>Ferrari</option><option>Fiat</option><option>Ford</option>
-        <option>GAC</option><option>Genesis</option>
-        <option>Honda</option><option>Hyundai</option>
-        <option>Infiniti</option><option>Isuzu</option>
-        <option>JAC</option><option>Jaguar</option><option>Jeep</option>
-        <option>Kia</option>
-        <option>Lamborghini</option><option>Land Rover</option><option>Lexus</option><option>Lincoln</option>
-        <option>Maserati</option><option>Mazda</option><option>Mercedes-Benz</option>
-        <option>MINI</option><option>Mitsubishi</option>
-        <option>Nissan</option>
-        <option>Peugeot</option><option>Porsche</option>
-        <option>RAM</option><option>Renault</option>
-        <option>Seat</option><option>Subaru</option><option>Suzuki</option>
-        <option>Toyota</option>
-        <option>Volkswagen</option><option>Volvo</option>
-        <option value="Otra">Otra</option>
+        <optgroup label="── Chinas ──">
+          <option>BAIC</option><option>Bestune</option><option>BYD</option><option>Changan</option>
+          <option>Chirey / Omoda / Exeed</option><option>Denza</option><option>DF SK</option>
+          <option>Dongfeng</option><option>Foton</option><option>GAC Motor</option><option>Geely</option>
+          <option>GWM / Wey</option><option>Hongqi</option><option>JAC</option><option>JAE Coo</option>
+          <option>Jetour</option><option>JMC</option><option>Jim</option><option>King Long</option>
+          <option>Leapmotor</option><option>MG / IM</option><option>Neta</option><option>Nevo / Avart</option>
+          <option>Seres</option><option>SEV</option><option>Skywell</option><option>Soueast</option>
+          <option>Zeekr</option>
+        </optgroup>
+        <optgroup label="── Europeas ──">
+          <option>Alfa Romeo</option><option>Audi</option><option>BMW</option><option>Cupra</option>
+          <option>Fiat</option><option>Ineos Grenadier</option><option>Land Rover</option>
+          <option>Mercedes-Benz</option><option>Mini Cooper</option><option>Peugeot</option>
+          <option>Porsche</option><option>Renault</option><option>Seat</option>
+          <option>Volkswagen</option><option>Volvo</option>
+        </optgroup>
+        <optgroup label="── Estadounidenses ──">
+          <option>Buick</option><option>Cadillac</option><option>Chevrolet</option><option>Chrysler</option>
+          <option>Dodge</option><option>Ford</option><option>GMC</option><option>Jeep</option>
+          <option>Lincoln</option><option>Ram</option><option>Tesla</option>
+        </optgroup>
+        <optgroup label="── Japonesas / Coreanas ──">
+          <option>Honda</option><option>Hyundai</option><option>Infiniti</option><option>Kia</option>
+          <option>Lexus</option><option>Mazda</option><option>Mitsubishi</option><option>Nissan</option>
+          <option>Subaru</option><option>Suzuki</option><option>Toyota</option>
+        </optgroup>
+        <optgroup label="── Mexicanas ──">
+          <option>Dina</option><option>Inferno</option><option>Zacua</option>
+        </optgroup>
+        <option value="Otra">Otra marca…</option>
       </select>
       <span class="em" id="emarca"></span>
     </div>
-    <!-- Campo "Otra marca" — visible solo si selecciona Otra -->
+
+    <!-- Otra marca (condicional) -->
     <div class="fg" id="otraMarcaBlk" style="display:none">
       <label class="lbl req" for="otraMarca">Especifica la Marca</label>
       <input id="otraMarca" name="otraMarca" type="text" placeholder="Escribe la marca del vehículo" disabled>
       <span class="em" id="eotraMarca"></span>
     </div>
-    <div class="fg"><label class="lbl req" for="version">Versión</label>
-      <input id="version" name="version" type="text" placeholder="Ej: Jetta Highline 1.4T">
+
+    <!-- Versión -->
+    <div class="fg">
+      <label class="lbl req" for="version">Versión / Trim</label>
+      <input id="version" name="version" type="text" placeholder="Ej: Jetta Highline 1.4T AT">
       <span class="em" id="eversion"></span>
     </div>
-    <div class="fg"><label class="lbl req" for="anio">Año</label>
+
+    <!-- Año -->
+    <div class="fg">
+      <label class="lbl req" for="anio">Año</label>
       <select id="anio" name="anio"><option value="" disabled selected>Selecciona año</option></select>
       <span class="em" id="eanio"></span>
     </div>
-    <div class="fg"><label class="lbl req" for="costo">Costo Total del Vehículo</label>
+
+    <!-- Costo -->
+    <div class="fg">
+      <label class="lbl req" for="costo">Costo Total del Vehículo</label>
       <div class="cur-wr"><span class="cur-pre">MX$</span>
         <input id="costo" name="costo" type="text" placeholder="0.00" inputmode="decimal">
       </div>
       <span class="em" id="ecosto"></span>
     </div>
-    <div class="fg full"><label class="lbl req">Pago Inicial</label>
+
+    <!-- Pago inicial — SIN campo "monto adicional" duplicado -->
+    <div class="fg full">
+      <label class="lbl req">Pago Inicial</label>
       <div class="pay-box">
         <div class="pay-ttl">Selecciona el tipo de pago inicial</div>
         <div class="pay-row">
@@ -460,20 +543,21 @@ textarea{resize:vertical;min-height:76px}
           </div>
           <div class="pay-in">
             <div id="payH" style="color:var(--lt);font-size:.82rem;padding:.55rem 0">← Selecciona tipo de pago</div>
+
+            <!-- ENGANCHE: elige % o monto fijo — único campo, sin duplicado -->
             <div id="engF" class="fg" style="display:none">
               <label class="lbl req" for="valEng">Enganche</label>
-              <!-- Selector de tipo de enganche -->
               <div style="display:flex;gap:.55rem;margin-bottom:.5rem">
-                <label class="rlbl" id="engPctLbl" style="font-size:.79rem;padding:.32rem .65rem">
+                <label class="rlbl" style="font-size:.79rem;padding:.32rem .65rem">
                   <input type="radio" name="engTipo" value="porcentaje" id="engPct" checked>
                   <span class="rc"></span>Porcentaje %
                 </label>
-                <label class="rlbl" id="engMonLbl" style="font-size:.79rem;padding:.32rem .65rem">
+                <label class="rlbl" style="font-size:.79rem;padding:.32rem .65rem">
                   <input type="radio" name="engTipo" value="monto_eng" id="engMon">
                   <span class="rc"></span>Monto fijo $
                 </label>
               </div>
-              <!-- Control % con flechas -->
+              <!-- Control % con flechas +5/-5 -->
               <div id="engPctCtrl">
                 <div style="display:flex;align-items:center;gap:.5rem">
                   <button type="button" id="engMinus" style="width:34px;height:34px;border-radius:6px;background:var(--bg);border:1.5px solid var(--bd);font-size:1.1rem;font-weight:700;cursor:pointer;color:var(--p);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s" title="Reducir 5%">−</button>
@@ -483,9 +567,9 @@ textarea{resize:vertical;min-height:76px}
                   </div>
                   <button type="button" id="engPlus" style="width:34px;height:34px;border-radius:6px;background:var(--bg);border:1.5px solid var(--bd);font-size:1.1rem;font-weight:700;cursor:pointer;color:var(--p);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s" title="Aumentar 5%">+</button>
                 </div>
-                <small style="color:var(--mid);font-size:.67rem;margin-top:.22rem;display:block">Usa las flechas (de 5 en 5) o escribe libremente. El % se agrega automáticamente.</small>
+                <small style="color:var(--mid);font-size:.67rem;margin-top:.22rem;display:block">Botones de 5 en 5 (mínimo 10%) o escribe libremente. El % se agrega solo.</small>
               </div>
-              <!-- Control monto fijo -->
+              <!-- Control monto fijo de enganche -->
               <div id="engMonCtrl" style="display:none">
                 <div class="cur-wr"><span class="cur-pre">MX$</span>
                   <input id="valEngMonto" name="valEngMonto" type="text" placeholder="0.00" inputmode="decimal">
@@ -493,6 +577,8 @@ textarea{resize:vertical;min-height:76px}
               </div>
               <span class="em" id="evalEng"></span>
             </div>
+
+            <!-- MONTO INICIAL (tipoPago=monto) -->
             <div id="monF" class="fg" style="display:none">
               <label class="lbl req" for="valMon">Monto Inicial</label>
               <div class="cur-wr"><span class="cur-pre">MX$</span>
@@ -506,35 +592,38 @@ textarea{resize:vertical;min-height:76px}
       <span class="em" id="etipoPago"></span>
     </div>
   </div>
-</div><!-- /s3 -->
+</div><!-- /s4 -->
 
-<!-- ═══ S4 — DOCUMENTOS Y ENVÍO ═══ -->
-<div class="sec" id="s4">
+<!-- ═══════════════════════════════════════════════════════
+     S5 — DOCUMENTOS Y ENVÍO
+     Upload obligatorio + leyenda INE, Resumen, Declaración
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s5">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg></div>
     <h2 class="sec-title">DOCUMENTOS Y ENVÍO</h2>
   </div>
 
-  <!-- ADJUNTAR DOCUMENTOS -->
+  <!-- ADJUNTAR DOCUMENTOS — OBLIGATORIO -->
   <div class="fg" style="margin-bottom:1.5rem">
-    <label class="lbl">Adjuntar Documentos</label>
+    <label class="lbl req" for="upI">Adjuntar Documentos</label>
     <div class="up-area" id="upA">
-      <!-- name="documentos[]" para que SubmitForm reciba los archivos -->
       <input type="file" id="upI" name="documentos[]" multiple accept=".pdf,.jpg,.jpeg,.png,.docx">
-      <div class="up-main">Arrastra archivos o haz clic para seleccionar</div>
+      <div class="up-main">Arrastra archivos o haz clic para seleccionar <span class="up-req">Obligatorio</span></div>
       <div class="up-sub">PDF, JPG, PNG, DOCX · Máx <strong>5 MB</strong> por archivo</div>
+      <div class="up-ine">INE frente y reverso — legible (texto claro, sin reflejos)</div>
     </div>
     <div class="f-list" id="fList"></div>
     <span class="em" id="eupErr"></span>
   </div>
 
-  <!-- RESUMEN -->
+  <!-- RESUMEN DE SOLICITUD -->
   <div class="sumbox" id="sumBox" style="display:none">
     <div class="sum-ttl">RESUMEN DE SOLICITUD</div>
     <div id="sumCont"></div>
   </div>
 
-  <!-- ═══ DECLARACIÓN JURADA (CHECKBOX OBLIGATORIO) ═══ -->
+  <!-- DECLARACIÓN JURADA — OBLIGATORIA -->
   <div class="decl-box" id="declBox">
     <div class="decl-head">
       Declaración y Aceptación
@@ -551,19 +640,17 @@ textarea{resize:vertical;min-height:76px}
         este acto tiene la misma validez legal que una firma autógrafa.
       </span>
     </div>
-    <!-- Campo oculto que se envía con el formulario -->
     <input type="hidden" id="declVal" name="declaracion_aceptada" value="">
     <span class="em" id="edecl" style="margin-top:.55rem;display:block"></span>
   </div>
-
-</div><!-- /s4 -->
+</div><!-- /s5 -->
 
 <!-- NAV -->
 <div class="nav">
   <button type="button" class="btn btn-p" id="btnPrev" disabled>
     <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>Anterior
   </button>
-  <span class="step-ind">Paso <strong id="curS">1</strong> de <strong>4</strong></span>
+  <span class="step-ind">Paso <strong id="curS">1</strong> de <strong>5</strong></span>
   <button type="button" class="btn btn-p" id="btnNext">
     Siguiente<svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
   </button>
@@ -596,28 +683,24 @@ textarea{resize:vertical;min-height:76px}
 (function(){
 'use strict';
 
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  CONFIGURACIÓN
-// ═══════════════════════════════════════════════════════════════════
-
-// reCAPTCHA v3
-// Site Key:   6Lc9zGUsAAAAAG2K5TAav3VrS9obGfFqXO5cnOkV  (frontend)
-// Secret Key: 6Lc9zGUsAAAAAHifaydBuJYHlSEX77P_6zCtACum  (backend — NO exponer aquí)
+// ═══════════════════════════════════════════════════
+// reCAPTCHA v3 — Site Key (pública)
 var RECAPTCHA_SITE_KEY = '6Lc9zGUsAAAAAG2K5TAav3VrS9obGfFqXO5cnOkV';
-
-// FormSubmit.co — el destino del correo se define en el action del <form>
+// Secret Key (backend, NO exponer): 6Lc9zGUsAAAAAHifaydBuJYHlSEX77P_6zCtACum
 
 // COPOMEX — Código Postal
 var CP_TOKEN = '36da398a-1848-44f3-a952-06c9bfb02cc8';
 
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  HELPERS
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 function Q(id){ return document.getElementById(id); }
 function V(id){ var e=Q(id); return e?e.value:''; }
-function SHOW(id){ Q(id).style.display=''; }
-function HIDE(id){ Q(id).style.display='none'; }
-function SHOWF(id){ Q(id).style.display='flex'; }
+function SHOW(id){ var e=Q(id); if(e) e.style.display=''; }
+function HIDE(id){ var e=Q(id); if(e) e.style.display='none'; }
+function SHOWF(id){ var e=Q(id); if(e) e.style.display='flex'; }
 
 function setErr(id,msg){
   var e=Q('e'+id); if(e) e.textContent=msg;
@@ -628,10 +711,10 @@ function clrErr(id){
   var i=Q(id); if(i){ i.classList.remove('bad'); if(i.value&&i.value.trim()) i.classList.add('ok'); }
 }
 
-// ═══════════════════════════════════════════════════════════════════
-//  NAVEGACIÓN
-// ═══════════════════════════════════════════════════════════════════
-var cur=1, TOTAL=4;
+// ═══════════════════════════════════════════════════
+//  NAVEGACIÓN — 5 secciones
+// ═══════════════════════════════════════════════════
+var cur=1, TOTAL=5;
 
 function slideTo(n){
   document.querySelectorAll('.sec').forEach(function(s){ s.classList.remove('active'); });
@@ -653,27 +736,46 @@ function slideTo(n){
 
 Q('btnNext').addEventListener('click',function(){
   if(validateSection(cur)){ if(cur<TOTAL) slideTo(cur+1); }
-  else{ var f=Q('s'+cur).querySelector('.bad'); if(f) f.scrollIntoView({behavior:'smooth',block:'center'}); }
+  else{
+    var f=Q('s'+cur).querySelector('.bad,input.bad,select.bad,textarea.bad,.decl-box.bad');
+    if(f) f.scrollIntoView({behavior:'smooth',block:'center'});
+  }
 });
 Q('btnPrev').addEventListener('click',function(){ if(cur>1) slideTo(cur-1); });
 document.querySelectorAll('.step').forEach(function(s){
   s.addEventListener('click',function(){ var t=parseInt(s.dataset.s); if(t<=cur) slideTo(t); });
 });
 
-// ═══════════════════════════════════════════════════════════════════
-//  YEAR SELECTOR
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+//  AÑO SELECTOR
+// ═══════════════════════════════════════════════════
 (function(){
   var s=Q('anio'), y=new Date().getFullYear();
-  for(var i=y;i>=2000;i--){ var o=document.createElement('option'); o.value=i; o.textContent=i; s.appendChild(o); }
+  for(var i=y+1;i>=2000;i--){
+    var o=document.createElement('option'); o.value=i; o.textContent=i; s.appendChild(o);
+  }
 })();
 
-// RFC/CURP uppercase
+// ═══════════════════════════════════════════════════
+//  RFC / CURP — uppercase
+// ═══════════════════════════════════════════════════
 ['rfc','curp'].forEach(function(id){
   Q(id).addEventListener('input',function(){ this.value=this.value.toUpperCase(); });
 });
 
-// Edad automática
+// CURP — validación inline al escribir/salir
+Q('curp').addEventListener('blur', function(){
+  var v=this.value.toUpperCase().trim();
+  if(!v) return;
+  // Estructura RENAPO: 4 letras + 6 dígitos + H/M + 2 letras estado + 3 letras consonantes + 1 alfanumérico + 1 dígito verificador
+  var ok=/^[A-Z]{4}\d{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9]\d$/.test(v);
+  if(!ok){ setErr('curp','Formato inválido. Debe tener 18 caracteres con la estructura de la RENAPO.'); }
+  else clrErr('curp');
+});
+
+// ═══════════════════════════════════════════════════
+//  EDAD AUTOMÁTICA
+// ═══════════════════════════════════════════════════
 Q('fNac').addEventListener('change',function(){
   if(!this.value){ Q('edad').value=''; return; }
   var b=new Date(this.value),t=new Date(),a=t.getFullYear()-b.getFullYear();
@@ -681,96 +783,9 @@ Q('fNac').addEventListener('change',function(){
   Q('edad').value=a>=0?a+' años':'';
 });
 
-// ═══════════════════════════════════════════════════════════════════
-//  CURP — solo mayúsculas y validación de formato en vSec1
-// ═══════════════════════════════════════════════════════════════════
-
-// ═══════════════════════════════════════════════════════════════════
-//  MARCA — mostrar campo "Otra marca" si selecciona Otra
-// ═══════════════════════════════════════════════════════════════════
-Q('marca').addEventListener('change',function(){
-  var blk=Q('otraMarcaBlk'), inp=Q('otraMarca');
-  if(this.value==='Otra'){
-    blk.style.display=''; inp.disabled=false; inp.focus();
-  } else {
-    blk.style.display='none'; inp.disabled=true; inp.value='';
-    inp.classList.remove('ok','bad'); var e=Q('eotraMarca'); if(e) e.textContent='';
-  }
-  clrErr('marca');
-});
-
-// ═══════════════════════════════════════════════════════════════════
-//  ENGANCHE — control porcentaje con botones +5/-5 y símbolo %
-// ═══════════════════════════════════════════════════════════════════
-var ENG_MIN=0, ENG_MAX=100, ENG_STEP=5, ENG_DEFAULT=10;
-var engEsPct=true; // true=porcentaje, false=monto fijo
-
-function engGetPct(){
-  var raw=V('valEng').replace(/[^0-9.]/g,'');
-  var n=parseFloat(raw);
-  return isNaN(n)?ENG_DEFAULT:Math.min(ENG_MAX,Math.max(ENG_MIN,n));
-}
-function engSetPct(n){
-  n=Math.min(ENG_MAX,Math.max(ENG_MIN,Math.round(n)));
-  Q('valEng').value=n+'%';
-  Q('valEng').classList.remove('bad');
-  clrErr('valEng');
-}
-function engFormatInput(){
-  var raw=this.value.replace(/[^0-9.]/g,'');
-  // Reinserta % al final mientras escribe
-  if(raw!=='') this.value=raw+'%';
-  else this.value='';
-}
-
-Q('engPlus').addEventListener('click',function(){ engSetPct(engGetPct()+ENG_STEP); });
-Q('engMinus').addEventListener('click',function(){ engSetPct(engGetPct()-ENG_STEP); });
-
-Q('valEng').addEventListener('input', function(){
-  // Permite escritura libre pero siempre mantiene %
-  var raw=this.value.replace(/[^0-9.]/g,'');
-  var pos=this.selectionStart;
-  if(raw!==''){
-    this.value=raw+'%';
-    // Colocar cursor antes del %
-    var newPos=Math.min(pos, raw.length);
-    this.setSelectionRange(newPos,newPos);
-  }
-});
-Q('valEng').addEventListener('blur',function(){
-  var raw=this.value.replace(/[^0-9.]/g,'');
-  if(raw!==''){
-    var n=Math.min(ENG_MAX,Math.max(ENG_MIN,parseFloat(raw)||0));
-    this.value=n+'%';
-  }
-});
-Q('valEng').addEventListener('focus',function(){
-  // Al enfocar, posicionar cursor antes del %
-  var len=this.value.replace('%','').length;
-  setTimeout(function(){ Q('valEng').setSelectionRange(len,len); },0);
-});
-// Flechas del teclado en el campo %
-Q('valEng').addEventListener('keydown',function(e){
-  if(e.key==='ArrowUp'){ e.preventDefault(); engSetPct(engGetPct()+ENG_STEP); }
-  if(e.key==='ArrowDown'){ e.preventDefault(); engSetPct(engGetPct()-ENG_STEP); }
-});
-
-// Tipo de enganche: % vs monto fijo
-document.querySelectorAll('input[name=engTipo]').forEach(function(r){
-  r.addEventListener('change',function(){
-    engEsPct=(this.value==='porcentaje');
-    if(engEsPct){
-      Q('engPctCtrl').style.display='';
-      Q('engMonCtrl').style.display='none';
-      if(!V('valEng')) engSetPct(ENG_DEFAULT);
-    } else {
-      Q('engPctCtrl').style.display='none';
-      Q('engMonCtrl').style.display='';
-      Q('valEngMonto').focus();
-    }
-    clrErr('valEng');
-  });
-});
+// ═══════════════════════════════════════════════════
+//  ESTADO CIVIL / RÉGIMEN
+// ═══════════════════════════════════════════════════
 Q('estCivil').addEventListener('change',function(){
   var blk=Q('regimenBlk'),sel=Q('regimen');
   if(this.value==='Casado(a)'){ blk.classList.add('open'); sel.disabled=false; }
@@ -778,9 +793,9 @@ Q('estCivil').addEventListener('change',function(){
   clrErr('estCivil');
 });
 
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  DEPENDIENTES
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 var RANGOS=['0–5 años','6–12 años','13–18 años','19+ años'];
 function buildDepFields(n){
   var c=Q('depAges'); c.innerHTML=''; Q('edepAges').textContent='';
@@ -810,32 +825,23 @@ Q('numDep').addEventListener('change',function(){
   var n=parseInt(this.value); if(n>0) buildDepFields(n); clrErr('numDep');
 });
 
-// PAYMENT RADIO
-document.querySelectorAll('input[name=tipoPago]').forEach(function(r){
-  r.addEventListener('change',function(){
-    HIDE('payH');
-    if(this.value==='enganche'){
-      SHOWF('engF'); HIDE('monF'); Q('valMon').value='';
-      // Inicializar porcentaje por defecto si no tiene valor
-      if(!V('valEng')) engSetPct(ENG_DEFAULT);
-    } else {
-      SHOWF('monF'); HIDE('engF'); Q('valEng').value='';
-    }
-  });
-});
-
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  COPOMEX — Código Postal
-// ═══════════════════════════════════════════════════════════════════
+//  Autorellena: colonia (dropdown), municipio, estado
+// ═══════════════════════════════════════════════════
 function cpClear(){
   HIDE('cpSpin'); Q('cp').disabled=false;
-  HIDE('cpErrBox'); Q('cpErrBox').textContent=''; HIDE('cpRetry'); HIDE('cpBadges');
-  Q('cpMun').textContent=''; Q('cpEst').textContent=''; Q('cpCiu').textContent=''; HIDE('cpCiuWrap');
+  HIDE('cpErrBox'); Q('cpErrBox').textContent=''; HIDE('cpRetry');
+  // Limpiar colonia
   HIDE('colBlk');
   Q('colonia').innerHTML='<option value="" disabled selected>Selecciona tu colonia</option>';
   Q('colonia').classList.remove('ok','bad'); Q('colCnt').textContent='';
   HIDE('colRegLbl'); HIDE('colSel'); Q('colSel').value='';
-  Q('hMun').value=''; Q('hEst').value=''; Q('hCiu').value=''; clrErr('cp');
+  // Limpiar municipio/estado (campos de texto autorrelleno)
+  Q('municipio').value=''; Q('municipio').classList.remove('ok','bad','autofill');
+  Q('estado').value=''; Q('estado').classList.remove('ok','bad','autofill');
+  Q('hCiu').value='';
+  clrErr('cp');
 }
 function cpFail(msg){
   HIDE('cpSpin'); Q('cp').disabled=false;
@@ -851,11 +857,14 @@ function cpFetch(cp){
       var first=data[0];
       if(first.error===true||first.error==='true'){ cpFail(first.error_message||'C.P. no encontrado.'); return; }
       var resp=first.response||{};
-      var mun=resp.municipio||'',est=resp.estado||'',ciu=resp.ciudad||'';
-      Q('cpMun').textContent=mun||'—'; Q('cpEst').textContent=est||'—';
-      if(ciu){ Q('cpCiu').textContent=ciu; SHOW('cpCiuWrap'); }
-      SHOWF('cpBadges');
-      Q('hMun').value=mun; Q('hEst').value=est; Q('hCiu').value=ciu;
+      var mun=resp.municipio||'', est=resp.estado||'', ciu=resp.ciudad||'';
+
+      // AUTORELLENO — Municipio y Estado
+      if(mun){ Q('municipio').value=mun; Q('municipio').classList.add('ok','autofill'); }
+      if(est){ Q('estado').value=est;    Q('estado').classList.add('ok','autofill'); }
+      if(ciu) Q('hCiu').value=ciu;
+
+      // Colonias
       var seen={},cols=[];
       data.forEach(function(item){
         if(!item.error&&item.response&&item.response.asentamiento){
@@ -868,7 +877,7 @@ function cpFetch(cp){
       var sel=Q('colonia');
       cols.forEach(function(c){ var o=document.createElement('option'); o.value=c; o.textContent=c; sel.appendChild(o); });
       Q('colCnt').textContent=cols.length+' colonia'+(cols.length!==1?'s':'');
-      SHOWF('colBlk');
+      SHOW('colBlk');
       Q('cp').classList.add('ok'); Q('cp').classList.remove('bad');
     })
     .catch(function(err){
@@ -896,36 +905,102 @@ Q('colonia').addEventListener('change',function(){
   } else{ Q('colSel').value=''; HIDE('colRegLbl'); HIDE('colSel'); }
 });
 
-// ═══════════════════════════════════════════════════════════════════
-//  CHECKBOX DE DECLARACIÓN JURADA
-// ═══════════════════════════════════════════════════════════════════
-var declChecked=false;
+// ═══════════════════════════════════════════════════
+//  MARCA — campo "Otra"
+// ═══════════════════════════════════════════════════
+Q('marca').addEventListener('change',function(){
+  var blk=Q('otraMarcaBlk'), inp=Q('otraMarca');
+  if(this.value==='Otra'){
+    blk.style.display=''; inp.disabled=false; inp.focus();
+  } else {
+    blk.style.display='none'; inp.disabled=true; inp.value='';
+    inp.classList.remove('ok','bad'); var e=Q('eotraMarca'); if(e) e.textContent='';
+  }
+  clrErr('marca');
+});
 
+// ═══════════════════════════════════════════════════
+//  ENGANCHE — +5/-5, símbolo % automático
+// ═══════════════════════════════════════════════════
+var ENG_MIN=0, ENG_MAX=100, ENG_STEP=5, ENG_DEFAULT=10;
+var engEsPct=true;
+
+function engGetPct(){
+  var raw=V('valEng').replace(/[^0-9.]/g,'');
+  var n=parseFloat(raw);
+  return isNaN(n)?ENG_DEFAULT:Math.min(ENG_MAX,Math.max(ENG_MIN,n));
+}
+function engSetPct(n){
+  n=Math.min(ENG_MAX,Math.max(ENG_MIN,Math.round(n)));
+  Q('valEng').value=n+'%';
+  Q('valEng').classList.remove('bad');
+  clrErr('valEng');
+}
+Q('engPlus').addEventListener('click',function(){ engSetPct(engGetPct()+ENG_STEP); });
+Q('engMinus').addEventListener('click',function(){ engSetPct(engGetPct()-ENG_STEP); });
+Q('valEng').addEventListener('input',function(){
+  var raw=this.value.replace(/[^0-9.]/g,'');
+  var pos=this.selectionStart;
+  if(raw!==''){ this.value=raw+'%'; var np=Math.min(pos,raw.length); this.setSelectionRange(np,np); }
+});
+Q('valEng').addEventListener('blur',function(){
+  var raw=this.value.replace(/[^0-9.]/g,'');
+  if(raw!=='') this.value=Math.min(ENG_MAX,Math.max(ENG_MIN,parseFloat(raw)||0))+'%';
+});
+Q('valEng').addEventListener('focus',function(){
+  var len=this.value.replace('%','').length;
+  setTimeout(function(){ Q('valEng').setSelectionRange(len,len); },0);
+});
+Q('valEng').addEventListener('keydown',function(e){
+  if(e.key==='ArrowUp'){ e.preventDefault(); engSetPct(engGetPct()+ENG_STEP); }
+  if(e.key==='ArrowDown'){ e.preventDefault(); engSetPct(engGetPct()-ENG_STEP); }
+});
+document.querySelectorAll('input[name=engTipo]').forEach(function(r){
+  r.addEventListener('change',function(){
+    engEsPct=(this.value==='porcentaje');
+    if(engEsPct){ Q('engPctCtrl').style.display=''; Q('engMonCtrl').style.display='none'; if(!V('valEng')) engSetPct(ENG_DEFAULT); }
+    else{ Q('engPctCtrl').style.display='none'; Q('engMonCtrl').style.display=''; Q('valEngMonto').focus(); }
+    clrErr('valEng');
+  });
+});
+
+// PAYMENT RADIO
+document.querySelectorAll('input[name=tipoPago]').forEach(function(r){
+  r.addEventListener('change',function(){
+    HIDE('payH');
+    if(this.value==='enganche'){
+      SHOWF('engF'); HIDE('monF'); Q('valMon').value='';
+      if(!V('valEng')) engSetPct(ENG_DEFAULT);
+    } else {
+      SHOWF('monF'); HIDE('engF'); Q('valEng').value='';
+    }
+  });
+});
+
+// ═══════════════════════════════════════════════════
+//  DECLARACIÓN JURADA
+// ═══════════════════════════════════════════════════
+var declChecked=false;
 function toggleDecl(){
   declChecked=!declChecked;
-  var vis=Q('chkVis'), box=Q('declBox'), row=Q('declRow');
+  var vis=Q('chkVis'),box=Q('declBox'),row=Q('declRow');
   if(declChecked){
-    vis.classList.add('on');
-    box.classList.add('ok'); box.classList.remove('bad');
-    Q('declVal').value='Acepto';
-    row.setAttribute('aria-checked','true');
+    vis.classList.add('on'); box.classList.add('ok'); box.classList.remove('bad');
+    Q('declVal').value='Acepto'; row.setAttribute('aria-checked','true');
     var e=Q('edecl'); if(e) e.textContent='';
-  } else{
-    vis.classList.remove('on');
-    box.classList.remove('ok');
-    Q('declVal').value='';
-    row.setAttribute('aria-checked','false');
+  } else {
+    vis.classList.remove('on'); box.classList.remove('ok');
+    Q('declVal').value=''; row.setAttribute('aria-checked','false');
   }
 }
-
-Q('declRow').addEventListener('click', toggleDecl);
+Q('declRow').addEventListener('click',toggleDecl);
 Q('declRow').addEventListener('keydown',function(e){
   if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggleDecl(); }
 });
 
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  VALIDACIONES POR SECCIÓN
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 function isEmpty(v){ return !v||!String(v).trim(); }
 function isName(v){ return /^[a-záéíóúüñA-ZÁÉÍÓÚÜÑ\s]{2,}$/.test((v||'').trim()); }
 function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v||'').trim()); }
@@ -936,9 +1011,11 @@ function validateSection(n){
   if(n===2) return vSec2();
   if(n===3) return vSec3();
   if(n===4) return vSec4();
+  if(n===5) return vSec5();
   return true;
 }
 
+// S1 — Datos Personales
 function vSec1(){
   var ok=true;
   function req(id,msg){ if(isEmpty(V(id))){ setErr(id,msg||'Campo requerido.'); ok=false; } else clrErr(id); }
@@ -959,10 +1036,14 @@ function vSec1(){
   req('estCivil','Selecciona tu estado civil.');
   if(V('estCivil')==='Casado(a)') req('regimen','Selecciona el régimen matrimonial.');
 
-  if(!/^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/.test(V('rfc').toUpperCase())){ setErr('rfc','Formato inválido. Ej: ABC123456XYZ'); ok=false; } else clrErr('rfc');
+  // RFC — formato alfanumérico 12-13 chars
+  if(!/^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/.test(V('rfc').toUpperCase())){ setErr('rfc','Formato inválido. Ej: ABCD123456XY0'); ok=false; } else clrErr('rfc');
 
+  // CURP — estructura RENAPO 18 chars
   var cv=V('curp').toUpperCase();
-  if(!/^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]{2}$/.test(cv)){ setErr('curp','Formato inválido. Ej: ABCD123456HDFLRN01'); ok=false; } else clrErr('curp');
+  if(!/^[A-Z]{4}\d{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9]\d$/.test(cv)){
+    setErr('curp','Formato inválido según la RENAPO. Verifica los 18 caracteres.'); ok=false;
+  } else clrErr('curp');
 
   req('tieneDep','Indica si tienes dependientes económicos.');
   if(V('tieneDep')==='Si'){
@@ -984,30 +1065,46 @@ function vSec1(){
       else Q('edepAges').textContent='';
     }
   }
-
-  if(!/^\d{5}$/.test(V('cp').trim())){ setErr('cp','Ingresa un C.P. de 5 dígitos.'); ok=false; } else clrErr('cp');
-  if(Q('colBlk').style.display!=='none'){
-    if(isEmpty(V('colonia'))){ setErr('colonia','Selecciona una colonia.'); ok=false; } else clrErr('colonia');
-  }
   return ok;
 }
 
+// S2 — Datos de Domicilio
 function vSec2(){
+  var ok=true;
+  function req(id,msg){ if(isEmpty(V(id))){ setErr(id,msg||'Campo requerido.'); ok=false; } else clrErr(id); }
+
+  req('calle','Ingresa la calle o avenida.');
+  req('numExt','Ingresa el número exterior.');
+  if(!/^\d{5}$/.test(V('cp').trim())){ setErr('cp','Ingresa un C.P. de 5 dígitos.'); ok=false; } else clrErr('cp');
+  // Colonia — solo valida si el bloque es visible
+  if(Q('colBlk').style.display!=='none'){
+    if(isEmpty(V('colonia'))){ setErr('colonia','Selecciona una colonia.'); ok=false; } else clrErr('colonia');
+  }
+  // Municipio y Estado (autorrelleno COPOMEX)
+  if(isEmpty(V('municipio'))){ setErr('municipio','Ingresa la delegación o municipio.'); ok=false; } else clrErr('municipio');
+  if(isEmpty(V('estado'))){ setErr('estado','Ingresa el estado.'); ok=false; } else clrErr('estado');
+  return ok;
+}
+
+// S3 — Referencias
+function vSec3(){
   var ok=true;
   function chk(id,fn,msg){ if(!fn(V(id))){ setErr(id,msg); ok=false; } else clrErr(id); }
   function req(id){ if(isEmpty(V(id))){ setErr(id,'Campo requerido.'); ok=false; } else clrErr(id); }
   [['f1n','f1t','f1e','f1d'],['f2n','f2t','f2e','f2d'],['a1n','a1t','a1e','a1d'],['a2n','a2t','a2e','a2d']].forEach(function(g){
-    chk(g[0],isName,'Nombre inválido.'); chk(g[1],isTel,'Teléfono inválido (7-15 dígitos).');
-    chk(g[2],isEmail,'Correo inválido.'); req(g[3]);
+    chk(g[0],isName,'Nombre inválido.');
+    chk(g[1],isTel,'Teléfono inválido (7-15 dígitos).');
+    chk(g[2],isEmail,'Correo inválido.');
+    req(g[3]);
   });
   return ok;
 }
 
-function vSec3(){
+// S4 — Vehículo
+function vSec4(){
   var ok=true;
   function req(id,msg){ if(isEmpty(V(id))){ setErr(id,msg||'Campo requerido.'); ok=false; } else clrErr(id); }
   req('marca','Selecciona la marca.');
-  // Si eligió "Otra", validar campo libre
   if(V('marca')==='Otra'){
     if(isEmpty(V('otraMarca'))){ setErr('otraMarca','Escribe la marca del vehículo.'); ok=false; } else clrErr('otraMarca');
   }
@@ -1019,49 +1116,59 @@ function vSec3(){
   else{
     clrErr('tipoPago');
     if(tp.value==='enganche'){
-      // Validar según sub-tipo seleccionado
       var ePct=document.querySelector('input[name=engTipo]:checked');
-      var esTipo=(ePct&&ePct.value==='porcentaje')||engEsPct;
-      if(esTipo){
-        var pctRaw=V('valEng').replace(/[^0-9.]/g,'');
-        if(isEmpty(pctRaw)||parseFloat(pctRaw)<=0){ setErr('valEng','Ingresa el porcentaje de enganche.'); ok=false; } else clrErr('valEng');
+      if(ePct&&ePct.value==='porcentaje'){
+        var pr=V('valEng').replace(/[^0-9.]/g,'');
+        if(isEmpty(pr)||parseFloat(pr)<=0){ setErr('valEng','Ingresa el porcentaje de enganche.'); ok=false; } else clrErr('valEng');
       } else {
         var mE=parseFloat(V('valEngMonto').replace(/[^0-9.]/g,''));
         if(!mE||mE<=0){ setErr('valEng','Ingresa el monto del enganche.'); ok=false; } else clrErr('valEng');
       }
+    } else {
+      var m=parseFloat(V('valMon').replace(/[^0-9.]/g,''));
+      if(!m||m<=0){ setErr('valMon','Ingresa el monto inicial.'); ok=false; } else clrErr('valMon');
     }
-    else{ var m=parseFloat(V('valMon').replace(/[^0-9.]/g,'')); if(!m||m<=0){ setErr('valMon','Ingresa el monto inicial.'); ok=false; } else clrErr('valMon'); }
   }
   return ok;
 }
 
-// Sección 4: valida que el checkbox esté marcado
-function vSec4(){
+// S5 — Documentos y Envío
+function vSec5(){
+  var ok=true;
+  // Upload obligatorio — debe tener al menos 1 archivo
+  if(upFiles.length===0){
+    var eu=Q('eupErr');
+    eu.textContent='Debes adjuntar al menos un documento (INE requerido).';
+    eu.style.display='block';
+    Q('upA').classList.add('bad-up');
+    ok=false;
+  } else {
+    var eu2=Q('eupErr'); eu2.textContent=''; eu2.style.display='none';
+    Q('upA').classList.remove('bad-up');
+  }
+  // Declaración obligatoria
   if(!declChecked){
     var e=Q('edecl'); if(e) e.textContent='Debes aceptar la declaración para poder enviar la solicitud.';
     Q('declBox').classList.add('bad'); Q('declBox').classList.remove('ok');
-    Q('declRow').scrollIntoView({behavior:'smooth',block:'center'});
-    return false;
+    ok=false;
+  } else {
+    var e2=Q('edecl'); if(e2) e2.textContent='';
+    Q('declBox').classList.remove('bad');
   }
-  var e=Q('edecl'); if(e) e.textContent='';
-  Q('declBox').classList.remove('bad');
-  return true;
+  return ok;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  RESUMEN
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 function buildSummary(){
   var tp=document.querySelector('input[name=tipoPago]:checked');
   var pago='—';
   if(tp){
     if(tp.value==='enganche'){
       var ePct=document.querySelector('input[name=engTipo]:checked');
-      var esTipo=(ePct&&ePct.value==='porcentaje')||engEsPct;
-      pago=esTipo?'Enganche: '+V('valEng'):'Enganche: MX$'+V('valEngMonto');
-    } else {
-      pago='Monto Inicial: MX$'+V('valMon');
-    }
+      pago=(ePct&&ePct.value==='porcentaje')?'Enganche: '+V('valEng'):'Enganche: MX$'+V('valEngMonto');
+    } else pago='Monto Inicial: MX$'+V('valMon');
   }
   var marcaFinal=V('marca')==='Otra'?'Otra ('+V('otraMarca')+')':V('marca');
   var depStr='No';
@@ -1080,11 +1187,14 @@ function buildSummary(){
     ['Nombre',[V('pNombre'),V('sNombre'),V('pApellido'),V('sApellido')].filter(Boolean).join(' ')],
     ['Género',V('genero')],['F. Nacimiento',V('fNac')],
     ['Estado Civil',V('estCivil')],
-    ['Régimen Matrimonial',V('estCivil')==='Casado(a)'?V('regimen'):'N/A'],
+    ['Régimen',V('estCivil')==='Casado(a)'?V('regimen'):'N/A'],
     ['Dependientes',depStr],
     ['RFC',V('rfc')],['CURP',V('curp')],
+    null,
+    ['Calle / Av.',V('calle')],
+    ['Número',V('numExt')+(V('numInt')?' — Int. '+V('numInt'):'')],
     ['C.P.',V('cp')],['Colonia',V('colSel')||V('colonia')],
-    ['Municipio',V('hMun')],['Estado',V('hEst')],
+    ['Municipio',V('municipio')],['Estado',V('estado')],
     null,
     ['Marca',marcaFinal],['Versión',V('version')],['Año',V('anio')],
     ['Costo','MX$ '+V('costo')],['Pago Inicial',pago]
@@ -1096,17 +1206,14 @@ function buildSummary(){
   Q('sumBox').style.display='block';
 }
 
-// ═══════════════════════════════════════════════════════════════════
-//  UPLOAD (UI visual — los archivos van en el input name="documentos[]")
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+//  UPLOAD
+// ═══════════════════════════════════════════════════
 var upFiles=[];
 var upA=Q('upA'),upI=Q('upI'),fL=Q('fList');
-upA.addEventListener('dragover',function(e){e.preventDefault();upA.classList.add('drag');});
-upA.addEventListener('dragleave',function(){upA.classList.remove('drag');});
-upA.addEventListener('drop',function(e){
-  e.preventDefault(); upA.classList.remove('drag');
-  doFiles(e.dataTransfer.files);
-});
+upA.addEventListener('dragover',function(e){ e.preventDefault(); upA.classList.add('drag'); });
+upA.addEventListener('dragleave',function(){ upA.classList.remove('drag'); });
+upA.addEventListener('drop',function(e){ e.preventDefault(); upA.classList.remove('drag'); doFiles(e.dataTransfer.files); });
 upI.addEventListener('change',function(){ doFiles(upI.files); upI.value=''; });
 
 function doFiles(fl){
@@ -1114,89 +1221,64 @@ function doFiles(fl){
   Array.from(fl).forEach(function(f){
     if(upFiles.some(function(x){return x.name===f.name;})) return;
     var ext='.'+f.name.split('.').pop().toLowerCase();
-    if(!['.pdf','.jpg','.jpeg','.png','.docx'].includes(ext)){errs.push('"'+f.name+'" tipo no permitido.');return;}
-    if(f.size>5242880){errs.push('"'+f.name+'" supera 5 MB.');return;}
+    if(!['.pdf','.jpg','.jpeg','.png','.docx'].includes(ext)){ errs.push('"'+f.name+'" tipo no permitido.'); return; }
+    if(f.size>5242880){ errs.push('"'+f.name+'" supera 5 MB.'); return; }
     upFiles.push(f);
+    // Limpiar error de upload si ya hay archivo
+    if(upFiles.length>0){ Q('upA').classList.remove('bad-up'); var eu=Q('eupErr'); eu.textContent=''; eu.style.display='none'; }
     var d=document.createElement('div'); d.className='f-item';
     d.innerHTML='<span>📄</span><span class="f-nm">'+f.name+'</span><span class="f-sz">'+fmtSz(f.size)+'</span><span class="f-ok">✓</span><button type="button" class="f-rm" title="Eliminar">✕</button>';
-    d.querySelector('.f-rm').addEventListener('click',function(){upFiles=upFiles.filter(function(x){return x.name!==f.name;});d.remove();});
+    d.querySelector('.f-rm').addEventListener('click',function(){ upFiles=upFiles.filter(function(x){return x.name!==f.name;}); d.remove(); });
     fL.appendChild(d);
   });
   var eu=Q('eupErr');
-  if(errs.length){eu.textContent=errs.join(' ');eu.style.display='block';} else eu.style.display='none';
+  if(errs.length){ eu.textContent=errs.join(' '); eu.style.display='block'; }
 }
-function fmtSz(b){return b<1048576?(b/1024).toFixed(0)+' KB':(b/1048576).toFixed(1)+' MB';}
+function fmtSz(b){ return b<1048576?(b/1024).toFixed(0)+' KB':(b/1048576).toFixed(1)+' MB'; }
 
-// ═══════════════════════════════════════════════════════════════════
-//  SUBMIT — reCAPTCHA v3 + SubmitForm (multipart con archivos)
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+//  SUBMIT — reCAPTCHA v3 + FormSubmit.co
+// ═══════════════════════════════════════════════════
 Q('frm').addEventListener('submit',function(e){
   e.preventDefault();
-
-  // Validar todas las secciones antes de enviar
   for(var s=1;s<=TOTAL;s++){
     if(!validateSection(s)){
       if(s!==cur) slideTo(s);
       return;
     }
   }
-
-  // Mostrar overlay y deshabilitar botón
   Q('sOv').classList.add('on');
   Q('btnSub').disabled=true;
-
-  // Obtener token reCAPTCHA v3 y luego enviar
   if(typeof grecaptcha!=='undefined'){
     grecaptcha.ready(function(){
       grecaptcha.execute(RECAPTCHA_SITE_KEY,{action:'submit_credito_ava'})
-        .then(function(token){ Q('rcToken').value=token; submitForm(); })
-        .catch(function(){ submitForm(); }); // continúa aunque reCAPTCHA falle
+        .then(function(token){ Q('rcToken').value=token; doSubmit(); })
+        .catch(function(){ doSubmit(); });
     });
-  } else {
-    submitForm(); // fallback si reCAPTCHA no carga
-  }
+  } else { doSubmit(); }
 });
 
-function submitForm(){
+function doSubmit(){
   var fd=new FormData(Q('frm'));
-
-  // Agregar archivos adjuntos (drag & drop) al FormData
-  upFiles.forEach(function(f,i){
-    fd.append('adjunto_'+(i+1), f, f.name);
-  });
-
-  // Subject dinámico con nombre del solicitante
+  upFiles.forEach(function(f,i){ fd.append('adjunto_'+(i+1),f,f.name); });
   var nm=[V('pNombre'),V('sNombre'),V('pApellido'),V('sApellido')].filter(Boolean).join(' ').replace(/\s+/,' ').trim();
   fd.set('_subject','Solicitud Crédito Vehicular AVA — '+nm);
-
-  // FormSubmit.co: POST multipart → redirige a página de confirmación
-  // Usamos fetch con redirect:'follow'; el éxito se detecta por status 200/ok
-  fetch(Q('frm').action,{
-    method:'POST',
-    body:fd,
-    redirect:'follow'
-  })
-  .then(function(r){
-    Q('sOv').classList.remove('on');
-    Q('btnSub').disabled=false;
-    // FormSubmit.co retorna 200 al redirigir a su página de agradecimiento
-    if(r.ok||r.redirected||r.status===200||r.status===302){
-      Q('modal').classList.add('on');
-    } else {
-      alert('Hubo un problema al enviar (código '+r.status+'). Intenta de nuevo.');
-    }
-  })
-  .catch(function(){
-    Q('sOv').classList.remove('on');
-    Q('btnSub').disabled=false;
-    alert('Error al enviar la solicitud. Verifica tu conexión e intenta de nuevo.');
-  });
+  fetch(Q('frm').action,{ method:'POST', body:fd, redirect:'follow' })
+    .then(function(r){
+      Q('sOv').classList.remove('on'); Q('btnSub').disabled=false;
+      if(r.ok||r.redirected||r.status===200||r.status===302){ Q('modal').classList.add('on'); }
+      else{ alert('Error al enviar (código '+r.status+'). Intenta de nuevo.'); }
+    })
+    .catch(function(){
+      Q('sOv').classList.remove('on'); Q('btnSub').disabled=false;
+      alert('Sin conexión. Verifica tu internet e intenta de nuevo.');
+    });
 }
 
 // MODAL
-Q('mClose').addEventListener('click',function(){Q('modal').classList.remove('on');});
-Q('modal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')Q('modal').classList.remove('on');});
+Q('mClose').addEventListener('click',function(){ Q('modal').classList.remove('on'); });
+Q('modal').addEventListener('click',function(e){ if(e.target===this) this.classList.remove('on'); });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') Q('modal').classList.remove('on'); });
 
 // INIT
 slideTo(1);
