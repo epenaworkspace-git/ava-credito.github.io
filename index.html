@@ -82,6 +82,17 @@ textarea{resize:vertical;min-height:76px}
 /* CAMPO AUTORELLENO (municipio/estado desde COPOMEX) */
 .autofill{border-color:var(--a) !important;background:rgba(22,93,255,.04) !important;color:var(--p) !important;font-weight:600}
 
+/* SELECTOR DE LADA INTERNACIONAL */
+.tel-wr{display:flex;align-items:stretch;border:1.5px solid var(--bd);border-radius:7px;overflow:hidden;background:#fff;transition:border-color .18s,box-shadow .18s}
+.tel-wr:focus-within{border-color:var(--a);box-shadow:0 0 0 3px rgba(22,93,255,.1)}
+.tel-wr.bad{border-color:var(--e);box-shadow:0 0 0 3px rgba(229,57,53,.08)}
+.tel-wr.ok{border-color:var(--a)}
+.lada-sel{border:none;border-right:1.5px solid var(--bd);border-radius:0;background:#F4F6FA;padding:.56rem .5rem .56rem .72rem;font-size:.82rem;font-weight:600;color:var(--p);cursor:pointer;flex-shrink:0;min-width:86px;max-width:116px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23999' d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .42rem center;padding-right:1.5rem;outline:none;transition:background .15s}
+.lada-sel:focus{background-color:#EBF0FF}
+.tel-num{border:none !important;border-radius:0 !important;flex:1;padding:.56rem .8rem;font-size:.88rem;outline:none;background:transparent !important;min-width:0;box-shadow:none !important}
+.tel-num:focus{border:none !important;box-shadow:none !important}
+.lada-sel:focus{box-shadow:none !important}
+
 /* REF */
 .ref{border:1.5px solid var(--bd);border-radius:9px;padding:1.1rem;margin-bottom:.85rem;transition:border-color .18s}
 .ref:focus-within{border-color:var(--a)}
@@ -497,7 +508,67 @@ textarea{resize:vertical;min-height:76px}
       <span class="em" id="ecurp"></span>
     </div>
 
-    <!-- Fila 7: Dependientes -->
+    <!-- Fila 7: Teléfono / Correo Electrónico -->
+    <div class="fg">
+      <label class="lbl req" for="telP">Teléfono</label>
+      <div class="tel-wr" id="telPWr">
+        <select class="lada-sel" id="ladaP" name="ladaP" aria-label="Código de país">
+          <option value="+52" data-flag="🇲🇽" selected>🇲🇽 +52</option>
+          <option value="+1" data-flag="🇺🇸">🇺🇸 +1</option>
+          <option value="+1" data-flag="🇨🇦">🇨🇦 +1</option>
+          <option value="+34" data-flag="🇪🇸">🇪🇸 +34</option>
+          <option value="+54" data-flag="🇦🇷">🇦🇷 +54</option>
+          <option value="+55" data-flag="🇧🇷">🇧🇷 +55</option>
+          <option value="+56" data-flag="🇨🇱">🇨🇱 +56</option>
+          <option value="+57" data-flag="🇨🇴">🇨🇴 +57</option>
+          <option value="+58" data-flag="🇻🇪">🇻🇪 +58</option>
+          <option value="+51" data-flag="🇵🇪">🇵🇪 +51</option>
+          <option value="+593" data-flag="🇪🇨">🇪🇨 +593</option>
+          <option value="+591" data-flag="🇧🇴">🇧🇴 +591</option>
+          <option value="+595" data-flag="🇵🇾">🇵🇾 +595</option>
+          <option value="+598" data-flag="🇺🇾">🇺🇾 +598</option>
+          <option value="+507" data-flag="🇵🇦">🇵🇦 +507</option>
+          <option value="+506" data-flag="🇨🇷">🇨🇷 +506</option>
+          <option value="+502" data-flag="🇬🇹">🇬🇹 +502</option>
+          <option value="+503" data-flag="🇸🇻">🇸🇻 +503</option>
+          <option value="+504" data-flag="🇭🇳">🇭🇳 +504</option>
+          <option value="+505" data-flag="🇳🇮">🇳🇮 +505</option>
+          <option value="+53" data-flag="🇨🇺">🇨🇺 +53</option>
+          <option value="+1-809" data-flag="🇩🇴">🇩🇴 +1-809</option>
+          <option value="+44" data-flag="🇬🇧">🇬🇧 +44</option>
+          <option value="+33" data-flag="🇫🇷">🇫🇷 +33</option>
+          <option value="+49" data-flag="🇩🇪">🇩🇪 +49</option>
+          <option value="+39" data-flag="🇮🇹">🇮🇹 +39</option>
+          <option value="+351" data-flag="🇵🇹">🇵🇹 +351</option>
+          <option value="+31" data-flag="🇳🇱">🇳🇱 +31</option>
+          <option value="+32" data-flag="🇧🇪">🇧🇪 +32</option>
+          <option value="+41" data-flag="🇨🇭">🇨🇭 +41</option>
+          <option value="+43" data-flag="🇦🇹">🇦🇹 +43</option>
+          <option value="+48" data-flag="🇵🇱">🇵🇱 +48</option>
+          <option value="+46" data-flag="🇸🇪">🇸🇪 +46</option>
+          <option value="+47" data-flag="🇳🇴">🇳🇴 +47</option>
+          <option value="+45" data-flag="🇩🇰">🇩🇰 +45</option>
+          <option value="+358" data-flag="🇫🇮">🇫🇮 +358</option>
+          <option value="+7" data-flag="🇷🇺">🇷🇺 +7</option>
+          <option value="+86" data-flag="🇨🇳">🇨🇳 +86</option>
+          <option value="+81" data-flag="🇯🇵">🇯🇵 +81</option>
+          <option value="+82" data-flag="🇰🇷">🇰🇷 +82</option>
+          <option value="+91" data-flag="🇮🇳">🇮🇳 +91</option>
+          <option value="+61" data-flag="🇦🇺">🇦🇺 +61</option>
+          <option value="+27" data-flag="🇿🇦">🇿🇦 +27</option>
+        </select>
+        <input class="tel-num" id="telP" name="telP" type="tel" placeholder="7771234567" maxlength="15" inputmode="numeric" autocomplete="tel">
+      </div>
+      <input type="hidden" id="telPFull" name="telefonoPersonal">
+      <span class="em" id="etelP"></span>
+    </div>
+    <div class="fg">
+      <label class="lbl req" for="emailP">Correo Electrónico</label>
+      <input id="emailP" name="emailP" type="email" placeholder="nombre@correo.com" autocomplete="email">
+      <span class="em" id="eemailP"></span>
+    </div>
+
+    <!-- Fila 8: Dependientes -->
     <div class="fg">
       <label class="lbl req" for="tieneDep">¿Tiene Dependientes Económicos?</label>
       <select id="tieneDep" name="tieneDep">
@@ -616,13 +687,117 @@ textarea{resize:vertical;min-height:76px}
   <div class="sub-n">No conviven con el solicitante</div>
   <div class="ref"><div class="ref-t">Familiar 1</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="f1n">Nombre Completo</label><input id="f1n" name="f1n" type="text" placeholder="Nombre completo"><span class="em" id="ef1n"></span></div>
-    <div class="fg"><label class="lbl req" for="f1t">Teléfono</label><input id="f1t" name="f1t" type="tel" placeholder="2221234567" maxlength="15"><span class="em" id="ef1t"></span></div>
+    <div class="fg">
+      <label class="lbl req" for="f1t">Teléfono</label>
+      <div class="tel-wr" id="f1tWr">
+        <select class="lada-sel" id="ladaf1t" name="ladaf1t" aria-label="Código de país">
+          <option value="+52" selected>🇲🇽 +52</option>
+          <option value="+1">🇺🇸 +1</option>
+          <option value="+1">🇨🇦 +1</option>
+          <option value="+34">🇪🇸 +34</option>
+          <option value="+54">🇦🇷 +54</option>
+          <option value="+55">🇧🇷 +55</option>
+          <option value="+56">🇨🇱 +56</option>
+          <option value="+57">🇨🇴 +57</option>
+          <option value="+58">🇻🇪 +58</option>
+          <option value="+51">🇵🇪 +51</option>
+          <option value="+593">🇪🇨 +593</option>
+          <option value="+591">🇧🇴 +591</option>
+          <option value="+595">🇵🇾 +595</option>
+          <option value="+598">🇺🇾 +598</option>
+          <option value="+507">🇵🇦 +507</option>
+          <option value="+506">🇨🇷 +506</option>
+          <option value="+502">🇬🇹 +502</option>
+          <option value="+503">🇸🇻 +503</option>
+          <option value="+504">🇭🇳 +504</option>
+          <option value="+505">🇳🇮 +505</option>
+          <option value="+53">🇨🇺 +53</option>
+          <option value="+1-809">🇩🇴 +1-809</option>
+          <option value="+44">🇬🇧 +44</option>
+          <option value="+33">🇫🇷 +33</option>
+          <option value="+49">🇩🇪 +49</option>
+          <option value="+39">🇮🇹 +39</option>
+          <option value="+351">🇵🇹 +351</option>
+          <option value="+31">🇳🇱 +31</option>
+          <option value="+32">🇧🇪 +32</option>
+          <option value="+41">🇨🇭 +41</option>
+          <option value="+43">🇦🇹 +43</option>
+          <option value="+48">🇵🇱 +48</option>
+          <option value="+46">🇸🇪 +46</option>
+          <option value="+47">🇳🇴 +47</option>
+          <option value="+45">🇩🇰 +45</option>
+          <option value="+358">🇫🇮 +358</option>
+          <option value="+7">🇷🇺 +7</option>
+          <option value="+86">🇨🇳 +86</option>
+          <option value="+81">🇯🇵 +81</option>
+          <option value="+82">🇰🇷 +82</option>
+          <option value="+91">🇮🇳 +91</option>
+          <option value="+61">🇦🇺 +61</option>
+          <option value="+27">🇿🇦 +27</option>
+        </select>
+        <input class="tel-num" id="f1t" name="f1t" type="tel" placeholder="2221234567" maxlength="15" inputmode="numeric">
+      </div>
+      <input type="hidden" id="f1tFull" name="f1tFull">
+      <span class="em" id="ef1t"></span>
+    </div>
     <div class="fg"><label class="lbl req" for="f1e">Correo</label><input id="f1e" name="f1e" type="email" placeholder="nombre@correo.com"><span class="em" id="ef1e"></span></div>
     <div class="fg full"><label class="lbl req" for="f1d">Dirección</label><textarea id="f1d" name="f1d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ef1d"></span></div>
   </div></div>
   <div class="ref"><div class="ref-t">Familiar 2</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="f2n">Nombre Completo</label><input id="f2n" name="f2n" type="text" placeholder="Nombre completo"><span class="em" id="ef2n"></span></div>
-    <div class="fg"><label class="lbl req" for="f2t">Teléfono</label><input id="f2t" name="f2t" type="tel" placeholder="2221234567" maxlength="15"><span class="em" id="ef2t"></span></div>
+    <div class="fg">
+      <label class="lbl req" for="f2t">Teléfono</label>
+      <div class="tel-wr" id="f2tWr">
+        <select class="lada-sel" id="ladaf2t" name="ladaf2t" aria-label="Código de país">
+          <option value="+52" selected>🇲🇽 +52</option>
+          <option value="+1">🇺🇸 +1</option>
+          <option value="+1">🇨🇦 +1</option>
+          <option value="+34">🇪🇸 +34</option>
+          <option value="+54">🇦🇷 +54</option>
+          <option value="+55">🇧🇷 +55</option>
+          <option value="+56">🇨🇱 +56</option>
+          <option value="+57">🇨🇴 +57</option>
+          <option value="+58">🇻🇪 +58</option>
+          <option value="+51">🇵🇪 +51</option>
+          <option value="+593">🇪🇨 +593</option>
+          <option value="+591">🇧🇴 +591</option>
+          <option value="+595">🇵🇾 +595</option>
+          <option value="+598">🇺🇾 +598</option>
+          <option value="+507">🇵🇦 +507</option>
+          <option value="+506">🇨🇷 +506</option>
+          <option value="+502">🇬🇹 +502</option>
+          <option value="+503">🇸🇻 +503</option>
+          <option value="+504">🇭🇳 +504</option>
+          <option value="+505">🇳🇮 +505</option>
+          <option value="+53">🇨🇺 +53</option>
+          <option value="+1-809">🇩🇴 +1-809</option>
+          <option value="+44">🇬🇧 +44</option>
+          <option value="+33">🇫🇷 +33</option>
+          <option value="+49">🇩🇪 +49</option>
+          <option value="+39">🇮🇹 +39</option>
+          <option value="+351">🇵🇹 +351</option>
+          <option value="+31">🇳🇱 +31</option>
+          <option value="+32">🇧🇪 +32</option>
+          <option value="+41">🇨🇭 +41</option>
+          <option value="+43">🇦🇹 +43</option>
+          <option value="+48">🇵🇱 +48</option>
+          <option value="+46">🇸🇪 +46</option>
+          <option value="+47">🇳🇴 +47</option>
+          <option value="+45">🇩🇰 +45</option>
+          <option value="+358">🇫🇮 +358</option>
+          <option value="+7">🇷🇺 +7</option>
+          <option value="+86">🇨🇳 +86</option>
+          <option value="+81">🇯🇵 +81</option>
+          <option value="+82">🇰🇷 +82</option>
+          <option value="+91">🇮🇳 +91</option>
+          <option value="+61">🇦🇺 +61</option>
+          <option value="+27">🇿🇦 +27</option>
+        </select>
+        <input class="tel-num" id="f2t" name="f2t" type="tel" placeholder="2221234567" maxlength="15" inputmode="numeric">
+      </div>
+      <input type="hidden" id="f2tFull" name="f2tFull">
+      <span class="em" id="ef2t"></span>
+    </div>
     <div class="fg"><label class="lbl req" for="f2e">Correo</label><input id="f2e" name="f2e" type="email" placeholder="nombre@correo.com"><span class="em" id="ef2e"></span></div>
     <div class="fg full"><label class="lbl req" for="f2d">Dirección</label><textarea id="f2d" name="f2d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ef2d"></span></div>
   </div></div>
@@ -630,13 +805,117 @@ textarea{resize:vertical;min-height:76px}
   <div class="sub-n">&nbsp;</div>
   <div class="ref"><div class="ref-t">Amistad 1</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="a1n">Nombre Completo</label><input id="a1n" name="a1n" type="text" placeholder="Nombre completo"><span class="em" id="ea1n"></span></div>
-    <div class="fg"><label class="lbl req" for="a1t">Teléfono</label><input id="a1t" name="a1t" type="tel" placeholder="2221234567" maxlength="15"><span class="em" id="ea1t"></span></div>
+    <div class="fg">
+      <label class="lbl req" for="a1t">Teléfono</label>
+      <div class="tel-wr" id="a1tWr">
+        <select class="lada-sel" id="ladaa1t" name="ladaa1t" aria-label="Código de país">
+          <option value="+52" selected>🇲🇽 +52</option>
+          <option value="+1">🇺🇸 +1</option>
+          <option value="+1">🇨🇦 +1</option>
+          <option value="+34">🇪🇸 +34</option>
+          <option value="+54">🇦🇷 +54</option>
+          <option value="+55">🇧🇷 +55</option>
+          <option value="+56">🇨🇱 +56</option>
+          <option value="+57">🇨🇴 +57</option>
+          <option value="+58">🇻🇪 +58</option>
+          <option value="+51">🇵🇪 +51</option>
+          <option value="+593">🇪🇨 +593</option>
+          <option value="+591">🇧🇴 +591</option>
+          <option value="+595">🇵🇾 +595</option>
+          <option value="+598">🇺🇾 +598</option>
+          <option value="+507">🇵🇦 +507</option>
+          <option value="+506">🇨🇷 +506</option>
+          <option value="+502">🇬🇹 +502</option>
+          <option value="+503">🇸🇻 +503</option>
+          <option value="+504">🇭🇳 +504</option>
+          <option value="+505">🇳🇮 +505</option>
+          <option value="+53">🇨🇺 +53</option>
+          <option value="+1-809">🇩🇴 +1-809</option>
+          <option value="+44">🇬🇧 +44</option>
+          <option value="+33">🇫🇷 +33</option>
+          <option value="+49">🇩🇪 +49</option>
+          <option value="+39">🇮🇹 +39</option>
+          <option value="+351">🇵🇹 +351</option>
+          <option value="+31">🇳🇱 +31</option>
+          <option value="+32">🇧🇪 +32</option>
+          <option value="+41">🇨🇭 +41</option>
+          <option value="+43">🇦🇹 +43</option>
+          <option value="+48">🇵🇱 +48</option>
+          <option value="+46">🇸🇪 +46</option>
+          <option value="+47">🇳🇴 +47</option>
+          <option value="+45">🇩🇰 +45</option>
+          <option value="+358">🇫🇮 +358</option>
+          <option value="+7">🇷🇺 +7</option>
+          <option value="+86">🇨🇳 +86</option>
+          <option value="+81">🇯🇵 +81</option>
+          <option value="+82">🇰🇷 +82</option>
+          <option value="+91">🇮🇳 +91</option>
+          <option value="+61">🇦🇺 +61</option>
+          <option value="+27">🇿🇦 +27</option>
+        </select>
+        <input class="tel-num" id="a1t" name="a1t" type="tel" placeholder="2221234567" maxlength="15" inputmode="numeric">
+      </div>
+      <input type="hidden" id="a1tFull" name="a1tFull">
+      <span class="em" id="ea1t"></span>
+    </div>
     <div class="fg"><label class="lbl req" for="a1e">Correo</label><input id="a1e" name="a1e" type="email" placeholder="nombre@correo.com"><span class="em" id="ea1e"></span></div>
     <div class="fg full"><label class="lbl req" for="a1d">Dirección</label><textarea id="a1d" name="a1d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ea1d"></span></div>
   </div></div>
   <div class="ref"><div class="ref-t">Amistad 2</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="a2n">Nombre Completo</label><input id="a2n" name="a2n" type="text" placeholder="Nombre completo"><span class="em" id="ea2n"></span></div>
-    <div class="fg"><label class="lbl req" for="a2t">Teléfono</label><input id="a2t" name="a2t" type="tel" placeholder="2221234567" maxlength="15"><span class="em" id="ea2t"></span></div>
+    <div class="fg">
+      <label class="lbl req" for="a2t">Teléfono</label>
+      <div class="tel-wr" id="a2tWr">
+        <select class="lada-sel" id="ladaa2t" name="ladaa2t" aria-label="Código de país">
+          <option value="+52" selected>🇲🇽 +52</option>
+          <option value="+1">🇺🇸 +1</option>
+          <option value="+1">🇨🇦 +1</option>
+          <option value="+34">🇪🇸 +34</option>
+          <option value="+54">🇦🇷 +54</option>
+          <option value="+55">🇧🇷 +55</option>
+          <option value="+56">🇨🇱 +56</option>
+          <option value="+57">🇨🇴 +57</option>
+          <option value="+58">🇻🇪 +58</option>
+          <option value="+51">🇵🇪 +51</option>
+          <option value="+593">🇪🇨 +593</option>
+          <option value="+591">🇧🇴 +591</option>
+          <option value="+595">🇵🇾 +595</option>
+          <option value="+598">🇺🇾 +598</option>
+          <option value="+507">🇵🇦 +507</option>
+          <option value="+506">🇨🇷 +506</option>
+          <option value="+502">🇬🇹 +502</option>
+          <option value="+503">🇸🇻 +503</option>
+          <option value="+504">🇭🇳 +504</option>
+          <option value="+505">🇳🇮 +505</option>
+          <option value="+53">🇨🇺 +53</option>
+          <option value="+1-809">🇩🇴 +1-809</option>
+          <option value="+44">🇬🇧 +44</option>
+          <option value="+33">🇫🇷 +33</option>
+          <option value="+49">🇩🇪 +49</option>
+          <option value="+39">🇮🇹 +39</option>
+          <option value="+351">🇵🇹 +351</option>
+          <option value="+31">🇳🇱 +31</option>
+          <option value="+32">🇧🇪 +32</option>
+          <option value="+41">🇨🇭 +41</option>
+          <option value="+43">🇦🇹 +43</option>
+          <option value="+48">🇵🇱 +48</option>
+          <option value="+46">🇸🇪 +46</option>
+          <option value="+47">🇳🇴 +47</option>
+          <option value="+45">🇩🇰 +45</option>
+          <option value="+358">🇫🇮 +358</option>
+          <option value="+7">🇷🇺 +7</option>
+          <option value="+86">🇨🇳 +86</option>
+          <option value="+81">🇯🇵 +81</option>
+          <option value="+82">🇰🇷 +82</option>
+          <option value="+91">🇮🇳 +91</option>
+          <option value="+61">🇦🇺 +61</option>
+          <option value="+27">🇿🇦 +27</option>
+        </select>
+        <input class="tel-num" id="a2t" name="a2t" type="tel" placeholder="2221234567" maxlength="15" inputmode="numeric">
+      </div>
+      <input type="hidden" id="a2tFull" name="a2tFull">
+      <span class="em" id="ea2t"></span>
+    </div>
     <div class="fg"><label class="lbl req" for="a2e">Correo</label><input id="a2e" name="a2e" type="email" placeholder="nombre@correo.com"><span class="em" id="ea2e"></span></div>
     <div class="fg full"><label class="lbl req" for="a2d">Dirección</label><textarea id="a2d" name="a2d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ea2d"></span></div>
   </div></div>
@@ -1026,6 +1305,56 @@ Q('numDep').addEventListener('change',function(){
 });
 
 // ═══════════════════════════════════════════════════
+//  LADA — Selector de código de país para todos los teléfonos
+//  Concatena lada + número en el campo hidden al cambiar cualquiera
+// ═══════════════════════════════════════════════════
+function initTelField(numId, ladaId, hiddenId, wrId){
+  function update(){
+    var lada = Q(ladaId) ? Q(ladaId).value : '+52';
+    var num  = (Q(numId)  ? Q(numId).value  : '').replace(/\D/g,'');
+    if(Q(hiddenId)) Q(hiddenId).value = num ? lada+' '+num : '';
+  }
+  function setWrapState(state){
+    if(!Q(wrId)) return;
+    Q(wrId).classList.remove('ok','bad');
+    if(state) Q(wrId).classList.add(state);
+    // quitar estado del input interno para evitar doble estilo
+    if(Q(numId)){ Q(numId).classList.remove('ok','bad'); }
+  }
+  if(Q(ladaId)) Q(ladaId).addEventListener('change', update);
+  if(Q(numId)){
+    Q(numId).addEventListener('input',function(){
+      // Solo dígitos
+      var raw=this.value.replace(/\D/g,'');
+      if(this.value!==raw) this.value=raw;
+      update();
+      // Limpiar estado de error mientras escribe
+      setWrapState(null);
+      var e=Q('e'+numId); if(e) e.textContent='';
+    });
+    Q(numId).addEventListener('blur',function(){
+      update();
+      var num=this.value.replace(/\D/g,'');
+      if(num.length>0 && num.length<7){
+        setWrapState('bad');
+        var e=Q('e'+numId); if(e) e.textContent='Mín. 7 dígitos.';
+      } else if(num.length>=7){
+        setWrapState('ok');
+        var e=Q('e'+numId); if(e) e.textContent='';
+      }
+    });
+  }
+  update(); // estado inicial
+}
+
+// Inicializar todos los campos de teléfono
+initTelField('telP','ladaP','telPFull','telPWr');
+initTelField('f1t','ladaf1t','f1tFull','f1tWr');
+initTelField('f2t','ladaf2t','f2tFull','f2tWr');
+initTelField('a1t','ladaa1t','a1tFull','a1tWr');
+initTelField('a2t','ladaa2t','a2tFull','a2tWr');
+
+// ═══════════════════════════════════════════════════
 //  COPOMEX — Código Postal
 //  Autorellena: colonia (dropdown), municipio, estado
 // ═══════════════════════════════════════════════════
@@ -1253,6 +1582,14 @@ function vSec1(){
     setErr('curp','Formato inválido según la RENAPO. Verifica los 18 caracteres.'); ok=false;
   } else clrErr('curp');
 
+  // Teléfono personal — valida número, el hidden guarda lada+número
+  var telPNum=(V('telP')||'').replace(/\D/g,'');
+  if(telPNum.length<7){ setErr('telP','Ingresa un número de al menos 7 dígitos.'); if(Q('telPWr')){Q('telPWr').classList.add('bad');Q('telPWr').classList.remove('ok');} ok=false; }
+  else{ var e=Q('etelP'); if(e)e.textContent=''; if(Q('telPWr')){Q('telPWr').classList.add('ok');Q('telPWr').classList.remove('bad');} }
+
+  // Correo personal
+  if(!isEmail(V('emailP'))){ setErr('emailP','Correo inválido.'); ok=false; } else clrErr('emailP');
+
   req('tieneDep','Indica si tienes dependientes económicos.');
   if(V('tieneDep')==='Si'){
     req('numDep','Indica el número de dependientes.');
@@ -1301,7 +1638,16 @@ function vSec3(){
   function req(id){ if(isEmpty(V(id))){ setErr(id,'Campo requerido.'); ok=false; } else clrErr(id); }
   [['f1n','f1t','f1e','f1d'],['f2n','f2t','f2e','f2d'],['a1n','a1t','a1e','a1d'],['a2n','a2t','a2e','a2d']].forEach(function(g){
     chk(g[0],isName,'Nombre inválido.');
-    chk(g[1],isTel,'Teléfono inválido (7-15 dígitos).');
+    // Validar número del campo .tel-num (no el hidden)
+    var tNum=(V(g[1])||'').replace(/\D/g,'');
+    var tWr=Q(g[1]+'Wr');
+    if(tNum.length<7){
+      var te=Q('e'+g[1]); if(te) te.textContent='Teléfono inválido (mín. 7 dígitos).';
+      if(tWr){ tWr.classList.add('bad'); tWr.classList.remove('ok'); } ok=false;
+    } else {
+      var te2=Q('e'+g[1]); if(te2) te2.textContent='';
+      if(tWr){ tWr.classList.add('ok'); tWr.classList.remove('bad'); }
+    }
     chk(g[2],isEmail,'Correo inválido.');
     req(g[3]);
   });
@@ -1397,6 +1743,7 @@ function buildSummary(){
     ['Estado Civil',V('estCivil')],
     ['Régimen',V('estCivil')==='Casado(a)'?V('regimen'):'N/A'],
     ['Dependientes',depStr],
+    ['Teléfono',V('telPFull')||V('telP')],['Correo',V('emailP')],
     ['RFC',V('rfc')],['CURP',V('curp')],
     null,
     ['Calle / Av.',V('calle')],
