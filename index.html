@@ -1,1046 +1,1101 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trámites en Línea — ANPAI</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-/* ══════════════════════════════════════════════════
-   TOKENS & RESET
-══════════════════════════════════════════════════ */
-:root{
-  --ink:#0D1B2A;
-  --ink2:#1E3148;
-  --gold:#C9A84C;
-  --gold2:#F0CC7A;
-  --cream:#F7F4EE;
-  --paper:#FDFBF7;
-  --line:#DDD8CE;
-  --muted:#7A7265;
-  --err:#C0392B;
-  --ok:#2E7D52;
-  --warn:#C47B0A;
-  --r:8px;
-  --shadow:0 4px 24px rgba(13,27,42,.10);
-  --shadow-lg:0 12px 48px rgba(13,27,42,.18);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:var(--cream);
-  color:var(--ink);
-  min-height:100vh;
-  overflow-x:hidden;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVA - Trámites Vehiculares en Morelos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lc9zGUsAAAAAG2K5TAav3VrS9obGfFqXO5cnOkV"></script>
+    <!-- Elfsight AI Chatbot — se carga de forma asíncrona, no bloquea el formulario -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
 
-/* ══════════════════════════════════════════════════
-   FONDO DECORATIVO
-══════════════════════════════════════════════════ */
-body::before{
-  content:'';
-  position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 80% 60% at 10% 0%, rgba(201,168,76,.07) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 90% 100%, rgba(13,27,42,.05) 0%, transparent 60%);
-  pointer-events:none;z-index:0;
-}
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-/* ══════════════════════════════════════════════════
-   WRAPPER
-══════════════════════════════════════════════════ */
-.page{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
-.wrap{max-width:740px;margin:0 auto;padding:2.5rem 1.25rem 5rem;width:100%}
+        :root {
+            --azul-dark:   #0A1F44;
+            --azul-mid:    #162d54;
+            --azul-blue:   #165DFF;
+            --azul-light:  #e8f0ff;
+            --blanco:      #FFFFFF;
+            --gris-dark:   #333333;
+            --gris-mid:    #6b7280;
+            --gris-light:  #f3f6fa;
+            --gris-border: #dde3ec;
+            --verde:       #22c55e;
+            --rojo:        #ef4444;
+            --r:           10px;
+            --r-lg:        16px;
+            --shadow:      0 4px 24px rgba(10,31,68,.10);
+            --shadow-lg:   0 8px 40px rgba(10,31,68,.14);
+        }
 
-/* ══════════════════════════════════════════════════
-   HEADER
-══════════════════════════════════════════════════ */
-.hdr{
-  text-align:center;
-  padding-bottom:2.5rem;
-  margin-bottom:2.5rem;
-  border-bottom:1px solid var(--line);
-  position:relative;
-}
-.hdr::after{
-  content:'';
-  position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);
-  width:64px;height:3px;background:var(--gold);border-radius:2px;
-}
-.hdr-badge{
-  display:inline-flex;align-items:center;gap:.55rem;
-  background:var(--ink2);color:var(--gold2);
-  font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  padding:.35rem 1rem;border-radius:2rem;margin-bottom:1.1rem;
-}
-.hdr-badge svg{width:13px;height:13px;fill:var(--gold2)}
-.hdr-logo{
-  font-family:'Playfair Display',serif;
-  font-size:2.6rem;font-weight:700;color:var(--ink);
-  letter-spacing:-.01em;line-height:1;
-  margin-bottom:.4rem;
-}
-.hdr-logo span{color:var(--gold)}
-.hdr-sub{
-  font-size:1rem;color:var(--muted);font-weight:400;
-  letter-spacing:.01em;
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #eef2f8;
+            color: var(--gris-dark);
+            min-height: 100vh;
+            padding: 24px 16px 100px;
+        }
 
-/* ══════════════════════════════════════════════════
-   TARJETA PRINCIPAL
-══════════════════════════════════════════════════ */
-.card{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:14px;
-  box-shadow:var(--shadow-lg);
-  overflow:hidden;
-}
-.card-top{
-  background:var(--ink2);
-  padding:1.4rem 2rem;
-  display:flex;align-items:center;justify-content:space-between;gap:1rem;
-}
-.card-ttl{
-  font-family:'Playfair Display',serif;
-  font-size:1.15rem;font-weight:600;color:#fff;
-  letter-spacing:.01em;
-}
-.folio-tag{
-  display:flex;flex-direction:column;align-items:flex-end;gap:.15rem;
-}
-.folio-lbl{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)}
-.folio-val{
-  font-family:'DM Sans',sans-serif;
-  font-size:.88rem;font-weight:600;letter-spacing:.06em;
-  color:var(--gold2);
-  background:rgba(201,168,76,.15);
-  border:1px solid rgba(201,168,76,.3);
-  border-radius:5px;padding:.2rem .75rem;
-  min-width:160px;text-align:center;
-  transition:all .3s ease;
-}
-.folio-val.ready{color:var(--gold2);border-color:var(--gold)}
-.folio-val.loading{opacity:.5}
-.card-body{padding:2rem 2rem 2.5rem}
+        .wrapper {
+            max-width: 860px;
+            margin: 0 auto;
+            animation: fadeUp .6s ease both;
+        }
+        @keyframes fadeUp {
+            from { opacity:0; transform:translateY(20px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
 
-/* ══════════════════════════════════════════════════
-   FORM GRID
-══════════════════════════════════════════════════ */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-.full{grid-column:1/-1}
-.fg{display:flex;flex-direction:column;gap:.35rem}
-.lbl{font-size:.78rem;font-weight:600;color:var(--ink);letter-spacing:.02em}
-.lbl.req::after{content:' *';color:var(--gold)}
-.hint{font-size:.69rem;color:var(--muted);font-weight:400}
+        /* ── HEADER ── */
+        .hdr {
+            background: linear-gradient(135deg, var(--azul-dark) 0%, var(--azul-mid) 100%);
+            border-radius: var(--r-lg) var(--r-lg) 0 0;
+            padding: 40px 40px 34px;
+            text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hdr::before {
+            content:''; position:absolute; inset:0;
+            background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(22,93,255,.28) 0%, transparent 70%);
+        }
+        .hdr-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.7rem; font-weight: 800;
+            letter-spacing: 3px;
+            position: relative; z-index:1; line-height:1; margin-bottom:8px;
+        }
+        .hdr-logo .letra-a  { color: var(--blanco); font-style:normal; }
+        .hdr-logo .letra-va { color: var(--azul-blue); font-style:normal; }
+        .hdr-sub {
+            font-size: .78rem; font-weight:600; letter-spacing:4px;
+            text-transform:uppercase; color:rgba(255,255,255,.70);
+            position:relative; z-index:1;
+        }
 
-/* ══════════════════════════════════════════════════
-   INPUTS
-══════════════════════════════════════════════════ */
-input,select,textarea{
-  width:100%;padding:.6rem .85rem;
-  border:1.5px solid var(--line);
-  border-radius:var(--r);
-  background:#fff;
-  font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--ink);
-  outline:none;appearance:none;-webkit-appearance:none;
-  transition:border-color .18s,box-shadow .18s,background .18s;
-}
-input:focus,select:focus{
-  border-color:var(--gold);
-  box-shadow:0 0 0 3px rgba(201,168,76,.15);
-  background:#fffef9;
-}
-input.ok,select.ok{border-color:var(--ok)}
-input.bad,select.bad,textarea.bad{border-color:var(--err);box-shadow:0 0 0 3px rgba(192,57,43,.08)}
-input[readonly]{background:var(--cream);color:var(--muted);cursor:default}
-select{cursor:pointer;padding-right:2.2rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath fill='%237A7265' d='M5.5 7L0 0h11z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .8rem center}
-.em{font-size:.71rem;color:var(--err);font-weight:500;min-height:.9rem}
+        /* ── FORM CARD ── */
+        .form-card {
+            background: var(--blanco);
+            border:1px solid var(--gris-border); border-top:none;
+            border-radius:0 0 var(--r-lg) var(--r-lg);
+            padding: 40px; box-shadow: var(--shadow-lg);
+        }
 
-/* ══════════════════════════════════════════════════
-   DIVIDER CON ETIQUETA
-══════════════════════════════════════════════════ */
-.sec-div{
-  grid-column:1/-1;
-  display:flex;align-items:center;gap:.75rem;
-  padding:.4rem 0;
-  margin:.25rem 0;
-}
-.sec-div span{
-  font-size:.69rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted);white-space:nowrap;
-}
-.sec-div::before,.sec-div::after{content:'';flex:1;height:1px;background:var(--line)}
+        /* ── SECTION TITLE ── */
+        .sec-title {
+            display:flex; align-items:center; gap:12px;
+            margin-bottom:24px; padding-bottom:14px;
+            border-bottom:2px solid var(--azul-blue);
+        }
+        .sec-icon {
+            width:34px; height:34px; background:var(--azul-light);
+            border-radius:8px; display:flex; align-items:center; justify-content:center;
+            font-size:1rem; flex-shrink:0;
+        }
+        .sec-title h2 {
+            font-size:.88rem; font-weight:700; letter-spacing:1.5px;
+            text-transform:uppercase; color:var(--azul-dark);
+        }
 
-/* ══════════════════════════════════════════════════
-   SELECTOR DE LADA (misma arquitectura que AVA)
-══════════════════════════════════════════════════ */
-.tel-wr{
-  display:flex;align-items:stretch;
-  border:1.5px solid var(--line);border-radius:var(--r);
-  overflow:hidden;background:#fff;
-  transition:border-color .18s,box-shadow .18s;
-}
-.tel-wr:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.15)}
-.tel-wr.ok{border-color:var(--ok)}
-.tel-wr.bad{border-color:var(--err);box-shadow:0 0 0 3px rgba(192,57,43,.08)}
-.lada-sel{
-  border:none;border-right:1.5px solid var(--line);border-radius:0;
-  background:#F5F3EE;padding:.6rem .45rem .6rem .7rem;
-  font-size:.8rem;font-weight:600;color:var(--ink2);
-  flex-shrink:0;min-width:84px;max-width:112px;
-  appearance:none;-webkit-appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%237A7265' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right .42rem center;
-  padding-right:1.5rem;outline:none;cursor:pointer;
-}
-.lada-sel:focus{background-color:#EEF0FF;box-shadow:none}
-.tel-num{
-  border:none !important;border-radius:0 !important;flex:1;
-  padding:.6rem .85rem;font-size:.88rem;
-  outline:none;background:transparent !important;min-width:0;
-  box-shadow:none !important;
-}
-.tel-wr input{border:none !important;box-shadow:none !important;border-radius:0 !important}
+        /* ── GRID ── */
+        .g2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+        .g-full { grid-column:1 / -1; }
 
-/* ══════════════════════════════════════════════════
-   TIPO DE TRÁMITE — CARDS SELECCIONABLES
-══════════════════════════════════════════════════ */
-.tipo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem}
-.tipo-card{
-  position:relative;cursor:pointer;
-  border:2px solid var(--line);border-radius:10px;
-  padding:1rem .85rem .9rem;
-  background:#fff;
-  transition:all .2s ease;
-  text-align:center;
-  user-select:none;
-}
-.tipo-card:hover{border-color:var(--gold);background:#fffef9}
-.tipo-card.sel{
-  border-color:var(--gold);
-  background:linear-gradient(135deg,#fffef4 0%,#fff9e8 100%);
-  box-shadow:0 4px 16px rgba(201,168,76,.18);
-}
-.tipo-card input[type=radio]{
-  position:absolute;inset:0;opacity:0;cursor:pointer;
-  width:100%;height:100%;margin:0;
-}
-.tipo-ico{font-size:1.6rem;margin-bottom:.42rem;line-height:1}
-.tipo-nm{font-size:.82rem;font-weight:600;color:var(--ink);line-height:1.2}
-.tipo-code{font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin-top:.2rem}
-.tipo-card.sel .tipo-nm{color:var(--ink2)}
-.tipo-card.sel .tipo-code{color:var(--gold)}
-.tipo-chk{
-  position:absolute;top:.5rem;right:.5rem;
-  width:16px;height:16px;border-radius:50%;
-  border:1.5px solid var(--line);background:#fff;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .18s;
-}
-.tipo-card.sel .tipo-chk{background:var(--gold);border-color:var(--gold)}
-.tipo-card.sel .tipo-chk::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff}
+        /* ── FIELD ── */
+        .fld { display:flex; flex-direction:column; gap:6px; }
+        .fld label {
+            font-size:.8rem; font-weight:600; color:var(--azul-dark); letter-spacing:.2px;
+        }
+        .fld label .req { color:var(--azul-blue); margin-left:2px; }
+        .fld label .opt { color:var(--gris-mid); font-weight:400; font-style:italic; margin-left:4px; font-size:.75rem; }
 
-/* ══════════════════════════════════════════════════
-   FOLIO GENERADO (campo visual integrado)
-══════════════════════════════════════════════════ */
-.folio-field{
-  display:flex;align-items:center;gap:.75rem;
-  padding:.65rem 1rem;
-  background:var(--cream);border:1.5px solid var(--line);
-  border-radius:var(--r);
-}
-.folio-ico{font-size:1.1rem;flex-shrink:0}
-.folio-txt{
-  font-size:.88rem;font-weight:700;letter-spacing:.07em;
-  color:var(--ink2);font-family:'DM Sans',monospace;
-}
-.folio-txt.empty{color:var(--muted);font-weight:400;font-size:.84rem;letter-spacing:0}
-.folio-status{
-  margin-left:auto;font-size:.72rem;font-weight:600;
-  padding:.18rem .6rem;border-radius:4px;white-space:nowrap;
-}
-.folio-status.pen{background:rgba(201,168,76,.12);color:var(--warn)}
-.folio-status.ok{background:rgba(46,125,82,.1);color:var(--ok)}
-.folio-status.err{background:rgba(192,57,43,.08);color:var(--err)}
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        select {
+            width:100%; padding:11px 14px;
+            border:1.5px solid var(--gris-border);
+            border-radius:var(--r);
+            font-size:.9rem; font-family:'Inter',sans-serif; color:var(--gris-dark);
+            background:var(--blanco);
+            transition:border-color .25s, box-shadow .25s;
+        }
+        input::placeholder { color:#b0b9c8; }
+        input:focus, select:focus {
+            outline:none; border-color:var(--azul-blue);
+            box-shadow:0 0 0 3px rgba(22,93,255,.11);
+        }
+        select {
+            cursor:pointer; appearance:none;
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23165DFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat:no-repeat; background-position:right 12px center;
+            padding-right:40px;
+        }
 
-/* ══════════════════════════════════════════════════
-   UPLOAD
-══════════════════════════════════════════════════ */
-.up-area{
-  border:2px dashed var(--line);border-radius:10px;
-  padding:1.6rem;text-align:center;cursor:pointer;
-  background:#fff;position:relative;
-  transition:all .2s ease;
-}
-.up-area:hover,.up-area.drag{border-color:var(--gold);background:#fffef9}
-.up-area.bad-up{border-color:var(--err)}
-.up-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
-.up-ico{font-size:2rem;margin-bottom:.45rem}
-.up-main{font-size:.9rem;font-weight:600;color:var(--ink2)}
-.up-fmt{font-size:.72rem;color:var(--muted);margin-top:.28rem}
-/* Indicador de tamaño */
-.up-indicator{
-  margin-top:.85rem;
-  padding:.65rem .9rem;border-radius:7px;
-  display:flex;align-items:flex-start;gap:.55rem;
-  font-size:.78rem;font-weight:500;line-height:1.45;
-  display:none;
-}
-.up-indicator.green{background:rgba(46,125,82,.09);color:#1B5E39;border:1px solid rgba(46,125,82,.2)}
-.up-indicator.orange{background:rgba(196,123,10,.09);color:#7A4B00;border:1px solid rgba(196,123,10,.2)}
-.up-indicator.red{background:rgba(192,57,43,.09);color:#8B1A12;border:1px solid rgba(192,57,43,.2)}
-.up-indicator-ico{font-size:1.1rem;flex-shrink:0;margin-top:.05rem}
-.up-fnm{font-size:.76rem;font-weight:600;color:var(--ink);margin-top:.2rem;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+        /* ── DIVIDER ── */
+        .div { height:1px; background:var(--gris-border); margin:30px 0; }
 
-/* ══════════════════════════════════════════════════
-   BOTÓN ENVIAR
-══════════════════════════════════════════════════ */
-.btn-submit{
-  width:100%;padding:.85rem 2rem;margin-top:2rem;
-  background:var(--ink2);color:#fff;
-  border:2px solid var(--ink2);border-radius:var(--r);
-  font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;
-  letter-spacing:.04em;text-transform:uppercase;
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:.65rem;
-  transition:all .22s ease;
-  position:relative;overflow:hidden;
-}
-.btn-submit::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(201,168,76,.0) 0%,rgba(201,168,76,.0) 100%);
-  transition:background .3s;
-}
-.btn-submit:hover:not(:disabled){
-  background:var(--gold);border-color:var(--gold);color:var(--ink);
-  box-shadow:0 6px 24px rgba(201,168,76,.35);
-  transform:translateY(-1px);
-}
-.btn-submit:active{transform:translateY(0)}
-.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-submit svg{width:17px;height:17px;fill:currentColor;flex-shrink:0}
-.btn-spin{
-  width:17px;height:17px;border:2.5px solid rgba(255,255,255,.35);
-  border-top-color:currentColor;border-radius:50%;
-  animation:spin .65s linear infinite;display:none;flex-shrink:0;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
+        /* ── TRAMITE CARDS ── */
+        .tramite-cards {
+            display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:8px;
+        }
+        .tramite-card {
+            border:2px solid var(--gris-border);
+            border-radius:var(--r-lg);
+            padding:18px 14px;
+            text-align:center;
+            cursor:pointer;
+            transition:all .25s ease;
+            background:var(--blanco);
+            position:relative;
+            user-select:none;
+        }
+        .tramite-card:hover {
+            border-color:var(--azul-blue);
+            background:var(--azul-light);
+            transform:translateY(-2px);
+            box-shadow:0 6px 20px rgba(22,93,255,.12);
+        }
+        .tramite-card.active {
+            border-color:var(--azul-blue);
+            background:linear-gradient(135deg, var(--azul-light) 0%, #dbeafe 100%);
+            box-shadow:0 6px 24px rgba(22,93,255,.18);
+        }
+        .tramite-card.active::after {
+            content:'✓';
+            position:absolute; top:8px; right:10px;
+            font-size:.7rem; font-weight:900;
+            color:var(--azul-blue);
+            background:var(--blanco);
+            width:18px; height:18px;
+            border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            border:1.5px solid var(--azul-blue);
+        }
+        .tc-icon {
+            font-size:2rem; margin-bottom:8px; display:block;
+        }
+        .tc-sigla {
+            font-size:1.1rem; font-weight:800;
+            color:var(--azul-dark); letter-spacing:1px;
+            display:block; margin-bottom:4px;
+        }
+        .tramite-card.active .tc-sigla { color:var(--azul-blue); }
+        .tc-name {
+            font-size:.72rem; font-weight:500; color:var(--gris-mid);
+            line-height:1.4;
+        }
+        .tramite-card.active .tc-name { color:var(--azul-dark); }
 
-/* ══════════════════════════════════════════════════
-   AVISO LEGAL
-══════════════════════════════════════════════════ */
-.legal{
-  margin-top:1.35rem;font-size:.72rem;color:var(--muted);
-  text-align:center;line-height:1.65;
-}
-.legal a{color:var(--ink2);text-decoration:underline}
+        /* hidden real select (still needed for form submission) */
+        #tipoTramite { display:none; }
 
-/* ══════════════════════════════════════════════════
-   MODAL ÉXITO
-══════════════════════════════════════════════════ */
-.overlay{
-  position:fixed;inset:0;background:rgba(13,27,42,.6);
-  backdrop-filter:blur(6px);
-  display:flex;align-items:center;justify-content:center;
-  z-index:9999;padding:1.5rem;
-  opacity:0;visibility:hidden;
-  transition:opacity .35s,visibility .35s;
-}
-.overlay.on{opacity:1;visibility:visible}
-.modal{
-  background:var(--paper);border:1px solid var(--line);
-  border-radius:16px;box-shadow:var(--shadow-lg);
-  max-width:440px;width:100%;padding:2.5rem 2rem;
-  text-align:center;
-  transform:scale(.92) translateY(12px);
-  transition:transform .38s cubic-bezier(.34,1.56,.64,1);
-}
-.overlay.on .modal{transform:scale(1) translateY(0)}
-.modal-seal{
-  width:72px;height:72px;border-radius:50%;
-  background:linear-gradient(135deg,var(--ink2),var(--ink));
-  margin:0 auto 1.1rem;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 8px 28px rgba(13,27,42,.25);
-}
-.modal-seal svg{width:34px;height:34px;fill:var(--gold2)}
-.modal-ttl{
-  font-family:'Playfair Display',serif;
-  font-size:1.45rem;font-weight:700;color:var(--ink);
-  margin-bottom:.55rem;
-}
-.modal-folio{
-  font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:.3rem;
-}
-.modal-folio-val{
-  display:inline-block;
-  font-size:1.15rem;font-weight:700;letter-spacing:.08em;
-  color:var(--ink2);
-  background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.35);
-  border-radius:6px;padding:.28rem 1.1rem;margin-bottom:.9rem;
-}
-.modal-msg{font-size:.87rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem}
-.modal-msg strong{color:var(--ink2)}
-.modal-btn{
-  background:var(--ink2);color:#fff;border:none;
-  padding:.62rem 2rem;border-radius:var(--r);
-  font-family:'DM Sans',sans-serif;font-size:.87rem;font-weight:600;
-  cursor:pointer;transition:background .18s,transform .15s;
-  letter-spacing:.03em;
-}
-.modal-btn:hover{background:var(--gold);color:var(--ink);transform:translateY(-1px)}
+        /* ── COST PILL ── */
+        .cost-pill {
+            display:none; align-items:center; justify-content:space-between;
+            background:linear-gradient(135deg, var(--azul-light) 0%, #dbeafe 100%);
+            border:1.5px solid var(--azul-blue);
+            border-radius:var(--r-lg); padding:14px 20px; margin-top:10px;
+            animation:fadeUp .4s ease;
+        }
+        .cost-pill.show { display:flex; }
+        .cp-lbl { font-size:.8rem; font-weight:700; color:var(--azul-dark); }
+        .cp-amt { font-size:1.65rem; font-weight:800; color:var(--azul-blue); font-feature-settings:"tnum"; }
 
-/* ══════════════════════════════════════════════════
-   OVERLAY ENVIANDO
-══════════════════════════════════════════════════ */
-.sending-ov{
-  position:fixed;inset:0;background:rgba(13,27,42,.65);
-  backdrop-filter:blur(4px);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
-  z-index:9998;opacity:0;visibility:hidden;transition:.25s;
-}
-.sending-ov.on{opacity:1;visibility:visible}
-.send-ring{
-  width:48px;height:48px;border:4px solid rgba(255,255,255,.2);
-  border-top-color:var(--gold2);border-radius:50%;
-  animation:spin .7s linear infinite;
-}
-.send-msg{font-size:.95rem;font-weight:600;color:#fff;letter-spacing:.03em}
+        /* ── REQ BOX ── */
+        .rbox { background:var(--gris-light); border-radius:var(--r-lg); border:1px solid var(--gris-border); overflow:hidden; }
+        .rbox-head {
+            background:var(--azul-dark); color:var(--blanco);
+            padding:12px 18px; font-size:.78rem; font-weight:700;
+            letter-spacing:1px; text-transform:uppercase;
+            display:flex; align-items:center; gap:8px;
+        }
+        .rbox-body { padding:18px; }
+        .r-alert {
+            background:#fefce8; border:1px solid #facc15;
+            border-radius:8px; padding:12px 14px;
+            font-size:.8rem; color:#854d0e; margin-bottom:16px; line-height:1.6;
+        }
+        .rg-title {
+            font-size:.75rem; font-weight:700; text-transform:uppercase;
+            letter-spacing:.8px; color:var(--azul-blue); margin:14px 0 7px;
+        }
+        .rlist { list-style:none; }
+        .rlist li {
+            font-size:.8rem; line-height:1.6; padding:5px 0 5px 22px;
+            position:relative; border-bottom:1px solid rgba(0,0,0,.04);
+        }
+        .rlist li:last-child { border-bottom:none; }
+        .rlist li.ob::before { content:'✓'; position:absolute; left:0; top:5px; color:var(--azul-blue); font-weight:800; }
+        .rlist li.op::before { content:'○'; position:absolute; left:1px; top:5px; color:var(--gris-mid); font-weight:800; }
+        .bOb {
+            display:inline-block; background:var(--azul-blue); color:#fff;
+            font-size:.6rem; font-weight:800; padding:1px 5px; border-radius:3px;
+            margin-right:3px; vertical-align:middle; text-transform:uppercase;
+        }
+        .bOp {
+            display:inline-block; background:var(--gris-mid); color:#fff;
+            font-size:.6rem; font-weight:800; padding:1px 5px; border-radius:3px;
+            margin-right:3px; vertical-align:middle; text-transform:uppercase;
+        }
+        .r-fmt {
+            background:#eff6ff; border:1px solid #93c5fd;
+            border-radius:8px; padding:12px 14px;
+            font-size:.79rem; color:#1e40af; margin-top:14px; line-height:1.7;
+        }
 
-/* ══════════════════════════════════════════════════
-   FOOTER
-══════════════════════════════════════════════════ */
-.ft{text-align:center;padding:1.5rem 1rem;font-size:.72rem;color:var(--muted);
-  border-top:1px solid var(--line);margin-top:2.5rem}
-.ft strong{color:var(--ink2)}
+        /* ── FILE DROP ── */
+        .fdrop {
+            border:2px dashed var(--gris-border); border-radius:var(--r-lg);
+            padding:26px 18px; text-align:center; cursor:pointer;
+            transition:all .3s; background:var(--gris-light); position:relative;
+        }
+        .fdrop:hover, .fdrop.drag { border-color:var(--azul-blue); background:var(--azul-light); }
+        .fdrop input[type="file"] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+        .fd-icon  { font-size:2rem; margin-bottom:6px; }
+        .fd-main  { font-size:.85rem; font-weight:700; color:var(--azul-dark); margin-bottom:3px; }
+        .fd-sub   { font-size:.75rem; color:var(--gris-mid); }
+        .fd-chips { margin-top:10px; display:flex; flex-direction:column; gap:5px; }
+        .fd-chip  {
+            display:inline-flex; align-items:center; gap:5px;
+            background:var(--blanco); border:1px solid var(--verde);
+            border-radius:6px; padding:4px 10px;
+            font-size:.76rem; color:var(--verde); font-weight:600;
+        }
 
-/* ══════════════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════════════ */
-@media(max-width:640px){
-  .wrap{padding:1.5rem .85rem 4rem}
-  .hdr-logo{font-size:2rem}
-  .card-top{flex-direction:column;align-items:flex-start;gap:.6rem}
-  .folio-tag{align-items:flex-start}
-  .card-body{padding:1.35rem 1.25rem 2rem}
-  .grid2{grid-template-columns:1fr}
-  .tipo-grid{grid-template-columns:1fr 1fr 1fr}
-}
-@media(max-width:420px){
-  .tipo-grid{grid-template-columns:1fr}
-  .hdr-logo{font-size:1.75rem}
-  .modal{padding:2rem 1.4rem}
-}
-</style>
+        /* ── RECAPTCHA ── */
+        .recap { margin:26px 0 18px; text-align:center; min-height:32px; }
+        .recap-spin {
+            display:inline-block; width:26px; height:26px;
+            border:3px solid var(--gris-border);
+            border-top:3px solid var(--azul-blue);
+            border-radius:50%; animation:spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform:rotate(360deg); } }
+        .recap-txt { font-size:.79rem; margin-top:7px; color:var(--gris-mid); }
+        .recap-txt.ok  { color:var(--verde); }
+        .recap-txt.err { color:var(--rojo); }
+
+        /* ── SUBMIT ── */
+        .btn-submit {
+            width:100%; padding:14px;
+            background:linear-gradient(135deg, var(--azul-blue) 0%, #0d3dcc 100%);
+            color:var(--blanco); border:none; border-radius:var(--r-lg);
+            font-family:'Inter',sans-serif; font-size:.9rem; font-weight:700;
+            letter-spacing:.8px; text-transform:uppercase;
+            cursor:pointer;
+            box-shadow:0 6px 18px rgba(22,93,255,.28);
+            transition:transform .2s, box-shadow .2s, opacity .2s;
+        }
+        .btn-submit:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 10px 28px rgba(22,93,255,.38); }
+        .btn-submit:disabled { opacity:.5; cursor:not-allowed; }
+
+        /* ── TOAST ── */
+        .toast { display:none; margin-top:16px; padding:13px 16px; border-radius:var(--r); font-size:.84rem; font-weight:600; text-align:center; }
+        .toast.ok  { background:#f0fdf4; color:#166534; border:1px solid #bbf7d0; display:block; }
+        .toast.err { background:#fef2f2; color:#991b1b; border:1px solid #fecaca; display:block; }
+
+        /* ── HIDDEN ── */
+        .sec-hide { display:none; }
+
+        /* ── INFO BOX (SC y SG) ── */
+        .info-box {
+            background: var(--azul-light);
+            border: 1.5px solid var(--azul-blue);
+            border-radius: var(--r-lg);
+            padding: 24px 26px;
+            text-align: center;
+        }
+        .info-box .ib-icon { font-size: 2.5rem; margin-bottom: 10px; }
+        .info-box h3 {
+            font-size: 1rem; font-weight: 700;
+            color: var(--azul-dark); margin-bottom: 8px;
+        }
+        .info-box p {
+            font-size: .84rem; color: var(--gris-mid); line-height: 1.6; margin-bottom: 16px;
+        }
+        .info-box .ib-contact {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            flex-wrap: wrap;
+        }
+        .ib-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--azul-blue); color: var(--blanco);
+            border-radius: 8px; padding: 10px 18px;
+            font-size: .82rem; font-weight: 700;
+            text-decoration: none; transition: all .2s;
+        }
+        .ib-btn:hover { background: #0d3dcc; transform: translateY(-1px); }
+        .ib-btn.wa { background: #25d366; }
+        .ib-btn.wa:hover { background: #1da855; }
+
+        /* ── WHATSAPP ── */
+        .wa-btn {
+            position:fixed; bottom:50px; left:50px;
+            background:linear-gradient(135deg,#25d366 0%,#128c7e 100%);
+            color:white; width:72px; height:72px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            box-shadow:0 10px 30px rgba(37,211,102,.4);
+            cursor:pointer; z-index:900;
+            transition:all .4s cubic-bezier(.4,0,.2,1);
+            text-decoration:none;
+            animation:waFloat 3s ease-in-out infinite;
+            border:4px solid white; overflow:hidden;
+        }
+        .wa-btn::before {
+            content:''; position:absolute; inset:0;
+            background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,.3) 50%,transparent 70%);
+            animation:waShine 3s infinite;
+        }
+        .wa-btn:hover { transform:scale(1.18) translateY(-5px); box-shadow:0 20px 40px rgba(37,211,102,.6); animation:none; }
+        .wa-tip {
+            position:absolute; left:90px; background:white; color:#333;
+            padding:11px 18px; border-radius:10px; white-space:nowrap;
+            box-shadow:0 8px 24px rgba(0,0,0,.14); opacity:0; pointer-events:none;
+            transition:all .4s cubic-bezier(.4,0,.2,1);
+            font-size:.85rem; font-weight:600;
+            border:1px solid rgba(0,0,0,.08); z-index:901;
+        }
+        .wa-btn:hover .wa-tip { opacity:1; transform:translateX(10px); }
+        .wa-svg { width:32px; height:32px; position:relative; z-index:1; }
+        .wa-svg path { fill:white; }
+        @keyframes waFloat {
+            0%,100% { transform:translateY(0) rotate(0deg); }
+            25%      { transform:translateY(-13px) rotate(2deg); }
+            75%      { transform:translateY(-5px) rotate(-2deg); }
+        }
+        @keyframes waShine {
+            0%   { transform:translateX(-100%); }
+            100% { transform:translateX(100%); }
+        }
+
+        /* ── Elfsight ── */
+        .elfsight-app-beb4a331-0ecc-4c09-b401-4d88d35cbf03 { z-index:950 !important; }
+
+        /* ── CASILLA DE VERIFICACIÓN ── */
+        .check-wrap {
+            background: var(--gris-light);
+            border: 1.5px solid var(--gris-border);
+            border-radius: var(--r-lg);
+            padding: 18px 20px;
+        }
+        .check-label {
+            display: flex; align-items: flex-start; gap: 14px; cursor: pointer;
+        }
+        .check-label input[type="checkbox"] { display: none; }
+        .check-box {
+            width: 22px; height: 22px; min-width: 22px;
+            border: 2px solid var(--gris-border);
+            border-radius: 5px; background: var(--blanco);
+            display: flex; align-items: center; justify-content: center;
+            margin-top: 1px;
+            transition: all .2s ease;
+        }
+        .check-box::after {
+            content: ''; display: none;
+            width: 6px; height: 11px;
+            border: 2.5px solid var(--blanco);
+            border-top: none; border-left: none;
+            transform: rotate(45deg) translateY(-1px);
+        }
+        .check-label input:checked ~ .check-box {
+            background: var(--azul-blue); border-color: var(--azul-blue);
+        }
+        .check-label input:checked ~ .check-box::after { display: block; }
+        .check-label:hover .check-box { border-color: var(--azul-blue); }
+        .check-txt {
+            font-size: .77rem; line-height: 1.65;
+            color: var(--gris-dark); font-weight: 500;
+        }
+
+        /* ── TELÉFONO CON LADA ── */
+        .phone-wrap {
+            display: flex; gap: 0;
+            border: 1.5px solid var(--gris-border);
+            border-radius: var(--r);
+            overflow: hidden;
+            transition: border-color .25s, box-shadow .25s;
+        }
+        .phone-wrap:focus-within {
+            border-color: var(--azul-blue);
+            box-shadow: 0 0 0 3px rgba(22,93,255,.11);
+        }
+        .lada-select {
+            border: none !important;
+            border-right: 1.5px solid var(--gris-border) !important;
+            border-radius: 0 !important;
+            background-color: var(--gris-light);
+            min-width: 110px; width: auto;
+            padding: 11px 10px 11px 12px;
+            font-size: .85rem;
+            box-shadow: none !important;
+            flex-shrink: 0;
+            background-position: right 6px center;
+            padding-right: 28px;
+        }
+        .lada-select:focus { outline: none; box-shadow: none !important; border-color: var(--gris-border) !important; }
+        .phone-input {
+            border: none !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            flex: 1;
+        }
+        .phone-input:focus { outline: none; box-shadow: none !important; }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:640px){
+            body { padding:10px 10px 90px; }
+            .hdr, .form-card { padding-left:20px; padding-right:20px; }
+            .hdr { padding-top:28px; padding-bottom:26px; }
+            .hdr-logo { font-size:2rem; }
+            .g2 { grid-template-columns:1fr; }
+            .tramite-cards { grid-template-columns:1fr; }
+
+            .wa-btn { width:58px; height:58px; bottom:24px; left:18px; }
+            .wa-svg { width:26px; height:26px; }
+            .wa-tip { display:none; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="page">
-<div class="wrap">
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/527771234567?text=Hola,%20tengo%20una%20consulta%20sobre%20tr%C3%A1mites%20vehiculares"
+   class="wa-btn" target="_blank" rel="noopener noreferrer">
+    <svg class="wa-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+    <div class="wa-tip">💬 ¿Dudas? Chatea con nosotros</div>
+</a>
 
-<!-- HEADER -->
-<header class="hdr">
-  <div class="hdr-badge">
-    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5z"/></svg>
-    Plataforma Oficial
-  </div>
-  <div class="hdr-logo">AN<span>PAI</span></div>
-  <div class="hdr-sub">Sistema de Registro de Trámites en Línea</div>
-</header>
+<!-- Elfsight Chatbot -->
+<div class="elfsight-app-beb4a331-0ecc-4c09-b401-4d88d35cbf03" data-elfsight-app-lazy></div>
 
-<!-- FORMULARIO -->
-<div class="card">
+<!-- ════════════ FORMULARIO ════════════ -->
+<div class="wrapper">
 
-  <!-- Barra superior con folio -->
-  <div class="card-top">
-    <div class="card-ttl">Nueva Solicitud de Trámite</div>
-    <div class="folio-tag">
-      <span class="folio-lbl">Folio</span>
-      <span class="folio-val" id="folioTopVal">Selecciona tipo</span>
+    <!-- Header -->
+    <div class="hdr">
+        <div class="hdr-logo"><span class="letra-a">A</span><span class="letra-va">VA</span></div>
+        <div class="hdr-sub">Trámites Vehiculares en Morelos</div>
     </div>
-  </div>
 
-  <form class="card-body" id="frm" novalidate>
+    <!-- Form -->
+    <div class="form-card">
+        <form id="tramiteForm" action="https://formsubmit.co/info@ava.com.mx" method="POST" enctype="multipart/form-data" novalidate>
+            <!-- ══ Configuración FormSubmit ══ -->
+            <input type="hidden" name="_subject" value="Nueva solicitud — AVA Morelos">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="_autoresponse" value="Hemos recibido tu solicitud. En breve nos pondremos en contacto contigo. — AVA Trámites Vehiculares en Morelos">
+            <input type="hidden" name="_cc" value="info@ava.com.mx">
+            <input type="hidden" name="_next" value="https://ava-tramites-vehiculares.github.io/gracias.html">
 
-    <div class="grid2">
+            <!-- 1. Datos Personales -->
+            <div class="sec-title">
+                <div class="sec-icon">👤</div>
+                <h2>Datos Personales</h2>
+            </div>
 
-      <!-- ── INFORMACIÓN PERSONAL ── -->
-      <div class="sec-div full"><span>Información Personal</span></div>
+            <div class="g2">
+                <div class="fld g-full">
+                    <label for="nombre">Nombre completo <span class="req">*</span></label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                </div>
+                <div class="fld">
+                    <label for="telefono">Teléfono de contacto <span class="req">*</span></label>
+                    <div class="phone-wrap">
+                        <select id="ladaPais" name="lada" class="lada-select" aria-label="Lada del país">
+                            <option value="+52" data-flag="🇲🇽" selected>🇲🇽 +52</option>
+                            <option value="+1" data-flag="🇺🇸">🇺🇸 +1</option>
+                            <option value="+1-CA" data-flag="🇨🇦">🇨🇦 +1</option>
+                            <option value="+502" data-flag="🇬🇹">🇬🇹 +502</option>
+                            <option value="+503" data-flag="🇸🇻">🇸🇻 +503</option>
+                            <option value="+504" data-flag="🇭🇳">🇭🇳 +504</option>
+                            <option value="+505" data-flag="🇳🇮">🇳🇮 +505</option>
+                            <option value="+506" data-flag="🇨🇷">🇨🇷 +506</option>
+                            <option value="+507" data-flag="🇵🇦">🇵🇦 +507</option>
+                            <option value="+53" data-flag="🇨🇺">🇨🇺 +53</option>
+                            <option value="+57" data-flag="🇨🇴">🇨🇴 +57</option>
+                            <option value="+58" data-flag="🇻🇪">🇻🇪 +58</option>
+                            <option value="+51" data-flag="🇵🇪">🇵🇪 +51</option>
+                            <option value="+56" data-flag="🇨🇱">🇨🇱 +56</option>
+                            <option value="+54" data-flag="🇦🇷">🇦🇷 +54</option>
+                            <option value="+55" data-flag="🇧🇷">🇧🇷 +55</option>
+                            <option value="+593" data-flag="🇪🇨">🇪🇨 +593</option>
+                            <option value="+591" data-flag="🇧🇴">🇧🇴 +591</option>
+                            <option value="+595" data-flag="🇵🇾">🇵🇾 +595</option>
+                            <option value="+598" data-flag="🇺🇾">🇺🇾 +598</option>
+                            <option value="+34" data-flag="🇪🇸">🇪🇸 +34</option>
+                            <option value="+33" data-flag="🇫🇷">🇫🇷 +33</option>
+                            <option value="+44" data-flag="🇬🇧">🇬🇧 +44</option>
+                            <option value="+49" data-flag="🇩🇪">🇩🇪 +49</option>
+                            <option value="+39" data-flag="🇮🇹">🇮🇹 +39</option>
+                            <option value="+351" data-flag="🇵🇹">🇵🇹 +351</option>
+                            <option value="+31" data-flag="🇳🇱">🇳🇱 +31</option>
+                            <option value="+32" data-flag="🇧🇪">🇧🇪 +32</option>
+                            <option value="+41" data-flag="🇨🇭">🇨🇭 +41</option>
+                            <option value="+43" data-flag="🇦🇹">🇦🇹 +43</option>
+                            <option value="+7" data-flag="🇷🇺">🇷🇺 +7</option>
+                            <option value="+86" data-flag="🇨🇳">🇨🇳 +86</option>
+                            <option value="+81" data-flag="🇯🇵">🇯🇵 +81</option>
+                            <option value="+82" data-flag="🇰🇷">🇰🇷 +82</option>
+                            <option value="+91" data-flag="🇮🇳">🇮🇳 +91</option>
+                            <option value="+61" data-flag="🇦🇺">🇦🇺 +61</option>
+                            <option value="+64" data-flag="🇳🇿">🇳🇿 +64</option>
+                            <option value="+27" data-flag="🇿🇦">🇿🇦 +27</option>
+                            <option value="+971" data-flag="🇦🇪">🇦🇪 +971</option>
+                            <option value="+966" data-flag="🇸🇦">🇸🇦 +966</option>
+                            <option value="+972" data-flag="🇮🇱">🇮🇱 +972</option>
+                            <option value="+90" data-flag="🇹🇷">🇹🇷 +90</option>
+                        </select>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Ej: 7771234567" required class="phone-input">
+                    </div>
+                </div>
+                <div class="fld">
+                    <label for="email">Correo electrónico <span class="req">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+                </div>
+            </div>
 
-      <!-- Nombre -->
-      <div class="fg">
-        <label class="lbl req" for="nombre">Nombre Completo</label>
-        <input id="nombre" name="nombre" type="text" placeholder="Ej. María Elena" autocomplete="given-name">
-        <span class="em" id="enombre"></span>
-      </div>
+            <div class="div"></div>
 
-      <!-- Apellido -->
-      <div class="fg">
-        <label class="lbl req" for="apellido">Apellido Completo</label>
-        <input id="apellido" name="apellido" type="text" placeholder="Ej. Ramírez Torres" autocomplete="family-name">
-        <span class="em" id="eapellido"></span>
-      </div>
+            <!-- 2. Tipo de Trámite -->
+            <div class="sec-title">
+                <div class="sec-icon">📋</div>
+                <h2>Tipo de Trámite</h2>
+            </div>
 
-      <!-- Fecha de nacimiento -->
-      <div class="fg">
-        <label class="lbl req" for="fNac">Fecha de Nacimiento</label>
-        <input id="fNac" name="fNac" type="date" autocomplete="bday">
-        <span class="em" id="efNac"></span>
-      </div>
+            <!-- Hidden select for form submission -->
+            <select id="tipoTramite" name="tipoTramite" required>
+                <option value="">— Seleccione —</option>
+                <option value="credito">Solicitud de crédito</option>
+                <option value="seguros">Seguros</option>
+                <option value="tramites">Trámites Vehiculares</option>
+            </select>
 
-      <!-- Correo -->
-      <div class="fg">
-        <label class="lbl req" for="email">Correo Electrónico</label>
-        <input id="email" name="email" type="email" placeholder="nombre@correo.com" autocomplete="email">
-        <span class="em" id="eemail"></span>
-      </div>
+            <!-- Visual card selector -->
+            <div class="tramite-cards">
+                <div class="tramite-card" id="card-credito" onclick="seleccionarTramite('credito', this)">
+                    <span class="tc-icon">💳</span>
+                    <span class="tc-sigla">SC</span>
+                    <span class="tc-name">Solicitud de Crédito</span>
+                </div>
+                <div class="tramite-card" id="card-seguros" onclick="seleccionarTramite('seguros', this)">
+                    <span class="tc-icon">🛡️</span>
+                    <span class="tc-sigla">SG</span>
+                    <span class="tc-name">Seguros</span>
+                </div>
+                <div class="tramite-card" id="card-tramites" onclick="seleccionarTramite('tramites', this)">
+                    <span class="tc-icon">📜</span>
+                    <span class="tc-sigla">TV</span>
+                    <span class="tc-name">Trámites Vehiculares</span>
+                </div>
+            </div>
 
-      <!-- Teléfono con lada -->
-      <div class="fg full">
-        <label class="lbl req" for="telNum">Teléfono de Contacto</label>
-        <div class="tel-wr" id="telWr">
-          <select class="lada-sel" id="ladaTel" name="ladaTel" aria-label="Código de país">
-            <option value="+52" selected>🇲🇽 +52</option>
-            <option value="+1">🇺🇸 +1</option>
-            <option value="+1">🇨🇦 +1</option>
-            <option value="+34">🇪🇸 +34</option>
-            <option value="+54">🇦🇷 +54</option>
-            <option value="+55">🇧🇷 +55</option>
-            <option value="+56">🇨🇱 +56</option>
-            <option value="+57">🇨🇴 +57</option>
-            <option value="+58">🇻🇪 +58</option>
-            <option value="+51">🇵🇪 +51</option>
-            <option value="+593">🇪🇨 +593</option>
-            <option value="+591">🇧🇴 +591</option>
-            <option value="+595">🇵🇾 +595</option>
-            <option value="+598">🇺🇾 +598</option>
-            <option value="+507">🇵🇦 +507</option>
-            <option value="+506">🇨🇷 +506</option>
-            <option value="+502">🇬🇹 +502</option>
-            <option value="+503">🇸🇻 +503</option>
-            <option value="+504">🇭🇳 +504</option>
-            <option value="+505">🇳🇮 +505</option>
-            <option value="+53">🇨🇺 +53</option>
-            <option value="+1-809">🇩🇴 +1-809</option>
-            <option value="+44">🇬🇧 +44</option>
-            <option value="+33">🇫🇷 +33</option>
-            <option value="+49">🇩🇪 +49</option>
-            <option value="+39">🇮🇹 +39</option>
-            <option value="+351">🇵🇹 +351</option>
-            <option value="+31">🇳🇱 +31</option>
-            <option value="+32">🇧🇪 +32</option>
-            <option value="+41">🇨🇭 +41</option>
-            <option value="+43">🇦🇹 +43</option>
-            <option value="+48">🇵🇱 +48</option>
-            <option value="+46">🇸🇪 +46</option>
-            <option value="+47">🇳🇴 +47</option>
-            <option value="+45">🇩🇰 +45</option>
-            <option value="+358">🇫🇮 +358</option>
-            <option value="+7">🇷🇺 +7</option>
-            <option value="+86">🇨🇳 +86</option>
-            <option value="+81">🇯🇵 +81</option>
-            <option value="+82">🇰🇷 +82</option>
-            <option value="+91">🇮🇳 +91</option>
-            <option value="+61">🇦🇺 +61</option>
-            <option value="+27">🇿🇦 +27</option>
-          </select>
-          <input class="tel-num" id="telNum" name="telNum" type="tel"
-                 placeholder="7771234567" maxlength="15" inputmode="numeric" autocomplete="tel">
-        </div>
-        <input type="hidden" id="telFull" name="telefono">
-        <span class="em" id="etelNum"></span>
-      </div>
+            <!-- ══ SECCIÓN SOLICITUD DE CRÉDITO ══ -->
+            <div id="sec-credito" class="sec-hide">
+                <div class="div"></div>
+                <div class="sec-title">
+                    <div class="sec-icon">💳</div>
+                    <h2>Solicitud de Crédito</h2>
+                </div>
+                <div class="info-box">
+                    <div class="ib-icon">💳</div>
+                    <h3>¿Interesado en una Solicitud de Crédito?</h3>
+                    <p>Para iniciar tu solicitud de crédito vehicular, uno de nuestros asesores te guiará personalmente por el proceso. Contáctanos directamente para obtener información sobre tasas, plazos y requisitos personalizados a tu perfil.</p>
+                    <div class="ib-contact">
+                        <a href="https://wa.me/527771234567?text=Hola,%20me%20interesa%20una%20solicitud%20de%20cr%C3%A9dito%20vehicular" class="ib-btn wa" target="_blank" rel="noopener noreferrer">
+                            💬 WhatsApp
+                        </a>
+                        <a href="mailto:info@ava.com.mx" class="ib-btn">
+                            ✉️ Enviar correo
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-      <!-- ── TIPO DE TRÁMITE ── -->
-      <div class="sec-div full"><span>Tipo de Trámite</span></div>
+            <!-- ══ SECCIÓN SEGUROS ══ -->
+            <div id="sec-seguros" class="sec-hide">
+                <div class="div"></div>
+                <div class="sec-title">
+                    <div class="sec-icon">🛡️</div>
+                    <h2>Seguros Automotrices</h2>
+                </div>
+                <div class="info-box">
+                    <div class="ib-icon">🛡️</div>
+                    <h3>¿Necesitas un seguro para tu vehículo?</h3>
+                    <p>Te ofrecemos las mejores opciones de seguros automotrices, adaptadas a tus necesidades y presupuesto. Nuestros asesores comparan coberturas de las principales aseguradoras para que obtengas la mejor protección al mejor precio.</p>
+                    <div class="ib-contact">
+                        <a href="https://wa.me/527771234567?text=Hola,%20me%20interesa%20un%20seguro%20automotriz" class="ib-btn wa" target="_blank" rel="noopener noreferrer">
+                            💬 WhatsApp
+                        </a>
+                        <a href="mailto:info@ava.com.mx" class="ib-btn">
+                            ✉️ Enviar correo
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-      <div class="fg full">
-        <label class="lbl req">Selecciona el tipo de trámite</label>
-        <div class="tipo-grid" id="tipoGrid">
+            <!-- ══ SECCIÓN TRÁMITES VEHICULARES ══ -->
+            <div id="sec-tramites" class="sec-hide">
+                <div class="div"></div>
+                <div class="sec-title">
+                    <div class="sec-icon">📜</div>
+                    <h2>Tipo de Trámite Vehicular</h2>
+                </div>
+                <div class="fld">
+                    <label for="tipoSubTramite">Seleccione el trámite <span class="req">*</span></label>
+                    <select id="tipoSubTramite" name="tipoSubTramite">
+                        <option value="">— Seleccione una opción —</option>
+                        <option value="alta">Alta vehicular</option>
+                        <option value="refrendo">Refrendo</option>
+                    </select>
+                </div>
 
-          <label class="tipo-card" id="tc-CE">
-            <input type="radio" name="tipoTramite" value="CE" data-label="Certificado">
-            <div class="tipo-chk"></div>
-            <div class="tipo-ico">📜</div>
-            <div class="tipo-nm">Certificado</div>
-            <div class="tipo-code">CE</div>
-          </label>
+                <!-- ══ SUB-SECCIÓN ALTA VEHICULAR ══ -->
+                <div id="sec-alta" class="sec-hide">
+                    <div class="div"></div>
 
-          <label class="tipo-card" id="tc-SO">
-            <input type="radio" name="tipoTramite" value="SO" data-label="Solicitud">
-            <div class="tipo-chk"></div>
-            <div class="tipo-ico">📋</div>
-            <div class="tipo-nm">Solicitud</div>
-            <div class="tipo-code">SO</div>
-          </label>
+                    <div class="sec-title">
+                        <div class="sec-icon">💰</div>
+                        <h2>Valor del Vehículo y Costo</h2>
+                    </div>
 
-          <label class="tipo-card" id="tc-RE">
-            <input type="radio" name="tipoTramite" value="RE" data-label="Registro">
-            <div class="tipo-chk"></div>
-            <div class="tipo-ico">📁</div>
-            <div class="tipo-nm">Registro</div>
-            <div class="tipo-code">RE</div>
-          </label>
+                    <div class="fld">
+                        <label for="valorVehiculo">Valor del vehículo <span class="req">*</span><span class="opt">(pesos mexicanos MXN)</span></label>
+                        <input type="number" id="valorVehiculo" name="valorVehiculo" min="0" placeholder="Ej: 850000">
+                    </div>
+                    <div class="cost-pill" id="costPill">
+                        <span class="cp-lbl">Costo total del trámite</span>
+                        <span class="cp-amt" id="costoTotal">$0.00</span>
+                    </div>
 
-        </div>
-        <span class="em" id="etipoTramite"></span>
-      </div>
+                    <div class="div"></div>
 
-      <!-- FOLIO GENERADO -->
-      <div class="fg full">
-        <label class="lbl">Folio Asignado <span style="font-weight:400;color:var(--muted)">(generado automáticamente)</span></label>
-        <div class="folio-field" id="folioField">
-          <span class="folio-ico">🔖</span>
-          <span class="folio-txt empty" id="folioDisplay">Selecciona el tipo de trámite</span>
-          <span class="folio-status pen" id="folioStatus" style="display:none">Generando…</span>
-        </div>
-        <input type="hidden" id="folioHidden" name="folio">
-      </div>
+                    <div class="sec-title">
+                        <div class="sec-icon">📋</div>
+                        <h2>Requisitos para Alta Vehicular</h2>
+                    </div>
 
-      <!-- ── DOCUMENTACIÓN ── -->
-      <div class="sec-div full"><span>Documentación Adjunta</span></div>
+                    <div class="rbox">
+                        <div class="rbox-head"><span>📌</span> Documentación necesaria</div>
+                        <div class="rbox-body">
+                            <div class="r-alert">
+                                <strong>IMPORTANTE:</strong> Todos los requisitos marcados como obligatorios son indispensables para procesar el trámite. El costo total incluye el pago de derechos e impuestos correspondientes, por lo que no es necesario que el cliente los abone por separado.
+                            </div>
+                            <div class="rg-title">Personas Físicas</div>
+                            <ul class="rlist">
+                                <li class="ob"><span class="bOb">Obligatorio</span> Factura de origen y archivo XML de la misma.</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Carta factura (vigente 30 días máx.) — solo si la compra fue a crédito.</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Identificación oficial vigente con fotografía (INE, pasaporte, licencia de conducir de Morelos, etc.).</li>
+                                <li class="op"><span class="bOp">Opcional</span> Comprobante de domicilio en Morelos no mayor a 3 meses (recibo de luz, agua, predial, estado de cuenta bancario, etc.).</li>
+                                <li class="op"><span class="bOp">Opcional</span> Identificación del titular del comprobante de domicilio (si no es el propietario del vehículo).</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Póliza de seguro automotriz vigente.</li>
+                            </ul>
+                            <div class="rg-title">Personas Morales</div>
+                            <ul class="rlist">
+                                <li class="ob"><span class="bOb">Obligatorio</span> Factura de origen y archivo XML de la misma.</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Carta factura (vigente 30 días máx.).</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Acta constitutiva.</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Poder notarial que acredite la representación legal.</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Identificación oficial vigente del representante legal.</li>
+                                <li class="op"><span class="bOp">Opcional</span> Comprobante de domicilio en Morelos a nombre de la empresa, no mayor a 3 meses.</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Constancia de situación fiscal actualizada de la empresa y del representante legal.</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Póliza de seguro automotriz vigente.</li>
+                            </ul>
+                            <div class="r-fmt">
+                                <strong>📄 REQUISITOS DE FORMATO</strong><br>
+                                Todos los documentos deben estar escaneados en <strong>formato PDF</strong> y ser completamente legibles (texto, sellos y datos claros, sin sombras ni reflejos, orientación correcta, copia fiel a la original).<br>
+                                Si hay muchos archivos o son muy grandes, comprímalos en <strong>formato ZIP o RAR</strong>.
+                            </div>
+                        </div>
+                    </div>
 
-      <div class="fg full">
-        <label class="lbl req" for="upFile">Adjuntar Documentación</label>
-        <div class="up-area" id="upArea">
-          <input type="file" id="upFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
-          <div class="up-ico">📎</div>
-          <div class="up-main">Arrastra tu archivo o haz clic para seleccionar</div>
-          <div class="up-fmt">PDF · DOC · DOCX · JPG · PNG — Máx. recomendado 5 MB</div>
-        </div>
-        <!-- Indicador de tamaño -->
-        <div class="up-indicator" id="upIndicator">
-          <span class="up-indicator-ico" id="upIco"></span>
-          <div>
-            <div id="upMsg"></div>
-            <div class="up-fnm" id="upFnm"></div>
-          </div>
-        </div>
-        <span class="em" id="eupFile"></span>
-      </div>
+                    <div class="div"></div>
 
-    </div><!-- /grid2 -->
+                    <div class="sec-title">
+                        <div class="sec-icon">📎</div>
+                        <h2>Cargar Documentación</h2>
+                    </div>
 
-    <!-- BOTÓN ENVIAR -->
-    <button type="submit" class="btn-submit" id="btnSubmit" disabled>
-      <div class="btn-spin" id="btnSpin"></div>
-      <svg id="btnIco" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-      <span id="btnTxt">Enviar Trámite</span>
-    </button>
+                    <div class="fld">
+                        <label>Documentación en PDF <span class="req">*</span><span class="opt">Si es necesario, comprimir en ZIP/RAR</span></label>
+                        <div class="fdrop" id="dropAlta">
+                            <input type="file" id="documentos" name="documentos" accept=".pdf,.zip,.rar" multiple>
+                            <div class="fd-icon">📁</div>
+                            <div class="fd-main">Haga clic o arrastre sus archivos aquí</div>
+                            <div class="fd-sub">Formatos aceptados: PDF, ZIP, RAR</div>
+                            <div class="fd-chips" id="chipsAlta"></div>
+                        </div>
+                    </div>
+                </div>
 
-    <p class="legal">
-      Al enviar este formulario aceptas que tus datos sean procesados conforme a la
-      política de privacidad de ANPAI. Para consultas escribe a
-      <a href="mailto:info@anpai.com.mx">info@anpai.com.mx</a>.
-    </p>
+                <!-- ══ SUB-SECCIÓN REFRENDO ══ -->
+                <div id="sec-ref" class="sec-hide">
+                    <div class="div"></div>
 
-  </form>
-</div><!-- /card -->
+                    <div class="sec-title">
+                        <div class="sec-icon">🔄</div>
+                        <h2>Datos del Refrendo</h2>
+                    </div>
 
-<footer class="ft">
-  <strong>ANPAI</strong> · Plataforma de Trámites en Línea ·
-  Los datos son procesados de forma segura y confidencial.
-</footer>
+                    <div class="g2">
+                        <div class="fld g-full">
+                            <label for="numeroPlacas">Número de placas <span class="req">*</span></label>
+                            <input type="text" id="numeroPlacas" name="numeroPlacas" placeholder="Ej: ABC-123-X">
+                        </div>
+                        <div class="fld g-full">
+                            <label for="tipoUnidad">Tipo de unidad a refrendar <span class="req">*</span></label>
+                            <select id="tipoUnidad" name="tipoUnidad">
+                                <option value="">— Seleccione el tipo de unidad —</option>
+                                <option value="autos" data-costo="2764.28">Automóviles particulares</option>
+                                <option value="camiones" data-costo="2655.71">Camiones, remolques, autos antiguos y demostradoras</option>
+                                <option value="motos" data-costo="2384.28">Motocicletas</option>
+                                <option value="capacidades" data-costo="2492.85">Vehículos con capacidades diferentes</option>
+                                <option value="publico" data-costo="3144.27">Transporte público</option>
+                            </select>
+                        </div>
+                    </div>
 
-</div><!-- /wrap -->
-</div><!-- /page -->
+                    <div class="cost-pill" id="costPillRef">
+                        <span class="cp-lbl">Costo total del refrendo</span>
+                        <span class="cp-amt" id="costoTotalRef">$0.00</span>
+                    </div>
 
-<!-- OVERLAY ENVIANDO -->
-<div class="sending-ov" id="sendingOv">
-  <div class="send-ring"></div>
-  <div class="send-msg">Registrando tu trámite…</div>
-</div>
+                    <div class="div"></div>
 
-<!-- MODAL ÉXITO -->
-<div class="overlay" id="modalOv">
-  <div class="modal" id="modal">
-    <div class="modal-seal">
-      <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    <div class="sec-title">
+                        <div class="sec-icon">📋</div>
+                        <h2>Requisitos para Refrendo</h2>
+                    </div>
+
+                    <div class="rbox">
+                        <div class="rbox-head"><span>📌</span> Documentación necesaria</div>
+                        <div class="rbox-body">
+                            <div class="r-alert">
+                                <strong>IMPORTANTE:</strong> Todos los requisitos son indispensables para procesar el trámite. El costo total incluye el pago de derechos e impuestos correspondientes, por lo que no es necesario que el cliente los abone por separado.
+                            </div>
+                            <div class="rg-title">Personas Físicas</div>
+                            <ul class="rlist">
+                                <li class="ob"><span class="bOb">Obligatorio</span> Identificación oficial con fotografía vigente (INE — por los dos lados, pasaporte, licencia de conducir de Morelos, etc.).</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Póliza de seguro automotriz vigente expedida por una aseguradora registrada.</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Tarjeta de circulación anterior.</li>
+                            </ul>
+                            <div class="rg-title">Personas Morales</div>
+                            <ul class="rlist">
+                                <li class="ob"><span class="bOb">Obligatorio</span> Todos los requisitos de Personas Físicas, más:</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> RFC de la empresa (constancia de situación fiscal).</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Acta constitutiva certificada ante notario público.</li>
+                                <li class="ob"><span class="bOb">Obligatorio</span> Poder notarial que acredite la representación legal.</li>
+                            </ul>
+                            <div class="r-fmt">
+                                <strong>📄 REQUISITOS DE FORMATO</strong><br>
+                                Todos los documentos deben estar escaneados en <strong>formato PDF</strong> y ser completamente legibles. Texto, sellos y datos visibles sin necesidad de ajustes; sin sombras, reflejos, borrosidad ni manchas. Colores fieles o en escala de grises con buen contraste; orientación correcta y tamaño proporcional. Copia fiel de la original, sin modificaciones; para identificaciones, incluir anverso y reverso.<br><br>
+                                Se pueden enviar en un solo archivo o <strong>comprimidos en ZIP o RAR</strong> si es necesario.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="div"></div>
+
+                    <div class="sec-title">
+                        <div class="sec-icon">📎</div>
+                        <h2>Cargar Documentación</h2>
+                    </div>
+
+                    <div class="fld">
+                        <label>Documentación <span class="req">*</span></label>
+                        <div class="fdrop" id="dropRef">
+                            <input type="file" id="docsRefrendo" name="docsRefrendo" accept=".pdf,.zip,.rar" multiple>
+                            <div class="fd-icon">📁</div>
+                            <div class="fd-main">Haga clic o arrastre sus archivos aquí</div>
+                            <div class="fd-sub">Documentación en PDF. Si es necesario, comprimir en ZIP/RAR.</div>
+                            <div class="fd-chips" id="chipsRef"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══ CASILLA DE VERIFICACIÓN ══ -->
+            <div id="sec-declaracion" class="sec-hide">
+                <div class="div"></div>
+                <div class="check-wrap">
+                    <label class="check-label" for="declaracion">
+                        <input type="checkbox" id="declaracion" name="declaracion">
+                        <span class="check-box"></span>
+                        <span class="check-txt">DECLARO BAJO MI RESPONSABILIDAD QUE TODA LA INFORMACIÓN PROPORCIONADA EN ESTE FORMULARIO ES VERDADERA, ACTUAL Y AUTÉNTICA. ASIMISMO, CERTIFICO QUE LOS DOCUMENTOS ADJUNTADOS SON COPIAS FIELES DE SUS ORIGINALES Y NO HAN SIDO ALTERADOS DE NINGUNA MANERA. CON ESTA ACCIÓN, VALIDO QUE HE TOMADO CONOCIMIENTO DE LOS ASPECTOS RELEVANTES DEL TRÁMITE Y QUE LOS REQUISITOS MARCADOS COMO OBLIGATORIOS LOS HE REUNIDO.</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- reCAPTCHA invisible -->
+            <div class="recap" id="recapWrap">
+                <div class="recap-spin" id="recapSpin" style="display:none;"></div>
+                <div class="recap-txt" id="recapTxt"></div>
+            </div>
+
+            <!-- Botón enviar -->
+            <button type="submit" class="btn-submit" id="submitBtn" disabled>
+                Enviar Solicitud
+            </button>
+
+            <div class="toast" id="toastMsg"></div>
+
+        </form>
     </div>
-    <div class="modal-ttl">¡Trámite Registrado!</div>
-    <div class="modal-folio">Tu folio asignado</div>
-    <div class="modal-folio-val" id="mFolioVal">—</div>
-    <div class="modal-msg" id="mMsg">
-      Tu trámite fue enviado exitosamente.<br>
-      Para seguimientos escribe a <strong>info@anpai.com.mx</strong>
-    </div>
-    <button class="modal-btn" id="mClose">Entendido</button>
-  </div>
 </div>
 
 <script>
-(function(){
-'use strict';
+    /* ── reCAPTCHA v3 ── */
+    let rcToken  = null;
+    let rcReady  = false;
 
-// ═══════════════════════════════════════════════════════════════
-//  CONFIGURACIÓN — REEMPLAZAR CON TUS VALORES REALES
-// ═══════════════════════════════════════════════════════════════
+    grecaptcha.ready(() => {
+        const spin = document.getElementById('recapSpin');
+        const txt  = document.getElementById('recapTxt');
+        spin.style.display = 'inline-block';
+        txt.textContent    = 'Verificando seguridad…';
 
-// URL del Web App de Google Apps Script (despliega tu script con "Ejecutar como: yo",
-// "Quién puede acceder: cualquier persona"). Ejemplo:
-// https://script.google.com/macros/s/AKfycbXXXXXX/exec
-var GAS_URL = 'https://script.google.com/macros/s/TU_DEPLOYMENT_ID_AQUI/exec';
-
-// ═══════════════════════════════════════════════════════════════
-//  HELPERS
-// ═══════════════════════════════════════════════════════════════
-function Q(id){ return document.getElementById(id); }
-function V(id){ var e=Q(id); return e?e.value.trim():''; }
-function setErr(id,msg){ var e=Q('e'+id); if(e)e.textContent=msg; var i=Q(id); if(i&&!i.closest('.tel-wr')&&!i.closest('.tipo-grid')){i.classList.add('bad');i.classList.remove('ok');} }
-function clrErr(id){ var e=Q('e'+id); if(e)e.textContent=''; var i=Q(id); if(i){i.classList.remove('bad');if(i.value&&i.value.trim())i.classList.add('ok');} }
-function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
-function isEmpty(v){ return !v||!v.trim(); }
-
-// ═══════════════════════════════════════════════════════════════
-//  TELÉFONO — selector de lada
-// ═══════════════════════════════════════════════════════════════
-function updateTel(){
-  var lada = Q('ladaTel').value;
-  var num  = Q('telNum').value.replace(/\D/g,'');
-  Q('telFull').value = num ? lada+' '+num : '';
-}
-Q('ladaTel').addEventListener('change', updateTel);
-Q('telNum').addEventListener('input', function(){
-  this.value = this.value.replace(/\D/g,'');
-  updateTel();
-  Q('telWr').classList.remove('ok','bad');
-  Q('etelNum').textContent='';
-});
-Q('telNum').addEventListener('blur', function(){
-  var n=this.value.replace(/\D/g,'');
-  if(n.length>0&&n.length<7){ Q('telWr').classList.add('bad'); Q('etelNum').textContent='Mín. 7 dígitos.'; }
-  else if(n.length>=7){ Q('telWr').classList.remove('bad'); Q('telWr').classList.add('ok'); Q('etelNum').textContent=''; }
-  updateTel();
-});
-
-// ═══════════════════════════════════════════════════════════════
-//  TIPO DE TRÁMITE — CARDS + FOLIO AUTOMÁTICO
-// ═══════════════════════════════════════════════════════════════
-var currentFolio = '';
-var folioLoading = false;
-
-// Códigos para el folio: primeras 2 letras del tipo
-var TIPO_MAP = { CE:'Certificado', SO:'Solicitud', RE:'Registro' };
-
-// Actualizar visualmente las cards
-document.querySelectorAll('.tipo-card').forEach(function(card){
-  var radio = card.querySelector('input[type=radio]');
-  radio.addEventListener('change', function(){
-    document.querySelectorAll('.tipo-card').forEach(function(c){ c.classList.remove('sel'); });
-    card.classList.add('sel');
-    Q('etipoTramite').textContent = '';
-    generarFolio(this.value);
-  });
-});
-
-// Pad 2 dígitos
-function pad2(n){ return n<10?'0'+n:String(n); }
-
-// Generar folio: AAAA-MM-NN-XX
-// Llama al GAS para obtener el siguiente número secuencial
-function generarFolio(tipo){
-  // UI estado "cargando"
-  Q('folioDisplay').textContent = 'Generando folio…';
-  Q('folioDisplay').className   = 'folio-txt empty';
-  Q('folioTopVal').textContent  = '…';
-  Q('folioTopVal').className    = 'folio-val loading';
-  Q('folioStatus').style.display= 'inline-block';
-  Q('folioStatus').textContent  = 'Generando…';
-  Q('folioStatus').className    = 'folio-status pen';
-  currentFolio = '';
-  Q('folioHidden').value = '';
-  folioLoading = true;
-  checkBtn();
-
-  var now = new Date();
-  var yyyy = now.getFullYear();
-  var mm   = pad2(now.getMonth()+1);
-  var params = '?action=getFolioSeq&tipo='+encodeURIComponent(tipo)
-             + '&year='+yyyy+'&month='+mm;
-
-  // Timeout de seguridad
-  var timer = setTimeout(function(){
-    if(folioLoading) onFolioError('Sin respuesta del servidor.');
-  }, 12000);
-
-  fetch(GAS_URL + params, { method:'GET' })
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      clearTimeout(timer);
-      if(data.ok && data.folio){
-        setFolio(data.folio, tipo);
-      } else {
-        // Fallback local si el servidor responde pero sin folio
-        var fallback = buildFolioLocal(yyyy, mm, tipo);
-        setFolio(fallback, tipo);
-      }
-    })
-    .catch(function(){
-      clearTimeout(timer);
-      // Fallback: generar localmente (sin garantía de unicidad)
-      var now2=new Date();
-      var fallback = buildFolioLocal(now2.getFullYear(), pad2(now2.getMonth()+1), tipo);
-      setFolio(fallback, tipo);
-      // Mostrar advertencia suave
-      Q('folioStatus').textContent  = 'Generado local';
-      Q('folioStatus').className    = 'folio-status pen';
+        grecaptcha.execute('6Lc9zGUsAAAAAG2K5TAav3VrS9obGfFqXO5cnOkV', { action:'submit' })
+            .then(token => {
+                rcToken = token;
+                setTimeout(() => {
+                    rcReady = true;
+                    spin.style.display = 'none';
+                    txt.textContent = '✓ Verificación de seguridad completada';
+                    txt.className = 'recap-txt ok';
+                    checkEnvio();
+                }, 1200);
+            })
+            .catch(() => {
+                spin.style.display = 'none';
+                txt.textContent = '✗ Error en la verificación. Recargue la página.';
+                txt.className = 'recap-txt err';
+            });
     });
-}
 
-// Construye folio local con timestamp como secuencia (fallback)
-function buildFolioLocal(yyyy, mm, tipo){
-  var seq = pad2(Math.floor(Math.random()*90)+10); // 10-99
-  return yyyy+'-'+mm+'-'+seq+'-'+tipo;
-}
+    /* ── Selección de tarjeta de trámite ── */
+    function seleccionarTramite(valor, cardEl) {
+        // Deselect all cards
+        document.querySelectorAll('.tramite-card').forEach(c => c.classList.remove('active'));
+        cardEl.classList.add('active');
 
-function setFolio(folio, tipo){
-  currentFolio = folio;
-  folioLoading = false;
-  Q('folioDisplay').textContent = folio;
-  Q('folioDisplay').className   = 'folio-txt';
-  Q('folioTopVal').textContent  = folio;
-  Q('folioTopVal').className    = 'folio-val ready';
-  Q('folioStatus').textContent  = 'Confirmado';
-  Q('folioStatus').className    = 'folio-status ok';
-  Q('folioStatus').style.display= 'inline-block';
-  Q('folioHidden').value        = folio;
-  checkBtn();
-}
+        // Update hidden select
+        document.getElementById('tipoTramite').value = valor;
 
-function onFolioError(msg){
-  folioLoading = false;
-  Q('folioDisplay').textContent = 'Error al generar folio';
-  Q('folioDisplay').className   = 'folio-txt empty';
-  Q('folioTopVal').textContent  = 'Error';
-  Q('folioTopVal').className    = 'folio-val';
-  Q('folioStatus').textContent  = msg||'Error';
-  Q('folioStatus').className    = 'folio-status err';
-  currentFolio = '';
-  Q('folioHidden').value = '';
-  checkBtn();
-}
+        // Hide all sections
+        document.getElementById('sec-credito').style.display   = 'none';
+        document.getElementById('sec-seguros').style.display   = 'none';
+        document.getElementById('sec-tramites').style.display  = 'none';
+        document.getElementById('sec-declaracion').style.display = 'none';
 
-// ═══════════════════════════════════════════════════════════════
-//  UPLOAD — indicador de tamaño
-// ═══════════════════════════════════════════════════════════════
-var upFile = null;
+        // Reset sub-tramite
+        resetSubTramite();
 
-Q('upArea').addEventListener('dragover', function(e){ e.preventDefault(); this.classList.add('drag'); });
-Q('upArea').addEventListener('dragleave', function(){ this.classList.remove('drag'); });
-Q('upArea').addEventListener('drop', function(e){ e.preventDefault(); this.classList.remove('drag'); handleFile(e.dataTransfer.files[0]); });
-Q('upFile').addEventListener('change', function(){ handleFile(this.files[0]); });
+        // Show relevant section
+        if (valor === 'credito') {
+            document.getElementById('sec-credito').style.display  = 'block';
+            document.getElementById('sec-declaracion').style.display = 'none'; // no form needed for contact types
+        } else if (valor === 'seguros') {
+            document.getElementById('sec-seguros').style.display  = 'block';
+            document.getElementById('sec-declaracion').style.display = 'none';
+        } else if (valor === 'tramites') {
+            document.getElementById('sec-tramites').style.display = 'block';
+            document.getElementById('sec-declaracion').style.display = 'block';
+        }
 
-function handleFile(f){
-  if(!f) return;
-  var allowed = ['.pdf','.doc','.docx','.jpg','.jpeg','.png'];
-  var ext = '.'+f.name.split('.').pop().toLowerCase();
-  var ind = Q('upIndicator');
+        checkEnvio();
+    }
 
-  Q('eupFile').textContent = '';
-  Q('upArea').classList.remove('bad-up');
-  upFile = null;
-  checkBtn();
+    function resetSubTramite() {
+        document.getElementById('tipoSubTramite').value = '';
+        document.getElementById('sec-alta').style.display = 'none';
+        document.getElementById('sec-ref').style.display  = 'none';
+        // Reset required attrs
+        document.getElementById('numeroPlacas').required  = false;
+        document.getElementById('tipoUnidad').required    = false;
+        document.getElementById('docsRefrendo').required  = false;
+        document.getElementById('valorVehiculo').required = false;
+        document.getElementById('documentos').required    = false;
+        // Reset cost pills
+        document.getElementById('costPill').classList.remove('show');
+        document.getElementById('costPillRef').classList.remove('show');
+        document.getElementById('valorVehiculo').value = '';
+        document.getElementById('tipoUnidad').value = '';
+    }
 
-  if(!allowed.includes(ext)){
-    Q('eupFile').textContent = 'Formato no permitido. Usa: PDF, DOC, DOCX, JPG o PNG.';
-    Q('upArea').classList.add('bad-up');
-    ind.style.display = 'none';
-    return;
-  }
+    /* ── Sub-trámite vehicular ── */
+    document.getElementById('tipoSubTramite').addEventListener('change', function(){
+        const alta = document.getElementById('sec-alta');
+        const ref  = document.getElementById('sec-ref');
 
-  var mb  = f.size/1048576;
-  var mbR = mb.toFixed(2);
+        // Reset
+        document.getElementById('numeroPlacas').required  = false;
+        document.getElementById('tipoUnidad').required    = false;
+        document.getElementById('docsRefrendo').required  = false;
+        document.getElementById('valorVehiculo').required = false;
+        document.getElementById('documentos').required    = false;
 
-  ind.style.display = 'flex';
-  Q('upFnm').textContent = f.name;
-
-  if(mb <= 3.75){
-    // ✅ Verde — OK
-    ind.className = 'up-indicator green';
-    Q('upIco').textContent = '✅';
-    Q('upMsg').textContent = mbR+' MB — Archivo dentro del límite óptimo.';
-    upFile = f; checkBtn();
-
-  } else if(mb <= 5){
-    // ⚠️ Naranja — aceptable pero grande
-    ind.className = 'up-indicator orange';
-    Q('upIco').textContent = '⚠️';
-    Q('upMsg').textContent = mbR+' MB — Archivo grande pero aceptable. Puede demorar el envío.';
-    upFile = f; checkBtn();
-
-  } else {
-    // ❌ Rojo — supera el límite
-    ind.className = 'up-indicator red';
-    Q('upIco').textContent = '❌';
-    Q('upMsg').innerHTML   = mbR+' MB — Archivo demasiado grande. '
-      +'Por favor envíalo directamente a '
-      +'<a href="mailto:info@anpai.com.mx" style="color:inherit;font-weight:700">info@anpai.com.mx</a>.';
-    Q('upArea').classList.add('bad-up');
-    upFile = null; checkBtn();
-    Q('eupFile').textContent = 'El archivo supera 5 MB. Envíalo a info@anpai.com.mx';
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════
-//  HABILITAR / DESHABILITAR BOTÓN
-//  El botón solo se activa si: folio generado + archivo adjunto válido
-// ═══════════════════════════════════════════════════════════════
-function checkBtn(){
-  var tipoSel = document.querySelector('input[name=tipoTramite]:checked');
-  var ready = tipoSel && currentFolio && !folioLoading && upFile;
-  Q('btnSubmit').disabled = !ready;
-}
-
-// Escuchar cambios en campos para habilitar botón cuando todo esté listo
-['nombre','apellido','fNac','email'].forEach(function(id){
-  Q(id).addEventListener('input', function(){ if(this.value) this.classList.add('ok'); else this.classList.remove('ok'); });
-});
-
-// ═══════════════════════════════════════════════════════════════
-//  VALIDACIÓN COMPLETA ANTES DE ENVIAR
-// ═══════════════════════════════════════════════════════════════
-function validate(){
-  var ok = true;
-
-  if(isEmpty(V('nombre'))){
-    setErr('nombre','Ingresa tu nombre.'); ok=false;
-  } else clrErr('nombre');
-
-  if(isEmpty(V('apellido'))){
-    setErr('apellido','Ingresa tu apellido.'); ok=false;
-  } else clrErr('apellido');
-
-  if(isEmpty(V('fNac'))){
-    setErr('fNac','Selecciona tu fecha de nacimiento.'); ok=false;
-  } else clrErr('fNac');
-
-  if(!isEmail(V('email'))){
-    setErr('email','Correo electrónico inválido.'); ok=false;
-  } else clrErr('email');
-
-  var telN = Q('telNum').value.replace(/\D/g,'');
-  if(telN.length<7){
-    Q('telWr').classList.add('bad'); Q('etelNum').textContent='Ingresa un número de al menos 7 dígitos.'; ok=false;
-  } else {
-    Q('telWr').classList.remove('bad'); Q('telWr').classList.add('ok'); Q('etelNum').textContent='';
-  }
-
-  var tipoSel = document.querySelector('input[name=tipoTramite]:checked');
-  if(!tipoSel){
-    Q('etipoTramite').textContent='Selecciona el tipo de trámite.'; ok=false;
-  } else Q('etipoTramite').textContent='';
-
-  if(!currentFolio){
-    Q('etipoTramite').textContent='Espera a que se genere el folio.'; ok=false;
-  }
-
-  if(!upFile){
-    Q('eupFile').textContent='Adjunta un documento.'; ok=false;
-  }
-
-  return ok;
-}
-
-// ═══════════════════════════════════════════════════════════════
-//  SUBMIT — envío a Google Apps Script
-// ═══════════════════════════════════════════════════════════════
-Q('frm').addEventListener('submit', function(e){
-  e.preventDefault();
-  if(!validate()){
-    // Scroll al primer error
-    var first = Q('frm').querySelector('.bad, .bad-up, [class$="em"]:not(:empty)');
-    if(first) first.scrollIntoView({behavior:'smooth',block:'center'});
-    return;
-  }
-
-  // UI — enviando
-  Q('sendingOv').classList.add('on');
-  Q('btnSubmit').disabled = true;
-  Q('btnSpin').style.display = 'block';
-  Q('btnIco').style.display  = 'none';
-  Q('btnTxt').textContent    = 'Enviando…';
-
-  // Construir FormData para el GAS
-  var fd = new FormData();
-  fd.append('action',        'saveTramite');
-  fd.append('folio',          currentFolio);
-  fd.append('nombre',         V('nombre'));
-  fd.append('apellido',       V('apellido'));
-  fd.append('fechaNacimiento',V('fNac'));
-  fd.append('telefono',       Q('telFull').value || (Q('ladaTel').value+' '+Q('telNum').value.replace(/\D/g,'')));
-  fd.append('correo',         V('email'));
-  var tipoSel = document.querySelector('input[name=tipoTramite]:checked');
-  fd.append('tipoTramite',    tipoSel ? TIPO_MAP[tipoSel.value] || tipoSel.value : '');
-  fd.append('archivoNombre',  upFile ? upFile.name : '');
-  fd.append('archivoMB',      upFile ? (upFile.size/1048576).toFixed(3) : '0');
-  if(upFile) fd.append('archivo', upFile, upFile.name);
-
-  fetch(GAS_URL, { method:'POST', body:fd })
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      Q('sendingOv').classList.remove('on');
-      if(data.ok){
-        showSuccess(currentFolio);
-      } else {
-        resetBtn();
-        alert('No se pudo registrar el trámite: '+(data.msg||'Error desconocido.')+'\nIntenta de nuevo o escribe a info@anpai.com.mx');
-      }
-    })
-    .catch(function(err){
-      Q('sendingOv').classList.remove('on');
-      resetBtn();
-      alert('Error de conexión. Verifica tu internet e intenta de nuevo.\nSi el problema persiste, contacta a info@anpai.com.mx');
+        if (this.value === 'alta') {
+            alta.style.display = 'block';
+            ref.style.display  = 'none';
+            document.getElementById('valorVehiculo').required = true;
+            document.getElementById('documentos').required    = true;
+            document.getElementById('costPillRef').classList.remove('show');
+            document.getElementById('tipoUnidad').value = '';
+        } else if (this.value === 'refrendo') {
+            alta.style.display = 'none';
+            ref.style.display  = 'block';
+            document.getElementById('numeroPlacas').required  = true;
+            document.getElementById('tipoUnidad').required    = true;
+            document.getElementById('docsRefrendo').required  = true;
+            document.getElementById('costPill').classList.remove('show');
+            document.getElementById('valorVehiculo').value = '';
+        } else {
+            alta.style.display = 'none';
+            ref.style.display  = 'none';
+        }
+        checkEnvio();
     });
-});
 
-function resetBtn(){
-  Q('btnSubmit').disabled = false;
-  Q('btnSpin').style.display = 'none';
-  Q('btnIco').style.display  = '';
-  Q('btnTxt').textContent    = 'Enviar Trámite';
-}
+    /* ── Cálculo de costo — Alta vehicular ── */
+    document.getElementById('valorVehiculo').addEventListener('input', function(){
+        const v    = parseFloat(this.value) || 0;
+        const pill = document.getElementById('costPill');
+        const amt  = document.getElementById('costoTotal');
+        let   c    = 0;
 
-// ═══════════════════════════════════════════════════════════════
-//  MODAL ÉXITO
-// ═══════════════════════════════════════════════════════════════
-function showSuccess(folio){
-  Q('mFolioVal').textContent = folio;
-  Q('mMsg').innerHTML =
-    '¡Tu trámite con folio <strong>'+folio+'</strong> fue enviado!<br>'
-    +'Para seguimientos escribe a <strong>info@anpai.com.mx</strong>';
-  Q('modalOv').classList.add('on');
-  // Reset del formulario
-  Q('frm').reset();
-  document.querySelectorAll('.tipo-card').forEach(function(c){ c.classList.remove('sel'); });
-  Q('folioDisplay').textContent = 'Selecciona el tipo de trámite';
-  Q('folioDisplay').className   = 'folio-txt empty';
-  Q('folioTopVal').textContent  = 'Selecciona tipo';
-  Q('folioTopVal').className    = 'folio-val';
-  Q('folioStatus').style.display= 'none';
-  Q('upIndicator').style.display= 'none';
-  Q('upArea').classList.remove('bad-up');
-  currentFolio = ''; upFile = null;
-  Q('btnSubmit').disabled = true;
-  resetBtn();
-  document.querySelectorAll('input.ok,select.ok').forEach(function(el){ el.classList.remove('ok'); });
-  Q('telWr').classList.remove('ok','bad');
-}
+        if      (v > 0 && v <= 990000)        c = 6000;
+        else if (v >= 1000000 && v <= 1950000) c = 6500;
+        else if (v >= 2000000)                 c = 7500;
 
-Q('mClose').addEventListener('click', function(){
-  Q('modalOv').classList.remove('on');
-});
-Q('modalOv').addEventListener('click', function(e){
-  if(e.target===this) this.classList.remove('on');
-});
-document.addEventListener('keydown', function(e){
-  if(e.key==='Escape') Q('modalOv').classList.remove('on');
-});
+        if (c > 0) {
+            amt.textContent = '$' + c.toLocaleString('es-MX', { minimumFractionDigits:2 });
+            pill.classList.add('show');
+        } else {
+            pill.classList.remove('show');
+        }
+        checkEnvio();
+    });
 
-})();
+    /* ── Cálculo de costo — Refrendo ── */
+    document.getElementById('tipoUnidad').addEventListener('change', function(){
+        const pill = document.getElementById('costPillRef');
+        const amt  = document.getElementById('costoTotalRef');
+        const opt  = this.options[this.selectedIndex];
+        const c    = parseFloat(opt.dataset.costo) || 0;
+
+        if (c > 0) {
+            amt.textContent = '$' + c.toLocaleString('es-MX', { minimumFractionDigits:2 });
+            pill.classList.add('show');
+        } else {
+            pill.classList.remove('show');
+        }
+        checkEnvio();
+    });
+
+    /* ── File drop — Alta vehicular ── */
+    const dA = document.getElementById('dropAlta');
+    const iA = document.getElementById('documentos');
+    const cA = document.getElementById('chipsAlta');
+
+    ['dragenter','dragover'].forEach(e => dA.addEventListener(e, ev => { ev.preventDefault(); dA.classList.add('drag'); }));
+    ['dragleave','drop'].forEach(e => dA.addEventListener(e, ev => { ev.preventDefault(); dA.classList.remove('drag'); }));
+    dA.addEventListener('drop', ev => { iA.files = ev.dataTransfer.files; renderChips(iA.files, cA); checkEnvio(); });
+    iA.addEventListener('change', () => { renderChips(iA.files, cA); checkEnvio(); });
+
+    /* ── File drop — Refrendo ── */
+    const dR = document.getElementById('dropRef');
+    const iR = document.getElementById('docsRefrendo');
+    const cR = document.getElementById('chipsRef');
+
+    ['dragenter','dragover'].forEach(e => dR.addEventListener(e, ev => { ev.preventDefault(); dR.classList.add('drag'); }));
+    ['dragleave','drop'].forEach(e => dR.addEventListener(e, ev => { ev.preventDefault(); dR.classList.remove('drag'); }));
+    dR.addEventListener('drop', ev => { iR.files = ev.dataTransfer.files; renderChips(iR.files, cR); checkEnvio(); });
+    iR.addEventListener('change', () => { renderChips(iR.files, cR); checkEnvio(); });
+
+    function renderChips(files, wrap){
+        wrap.innerHTML = '';
+        Array.from(files).forEach(f => {
+            const ch = document.createElement('div');
+            ch.className = 'fd-chip';
+            ch.innerHTML = `<span>✓</span><span>${f.name}</span>`;
+            wrap.appendChild(ch);
+        });
+    }
+
+    /* ── Casilla de verificación ── */
+    document.getElementById('declaracion').addEventListener('change', checkEnvio);
+
+    /* ── Habilitar/deshabilitar botón Enviar ── */
+    function checkEnvio(){
+        const tramite   = document.getElementById('tipoTramite').value;
+        const declarado = document.getElementById('declaracion').checked;
+        const btn       = document.getElementById('submitBtn');
+
+        if (!tramite || !rcReady) { btn.disabled = true; return; }
+
+        // SC y SG no tienen formulario de envío — deshabilitar botón
+        if (tramite === 'credito' || tramite === 'seguros') {
+            btn.disabled = true;
+            return;
+        }
+
+        // Trámites vehiculares
+        if (!declarado) { btn.disabled = true; return; }
+
+        const subTramite = document.getElementById('tipoSubTramite').value;
+        if (!subTramite) { btn.disabled = true; return; }
+
+        if (subTramite === 'alta') {
+            const val  = parseFloat(document.getElementById('valorVehiculo').value) || 0;
+            const docs = iA.files.length > 0;
+            btn.disabled = !(val > 0 && docs);
+        } else if (subTramite === 'refrendo') {
+            const plac  = document.getElementById('numeroPlacas').value.trim() !== '';
+            const unid  = document.getElementById('tipoUnidad').value !== '';
+            const docs  = iR.files.length > 0;
+            btn.disabled = !(plac && unid && docs);
+        } else {
+            btn.disabled = true;
+        }
+    }
+
+    /* ── Envío ── */
+    document.getElementById('tramiteForm').addEventListener('submit', function(e){
+        e.preventDefault();
+
+        const tramite = document.getElementById('tipoTramite').value;
+
+        if (tramite === 'tramites' && !document.getElementById('declaracion').checked) {
+            showToast('Debe marcar la casilla de declaración para continuar.','err'); return;
+        }
+        if (!rcReady) {
+            showToast('Espere a que se complete la verificación de seguridad.','err'); return;
+        }
+
+        // Concatenar lada + número en el campo de teléfono antes de enviar
+        const lada = document.getElementById('ladaPais').value.replace('-CA','');
+        const num  = document.getElementById('telefono').value.trim();
+        document.getElementById('telefono').value = lada + ' ' + num;
+
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.textContent = 'Enviando…';
+
+        this.submit();
+    });
+
+    function showToast(msg, type){
+        const t = document.getElementById('toastMsg');
+        t.textContent = msg; t.className = 'toast '+type;
+        setTimeout(() => { t.className = 'toast'; }, 6000);
+    }
 </script>
+
 </body>
 </html>
