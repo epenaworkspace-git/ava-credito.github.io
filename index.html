@@ -1305,66 +1305,172 @@ function clrErr(id){
 })();
 
 // ═══ BARRA DE PROGRESO — COMPONENTE 2 ═══
-var progressState = { currentForm: null, total: 0, done: 0 };
+// Estrategia: en lugar de buscar [required] (que no existe en este form),
+// definimos explícitamente los campos obligatorios de cada sección,
+// igual que lo hace validateSection(). El total varía según el estado
+// de campos condicionales (régimen, dependientes, tipo de pago, etc.).
 
-function getRequiredFieldsForForm(formId){
-  var form = document.getElementById(formId);
-  if(!form) return [];
-  var fields=[], radioGroups={}, seen={};
-  form.querySelectorAll('[required]').forEach(function(el){
-    if(el.type==='hidden') return;
-    if(el.classList.contains('lada-sel')) return;
-    if(el.classList.contains('tel-num')) return;
-    if(el.id && el.id.indexOf('colonias-')===0) return;
-    // Excluir campos readonly autorrellenos (municipio, estado) — ya dependen del CP
-    if(el.readOnly && (el.id==='municipio'||el.id==='estado')) return;
-    var key = el.name||el.id||('anon_'+Math.random());
-    if(el.type==='radio'){
-      if(!radioGroups[el.name]){ radioGroups[el.name]=true; fields.push({type:'radio',name:el.name}); }
-    } else {
-      if(!seen[key]){ seen[key]=true; fields.push({type:'standard',el:el}); }
+function getProgressFields(){
+  var fields = [];
+
+  // ── Helpers ──
+  function std(id){
+    var el = Q(id);
+    if(!el) return;
+    fields.push({ label: id, check: function(){ return el.value.trim().length > 0; } });
+  }
+  function tel(numId){
+    fields.push({ label: numId, check: function(){
+      var el = Q(numId); return el && el.value.replace(/\D/g,'').length >= 7;
+    }});
+  }
+  function radio(name){
+    fields.push({ label: 'radio_'+name, check: function(){
+      return document.querySelector('input[name="'+name+'"]:checked') !== null;
+    }});
+  }
+  function email(id){
+    fields.push({ label: id, check: function(){
+      var el = Q(id); if(!el) return false;
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
+    }});
+  }
+  function rfc(){
+    fields.push({ label: 'rfc', check: function(){
+      return /^[A-ZÑ&]{3,4}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z\d]{3}$/.test((V('rfc')||'').toUpperCase());
+    }});
+  }
+  function curp(){
+    fields.push({ label: 'curp', check: function(){
+      return /^[A-Z]{4}\d{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9]\d$/.test((V('curp')||'').toUpperCase());
+    }});
+  }
+
+  // ── S1: Datos Personales ──
+  std('pNombre');
+  std('pApellido');
+  std('sApellido');
+  std('genero');
+  std('fNac');
+  std('estCivil');
+  // Régimen: solo si casado
+  if(V('estCivil') === 'Casado(a)') std('regimen');
+  rfc();
+  curp();
+  tel('telP');
+  email('emailP');
+  std('tieneDep');
+  // Dependientes: solo si tiene
+  if(V('tieneDep') === 'Si'){
+    std('numDep');
+    var nd = parseInt(V('numDep')) || 0;
+    for(var i = 1; i <= nd; i++){
+      (function(idx){
+        fields.push({ label: 'depAge'+idx, check: function(){
+          var sel = Q('depAge'+idx);
+          if(!sel || !sel.value) return false;
+          if(sel.value === 'manual'){
+            var m = Q('depAge'+idx+'M');
+            return m && m.value.trim().length > 0;
+          }
+          return true;
+        }});
+      })(i);
     }
+  }
+
+  // ── S2: Domicilio ──
+  std('calle');
+  std('numExt');
+  // CP: 5 dígitos
+  fields.push({ label: 'cp', check: function(){ return /^\d{5}$/.test((V('cp')||'').trim()); }});
+  // Colonia: solo si el bloque está visible
+  fields.push({ label: 'colonia', check: function(){
+    var blk = Q('colBlk');
+    if(!blk || blk.style.display === 'none') return true; // no aplica aún
+    return V('colonia').trim().length > 0;
+  }});
+  // Municipio y estado se llenan solos con el CP, los contamos cuando tengan valor
+  fields.push({ label: 'municipio', check: function(){ return V('municipio').trim().length > 0; }});
+  fields.push({ label: 'estado',    check: function(){ return V('estado').trim().length > 0; }});
+
+  // ── S3: Referencias (4 × 4 campos) ──
+  ['f1','f2','a1','a2'].forEach(function(p){
+    std(p+'n');
+    tel(p+'t');
+    email(p+'e');
+    fields.push({ label: p+'d', check: function(){ var el=Q(p+'d'); return el && el.value.trim().length>0; }});
   });
+
+  // ── S4: Vehículo ──
+  std('marca');
+  // Otra marca: solo si seleccionó "Otra"
+  if(V('marca') === 'Otra'){
+    fields.push({ label: 'otraMarca', check: function(){ return V('otraMarca').trim().length > 0; }});
+  }
+  std('version');
+  std('anio');
+  fields.push({ label: 'costo', check: function(){
+    var c = parseFloat((V('costo')||'').replace(/[^0-9.]/g,''));
+    return !isNaN(c) && c > 0;
+  }});
+  // Tipo de pago
+  radio('tipoPago');
+  var tp = document.querySelector('input[name="tipoPago"]:checked');
+  if(tp){
+    if(tp.value === 'enganche'){
+      var ePct = document.querySelector('input[name="engTipo"]:checked');
+      if(!ePct || ePct.value === 'porcentaje'){
+        fields.push({ label: 'valEng', check: function(){
+          var r = (V('valEng')||'').replace(/[^0-9.]/g,'');
+          return r.length > 0 && parseFloat(r) > 0;
+        }});
+      } else {
+        fields.push({ label: 'valEngMonto', check: function(){
+          var m = parseFloat((V('valEngMonto')||'').replace(/[^0-9.]/g,''));
+          return !isNaN(m) && m > 0;
+        }});
+      }
+    } else {
+      fields.push({ label: 'valMon', check: function(){
+        var m = parseFloat((V('valMon')||'').replace(/[^0-9.]/g,''));
+        return !isNaN(m) && m > 0;
+      }});
+    }
+  }
+
+  // ── S5: Documentos y declaración ──
+  fields.push({ label: 'documentos', check: function(){ return upFiles.length > 0; }});
+  fields.push({ label: 'declaracion', check: function(){ return declChecked; }});
+
   return fields;
 }
 
-function isFieldFilled(fieldDef){
-  if(fieldDef.type==='radio'){
-    return document.querySelector('input[name="'+fieldDef.name+'"]:checked')!==null;
-  }
-  if(fieldDef.type==='standard'){
-    return fieldDef.el && fieldDef.el.value.trim().length>0;
-  }
-  return false;
-}
-
 function updateProgressBar(){
-  if(!progressState.currentForm) return;
-  var fields = getRequiredFieldsForForm(progressState.currentForm);
-  var total=fields.length, done=0;
-  fields.forEach(function(f){ if(isFieldFilled(f)) done++; });
-  progressState.total=total; progressState.done=done;
-  var pct = total>0?(done/total)*100:0;
-  var fill=Q('formProgressFill');
-  if(fill) fill.style.width=pct+'%';
-  var doneEl=Q('formProgressDone'); if(doneEl) doneEl.textContent=done;
-  var totEl=Q('formProgressTotal'); if(totEl) totEl.textContent=total;
+  var fields = getProgressFields();
+  var total = fields.length, done = 0;
+  fields.forEach(function(f){ try{ if(f.check()) done++; } catch(e){} });
+  var pct = total > 0 ? (done / total) * 100 : 0;
+  var fill = Q('formProgressFill');
+  if(fill) fill.style.width = pct + '%';
+  var doneEl = Q('formProgressDone'); if(doneEl) doneEl.textContent = done;
+  var totEl  = Q('formProgressTotal'); if(totEl)  totEl.textContent  = total;
 }
 
-function attachProgressListeners(formId){
-  var form=document.getElementById(formId);
-  if(!form) return;
-  form.querySelectorAll('input, select, textarea').forEach(function(el){
-    el.addEventListener('input', updateProgressBar);
+function attachProgressListeners(){
+  // Escuchar cualquier cambio en todo el form
+  Q('frm').querySelectorAll('input, select, textarea').forEach(function(el){
+    el.removeEventListener('input',  updateProgressBar);
+    el.removeEventListener('change', updateProgressBar);
+    el.addEventListener('input',  updateProgressBar);
     el.addEventListener('change', updateProgressBar);
   });
 }
 
-function showProgressBar(formId){
-  progressState.currentForm=formId;
-  var wrap=Q('formProgressWrap');
+function showProgressBar(){
+  var wrap = Q('formProgressWrap');
   if(wrap) wrap.classList.add('visible');
-  attachProgressListeners(formId);
+  attachProgressListeners();
   updateProgressBar();
 }
 
@@ -1387,7 +1493,7 @@ function slideTo(n){
   if(last) buildSummary();
   cur=n;
   // Re-attach listeners al cambiar de paso (por campos dinámicos)
-  attachProgressListeners('frm');
+  attachProgressListeners();
   updateProgressBar();
   window.scrollTo({top:Q('prog').offsetTop-20,behavior:'smooth'});
 }
@@ -1466,8 +1572,8 @@ function buildDepFields(n){
     })(id,id+'M');
   }
   updateProgressBar();
-}
-Q('tieneDep').addEventListener('change',function(){
+  // Re-adjuntar listeners a los nuevos campos generados
+  attachProgressListeners();
   var blk=Q('depBlk'),num=Q('numDep'); clrErr('tieneDep');
   if(this.value==='Si'){ blk.classList.add('open'); num.disabled=false; }
   else{ blk.classList.remove('open'); num.disabled=true; num.value=''; Q('depAges').innerHTML=''; num.classList.remove('ok','bad'); Q('edepAges').textContent=''; var e=Q('enumDep'); if(e) e.textContent=''; }
@@ -1841,7 +1947,7 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') Q('modal')
 
 // INIT
 slideTo(1);
-showProgressBar('frm');
+showProgressBar();
 
 })();
 </script>
