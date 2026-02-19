@@ -10,17 +10,17 @@
 :root{--p:#0A1F44;--a:#165DFF;--e:#E53935;--bd:#E0E0E0;--bg:#F8FAFC;--mid:#666;--lt:#999}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#333;min-height:100vh}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#333;min-height:100vh;transition:background-color 0.3s ease,color 0.3s ease}
 .wrap{max-width:880px;margin:0 auto;padding:2rem 1.25rem 4rem}
 
 /* HEADER */
-.hdr{background:var(--p);border-radius:9px;padding:2rem;text-align:center;margin-bottom:1.75rem;box-shadow:0 8px 28px rgba(10,31,68,.18)}
+.hdr{background:var(--p);border-radius:9px;padding:2rem;text-align:center;margin-bottom:1.75rem;box-shadow:0 8px 28px rgba(10,31,68,.18);transition:background 0.3s ease}
 .hdr-logo{font-family:'DM Serif Display',serif;font-size:1.9rem;color:#fff;letter-spacing:.04em}
 .hdr-logo span{color:#5B8EFF}
 .hdr-sub{font-size:.95rem;color:rgba(255,255,255,.7);margin-top:.3rem;letter-spacing:.06em;text-transform:uppercase}
 
 /* PROGRESS — 5 pasos */
-.prog{background:#fff;border-radius:9px;padding:1rem 1.2rem;margin-bottom:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.07);display:flex;align-items:center}
+.prog{background:#fff;border-radius:9px;padding:1rem 1.2rem;margin-bottom:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.07);display:flex;align-items:center;transition:background 0.3s ease,border-color 0.3s ease}
 .step{flex:1;display:flex;flex-direction:column;align-items:center;gap:.28rem;position:relative;cursor:pointer}
 .step:not(:last-child)::after{content:'';position:absolute;top:15px;left:calc(50% + 16px);width:calc(100% - 32px);height:2px;background:var(--bd);z-index:0;transition:background .3s}
 .step.done:not(:last-child)::after{background:var(--a)}
@@ -31,7 +31,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#333;min-height
 .step.active .sl,.step.done .sl{color:var(--a)}
 
 /* CARD */
-.card{background:#fff;border-radius:9px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:hidden}
+.card{background:#fff;border-radius:9px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:hidden;transition:background 0.3s ease,box-shadow 0.3s ease}
 
 /* SECCIONES */
 .sec{padding:2rem;display:none}
@@ -49,11 +49,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#333;min-height
 @media(max-width:680px){.grid,.grid3{grid-template-columns:1fr}}
 .full{grid-column:1/-1}
 .fg{display:flex;flex-direction:column;gap:.32rem}
-.lbl{font-size:.8rem;font-weight:600;color:#333;letter-spacing:.02em}
+.lbl{font-size:.8rem;font-weight:600;color:#333;letter-spacing:.02em;transition:color 0.3s ease}
 .lbl.req::after{content:' *';color:var(--a)}
 .note{font-size:.71rem;font-weight:400;color:var(--mid)}
 
-input,select,textarea{width:100%;padding:.56rem .8rem;border:1.5px solid var(--bd);border-radius:7px;background:#fff;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#333;outline:none;appearance:none;-webkit-appearance:none;transition:border-color .18s,box-shadow .18s}
+input,select,textarea{width:100%;padding:.56rem .8rem;border:1.5px solid var(--bd);border-radius:7px;background:#fff;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#333;outline:none;appearance:none;-webkit-appearance:none;transition:border-color .18s,box-shadow .18s,background 0.3s ease,color 0.3s ease}
 input:focus,select:focus,textarea:focus{border-color:var(--a);box-shadow:0 0 0 3px rgba(22,93,255,.1)}
 input.ok,select.ok{border-color:var(--a)}
 input.bad,select.bad,textarea.bad{border-color:var(--e);box-shadow:0 0 0 3px rgba(229,57,53,.08)}
@@ -78,12 +78,10 @@ textarea{resize:vertical;min-height:76px}
 @keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
 .cp-tag{font-size:.7rem;font-weight:600;background:rgba(10,31,68,.05);color:var(--p);border-radius:4px;padding:.16rem .48rem}
 .cp-tag strong{color:var(--a)}
-
-/* CAMPO AUTORELLENO (municipio/estado desde COPOMEX) */
 .autofill{border-color:var(--a) !important;background:rgba(22,93,255,.04) !important;color:var(--p) !important;font-weight:600}
 
 /* SELECTOR DE LADA INTERNACIONAL */
-.tel-wr{display:flex;align-items:stretch;border:1.5px solid var(--bd);border-radius:7px;overflow:hidden;background:#fff;transition:border-color .18s,box-shadow .18s}
+.tel-wr{display:flex;align-items:stretch;border:1.5px solid var(--bd);border-radius:7px;overflow:hidden;background:#fff;transition:border-color .18s,box-shadow .18s,background 0.3s ease}
 .tel-wr:focus-within{border-color:var(--a);box-shadow:0 0 0 3px rgba(22,93,255,.1)}
 .tel-wr.bad{border-color:var(--e);box-shadow:0 0 0 3px rgba(229,57,53,.08)}
 .tel-wr.ok{border-color:var(--a)}
@@ -94,7 +92,7 @@ textarea{resize:vertical;min-height:76px}
 .lada-sel:focus{box-shadow:none !important}
 
 /* REF */
-.ref{border:1.5px solid var(--bd);border-radius:9px;padding:1.1rem;margin-bottom:.85rem;transition:border-color .18s}
+.ref{border:1.5px solid var(--bd);border-radius:9px;padding:1.1rem;margin-bottom:.85rem;transition:border-color .18s,background 0.3s ease}
 .ref:focus-within{border-color:var(--a)}
 .ref-t{font-size:.85rem;font-weight:600;color:#333;margin-bottom:.85rem;display:flex;align-items:center;gap:.4rem}
 .ref-t::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--a)}
@@ -102,7 +100,7 @@ textarea{resize:vertical;min-height:76px}
 .sub-n{font-size:.78rem;color:var(--mid);margin-bottom:.9rem}
 
 /* PAYMENT */
-.pay-box{border:1.5px solid var(--bd);border-radius:9px;padding:1.1rem;background:var(--bg);transition:border-color .18s}
+.pay-box{border:1.5px solid var(--bd);border-radius:9px;padding:1.1rem;background:var(--bg);transition:border-color .18s,background 0.3s ease}
 .pay-box:focus-within{border-color:var(--a)}
 .pay-ttl{font-size:.82rem;font-weight:600;color:var(--p);margin-bottom:.85rem}
 .pay-row{display:flex;gap:1rem;flex-wrap:wrap}
@@ -139,7 +137,7 @@ textarea{resize:vertical;min-height:76px}
 .f-rm{background:none;border:none;color:var(--e);cursor:pointer;font-size:.95rem;padding:.1rem .28rem;border-radius:4px}
 
 /* SUMMARY */
-.sumbox{background:var(--bg);border:1.5px solid var(--bd);border-radius:9px;padding:1.1rem;margin-bottom:1.4rem}
+.sumbox{background:var(--bg);border:1.5px solid var(--bd);border-radius:9px;padding:1.1rem;margin-bottom:1.4rem;transition:background 0.3s ease,border-color 0.3s ease}
 .sum-ttl{font-size:.84rem;font-weight:600;color:var(--p);margin-bottom:.65rem}
 .sum-row{display:flex;gap:.45rem;font-size:.79rem;line-height:1.85}
 .sum-k{color:var(--p);font-weight:600;min-width:160px;flex-shrink:0}
@@ -160,7 +158,7 @@ textarea{resize:vertical;min-height:76px}
 .decl-req{font-size:.7rem;font-weight:600;color:var(--a);background:rgba(22,93,255,.07);border-radius:4px;padding:.12rem .42rem;margin-left:.35rem;vertical-align:middle}
 
 /* NAV */
-.nav{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.35rem 2rem;background:#FAFBFD;border-top:1px solid #EEF2F7}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.35rem 2rem;background:#FAFBFD;border-top:1px solid #EEF2F7;transition:background 0.3s ease,border-color 0.3s ease}
 .btn{display:inline-flex;align-items:center;gap:.42rem;padding:.6rem 1.6rem;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:.87rem;font-weight:600;cursor:pointer;border:2px solid transparent;transition:all .18s;user-select:none}
 .btn-p{background:var(--p);color:#fff;border-color:var(--p)}
 .btn-p:hover:not(:disabled){background:var(--a);border-color:var(--a);box-shadow:0 4px 14px rgba(22,93,255,.28)}
@@ -191,13 +189,344 @@ textarea{resize:vertical;min-height:76px}
 @keyframes ringspin{to{transform:rotate(360deg)}}
 .s-msg{font-size:.95rem;font-weight:600;color:#fff;letter-spacing:.03em}
 
+/* ===================== THEME TOGGLE BUTTON ===================== */
+.theme-toggle-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #e8ecf4, #d0d6e8);
+  box-shadow:
+    0 6px 20px rgba(0,0,0,0.18),
+    inset 0 -2px 4px rgba(0,0,0,0.15),
+    inset 0 2px 4px rgba(255,255,255,0.9);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: subtlePulse 3s infinite ease-in-out;
+}
+.theme-toggle-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 65%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.theme-toggle-btn:hover::before { opacity: 1; }
+.theme-toggle-btn:hover {
+  animation: none;
+  transform: scale(1.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25),
+    inset 0 -2px 4px rgba(0,0,0,0.15),
+    inset 0 3px 6px rgba(255,255,255,1);
+}
+.theme-toggle-btn:active { transform: scale(0.94); }
+
+@keyframes subtlePulse {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.03); }
+}
+
+.toggle-icon-wrap {
+  position: relative;
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+.theme-toggle-btn:hover .toggle-icon-wrap { transform: rotate(20deg); }
+
+.icon-sun, .icon-moon {
+  position: absolute;
+  width: 28px; height: 28px;
+  transition: all 0.45s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+.icon-sun {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  filter: drop-shadow(0 0 4px rgba(255,215,0,0.6));
+}
+.icon-moon {
+  opacity: 0;
+  transform: scale(0.4) rotate(-80deg);
+  filter: drop-shadow(0 0 4px rgba(100,120,255,0.6));
+}
+
+body.dark-mode .icon-sun  { opacity: 0; transform: scale(0.4) rotate(80deg); }
+body.dark-mode .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); }
+body.dark-mode .theme-toggle-btn {
+  background: linear-gradient(145deg, #1e2d50, #0f1d38);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4),
+    0 0 15px rgba(65,105,225,0.3),
+    inset 0 -2px 4px rgba(0,0,0,0.4),
+    inset 0 2px 4px rgba(255,255,255,0.06);
+}
+
+/* ===================== DARK MODE — VARIABLES GLOBALES ===================== */
+body.dark-mode {
+  background: #0c1525;
+  color: #d0d8ec;
+}
+
+body.dark-mode .hdr { background: #0a1535; }
+
+body.dark-mode .prog {
+  background: #111f3a;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+body.dark-mode .sc { background: #111f3a; border-color: #2a3a5c; color: #7a8fb0; }
+body.dark-mode .sl { color: #4a5878; }
+body.dark-mode .step.active .sc, body.dark-mode .step.done .sc { background: var(--a); border-color: var(--a); color: #fff; }
+body.dark-mode .step.active .sl, body.dark-mode .step.done .sl { color: var(--a); }
+body.dark-mode .step:not(:last-child)::after { background: #2a3a5c; }
+body.dark-mode .step.done:not(:last-child)::after { background: var(--a); }
+
+body.dark-mode .card {
+  background: #111f3a;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+body.dark-mode .sec-hdr { border-bottom-color: #1e2d50; }
+body.dark-mode .sec-ico { background: rgba(255,255,255,0.05); }
+body.dark-mode .sec-ico svg { fill: #7a8fb0; }
+body.dark-mode .sec-title { color: #c8d6f0; }
+
+body.dark-mode .lbl { color: #7a8fb0; }
+body.dark-mode .note { color: #4a5878; }
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background: #162040;
+  border-color: #243660;
+  color: #d0d8ec;
+}
+body.dark-mode input:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus {
+  background: #1a2850;
+  border-color: var(--a);
+  box-shadow: 0 0 0 3px rgba(77,138,255,0.15);
+}
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder { color: #3a4e70; }
+body.dark-mode input:disabled,
+body.dark-mode select:disabled { background: #0f1a30; color: #3a4e70; }
+
+body.dark-mode select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%234a5878' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .75rem center;
+  background-color: #162040;
+}
+
+body.dark-mode .tel-wr {
+  background: #162040;
+  border-color: #243660;
+}
+body.dark-mode .lada-sel {
+  background-color: #1a2850;
+  color: #c8d6f0;
+  border-right-color: #243660;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%234a5878' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .42rem center;
+}
+body.dark-mode .lada-sel:focus { background-color: #1e2f5a; }
+body.dark-mode .tel-num { color: #d0d8ec; }
+
+body.dark-mode .ref { background: #0e1a30; border-color: #1e2d50; }
+body.dark-mode .ref-t { color: #c8d6f0; }
+body.dark-mode .sub-t { color: #c8d6f0; }
+body.dark-mode .sub-n { color: #4a5878; }
+
+body.dark-mode .pay-box { background: #0e1a30; border-color: #1e2d50; }
+body.dark-mode .pay-ttl { color: #c8d6f0; }
+body.dark-mode .rlbl {
+  background: #162040;
+  border-color: #243660;
+  color: #c8d6f0;
+}
+body.dark-mode .rlbl:hover { border-color: var(--a); }
+body.dark-mode .rlbl:has(input:checked) { background: rgba(22,93,255,0.15); color: #6ba3ff; border-color: var(--a); }
+body.dark-mode .rc { border-color: #3a4e70; }
+
+body.dark-mode .cur-pre { color: #4a5878; }
+
+body.dark-mode .up-area {
+  background: #0e1a30;
+  border-color: #2a3a5c;
+}
+body.dark-mode .up-area:hover { background: rgba(22,93,255,0.05); border-color: var(--a); }
+body.dark-mode .up-main { color: #c8d6f0; }
+body.dark-mode .up-req { background: rgba(22,93,255,0.2); }
+body.dark-mode .up-sub { color: #4a5878; }
+body.dark-mode .up-ine { background: rgba(255,255,255,0.04); color: #c8d6f0; }
+body.dark-mode .f-item { background: #162040; border-color: #243660; color: #c8d6f0; }
+body.dark-mode .f-sz { color: #4a5878; }
+
+body.dark-mode .sumbox { background: #0e1a30; border-color: #1e2d50; }
+body.dark-mode .sum-ttl { color: #c8d6f0; }
+body.dark-mode .sum-k { color: #6ba3ff; }
+body.dark-mode .sum-row { color: #c8d6f0; }
+body.dark-mode .sum-sep { border-top-color: #1e2d50; }
+
+body.dark-mode .decl-box { background: #0e1a30; border-color: #1e2d50; }
+body.dark-mode .decl-box.ok { background: rgba(22,93,255,0.08); border-color: var(--a); }
+body.dark-mode .decl-box.bad { background: rgba(229,57,53,0.08); }
+body.dark-mode .decl-head { color: #c8d6f0; }
+body.dark-mode .decl-text { color: #7a8fb0; }
+body.dark-mode .chk-vis { background: #162040; border-color: #3a4e70; }
+
+body.dark-mode .nav { background: #0e1a30; border-top-color: #1e2d50; }
+body.dark-mode .step-ind { color: #4a5878; }
+body.dark-mode .btn-p { background: #1e3060; border-color: #1e3060; }
+body.dark-mode .btn-p:hover:not(:disabled) { background: var(--a); border-color: var(--a); }
+body.dark-mode .btn-s { background: var(--a); border-color: var(--a); }
+
+body.dark-mode .info-tag { background: rgba(22,93,255,0.15); color: #6ba3ff; }
+body.dark-mode .dep-lbl { color: #6ba3ff; }
+
+body.dark-mode .mbox { background: #111f3a; }
+body.dark-mode .m-t { color: #c8d6f0; }
+body.dark-mode .m-m { color: #7a8fb0; }
+body.dark-mode .m-btn { background: var(--a); }
+
+body.dark-mode .autofill {
+  background: rgba(22,93,255,0.08) !important;
+  color: #6ba3ff !important;
+  border-color: var(--a) !important;
+}
+
+body.dark-mode #cpErrBox {
+  background: rgba(229,57,53,0.1);
+  border-color: rgba(229,57,53,0.3);
+  color: #ff8a80;
+}
+body.dark-mode #cpRetry { background: #1e3060; }
+body.dark-mode #colRegLbl { color: #4a5878; }
+body.dark-mode #colSel {
+  background: rgba(22,93,255,0.1) !important;
+  color: #6ba3ff !important;
+  border-color: var(--a) !important;
+}
+
+/* Transición global suave */
+body, .prog, .card, .sec, .sec-hdr, .lbl, input, select, textarea,
+.ref, .pay-box, .rlbl, .up-area, .f-item, .sumbox, .decl-box, .nav,
+.mbox, .hdr, .sc, .dep-lbl {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===================== FLOATING PROGRESS BAR ===================== */
+.form-progress-wrap {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1500;
+  display: none;
+  width: calc(100% - 200px);
+  max-width: 720px;
+  min-width: 280px;
+  pointer-events: none;
+}
+.form-progress-wrap.visible { display: block; }
+
+.form-progress-pill {
+  background: #ffffff;
+  border-radius: 60px;
+  padding: 10px 20px 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow:
+    0 4px 24px rgba(10,31,68,0.14),
+    0 1px 4px rgba(10,31,68,0.08);
+  border: 1px solid rgba(10,31,68,0.07);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-progress-bar-track {
+  flex: 1;
+  height: 8px;
+  background: #E8ECF4;
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.form-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #165DFF 0%, #3a7fff 100%);
+  border-radius: 99px;
+  width: 0%;
+  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.form-progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -60px;
+  width: 50px; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+  animation: barShine 2.2s ease-in-out infinite;
+}
+@keyframes barShine {
+  0%   { left: -60px; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { left: calc(100% + 20px); opacity: 0; }
+}
+
+.form-progress-text {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #6B7A99;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.1px;
+  min-width: 130px;
+  text-align: right;
+  transition: color 0.3s ease;
+}
+.form-progress-text strong {
+  color: #165DFF;
+  font-weight: 700;
+}
+
+body.dark-mode .form-progress-pill {
+  background: #1a2645;
+  border-color: rgba(255,255,255,0.12);
+  box-shadow:
+    0 4px 28px rgba(0,0,0,0.55),
+    0 1px 4px rgba(0,0,0,0.35);
+}
+body.dark-mode .form-progress-bar-track { background: #263558; }
+body.dark-mode .form-progress-bar-fill {
+  background: linear-gradient(90deg, #4d8aff 0%, #78b0ff 100%);
+}
+body.dark-mode .form-progress-text {
+  color: #c8d6f0;
+  font-weight: 600;
+}
+body.dark-mode .form-progress-text strong {
+  color: #78b0ff;
+  font-weight: 800;
+}
+
 /* ══════════════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════════════ */
-
-/* Tablet ancha (≤860px) — ya cubierto por max-width del .wrap */
-
-/* Tablet media (≤720px) */
 @media(max-width:720px){
   .grid3{grid-template-columns:1fr 1fr}
   .prog{padding:.8rem .7rem}
@@ -206,58 +535,42 @@ textarea{resize:vertical;min-height:76px}
   .step:not(:last-child)::after{left:calc(50% + 15px);width:calc(100% - 30px)}
 }
 
-/* Tablet chica / móvil grande (≤600px) */
-@media(max-width:600px){
-  /* — Página — */
-  .wrap{padding:.85rem .65rem 3rem}
+@media(max-width:640px){
+  .theme-toggle-btn { top: 14px; right: 14px; width: 44px; height: 44px; }
+  .icon-sun, .icon-moon { width: 22px; height: 22px; }
+  .form-progress-wrap { width: calc(100% - 24px); bottom: 16px; }
+  .form-progress-pill { padding: 8px 14px 8px 12px; gap: 10px; }
+  .form-progress-text { font-size: 11.5px; min-width: 110px; }
+}
 
-  /* — Header — */
+@media(max-width:600px){
+  .wrap{padding:.85rem .65rem 3rem}
   .hdr{padding:1.3rem 1rem;border-radius:7px;margin-bottom:1.2rem}
   .hdr-logo{font-size:1.5rem}
   .hdr-sub{font-size:.8rem;letter-spacing:.04em}
-
-  /* — Progress bar: 5 pasos compactos — */
   .prog{padding:.6rem .4rem;border-radius:7px;margin-bottom:1.2rem;gap:0}
   .sc{width:25px;height:25px;font-size:.64rem}
   .sl{font-size:.5rem;line-height:1.1}
   .step:not(:last-child)::after{left:calc(50% + 13px);width:calc(100% - 26px);top:12px}
   .step.active .sc{box-shadow:0 0 0 3px rgba(22,93,255,.15)}
-
-  /* — Card — */
   .card{border-radius:7px}
-
-  /* — Secciones — */
   .sec{padding:1rem}
   .sec-hdr{padding-top:.65rem;padding-bottom:.85rem;margin-bottom:1.1rem;gap:.5rem}
   .sec-ico{width:29px;height:29px;border-radius:6px}
   .sec-ico svg{width:16px;height:16px}
   .sec-title{font-size:.95rem}
-
-  /* — Grids → 1 columna — */
   .grid,.grid3{grid-template-columns:1fr;gap:1rem}
   .full{grid-column:1/-1}
-
-  /* — Campos — */
   input,select,textarea{font-size:.84rem;padding:.5rem .7rem}
   .lbl{font-size:.76rem}
   .em{font-size:.7rem}
   .note{font-size:.68rem}
-
-  /* — RFC / CURP: letra-spacing reducido en móvil — */
   #rfc,#curp{letter-spacing:.02em}
-
-  /* — Dependientes — */
   .dep-grid{grid-template-columns:1fr 1fr;gap:.6rem}
-
-  /* — Condicionales — */
   .cond-block.open{max-height:800px}
-
-  /* — Referencias — */
   .ref{padding:.9rem;border-radius:8px}
   .ref-t{font-size:.82rem;margin-bottom:.7rem}
   .sub-t{font-size:.98rem}
-
-  /* — Vehículo: pago inicial — */
   .pay-box{padding:.9rem}
   .pay-ttl{font-size:.79rem;margin-bottom:.7rem}
   .pay-row{flex-direction:column;gap:.75rem}
@@ -265,16 +578,10 @@ textarea{resize:vertical;min-height:76px}
   .rlbl{font-size:.79rem;padding:.36rem .58rem;border-radius:5px}
   .pay-in{min-width:unset;width:100%}
   #payH{font-size:.79rem}
-
-  /* — Enganche: botones más tocables — */
   #engMinus,#engPlus{width:40px;height:40px;font-size:1.25rem;border-radius:8px}
   #valEng{font-size:.88rem}
-
-  /* — CP badges — */
   #cpBadges{flex-direction:column;gap:.28rem}
   .cp-tag{font-size:.69rem}
-
-  /* — Upload — */
   .up-area{padding:1rem .8rem;border-radius:8px}
   .up-main{font-size:.83rem}
   .up-req{font-size:.68rem}
@@ -283,27 +590,19 @@ textarea{resize:vertical;min-height:76px}
   .f-item{padding:.45rem .62rem;font-size:.76rem;gap:.45rem}
   .f-nm{font-size:.75rem}
   .f-sz{font-size:.7rem}
-
-  /* — Resumen — */
   .sumbox{padding:.9rem}
   .sum-ttl{font-size:.8rem}
   .sum-row{flex-direction:column;gap:.04rem;line-height:1.55;padding:.15rem 0}
   .sum-k{min-width:unset;font-size:.74rem;color:var(--a)}
-
-  /* — Declaración — */
   .decl-box{padding:.95rem 1rem;margin-top:1.2rem;border-radius:8px}
   .decl-head{font-size:.74rem;margin-bottom:.6rem}
   .decl-text{font-size:.78rem;line-height:1.65}
   .chk-vis{width:22px;height:22px;min-width:22px;border-radius:5px}
   .decl-row{gap:.75rem}
-
-  /* — NAV — */
   .nav{padding:.85rem .9rem;gap:.55rem;flex-wrap:wrap}
   .step-ind{font-size:.72rem;order:-1;width:100%;text-align:center;margin-bottom:.1rem}
   .btn{padding:.5rem 1rem;font-size:.81rem}
   .btn-s{padding:.55rem 1.2rem;font-size:.81rem;letter-spacing:.02em}
-
-  /* — Modal — */
   .mbox{padding:1.5rem 1.1rem;border-radius:11px}
   .m-ico{width:52px;height:52px}
   .m-ico svg{width:26px;height:26px}
@@ -312,7 +611,6 @@ textarea{resize:vertical;min-height:76px}
   .m-btn{padding:.52rem 1.4rem;font-size:.83rem}
 }
 
-/* Móvil muy pequeño (≤380px) */
 @media(max-width:380px){
   .wrap{padding:.65rem .5rem 2.5rem}
   .hdr-logo{font-size:1.35rem}
@@ -377,7 +675,6 @@ textarea{resize:vertical;min-height:76px}
   0%{transform:translateX(-120%)}
   100%{transform:translateX(120%)}
 }
-/* Mobile — botón más pequeño y sin tooltip */
 @media(max-width:600px){
   .wa-float{width:54px;height:54px;bottom:28px;left:20px;border-width:2.5px}
   .wa-icon{width:27px;height:27px}
@@ -390,6 +687,58 @@ textarea{resize:vertical;min-height:76px}
 </style>
 </head>
 <body>
+
+<!-- ===== BOTÓN MODO CLARO / OSCURO ===== -->
+<button class="theme-toggle-btn" id="themeToggleBtn"
+        aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
+  <div class="toggle-icon-wrap">
+    <!-- Sol (visible en modo claro) -->
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="4.5" fill="#FFD700" stroke="#FFA500" stroke-width="1.4"/>
+      <g stroke="#FFD700" stroke-width="2" stroke-linecap="round">
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(0 12 12)">
+          <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
+        </line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(45 12 12)">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+        </line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(90 12 12)">
+          <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
+        </line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(135 12 12)">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+        </line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(180 12 12)">
+          <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
+        </line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(225 12 12)">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+        </line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(270 12 12)">
+          <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
+        </line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(315 12 12)">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+        </line>
+      </g>
+    </svg>
+    <!-- Luna (visible en modo oscuro) -->
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+            fill="#c8d0ff" stroke="#4169E1" stroke-width="1.5"/>
+      <circle cx="15" cy="9" r="1" fill="#fff8c0" opacity="0.85">
+        <animate attributeName="opacity" values="0.85;0.3;0.85" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="17" cy="13" r="0.7" fill="#fff8c0" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="13" cy="15" r="0.55" fill="#fff8c0" opacity="0.4">
+        <animate attributeName="opacity" values="0.4;0.1;0.4" dur="5s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+  </div>
+</button>
+
 <div class="wrap">
 
 <header class="hdr">
@@ -406,7 +755,6 @@ textarea{resize:vertical;min-height:76px}
   <div class="step" data-s="5"><div class="sc">5</div><span class="sl">Docs y<br>Envío</span></div>
 </nav>
 
-<!-- FormSubmit.co — action="https://formsubmit.co/info@anpai.com.mx" -->
 <form id="frm" novalidate
       action="https://formsubmit.co/info@anpai.com.mx"
       method="POST"
@@ -422,17 +770,14 @@ textarea{resize:vertical;min-height:76px}
 
 <!-- ═══════════════════════════════════════════════════════
      S1 — DATOS PERSONALES
-     Campos: Nombres, Apellidos, Género, F.Nac, Edad (auto),
-             Estado Civil, Régimen, RFC, CURP, Dependientes
      ═══════════════════════════════════════════════════════ -->
-<div class="sec" id="s1">
+<div class="sec active" id="s1">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v1h20v-1c0-3.3-6.7-5-10-5z"/></svg></div>
     <h1 class="sec-title">DATOS PERSONALES</h1>
   </div>
 
   <div class="grid">
-    <!-- Fila 1: Primer Nombre / Segundo Nombre -->
     <div class="fg">
       <label class="lbl req" for="pNombre">Primer Nombre</label>
       <input id="pNombre" name="pNombre" type="text" placeholder="Tu primer nombre" autocomplete="given-name">
@@ -442,8 +787,6 @@ textarea{resize:vertical;min-height:76px}
       <label class="lbl" for="sNombre">Segundo Nombre <span class="note">(opcional)</span></label>
       <input id="sNombre" name="sNombre" type="text" placeholder="Tu segundo nombre" autocomplete="additional-name">
     </div>
-
-    <!-- Fila 2: Primer Apellido / Segundo Apellido -->
     <div class="fg">
       <label class="lbl req" for="pApellido">Primer Apellido</label>
       <input id="pApellido" name="pApellido" type="text" placeholder="Tu primer apellido" autocomplete="family-name">
@@ -454,8 +797,6 @@ textarea{resize:vertical;min-height:76px}
       <input id="sApellido" name="sApellido" type="text" placeholder="Tu segundo apellido">
       <span class="em" id="esApellido"></span>
     </div>
-
-    <!-- Fila 3: Género / Fecha Nac -->
     <div class="fg">
       <label class="lbl req" for="genero">Género</label>
       <select id="genero" name="genero">
@@ -469,8 +810,6 @@ textarea{resize:vertical;min-height:76px}
       <input id="fNac" name="fNac" type="date" autocomplete="bday">
       <span class="em" id="efNac"></span>
     </div>
-
-    <!-- Fila 4: Edad (auto) / Estado Civil -->
     <div class="fg">
       <label class="lbl" for="edad">Edad <span class="note">(se calcula automáticamente)</span></label>
       <input id="edad" name="edad" type="text" readonly disabled placeholder="—">
@@ -484,8 +823,6 @@ textarea{resize:vertical;min-height:76px}
       </select>
       <span class="em" id="eestCivil"></span>
     </div>
-
-    <!-- Fila 5: Régimen Matrimonial (condicional) / RFC -->
     <div class="fg cond-block" id="regimenBlk">
       <label class="lbl req" for="regimen">Régimen Matrimonial</label>
       <select id="regimen" name="regimen" disabled>
@@ -500,15 +837,11 @@ textarea{resize:vertical;min-height:76px}
       <input id="rfc" name="rfc" type="text" placeholder="ABCD123456AB1" maxlength="13" style="text-transform:uppercase;letter-spacing:.06em" autocomplete="off">
       <span class="em" id="erfc"></span>
     </div>
-
-    <!-- Fila 6: RFC / CURP — misma fila, misma anchura (no full) -->
     <div class="fg">
       <label class="lbl req" for="curp">CURP <span class="note">18 caracteres — RENAPO</span></label>
       <input id="curp" name="curp" type="text" placeholder="ABCD123456HDFLRN01" maxlength="18" style="text-transform:uppercase;letter-spacing:.04em" autocomplete="off">
       <span class="em" id="ecurp"></span>
     </div>
-
-    <!-- Fila 7: Teléfono / Correo Electrónico -->
     <div class="fg">
       <label class="lbl req" for="telP">Teléfono</label>
       <div class="tel-wr" id="telPWr">
@@ -523,39 +856,13 @@ textarea{resize:vertical;min-height:76px}
           <option value="+57" data-flag="🇨🇴">🇨🇴 +57</option>
           <option value="+58" data-flag="🇻🇪">🇻🇪 +58</option>
           <option value="+51" data-flag="🇵🇪">🇵🇪 +51</option>
-          <option value="+593" data-flag="🇪🇨">🇪🇨 +593</option>
-          <option value="+591" data-flag="🇧🇴">🇧🇴 +591</option>
-          <option value="+595" data-flag="🇵🇾">🇵🇾 +595</option>
-          <option value="+598" data-flag="🇺🇾">🇺🇾 +598</option>
-          <option value="+507" data-flag="🇵🇦">🇵🇦 +507</option>
-          <option value="+506" data-flag="🇨🇷">🇨🇷 +506</option>
-          <option value="+502" data-flag="🇬🇹">🇬🇹 +502</option>
-          <option value="+503" data-flag="🇸🇻">🇸🇻 +503</option>
-          <option value="+504" data-flag="🇭🇳">🇭🇳 +504</option>
-          <option value="+505" data-flag="🇳🇮">🇳🇮 +505</option>
-          <option value="+53" data-flag="🇨🇺">🇨🇺 +53</option>
-          <option value="+1-809" data-flag="🇩🇴">🇩🇴 +1-809</option>
           <option value="+44" data-flag="🇬🇧">🇬🇧 +44</option>
           <option value="+33" data-flag="🇫🇷">🇫🇷 +33</option>
           <option value="+49" data-flag="🇩🇪">🇩🇪 +49</option>
-          <option value="+39" data-flag="🇮🇹">🇮🇹 +39</option>
-          <option value="+351" data-flag="🇵🇹">🇵🇹 +351</option>
-          <option value="+31" data-flag="🇳🇱">🇳🇱 +31</option>
-          <option value="+32" data-flag="🇧🇪">🇧🇪 +32</option>
-          <option value="+41" data-flag="🇨🇭">🇨🇭 +41</option>
-          <option value="+43" data-flag="🇦🇹">🇦🇹 +43</option>
-          <option value="+48" data-flag="🇵🇱">🇵🇱 +48</option>
-          <option value="+46" data-flag="🇸🇪">🇸🇪 +46</option>
-          <option value="+47" data-flag="🇳🇴">🇳🇴 +47</option>
-          <option value="+45" data-flag="🇩🇰">🇩🇰 +45</option>
-          <option value="+358" data-flag="🇫🇮">🇫🇮 +358</option>
-          <option value="+7" data-flag="🇷🇺">🇷🇺 +7</option>
           <option value="+86" data-flag="🇨🇳">🇨🇳 +86</option>
           <option value="+81" data-flag="🇯🇵">🇯🇵 +81</option>
-          <option value="+82" data-flag="🇰🇷">🇰🇷 +82</option>
           <option value="+91" data-flag="🇮🇳">🇮🇳 +91</option>
           <option value="+61" data-flag="🇦🇺">🇦🇺 +61</option>
-          <option value="+27" data-flag="🇿🇦">🇿🇦 +27</option>
         </select>
         <input class="tel-num" id="telP" name="telP" type="tel" placeholder="7771234567" maxlength="15" inputmode="numeric" autocomplete="tel">
       </div>
@@ -567,8 +874,6 @@ textarea{resize:vertical;min-height:76px}
       <input id="emailP" name="emailP" type="email" placeholder="nombre@correo.com" autocomplete="email">
       <span class="em" id="eemailP"></span>
     </div>
-
-    <!-- Fila 8: Dependientes -->
     <div class="fg">
       <label class="lbl req" for="tieneDep">¿Tiene Dependientes Económicos?</label>
       <select id="tieneDep" name="tieneDep">
@@ -601,24 +906,18 @@ textarea{resize:vertical;min-height:76px}
 
 <!-- ═══════════════════════════════════════════════════════
      S2 — DATOS DE DOMICILIO
-     Campos: Calle, Núm Ext, Núm Int, CP + COPOMEX,
-             Colonia (dropdown), Delegación/Municipio, Estado
      ═══════════════════════════════════════════════════════ -->
 <div class="sec" id="s2">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
     <h2 class="sec-title">DATOS DE DOMICILIO</h2>
   </div>
-
   <div class="grid">
-    <!-- 1. Calle o Avenida — full width -->
     <div class="fg full">
       <label class="lbl req" for="calle">Calle o Avenida</label>
       <input id="calle" name="calle" type="text" placeholder="Nombre de la calle o avenida" autocomplete="street-address">
       <span class="em" id="ecalle"></span>
     </div>
-
-    <!-- 2. Número Exterior / 3. Número Interior -->
     <div class="fg">
       <label class="lbl req" for="numExt">Número Exterior</label>
       <input id="numExt" name="numExt" type="text" placeholder="Ej. 142">
@@ -628,8 +927,6 @@ textarea{resize:vertical;min-height:76px}
       <label class="lbl" for="numInt">Número Interior <span class="note">(opcional)</span></label>
       <input id="numInt" name="numInt" type="text" placeholder="Ej. Depto. 3B">
     </div>
-
-    <!-- 4. Código Postal + COPOMEX -->
     <div class="fg">
       <label class="lbl req" for="cp">Código Postal</label>
       <div class="cp-wr" id="cpWr">
@@ -641,8 +938,6 @@ textarea{resize:vertical;min-height:76px}
       <div id="cpErrBox" style="display:none;font-size:.75rem;color:var(--e);font-weight:500;padding:.42rem .68rem;background:rgba(229,57,53,.05);border:1px solid rgba(229,57,53,.18);border-radius:6px;margin-top:.32rem"></div>
       <button type="button" id="cpRetry" style="display:none;margin-top:.38rem;padding:.32rem .85rem;border-radius:6px;background:var(--p);color:#fff;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600">↺ Reintentar</button>
     </div>
-
-    <!-- 5. Colonia (dropdown COPOMEX) -->
     <div class="fg" id="colBlk" style="display:none">
       <label class="lbl req" for="colonia">
         Colonia
@@ -655,22 +950,16 @@ textarea{resize:vertical;min-height:76px}
       <div id="colRegLbl" style="display:none;font-size:.68rem;font-weight:700;color:var(--mid);letter-spacing:.05em;margin-top:.48rem;margin-bottom:.2rem">✓ COLONIA REGISTRADA</div>
       <input id="colSel" name="coloniaSeleccionada" type="text" readonly style="display:none;border:2px solid var(--a);background:rgba(22,93,255,.04);font-weight:600;color:var(--a);cursor:default" placeholder="Colonia registrada">
     </div>
-
-    <!-- 6. Delegación o Municipio — autorellena desde COPOMEX -->
     <div class="fg">
       <label class="lbl req" for="municipio">Delegación o Municipio</label>
       <input id="municipio" name="municipio" type="text" placeholder="Se completa con el C.P." readonly>
       <span class="em" id="emunicipio"></span>
     </div>
-
-    <!-- 7. Estado de la República — autorellena desde COPOMEX -->
     <div class="fg">
       <label class="lbl req" for="estado">Estado de la República</label>
       <input id="estado" name="estado" type="text" placeholder="Se completa con el C.P." readonly>
       <span class="em" id="eestado"></span>
     </div>
-
-    <!-- Campos ocultos auxiliares -->
     <input type="hidden" id="hCiu" name="ciudad">
   </div>
 </div><!-- /s2 -->
@@ -685,56 +974,14 @@ textarea{resize:vertical;min-height:76px}
   </div>
   <div class="sub-t">REFERENCIAS FAMILIARES</div>
   <div class="sub-n">No conviven con el solicitante</div>
+
+  <!-- Familiar 1 -->
   <div class="ref"><div class="ref-t">Familiar 1</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="f1n">Nombre Completo</label><input id="f1n" name="f1n" type="text" placeholder="Nombre completo"><span class="em" id="ef1n"></span></div>
     <div class="fg">
       <label class="lbl req" for="f1t">Teléfono</label>
       <div class="tel-wr" id="f1tWr">
-        <select class="lada-sel" id="ladaf1t" name="ladaf1t" aria-label="Código de país">
-          <option value="+52" selected>🇲🇽 +52</option>
-          <option value="+1">🇺🇸 +1</option>
-          <option value="+1">🇨🇦 +1</option>
-          <option value="+34">🇪🇸 +34</option>
-          <option value="+54">🇦🇷 +54</option>
-          <option value="+55">🇧🇷 +55</option>
-          <option value="+56">🇨🇱 +56</option>
-          <option value="+57">🇨🇴 +57</option>
-          <option value="+58">🇻🇪 +58</option>
-          <option value="+51">🇵🇪 +51</option>
-          <option value="+593">🇪🇨 +593</option>
-          <option value="+591">🇧🇴 +591</option>
-          <option value="+595">🇵🇾 +595</option>
-          <option value="+598">🇺🇾 +598</option>
-          <option value="+507">🇵🇦 +507</option>
-          <option value="+506">🇨🇷 +506</option>
-          <option value="+502">🇬🇹 +502</option>
-          <option value="+503">🇸🇻 +503</option>
-          <option value="+504">🇭🇳 +504</option>
-          <option value="+505">🇳🇮 +505</option>
-          <option value="+53">🇨🇺 +53</option>
-          <option value="+1-809">🇩🇴 +1-809</option>
-          <option value="+44">🇬🇧 +44</option>
-          <option value="+33">🇫🇷 +33</option>
-          <option value="+49">🇩🇪 +49</option>
-          <option value="+39">🇮🇹 +39</option>
-          <option value="+351">🇵🇹 +351</option>
-          <option value="+31">🇳🇱 +31</option>
-          <option value="+32">🇧🇪 +32</option>
-          <option value="+41">🇨🇭 +41</option>
-          <option value="+43">🇦🇹 +43</option>
-          <option value="+48">🇵🇱 +48</option>
-          <option value="+46">🇸🇪 +46</option>
-          <option value="+47">🇳🇴 +47</option>
-          <option value="+45">🇩🇰 +45</option>
-          <option value="+358">🇫🇮 +358</option>
-          <option value="+7">🇷🇺 +7</option>
-          <option value="+86">🇨🇳 +86</option>
-          <option value="+81">🇯🇵 +81</option>
-          <option value="+82">🇰🇷 +82</option>
-          <option value="+91">🇮🇳 +91</option>
-          <option value="+61">🇦🇺 +61</option>
-          <option value="+27">🇿🇦 +27</option>
-        </select>
+        <select class="lada-sel" id="ladaf1t" name="ladaf1t"><option value="+52" selected>🇲🇽 +52</option><option value="+1">🇺🇸 +1</option><option value="+34">🇪🇸 +34</option></select>
         <input class="tel-num" id="f1t" name="f1t" type="tel" placeholder="2221234567" maxlength="15" inputmode="numeric">
       </div>
       <input type="hidden" id="f1tFull" name="f1tFull">
@@ -743,56 +990,14 @@ textarea{resize:vertical;min-height:76px}
     <div class="fg"><label class="lbl req" for="f1e">Correo</label><input id="f1e" name="f1e" type="email" placeholder="nombre@correo.com"><span class="em" id="ef1e"></span></div>
     <div class="fg full"><label class="lbl req" for="f1d">Dirección</label><textarea id="f1d" name="f1d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ef1d"></span></div>
   </div></div>
+
+  <!-- Familiar 2 -->
   <div class="ref"><div class="ref-t">Familiar 2</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="f2n">Nombre Completo</label><input id="f2n" name="f2n" type="text" placeholder="Nombre completo"><span class="em" id="ef2n"></span></div>
     <div class="fg">
       <label class="lbl req" for="f2t">Teléfono</label>
       <div class="tel-wr" id="f2tWr">
-        <select class="lada-sel" id="ladaf2t" name="ladaf2t" aria-label="Código de país">
-          <option value="+52" selected>🇲🇽 +52</option>
-          <option value="+1">🇺🇸 +1</option>
-          <option value="+1">🇨🇦 +1</option>
-          <option value="+34">🇪🇸 +34</option>
-          <option value="+54">🇦🇷 +54</option>
-          <option value="+55">🇧🇷 +55</option>
-          <option value="+56">🇨🇱 +56</option>
-          <option value="+57">🇨🇴 +57</option>
-          <option value="+58">🇻🇪 +58</option>
-          <option value="+51">🇵🇪 +51</option>
-          <option value="+593">🇪🇨 +593</option>
-          <option value="+591">🇧🇴 +591</option>
-          <option value="+595">🇵🇾 +595</option>
-          <option value="+598">🇺🇾 +598</option>
-          <option value="+507">🇵🇦 +507</option>
-          <option value="+506">🇨🇷 +506</option>
-          <option value="+502">🇬🇹 +502</option>
-          <option value="+503">🇸🇻 +503</option>
-          <option value="+504">🇭🇳 +504</option>
-          <option value="+505">🇳🇮 +505</option>
-          <option value="+53">🇨🇺 +53</option>
-          <option value="+1-809">🇩🇴 +1-809</option>
-          <option value="+44">🇬🇧 +44</option>
-          <option value="+33">🇫🇷 +33</option>
-          <option value="+49">🇩🇪 +49</option>
-          <option value="+39">🇮🇹 +39</option>
-          <option value="+351">🇵🇹 +351</option>
-          <option value="+31">🇳🇱 +31</option>
-          <option value="+32">🇧🇪 +32</option>
-          <option value="+41">🇨🇭 +41</option>
-          <option value="+43">🇦🇹 +43</option>
-          <option value="+48">🇵🇱 +48</option>
-          <option value="+46">🇸🇪 +46</option>
-          <option value="+47">🇳🇴 +47</option>
-          <option value="+45">🇩🇰 +45</option>
-          <option value="+358">🇫🇮 +358</option>
-          <option value="+7">🇷🇺 +7</option>
-          <option value="+86">🇨🇳 +86</option>
-          <option value="+81">🇯🇵 +81</option>
-          <option value="+82">🇰🇷 +82</option>
-          <option value="+91">🇮🇳 +91</option>
-          <option value="+61">🇦🇺 +61</option>
-          <option value="+27">🇿🇦 +27</option>
-        </select>
+        <select class="lada-sel" id="ladaf2t" name="ladaf2t"><option value="+52" selected>🇲🇽 +52</option><option value="+1">🇺🇸 +1</option><option value="+34">🇪🇸 +34</option></select>
         <input class="tel-num" id="f2t" name="f2t" type="tel" placeholder="2221234567" maxlength="15" inputmode="numeric">
       </div>
       <input type="hidden" id="f2tFull" name="f2tFull">
@@ -801,58 +1006,17 @@ textarea{resize:vertical;min-height:76px}
     <div class="fg"><label class="lbl req" for="f2e">Correo</label><input id="f2e" name="f2e" type="email" placeholder="nombre@correo.com"><span class="em" id="ef2e"></span></div>
     <div class="fg full"><label class="lbl req" for="f2d">Dirección</label><textarea id="f2d" name="f2d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ef2d"></span></div>
   </div></div>
+
   <div class="sub-t" style="margin-top:.6rem">REFERENCIAS DE AMISTAD</div>
   <div class="sub-n">&nbsp;</div>
+
+  <!-- Amistad 1 -->
   <div class="ref"><div class="ref-t">Amistad 1</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="a1n">Nombre Completo</label><input id="a1n" name="a1n" type="text" placeholder="Nombre completo"><span class="em" id="ea1n"></span></div>
     <div class="fg">
       <label class="lbl req" for="a1t">Teléfono</label>
       <div class="tel-wr" id="a1tWr">
-        <select class="lada-sel" id="ladaa1t" name="ladaa1t" aria-label="Código de país">
-          <option value="+52" selected>🇲🇽 +52</option>
-          <option value="+1">🇺🇸 +1</option>
-          <option value="+1">🇨🇦 +1</option>
-          <option value="+34">🇪🇸 +34</option>
-          <option value="+54">🇦🇷 +54</option>
-          <option value="+55">🇧🇷 +55</option>
-          <option value="+56">🇨🇱 +56</option>
-          <option value="+57">🇨🇴 +57</option>
-          <option value="+58">🇻🇪 +58</option>
-          <option value="+51">🇵🇪 +51</option>
-          <option value="+593">🇪🇨 +593</option>
-          <option value="+591">🇧🇴 +591</option>
-          <option value="+595">🇵🇾 +595</option>
-          <option value="+598">🇺🇾 +598</option>
-          <option value="+507">🇵🇦 +507</option>
-          <option value="+506">🇨🇷 +506</option>
-          <option value="+502">🇬🇹 +502</option>
-          <option value="+503">🇸🇻 +503</option>
-          <option value="+504">🇭🇳 +504</option>
-          <option value="+505">🇳🇮 +505</option>
-          <option value="+53">🇨🇺 +53</option>
-          <option value="+1-809">🇩🇴 +1-809</option>
-          <option value="+44">🇬🇧 +44</option>
-          <option value="+33">🇫🇷 +33</option>
-          <option value="+49">🇩🇪 +49</option>
-          <option value="+39">🇮🇹 +39</option>
-          <option value="+351">🇵🇹 +351</option>
-          <option value="+31">🇳🇱 +31</option>
-          <option value="+32">🇧🇪 +32</option>
-          <option value="+41">🇨🇭 +41</option>
-          <option value="+43">🇦🇹 +43</option>
-          <option value="+48">🇵🇱 +48</option>
-          <option value="+46">🇸🇪 +46</option>
-          <option value="+47">🇳🇴 +47</option>
-          <option value="+45">🇩🇰 +45</option>
-          <option value="+358">🇫🇮 +358</option>
-          <option value="+7">🇷🇺 +7</option>
-          <option value="+86">🇨🇳 +86</option>
-          <option value="+81">🇯🇵 +81</option>
-          <option value="+82">🇰🇷 +82</option>
-          <option value="+91">🇮🇳 +91</option>
-          <option value="+61">🇦🇺 +61</option>
-          <option value="+27">🇿🇦 +27</option>
-        </select>
+        <select class="lada-sel" id="ladaa1t" name="ladaa1t"><option value="+52" selected>🇲🇽 +52</option><option value="+1">🇺🇸 +1</option><option value="+34">🇪🇸 +34</option></select>
         <input class="tel-num" id="a1t" name="a1t" type="tel" placeholder="2221234567" maxlength="15" inputmode="numeric">
       </div>
       <input type="hidden" id="a1tFull" name="a1tFull">
@@ -861,56 +1025,14 @@ textarea{resize:vertical;min-height:76px}
     <div class="fg"><label class="lbl req" for="a1e">Correo</label><input id="a1e" name="a1e" type="email" placeholder="nombre@correo.com"><span class="em" id="ea1e"></span></div>
     <div class="fg full"><label class="lbl req" for="a1d">Dirección</label><textarea id="a1d" name="a1d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ea1d"></span></div>
   </div></div>
+
+  <!-- Amistad 2 -->
   <div class="ref"><div class="ref-t">Amistad 2</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="a2n">Nombre Completo</label><input id="a2n" name="a2n" type="text" placeholder="Nombre completo"><span class="em" id="ea2n"></span></div>
     <div class="fg">
       <label class="lbl req" for="a2t">Teléfono</label>
       <div class="tel-wr" id="a2tWr">
-        <select class="lada-sel" id="ladaa2t" name="ladaa2t" aria-label="Código de país">
-          <option value="+52" selected>🇲🇽 +52</option>
-          <option value="+1">🇺🇸 +1</option>
-          <option value="+1">🇨🇦 +1</option>
-          <option value="+34">🇪🇸 +34</option>
-          <option value="+54">🇦🇷 +54</option>
-          <option value="+55">🇧🇷 +55</option>
-          <option value="+56">🇨🇱 +56</option>
-          <option value="+57">🇨🇴 +57</option>
-          <option value="+58">🇻🇪 +58</option>
-          <option value="+51">🇵🇪 +51</option>
-          <option value="+593">🇪🇨 +593</option>
-          <option value="+591">🇧🇴 +591</option>
-          <option value="+595">🇵🇾 +595</option>
-          <option value="+598">🇺🇾 +598</option>
-          <option value="+507">🇵🇦 +507</option>
-          <option value="+506">🇨🇷 +506</option>
-          <option value="+502">🇬🇹 +502</option>
-          <option value="+503">🇸🇻 +503</option>
-          <option value="+504">🇭🇳 +504</option>
-          <option value="+505">🇳🇮 +505</option>
-          <option value="+53">🇨🇺 +53</option>
-          <option value="+1-809">🇩🇴 +1-809</option>
-          <option value="+44">🇬🇧 +44</option>
-          <option value="+33">🇫🇷 +33</option>
-          <option value="+49">🇩🇪 +49</option>
-          <option value="+39">🇮🇹 +39</option>
-          <option value="+351">🇵🇹 +351</option>
-          <option value="+31">🇳🇱 +31</option>
-          <option value="+32">🇧🇪 +32</option>
-          <option value="+41">🇨🇭 +41</option>
-          <option value="+43">🇦🇹 +43</option>
-          <option value="+48">🇵🇱 +48</option>
-          <option value="+46">🇸🇪 +46</option>
-          <option value="+47">🇳🇴 +47</option>
-          <option value="+45">🇩🇰 +45</option>
-          <option value="+358">🇫🇮 +358</option>
-          <option value="+7">🇷🇺 +7</option>
-          <option value="+86">🇨🇳 +86</option>
-          <option value="+81">🇯🇵 +81</option>
-          <option value="+82">🇰🇷 +82</option>
-          <option value="+91">🇮🇳 +91</option>
-          <option value="+61">🇦🇺 +61</option>
-          <option value="+27">🇿🇦 +27</option>
-        </select>
+        <select class="lada-sel" id="ladaa2t" name="ladaa2t"><option value="+52" selected>🇲🇽 +52</option><option value="+1">🇺🇸 +1</option><option value="+34">🇪🇸 +34</option></select>
         <input class="tel-num" id="a2t" name="a2t" type="tel" placeholder="2221234567" maxlength="15" inputmode="numeric">
       </div>
       <input type="hidden" id="a2tFull" name="a2tFull">
@@ -923,7 +1045,6 @@ textarea{resize:vertical;min-height:76px}
 
 <!-- ═══════════════════════════════════════════════════════
      S4 — VEHÍCULO Y FINANCIAMIENTO
-     Marcas completas MX 2026, campo Otra, Enganche sin duplicado
      ═══════════════════════════════════════════════════════ -->
 <div class="sec" id="s4">
   <div class="sec-hdr">
@@ -931,32 +1052,25 @@ textarea{resize:vertical;min-height:76px}
     <h2 class="sec-title">VEHÍCULO Y FINANCIAMIENTO</h2>
   </div>
   <div class="grid">
-    <!-- Marca -->
     <div class="fg">
       <label class="lbl req" for="marca">Marca</label>
       <select id="marca" name="marca">
         <option value="" disabled selected>Selecciona marca</option>
         <optgroup label="── Chinas ──">
-          <option>BAIC</option><option>Bestune</option><option>BYD</option><option>Changan</option>
-          <option>Chirey / Omoda / Exeed</option><option>Denza</option><option>DF SK</option>
-          <option>Dongfeng</option><option>Foton</option><option>GAC Motor</option><option>Geely</option>
-          <option>GWM / Wey</option><option>Hongqi</option><option>JAC</option><option>JAE Coo</option>
-          <option>Jetour</option><option>JMC</option><option>Jim</option><option>King Long</option>
-          <option>Leapmotor</option><option>MG / IM</option><option>Neta</option><option>Nevo / Avart</option>
-          <option>Seres</option><option>SEV</option><option>Skywell</option><option>Soueast</option>
-          <option>Zeekr</option>
+          <option>BAIC</option><option>BYD</option><option>Changan</option><option>Chirey / Omoda / Exeed</option>
+          <option>GAC Motor</option><option>Geely</option><option>GWM / Wey</option><option>JAC</option>
+          <option>Jetour</option><option>MG / IM</option><option>Neta</option><option>Zeekr</option>
         </optgroup>
         <optgroup label="── Europeas ──">
           <option>Alfa Romeo</option><option>Audi</option><option>BMW</option><option>Cupra</option>
-          <option>Fiat</option><option>Ineos Grenadier</option><option>Land Rover</option>
-          <option>Mercedes-Benz</option><option>Mini Cooper</option><option>Peugeot</option>
-          <option>Porsche</option><option>Renault</option><option>Seat</option>
+          <option>Fiat</option><option>Land Rover</option><option>Mercedes-Benz</option><option>Mini Cooper</option>
+          <option>Peugeot</option><option>Porsche</option><option>Renault</option><option>Seat</option>
           <option>Volkswagen</option><option>Volvo</option>
         </optgroup>
         <optgroup label="── Estadounidenses ──">
-          <option>Buick</option><option>Cadillac</option><option>Chevrolet</option><option>Chrysler</option>
-          <option>Dodge</option><option>Ford</option><option>GMC</option><option>Jeep</option>
-          <option>Lincoln</option><option>Ram</option><option>Tesla</option>
+          <option>Buick</option><option>Cadillac</option><option>Chevrolet</option><option>Dodge</option>
+          <option>Ford</option><option>GMC</option><option>Jeep</option><option>Lincoln</option>
+          <option>Ram</option><option>Tesla</option>
         </optgroup>
         <optgroup label="── Japonesas / Coreanas ──">
           <option>Honda</option><option>Hyundai</option><option>Infiniti</option><option>Kia</option>
@@ -964,35 +1078,27 @@ textarea{resize:vertical;min-height:76px}
           <option>Subaru</option><option>Suzuki</option><option>Toyota</option>
         </optgroup>
         <optgroup label="── Mexicanas ──">
-          <option>Dina</option><option>Inferno</option><option>Zacua</option>
+          <option>Zacua</option>
         </optgroup>
         <option value="Otra">Otra marca…</option>
       </select>
       <span class="em" id="emarca"></span>
     </div>
-
-    <!-- Otra marca (condicional) -->
     <div class="fg" id="otraMarcaBlk" style="display:none">
       <label class="lbl req" for="otraMarca">Especifica la Marca</label>
       <input id="otraMarca" name="otraMarca" type="text" placeholder="Escribe la marca del vehículo" disabled>
       <span class="em" id="eotraMarca"></span>
     </div>
-
-    <!-- Versión -->
     <div class="fg">
       <label class="lbl req" for="version">Versión / Trim</label>
       <input id="version" name="version" type="text" placeholder="Ej: Jetta Highline 1.4T AT">
       <span class="em" id="eversion"></span>
     </div>
-
-    <!-- Año -->
     <div class="fg">
       <label class="lbl req" for="anio">Año</label>
       <select id="anio" name="anio"><option value="" disabled selected>Selecciona año</option></select>
       <span class="em" id="eanio"></span>
     </div>
-
-    <!-- Costo -->
     <div class="fg">
       <label class="lbl req" for="costo">Costo Total del Vehículo</label>
       <div class="cur-wr"><span class="cur-pre">MX$</span>
@@ -1000,8 +1106,6 @@ textarea{resize:vertical;min-height:76px}
       </div>
       <span class="em" id="ecosto"></span>
     </div>
-
-    <!-- Pago inicial — SIN campo "monto adicional" duplicado -->
     <div class="fg full">
       <label class="lbl req">Pago Inicial</label>
       <div class="pay-box">
@@ -1013,33 +1117,27 @@ textarea{resize:vertical;min-height:76px}
           </div>
           <div class="pay-in">
             <div id="payH" style="color:var(--lt);font-size:.82rem;padding:.55rem 0">← Selecciona tipo de pago</div>
-
-            <!-- ENGANCHE: elige % o monto fijo — único campo, sin duplicado -->
             <div id="engF" class="fg" style="display:none">
               <label class="lbl req" for="valEng">Enganche</label>
               <div style="display:flex;gap:.55rem;margin-bottom:.5rem">
                 <label class="rlbl" style="font-size:.79rem;padding:.32rem .65rem">
-                  <input type="radio" name="engTipo" value="porcentaje" id="engPct" checked>
-                  <span class="rc"></span>Porcentaje %
+                  <input type="radio" name="engTipo" value="porcentaje" id="engPct" checked><span class="rc"></span>Porcentaje %
                 </label>
                 <label class="rlbl" style="font-size:.79rem;padding:.32rem .65rem">
-                  <input type="radio" name="engTipo" value="monto_eng" id="engMon">
-                  <span class="rc"></span>Monto fijo $
+                  <input type="radio" name="engTipo" value="monto_eng" id="engMon"><span class="rc"></span>Monto fijo $
                 </label>
               </div>
-              <!-- Control % con flechas +5/-5 -->
               <div id="engPctCtrl">
                 <div style="display:flex;align-items:center;gap:.5rem">
-                  <button type="button" id="engMinus" style="width:34px;height:34px;border-radius:6px;background:var(--bg);border:1.5px solid var(--bd);font-size:1.1rem;font-weight:700;cursor:pointer;color:var(--p);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s" title="Reducir 5%">−</button>
+                  <button type="button" id="engMinus" style="width:34px;height:34px;border-radius:6px;background:var(--bg);border:1.5px solid var(--bd);font-size:1.1rem;font-weight:700;cursor:pointer;color:var(--p);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s">−</button>
                   <div style="position:relative;flex:1">
                     <input id="valEng" name="valEng" type="text" placeholder="10%" style="padding-right:2rem;text-align:center;font-weight:600">
                     <span style="position:absolute;right:.75rem;top:50%;transform:translateY(-50%);font-size:.88rem;font-weight:700;color:var(--a);pointer-events:none" id="engPctSym">%</span>
                   </div>
-                  <button type="button" id="engPlus" style="width:34px;height:34px;border-radius:6px;background:var(--bg);border:1.5px solid var(--bd);font-size:1.1rem;font-weight:700;cursor:pointer;color:var(--p);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s" title="Aumentar 5%">+</button>
+                  <button type="button" id="engPlus" style="width:34px;height:34px;border-radius:6px;background:var(--bg);border:1.5px solid var(--bd);font-size:1.1rem;font-weight:700;cursor:pointer;color:var(--p);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s">+</button>
                 </div>
-                <small style="color:var(--mid);font-size:.67rem;margin-top:.22rem;display:block">Botones de 5 en 5 (mínimo 10%) o escribe libremente. El % se agrega solo.</small>
+                <small style="color:var(--mid);font-size:.67rem;margin-top:.22rem;display:block">Botones de 5 en 5 (mínimo 10%) o escribe libremente.</small>
               </div>
-              <!-- Control monto fijo de enganche -->
               <div id="engMonCtrl" style="display:none">
                 <div class="cur-wr"><span class="cur-pre">MX$</span>
                   <input id="valEngMonto" name="valEngMonto" type="text" placeholder="0.00" inputmode="decimal">
@@ -1047,8 +1145,6 @@ textarea{resize:vertical;min-height:76px}
               </div>
               <span class="em" id="evalEng"></span>
             </div>
-
-            <!-- MONTO INICIAL (tipoPago=monto) -->
             <div id="monF" class="fg" style="display:none">
               <label class="lbl req" for="valMon">Monto Inicial</label>
               <div class="cur-wr"><span class="cur-pre">MX$</span>
@@ -1066,15 +1162,12 @@ textarea{resize:vertical;min-height:76px}
 
 <!-- ═══════════════════════════════════════════════════════
      S5 — DOCUMENTOS Y ENVÍO
-     Upload obligatorio + leyenda INE, Resumen, Declaración
      ═══════════════════════════════════════════════════════ -->
 <div class="sec" id="s5">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg></div>
     <h2 class="sec-title">DOCUMENTOS Y ENVÍO</h2>
   </div>
-
-  <!-- ADJUNTAR DOCUMENTOS — OBLIGATORIO -->
   <div class="fg" style="margin-bottom:1.5rem">
     <label class="lbl req" for="upI">Adjuntar Documentos</label>
     <div class="up-area" id="upA">
@@ -1086,19 +1179,12 @@ textarea{resize:vertical;min-height:76px}
     <div class="f-list" id="fList"></div>
     <span class="em" id="eupErr"></span>
   </div>
-
-  <!-- RESUMEN DE SOLICITUD -->
   <div class="sumbox" id="sumBox" style="display:none">
     <div class="sum-ttl">RESUMEN DE SOLICITUD</div>
     <div id="sumCont"></div>
   </div>
-
-  <!-- DECLARACIÓN JURADA — OBLIGATORIA -->
   <div class="decl-box" id="declBox">
-    <div class="decl-head">
-      Declaración y Aceptación
-      <span class="decl-req">Obligatorio</span>
-    </div>
+    <div class="decl-head">Declaración y Aceptación<span class="decl-req">Obligatorio</span></div>
     <div class="decl-row" id="declRow" role="checkbox" aria-checked="false" tabindex="0">
       <div class="chk-vis" id="chkVis">
         <svg viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1"/></svg>
@@ -1133,6 +1219,21 @@ textarea{resize:vertical;min-height:76px}
 </form>
 </div><!-- /wrap -->
 
+<!-- BARRA DE PROGRESO FLOTANTE -->
+<div class="form-progress-wrap" id="formProgressWrap">
+  <div class="form-progress-pill">
+    <div class="form-progress-bar-track">
+      <div class="form-progress-bar-fill" id="formProgressFill"></div>
+    </div>
+    <span class="form-progress-text">
+      <strong id="formProgressDone">0</strong>
+      de
+      <span id="formProgressTotal">0</span>
+      campos completados
+    </span>
+  </div>
+</div>
+
 <!-- MODAL ÉXITO -->
 <div class="modal" id="modal">
   <div class="mbox">
@@ -1149,23 +1250,24 @@ textarea{resize:vertical;min-height:76px}
   <div class="s-msg">Enviando solicitud…</div>
 </div>
 
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/525525374608?text=Hola%20AVA%2C%20tengo%20una%20consulta%20sobre%20el%20cr%C3%A9dito%20vehicular"
+   class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Chatear con AVA por WhatsApp">
+  <span class="wa-tip">💬 ¿Dudas? Chatea con nosotros</span>
+  <svg class="wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.67-1.612-.92-2.207-.24-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.76.982.998-3.675-.236-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.9 6.994c-.004 5.45-4.436 9.88-9.885 9.88m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.333.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.333 11.893-11.893 0-3.18-1.24-6.162-3.495-8.411"/>
+  </svg>
+</a>
+
 <script>
 (function(){
 'use strict';
 
-// ═══════════════════════════════════════════════════
-//  CONFIGURACIÓN
-// ═══════════════════════════════════════════════════
-// reCAPTCHA v3 — Site Key (pública)
 var RECAPTCHA_SITE_KEY = '6Lc9zGUsAAAAAG2K5TAav3VrS9obGfFqXO5cnOkV';
-// Secret Key (backend, NO exponer): 6Lc9zGUsAAAAAHifaydBuJYHlSEX77P_6zCtACum
-
-// COPOMEX — Código Postal
 var CP_TOKEN = '36da398a-1848-44f3-a952-06c9bfb02cc8';
+var THEME_STORAGE_KEY = 'ava-credito-theme';
 
-// ═══════════════════════════════════════════════════
-//  HELPERS
-// ═══════════════════════════════════════════════════
+// ═══ HELPERS ═══
 function Q(id){ return document.getElementById(id); }
 function V(id){ var e=Q(id); return e?e.value:''; }
 function SHOW(id){ var e=Q(id); if(e) e.style.display=''; }
@@ -1181,9 +1283,92 @@ function clrErr(id){
   var i=Q(id); if(i){ i.classList.remove('bad'); if(i.value&&i.value.trim()) i.classList.add('ok'); }
 }
 
-// ═══════════════════════════════════════════════════
-//  NAVEGACIÓN — 5 secciones
-// ═══════════════════════════════════════════════════
+// ═══ THEME TOGGLE — COMPONENTE 1 ═══
+(function(){
+  try {
+    if(localStorage.getItem(THEME_STORAGE_KEY)==='dark'){
+      document.body.classList.add('dark-mode');
+    }
+  } catch(e){}
+
+  var btn = Q('themeToggleBtn');
+  if(btn){
+    btn.addEventListener('click', function(){
+      var isDark = document.body.classList.toggle('dark-mode');
+      try { localStorage.setItem(THEME_STORAGE_KEY, isDark?'dark':'light'); } catch(e){}
+      btn.style.boxShadow = isDark
+        ? '0 0 24px rgba(65,105,225,0.75)'
+        : '0 0 24px rgba(255,215,0,0.75)';
+      setTimeout(function(){ btn.style.boxShadow=''; }, 400);
+    });
+  }
+})();
+
+// ═══ BARRA DE PROGRESO — COMPONENTE 2 ═══
+var progressState = { currentForm: null, total: 0, done: 0 };
+
+function getRequiredFieldsForForm(formId){
+  var form = document.getElementById(formId);
+  if(!form) return [];
+  var fields=[], radioGroups={}, seen={};
+  form.querySelectorAll('[required]').forEach(function(el){
+    if(el.type==='hidden') return;
+    if(el.classList.contains('lada-sel')) return;
+    if(el.classList.contains('tel-num')) return;
+    if(el.id && el.id.indexOf('colonias-')===0) return;
+    // Excluir campos readonly autorrellenos (municipio, estado) — ya dependen del CP
+    if(el.readOnly && (el.id==='municipio'||el.id==='estado')) return;
+    var key = el.name||el.id||('anon_'+Math.random());
+    if(el.type==='radio'){
+      if(!radioGroups[el.name]){ radioGroups[el.name]=true; fields.push({type:'radio',name:el.name}); }
+    } else {
+      if(!seen[key]){ seen[key]=true; fields.push({type:'standard',el:el}); }
+    }
+  });
+  return fields;
+}
+
+function isFieldFilled(fieldDef){
+  if(fieldDef.type==='radio'){
+    return document.querySelector('input[name="'+fieldDef.name+'"]:checked')!==null;
+  }
+  if(fieldDef.type==='standard'){
+    return fieldDef.el && fieldDef.el.value.trim().length>0;
+  }
+  return false;
+}
+
+function updateProgressBar(){
+  if(!progressState.currentForm) return;
+  var fields = getRequiredFieldsForForm(progressState.currentForm);
+  var total=fields.length, done=0;
+  fields.forEach(function(f){ if(isFieldFilled(f)) done++; });
+  progressState.total=total; progressState.done=done;
+  var pct = total>0?(done/total)*100:0;
+  var fill=Q('formProgressFill');
+  if(fill) fill.style.width=pct+'%';
+  var doneEl=Q('formProgressDone'); if(doneEl) doneEl.textContent=done;
+  var totEl=Q('formProgressTotal'); if(totEl) totEl.textContent=total;
+}
+
+function attachProgressListeners(formId){
+  var form=document.getElementById(formId);
+  if(!form) return;
+  form.querySelectorAll('input, select, textarea').forEach(function(el){
+    el.addEventListener('input', updateProgressBar);
+    el.addEventListener('change', updateProgressBar);
+  });
+}
+
+function showProgressBar(formId){
+  progressState.currentForm=formId;
+  var wrap=Q('formProgressWrap');
+  if(wrap) wrap.classList.add('visible');
+  attachProgressListeners(formId);
+  updateProgressBar();
+}
+
+// ═══ NAVEGACIÓN — 5 secciones ═══
 var cur=1, TOTAL=5;
 
 function slideTo(n){
@@ -1201,13 +1386,16 @@ function slideTo(n){
   Q('btnSub').style.display=last?'inline-flex':'none';
   if(last) buildSummary();
   cur=n;
+  // Re-attach listeners al cambiar de paso (por campos dinámicos)
+  attachProgressListeners('frm');
+  updateProgressBar();
   window.scrollTo({top:Q('prog').offsetTop-20,behavior:'smooth'});
 }
 
 Q('btnNext').addEventListener('click',function(){
   if(validateSection(cur)){ if(cur<TOTAL) slideTo(cur+1); }
   else{
-    var f=Q('s'+cur).querySelector('.bad,input.bad,select.bad,textarea.bad,.decl-box.bad');
+    var f=Q('s'+cur).querySelector('.bad,.tel-wr.bad,.decl-box.bad');
     if(f) f.scrollIntoView({behavior:'smooth',block:'center'});
   }
 });
@@ -1216,9 +1404,7 @@ document.querySelectorAll('.step').forEach(function(s){
   s.addEventListener('click',function(){ var t=parseInt(s.dataset.s); if(t<=cur) slideTo(t); });
 });
 
-// ═══════════════════════════════════════════════════
-//  AÑO SELECTOR
-// ═══════════════════════════════════════════════════
+// ═══ AÑO SELECTOR ═══
 (function(){
   var s=Q('anio'), y=new Date().getFullYear();
   for(var i=y+1;i>=2000;i--){
@@ -1226,35 +1412,22 @@ document.querySelectorAll('.step').forEach(function(s){
   }
 })();
 
-// ═══════════════════════════════════════════════════
-//  RFC / CURP — uppercase
-// ═══════════════════════════════════════════════════
+// ═══ RFC / CURP uppercase ═══
 ['rfc','curp'].forEach(function(id){
   Q(id).addEventListener('input',function(){ this.value=this.value.toUpperCase(); });
 });
-
-// RFC — validación inline al salir del campo
-Q('rfc').addEventListener('blur', function(){
-  var v=this.value.toUpperCase().trim();
-  if(!v) return;
+Q('rfc').addEventListener('blur',function(){
+  var v=this.value.toUpperCase().trim(); if(!v) return;
   var ok=/^[A-ZÑ&]{3,4}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z\d]{3}$/.test(v);
-  if(!ok){ setErr('rfc','RFC inválido. Verifica: letras + fecha (AAMMDD) + homoclave (3 caracteres).'); }
-  else clrErr('rfc');
+  if(!ok) setErr('rfc','RFC inválido. Verifica: letras + fecha (AAMMDD) + homoclave.'); else clrErr('rfc');
 });
-
-// CURP — validación inline al salir del campo
-Q('curp').addEventListener('blur', function(){
-  var v=this.value.toUpperCase().trim();
-  if(!v) return;
-  // Estructura RENAPO: 4 letras + 6 dígitos + H/M + 2 letras estado + 3 letras consonantes + 1 alfanumérico + 1 dígito verificador
+Q('curp').addEventListener('blur',function(){
+  var v=this.value.toUpperCase().trim(); if(!v) return;
   var ok=/^[A-Z]{4}\d{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9]\d$/.test(v);
-  if(!ok){ setErr('curp','Formato inválido. Debe tener 18 caracteres con la estructura de la RENAPO.'); }
-  else clrErr('curp');
+  if(!ok) setErr('curp','Formato inválido según RENAPO (18 caracteres).'); else clrErr('curp');
 });
 
-// ═══════════════════════════════════════════════════
-//  EDAD AUTOMÁTICA
-// ═══════════════════════════════════════════════════
+// ═══ EDAD AUTOMÁTICA ═══
 Q('fNac').addEventListener('change',function(){
   if(!this.value){ Q('edad').value=''; return; }
   var b=new Date(this.value),t=new Date(),a=t.getFullYear()-b.getFullYear();
@@ -1262,19 +1435,16 @@ Q('fNac').addEventListener('change',function(){
   Q('edad').value=a>=0?a+' años':'';
 });
 
-// ═══════════════════════════════════════════════════
-//  ESTADO CIVIL / RÉGIMEN
-// ═══════════════════════════════════════════════════
+// ═══ ESTADO CIVIL / RÉGIMEN ═══
 Q('estCivil').addEventListener('change',function(){
   var blk=Q('regimenBlk'),sel=Q('regimen');
   if(this.value==='Casado(a)'){ blk.classList.add('open'); sel.disabled=false; }
   else{ blk.classList.remove('open'); sel.disabled=true; sel.value=''; sel.classList.remove('ok','bad'); var e=Q('eregimen'); if(e) e.textContent=''; }
   clrErr('estCivil');
+  updateProgressBar();
 });
 
-// ═══════════════════════════════════════════════════
-//  DEPENDIENTES
-// ═══════════════════════════════════════════════════
+// ═══ DEPENDIENTES ═══
 var RANGOS=['0–5 años','6–12 años','13–18 años','19+ años'];
 function buildDepFields(n){
   var c=Q('depAges'); c.innerHTML=''; Q('edepAges').textContent='';
@@ -1291,86 +1461,70 @@ function buildDepFields(n){
     (function(sId,mId){
       Q(sId).addEventListener('change',function(){
         if(this.value==='manual'){ SHOW(mId); Q(mId).focus(); } else{ HIDE(mId); Q(mId).value=''; }
+        updateProgressBar();
       });
     })(id,id+'M');
   }
+  updateProgressBar();
 }
 Q('tieneDep').addEventListener('change',function(){
   var blk=Q('depBlk'),num=Q('numDep'); clrErr('tieneDep');
   if(this.value==='Si'){ blk.classList.add('open'); num.disabled=false; }
   else{ blk.classList.remove('open'); num.disabled=true; num.value=''; Q('depAges').innerHTML=''; num.classList.remove('ok','bad'); Q('edepAges').textContent=''; var e=Q('enumDep'); if(e) e.textContent=''; }
+  updateProgressBar();
 });
 Q('numDep').addEventListener('change',function(){
   var n=parseInt(this.value); if(n>0) buildDepFields(n); clrErr('numDep');
 });
 
-// ═══════════════════════════════════════════════════
-//  LADA — Selector de código de país para todos los teléfonos
-//  Concatena lada + número en el campo hidden al cambiar cualquiera
-// ═══════════════════════════════════════════════════
-function initTelField(numId, ladaId, hiddenId, wrId){
+// ═══ LADA / TELÉFONO ═══
+function initTelField(numId,ladaId,hiddenId,wrId){
   function update(){
-    var lada = Q(ladaId) ? Q(ladaId).value : '+52';
-    var num  = (Q(numId)  ? Q(numId).value  : '').replace(/\D/g,'');
-    if(Q(hiddenId)) Q(hiddenId).value = num ? lada+' '+num : '';
+    var lada=Q(ladaId)?Q(ladaId).value:'+52';
+    var num=(Q(numId)?Q(numId).value:'').replace(/\D/g,'');
+    if(Q(hiddenId)) Q(hiddenId).value=num?lada+' '+num:'';
   }
   function setWrapState(state){
     if(!Q(wrId)) return;
     Q(wrId).classList.remove('ok','bad');
     if(state) Q(wrId).classList.add(state);
-    // quitar estado del input interno para evitar doble estilo
-    if(Q(numId)){ Q(numId).classList.remove('ok','bad'); }
+    if(Q(numId)) Q(numId).classList.remove('ok','bad');
   }
-  if(Q(ladaId)) Q(ladaId).addEventListener('change', update);
+  if(Q(ladaId)) Q(ladaId).addEventListener('change',update);
   if(Q(numId)){
     Q(numId).addEventListener('input',function(){
-      // Solo dígitos
       var raw=this.value.replace(/\D/g,'');
       if(this.value!==raw) this.value=raw;
-      update();
-      // Limpiar estado de error mientras escribe
-      setWrapState(null);
+      update(); setWrapState(null);
       var e=Q('e'+numId); if(e) e.textContent='';
+      updateProgressBar();
     });
     Q(numId).addEventListener('blur',function(){
       update();
       var num=this.value.replace(/\D/g,'');
-      if(num.length>0 && num.length<7){
-        setWrapState('bad');
-        var e=Q('e'+numId); if(e) e.textContent='Mín. 7 dígitos.';
-      } else if(num.length>=7){
-        setWrapState('ok');
-        var e=Q('e'+numId); if(e) e.textContent='';
-      }
+      if(num.length>0&&num.length<7){ setWrapState('bad'); var e=Q('e'+numId); if(e) e.textContent='Mín. 7 dígitos.'; }
+      else if(num.length>=7){ setWrapState('ok'); var e=Q('e'+numId); if(e) e.textContent=''; }
     });
   }
-  update(); // estado inicial
+  update();
 }
-
-// Inicializar todos los campos de teléfono
 initTelField('telP','ladaP','telPFull','telPWr');
 initTelField('f1t','ladaf1t','f1tFull','f1tWr');
 initTelField('f2t','ladaf2t','f2tFull','f2tWr');
 initTelField('a1t','ladaa1t','a1tFull','a1tWr');
 initTelField('a2t','ladaa2t','a2tFull','a2tWr');
 
-// ═══════════════════════════════════════════════════
-//  COPOMEX — Código Postal
-//  Autorellena: colonia (dropdown), municipio, estado
-// ═══════════════════════════════════════════════════
+// ═══ COPOMEX ═══
 function cpClear(){
   HIDE('cpSpin'); Q('cp').disabled=false;
   HIDE('cpErrBox'); Q('cpErrBox').textContent=''; HIDE('cpRetry');
-  // Limpiar colonia
   HIDE('colBlk');
   Q('colonia').innerHTML='<option value="" disabled selected>Selecciona tu colonia</option>';
   Q('colonia').classList.remove('ok','bad'); Q('colCnt').textContent='';
   HIDE('colRegLbl'); HIDE('colSel'); Q('colSel').value='';
-  // Limpiar municipio/estado (campos de texto autorrelleno)
   Q('municipio').value=''; Q('municipio').classList.remove('ok','bad','autofill');
   Q('estado').value=''; Q('estado').classList.remove('ok','bad','autofill');
-  Q('hCiu').value='';
-  clrErr('cp');
+  Q('hCiu').value=''; clrErr('cp');
 }
 function cpFail(msg){
   HIDE('cpSpin'); Q('cp').disabled=false;
@@ -1386,14 +1540,10 @@ function cpFetch(cp){
       var first=data[0];
       if(first.error===true||first.error==='true'){ cpFail(first.error_message||'C.P. no encontrado.'); return; }
       var resp=first.response||{};
-      var mun=resp.municipio||'', est=resp.estado||'', ciu=resp.ciudad||'';
-
-      // AUTORELLENO — Municipio y Estado
+      var mun=resp.municipio||'',est=resp.estado||'',ciu=resp.ciudad||'';
       if(mun){ Q('municipio').value=mun; Q('municipio').classList.add('ok','autofill'); }
-      if(est){ Q('estado').value=est;    Q('estado').classList.add('ok','autofill'); }
+      if(est){ Q('estado').value=est; Q('estado').classList.add('ok','autofill'); }
       if(ciu) Q('hCiu').value=ciu;
-
-      // Colonias
       var seen={},cols=[];
       data.forEach(function(item){
         if(!item.error&&item.response&&item.response.asentamiento){
@@ -1421,119 +1571,68 @@ function cpTrigger(){
 }
 Q('cp').addEventListener('blur',cpTrigger);
 Q('cp').addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); cpTrigger(); } });
-Q('cp').addEventListener('input',function(){
-  var raw=this.value.replace(/\D/g,'').slice(0,5);
-  if(this.value!==raw) this.value=raw;
-  cpClear(); this.classList.remove('ok','bad');
-});
+Q('cp').addEventListener('input',function(){ var raw=this.value.replace(/\D/g,'').slice(0,5); if(this.value!==raw) this.value=raw; cpClear(); this.classList.remove('ok','bad'); });
 Q('cpRetry').addEventListener('click',function(){ var v=Q('cp').value.replace(/\D/g,''); if(v.length===5) cpFetch(v); });
 Q('colonia').addEventListener('change',function(){
-  if(this.value){
-    this.classList.add('ok'); this.classList.remove('bad');
-    Q('colSel').value=this.value; SHOW('colRegLbl'); SHOW('colSel'); clrErr('colonia');
-  } else{ Q('colSel').value=''; HIDE('colRegLbl'); HIDE('colSel'); }
+  if(this.value){ this.classList.add('ok'); this.classList.remove('bad'); Q('colSel').value=this.value; SHOW('colRegLbl'); SHOW('colSel'); clrErr('colonia'); }
+  else{ Q('colSel').value=''; HIDE('colRegLbl'); HIDE('colSel'); }
+  updateProgressBar();
 });
 
-// ═══════════════════════════════════════════════════
-//  MARCA — campo "Otra"
-// ═══════════════════════════════════════════════════
+// ═══ MARCA — campo "Otra" ═══
 Q('marca').addEventListener('change',function(){
-  var blk=Q('otraMarcaBlk'), inp=Q('otraMarca');
-  if(this.value==='Otra'){
-    blk.style.display=''; inp.disabled=false; inp.focus();
-  } else {
-    blk.style.display='none'; inp.disabled=true; inp.value='';
-    inp.classList.remove('ok','bad'); var e=Q('eotraMarca'); if(e) e.textContent='';
-  }
-  clrErr('marca');
+  var blk=Q('otraMarcaBlk'),inp=Q('otraMarca');
+  if(this.value==='Otra'){ blk.style.display=''; inp.disabled=false; inp.focus(); }
+  else{ blk.style.display='none'; inp.disabled=true; inp.value=''; inp.classList.remove('ok','bad'); var e=Q('eotraMarca'); if(e) e.textContent=''; }
+  clrErr('marca'); updateProgressBar();
 });
 
-// ═══════════════════════════════════════════════════
-//  ENGANCHE — +5/-5, símbolo % automático
-// ═══════════════════════════════════════════════════
+// ═══ ENGANCHE ═══
 var ENG_MIN=0, ENG_MAX=100, ENG_STEP=5, ENG_DEFAULT=10;
 var engEsPct=true;
-
-function engGetPct(){
-  var raw=V('valEng').replace(/[^0-9.]/g,'');
-  var n=parseFloat(raw);
-  return isNaN(n)?ENG_DEFAULT:Math.min(ENG_MAX,Math.max(ENG_MIN,n));
-}
-function engSetPct(n){
-  n=Math.min(ENG_MAX,Math.max(ENG_MIN,Math.round(n)));
-  Q('valEng').value=n+'%';
-  Q('valEng').classList.remove('bad');
-  clrErr('valEng');
-}
+function engGetPct(){ var raw=V('valEng').replace(/[^0-9.]/g,''); var n=parseFloat(raw); return isNaN(n)?ENG_DEFAULT:Math.min(ENG_MAX,Math.max(ENG_MIN,n)); }
+function engSetPct(n){ n=Math.min(ENG_MAX,Math.max(ENG_MIN,Math.round(n))); Q('valEng').value=n+'%'; Q('valEng').classList.remove('bad'); clrErr('valEng'); }
 Q('engPlus').addEventListener('click',function(){ engSetPct(engGetPct()+ENG_STEP); });
 Q('engMinus').addEventListener('click',function(){ engSetPct(engGetPct()-ENG_STEP); });
 Q('valEng').addEventListener('input',function(){
-  var raw=this.value.replace(/[^0-9.]/g,'');
-  var pos=this.selectionStart;
+  var raw=this.value.replace(/[^0-9.]/g,''),pos=this.selectionStart;
   if(raw!==''){ this.value=raw+'%'; var np=Math.min(pos,raw.length); this.setSelectionRange(np,np); }
 });
-Q('valEng').addEventListener('blur',function(){
-  var raw=this.value.replace(/[^0-9.]/g,'');
-  if(raw!=='') this.value=Math.min(ENG_MAX,Math.max(ENG_MIN,parseFloat(raw)||0))+'%';
-});
-Q('valEng').addEventListener('focus',function(){
-  var len=this.value.replace('%','').length;
-  setTimeout(function(){ Q('valEng').setSelectionRange(len,len); },0);
-});
-Q('valEng').addEventListener('keydown',function(e){
-  if(e.key==='ArrowUp'){ e.preventDefault(); engSetPct(engGetPct()+ENG_STEP); }
-  if(e.key==='ArrowDown'){ e.preventDefault(); engSetPct(engGetPct()-ENG_STEP); }
-});
+Q('valEng').addEventListener('blur',function(){ var raw=this.value.replace(/[^0-9.]/g,''); if(raw!=='') this.value=Math.min(ENG_MAX,Math.max(ENG_MIN,parseFloat(raw)||0))+'%'; });
+Q('valEng').addEventListener('focus',function(){ var len=this.value.replace('%','').length; setTimeout(function(){ Q('valEng').setSelectionRange(len,len); },0); });
+Q('valEng').addEventListener('keydown',function(e){ if(e.key==='ArrowUp'){ e.preventDefault(); engSetPct(engGetPct()+ENG_STEP); } if(e.key==='ArrowDown'){ e.preventDefault(); engSetPct(engGetPct()-ENG_STEP); } });
 document.querySelectorAll('input[name=engTipo]').forEach(function(r){
   r.addEventListener('change',function(){
     engEsPct=(this.value==='porcentaje');
     if(engEsPct){ Q('engPctCtrl').style.display=''; Q('engMonCtrl').style.display='none'; if(!V('valEng')) engSetPct(ENG_DEFAULT); }
     else{ Q('engPctCtrl').style.display='none'; Q('engMonCtrl').style.display=''; Q('valEngMonto').focus(); }
-    clrErr('valEng');
+    clrErr('valEng'); updateProgressBar();
   });
 });
-
-// PAYMENT RADIO
 document.querySelectorAll('input[name=tipoPago]').forEach(function(r){
   r.addEventListener('change',function(){
     HIDE('payH');
-    if(this.value==='enganche'){
-      SHOWF('engF'); HIDE('monF'); Q('valMon').value='';
-      if(!V('valEng')) engSetPct(ENG_DEFAULT);
-    } else {
-      SHOWF('monF'); HIDE('engF'); Q('valEng').value='';
-    }
+    if(this.value==='enganche'){ SHOWF('engF'); HIDE('monF'); Q('valMon').value=''; if(!V('valEng')) engSetPct(ENG_DEFAULT); }
+    else{ SHOWF('monF'); HIDE('engF'); Q('valEng').value=''; }
+    updateProgressBar();
   });
 });
 
-// ═══════════════════════════════════════════════════
-//  DECLARACIÓN JURADA
-// ═══════════════════════════════════════════════════
+// ═══ DECLARACIÓN ═══
 var declChecked=false;
 function toggleDecl(){
   declChecked=!declChecked;
   var vis=Q('chkVis'),box=Q('declBox'),row=Q('declRow');
-  if(declChecked){
-    vis.classList.add('on'); box.classList.add('ok'); box.classList.remove('bad');
-    Q('declVal').value='Acepto'; row.setAttribute('aria-checked','true');
-    var e=Q('edecl'); if(e) e.textContent='';
-  } else {
-    vis.classList.remove('on'); box.classList.remove('ok');
-    Q('declVal').value=''; row.setAttribute('aria-checked','false');
-  }
+  if(declChecked){ vis.classList.add('on'); box.classList.add('ok'); box.classList.remove('bad'); Q('declVal').value='Acepto'; row.setAttribute('aria-checked','true'); var e=Q('edecl'); if(e) e.textContent=''; }
+  else{ vis.classList.remove('on'); box.classList.remove('ok'); Q('declVal').value=''; row.setAttribute('aria-checked','false'); }
 }
 Q('declRow').addEventListener('click',toggleDecl);
-Q('declRow').addEventListener('keydown',function(e){
-  if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggleDecl(); }
-});
+Q('declRow').addEventListener('keydown',function(e){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggleDecl(); } });
 
-// ═══════════════════════════════════════════════════
-//  VALIDACIONES POR SECCIÓN
-// ═══════════════════════════════════════════════════
+// ═══ VALIDACIONES ═══
 function isEmpty(v){ return !v||!String(v).trim(); }
 function isName(v){ return /^[a-záéíóúüñA-ZÁÉÍÓÚÜÑ\s]{2,}$/.test((v||'').trim()); }
 function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v||'').trim()); }
-function isTel(v){ return /^\d{7,15}$/.test((v||'').replace(/\D/g,'')); }
 
 function validateSection(n){
   if(n===1) return vSec1();
@@ -1544,52 +1643,30 @@ function validateSection(n){
   return true;
 }
 
-// S1 — Datos Personales
 function vSec1(){
   var ok=true;
   function req(id,msg){ if(isEmpty(V(id))){ setErr(id,msg||'Campo requerido.'); ok=false; } else clrErr(id); }
   function chk(id,fn,msg){ if(!fn(V(id))){ setErr(id,msg); ok=false; } else clrErr(id); }
-
   chk('pNombre',isName,'Solo letras y espacios, mín. 2 caracteres.');
   chk('pApellido',isName,'Solo letras y espacios, mín. 2 caracteres.');
   chk('sApellido',isName,'Solo letras y espacios, mín. 2 caracteres.');
   req('genero','Selecciona una opción.');
-
   if(isEmpty(V('fNac'))){ setErr('fNac','Selecciona tu fecha de nacimiento.'); ok=false; }
   else{
     var b=new Date(V('fNac')),t=new Date(),a=t.getFullYear()-b.getFullYear();
     if(t.getMonth()<b.getMonth()||(t.getMonth()===b.getMonth()&&t.getDate()<b.getDate())) a--;
     if(a<18){ setErr('fNac','Debes ser mayor de 18 años.'); ok=false; } else clrErr('fNac');
   }
-
   req('estCivil','Selecciona tu estado civil.');
   if(V('estCivil')==='Casado(a)') req('regimen','Selecciona el régimen matrimonial.');
-
-  // RFC — estructura SAT oficial:
-  //   Personas físicas:  4 letras (nombre+apellidos) + AAMMDD + 3 alfanum (homoclave) = 13 chars
-  //   Personas morales:  3 letras (razón social)     + AAMMDD + 3 alfanum (homoclave) = 12 chars
-  //   Fecha válida:      mes 01-12, día 01-31
-  //   Homoclave:         3 posiciones A-Z y 0-9 (cualquier combinación)
-  var rfcVal = V('rfc').toUpperCase();
-  var rfcOk = /^[A-ZÑ&]{3,4}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z\d]{3}$/.test(rfcVal);
-  if(!rfcOk){
-    setErr('rfc','RFC inválido. Verifica: letras iniciales + fecha (AAMMDD) + homoclave (3 caracteres).'); ok=false;
-  } else clrErr('rfc');
-
-  // CURP — estructura RENAPO 18 chars
+  var rfcVal=V('rfc').toUpperCase();
+  if(!/^[A-ZÑ&]{3,4}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z\d]{3}$/.test(rfcVal)){ setErr('rfc','RFC inválido.'); ok=false; } else clrErr('rfc');
   var cv=V('curp').toUpperCase();
-  if(!/^[A-Z]{4}\d{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9]\d$/.test(cv)){
-    setErr('curp','Formato inválido según la RENAPO. Verifica los 18 caracteres.'); ok=false;
-  } else clrErr('curp');
-
-  // Teléfono personal — valida número, el hidden guarda lada+número
+  if(!/^[A-Z]{4}\d{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9]\d$/.test(cv)){ setErr('curp','Formato inválido (18 caracteres RENAPO).'); ok=false; } else clrErr('curp');
   var telPNum=(V('telP')||'').replace(/\D/g,'');
   if(telPNum.length<7){ setErr('telP','Ingresa un número de al menos 7 dígitos.'); if(Q('telPWr')){Q('telPWr').classList.add('bad');Q('telPWr').classList.remove('ok');} ok=false; }
   else{ var e=Q('etelP'); if(e)e.textContent=''; if(Q('telPWr')){Q('telPWr').classList.add('ok');Q('telPWr').classList.remove('bad');} }
-
-  // Correo personal
-  if(!isEmail(V('emailP'))){ setErr('emailP','Correo inválido.'); ok=false; } else clrErr('emailP');
-
+  if(isEmpty(V('emailP'))||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(V('emailP').trim())){ setErr('emailP','Correo inválido.'); ok=false; } else clrErr('emailP');
   req('tieneDep','Indica si tienes dependientes económicos.');
   if(V('tieneDep')==='Si'){
     req('numDep','Indica el número de dependientes.');
@@ -1597,14 +1674,14 @@ function vSec1(){
     if(n>0){
       var allOk=true;
       for(var i=1;i<=n;i++){
-        var sId='depAge'+i,mId='depAge'+i+'M',sEl=Q(sId),mEl=Q(mId);
+        var sEl=Q('depAge'+i),mEl=Q('depAge'+i+'M');
         if(!sEl) continue;
         if(sEl.value==='manual'){
-          if(isEmpty(mEl?mEl.value:'')){ var e1=Q('e'+sId); if(e1) e1.textContent='Ingresa la edad.'; sEl.classList.add('bad'); allOk=false; }
-          else{ var e2=Q('e'+sId); if(e2) e2.textContent=''; sEl.classList.remove('bad'); }
+          if(isEmpty(mEl?mEl.value:'')){ var e1=Q('edepAge'+i); if(e1) e1.textContent='Ingresa la edad.'; sEl.classList.add('bad'); allOk=false; }
+          else{ var e2=Q('edepAge'+i); if(e2) e2.textContent=''; sEl.classList.remove('bad'); }
         } else if(isEmpty(sEl.value)){
-          var e3=Q('e'+sId); if(e3) e3.textContent='Selecciona un rango.'; sEl.classList.add('bad'); allOk=false;
-        } else{ var e4=Q('e'+sId); if(e4) e4.textContent=''; sEl.classList.remove('bad'); sEl.classList.add('ok'); }
+          var e3=Q('edepAge'+i); if(e3) e3.textContent='Selecciona un rango.'; sEl.classList.add('bad'); allOk=false;
+        } else{ var e4=Q('edepAge'+i); if(e4) e4.textContent=''; sEl.classList.remove('bad'); sEl.classList.add('ok'); }
       }
       if(!allOk){ Q('edepAges').textContent='Completa la edad de todos los dependientes.'; ok=false; }
       else Q('edepAges').textContent='';
@@ -1613,55 +1690,39 @@ function vSec1(){
   return ok;
 }
 
-// S2 — Datos de Domicilio
 function vSec2(){
   var ok=true;
   function req(id,msg){ if(isEmpty(V(id))){ setErr(id,msg||'Campo requerido.'); ok=false; } else clrErr(id); }
-
   req('calle','Ingresa la calle o avenida.');
   req('numExt','Ingresa el número exterior.');
   if(!/^\d{5}$/.test(V('cp').trim())){ setErr('cp','Ingresa un C.P. de 5 dígitos.'); ok=false; } else clrErr('cp');
-  // Colonia — solo valida si el bloque es visible
-  if(Q('colBlk').style.display!=='none'){
-    if(isEmpty(V('colonia'))){ setErr('colonia','Selecciona una colonia.'); ok=false; } else clrErr('colonia');
-  }
-  // Municipio y Estado (autorrelleno COPOMEX)
+  if(Q('colBlk').style.display!=='none'){ if(isEmpty(V('colonia'))){ setErr('colonia','Selecciona una colonia.'); ok=false; } else clrErr('colonia'); }
   if(isEmpty(V('municipio'))){ setErr('municipio','Ingresa la delegación o municipio.'); ok=false; } else clrErr('municipio');
   if(isEmpty(V('estado'))){ setErr('estado','Ingresa el estado.'); ok=false; } else clrErr('estado');
   return ok;
 }
 
-// S3 — Referencias
 function vSec3(){
   var ok=true;
   function chk(id,fn,msg){ if(!fn(V(id))){ setErr(id,msg); ok=false; } else clrErr(id); }
   function req(id){ if(isEmpty(V(id))){ setErr(id,'Campo requerido.'); ok=false; } else clrErr(id); }
   [['f1n','f1t','f1e','f1d'],['f2n','f2t','f2e','f2d'],['a1n','a1t','a1e','a1d'],['a2n','a2t','a2e','a2d']].forEach(function(g){
     chk(g[0],isName,'Nombre inválido.');
-    // Validar número del campo .tel-num (no el hidden)
     var tNum=(V(g[1])||'').replace(/\D/g,'');
     var tWr=Q(g[1]+'Wr');
-    if(tNum.length<7){
-      var te=Q('e'+g[1]); if(te) te.textContent='Teléfono inválido (mín. 7 dígitos).';
-      if(tWr){ tWr.classList.add('bad'); tWr.classList.remove('ok'); } ok=false;
-    } else {
-      var te2=Q('e'+g[1]); if(te2) te2.textContent='';
-      if(tWr){ tWr.classList.add('ok'); tWr.classList.remove('bad'); }
-    }
+    if(tNum.length<7){ var te=Q('e'+g[1]); if(te) te.textContent='Teléfono inválido (mín. 7 dígitos).'; if(tWr){tWr.classList.add('bad');tWr.classList.remove('ok');} ok=false; }
+    else{ var te2=Q('e'+g[1]); if(te2) te2.textContent=''; if(tWr){tWr.classList.add('ok');tWr.classList.remove('bad');} }
     chk(g[2],isEmail,'Correo inválido.');
     req(g[3]);
   });
   return ok;
 }
 
-// S4 — Vehículo
 function vSec4(){
   var ok=true;
   function req(id,msg){ if(isEmpty(V(id))){ setErr(id,msg||'Campo requerido.'); ok=false; } else clrErr(id); }
   req('marca','Selecciona la marca.');
-  if(V('marca')==='Otra'){
-    if(isEmpty(V('otraMarca'))){ setErr('otraMarca','Escribe la marca del vehículo.'); ok=false; } else clrErr('otraMarca');
-  }
+  if(V('marca')==='Otra'){ if(isEmpty(V('otraMarca'))){ setErr('otraMarca','Escribe la marca del vehículo.'); ok=false; } else clrErr('otraMarca'); }
   req('version','Ingresa la versión.'); req('anio','Selecciona el año.');
   var c=parseFloat(V('costo').replace(/[^0-9.]/g,''));
   if(!c||c<=0){ setErr('costo','Ingresa el costo del vehículo.'); ok=false; } else clrErr('costo');
@@ -1671,13 +1732,8 @@ function vSec4(){
     clrErr('tipoPago');
     if(tp.value==='enganche'){
       var ePct=document.querySelector('input[name=engTipo]:checked');
-      if(ePct&&ePct.value==='porcentaje'){
-        var pr=V('valEng').replace(/[^0-9.]/g,'');
-        if(isEmpty(pr)||parseFloat(pr)<=0){ setErr('valEng','Ingresa el porcentaje de enganche.'); ok=false; } else clrErr('valEng');
-      } else {
-        var mE=parseFloat(V('valEngMonto').replace(/[^0-9.]/g,''));
-        if(!mE||mE<=0){ setErr('valEng','Ingresa el monto del enganche.'); ok=false; } else clrErr('valEng');
-      }
+      if(ePct&&ePct.value==='porcentaje'){ var pr=V('valEng').replace(/[^0-9.]/g,''); if(isEmpty(pr)||parseFloat(pr)<=0){ setErr('valEng','Ingresa el porcentaje de enganche.'); ok=false; } else clrErr('valEng'); }
+      else{ var mE=parseFloat(V('valEngMonto').replace(/[^0-9.]/g,'')); if(!mE||mE<=0){ setErr('valEng','Ingresa el monto del enganche.'); ok=false; } else clrErr('valEng'); }
     } else {
       var m=parseFloat(V('valMon').replace(/[^0-9.]/g,''));
       if(!m||m<=0){ setErr('valMon','Ingresa el monto inicial.'); ok=false; } else clrErr('valMon');
@@ -1686,73 +1742,35 @@ function vSec4(){
   return ok;
 }
 
-// S5 — Documentos y Envío
 function vSec5(){
   var ok=true;
-  // Upload obligatorio — debe tener al menos 1 archivo
-  if(upFiles.length===0){
-    var eu=Q('eupErr');
-    eu.textContent='Debes adjuntar al menos un documento (INE requerido).';
-    eu.style.display='block';
-    Q('upA').classList.add('bad-up');
-    ok=false;
-  } else {
-    var eu2=Q('eupErr'); eu2.textContent=''; eu2.style.display='none';
-    Q('upA').classList.remove('bad-up');
-  }
-  // Declaración obligatoria
-  if(!declChecked){
-    var e=Q('edecl'); if(e) e.textContent='Debes aceptar la declaración para poder enviar la solicitud.';
-    Q('declBox').classList.add('bad'); Q('declBox').classList.remove('ok');
-    ok=false;
-  } else {
-    var e2=Q('edecl'); if(e2) e2.textContent='';
-    Q('declBox').classList.remove('bad');
-  }
+  if(upFiles.length===0){ var eu=Q('eupErr'); eu.textContent='Debes adjuntar al menos un documento (INE requerido).'; eu.style.display='block'; Q('upA').classList.add('bad-up'); ok=false; }
+  else{ var eu2=Q('eupErr'); eu2.textContent=''; eu2.style.display='none'; Q('upA').classList.remove('bad-up'); }
+  if(!declChecked){ var e=Q('edecl'); if(e) e.textContent='Debes aceptar la declaración para poder enviar la solicitud.'; Q('declBox').classList.add('bad'); Q('declBox').classList.remove('ok'); ok=false; }
+  else{ var e2=Q('edecl'); if(e2) e2.textContent=''; Q('declBox').classList.remove('bad'); }
   return ok;
 }
 
-// ═══════════════════════════════════════════════════
-//  RESUMEN
-// ═══════════════════════════════════════════════════
+// ═══ RESUMEN ═══
 function buildSummary(){
   var tp=document.querySelector('input[name=tipoPago]:checked');
   var pago='—';
   if(tp){
-    if(tp.value==='enganche'){
-      var ePct=document.querySelector('input[name=engTipo]:checked');
-      pago=(ePct&&ePct.value==='porcentaje')?'Enganche: '+V('valEng'):'Enganche: MX$'+V('valEngMonto');
-    } else pago='Monto Inicial: MX$'+V('valMon');
+    if(tp.value==='enganche'){ var ePct=document.querySelector('input[name=engTipo]:checked'); pago=(ePct&&ePct.value==='porcentaje')?'Enganche: '+V('valEng'):'Enganche: MX$'+V('valEngMonto'); }
+    else pago='Monto Inicial: MX$'+V('valMon');
   }
   var marcaFinal=V('marca')==='Otra'?'Otra ('+V('otraMarca')+')':V('marca');
   var depStr='No';
-  if(V('tieneDep')==='Si'){
-    var nd=parseInt(V('numDep'))||0;
-    if(nd>0){
-      var ages=[];
-      for(var i=1;i<=nd;i++){
-        var sv=V('depAge'+i),mv=V('depAge'+i+'M');
-        ages.push('Dep.'+i+': '+(sv==='manual'?(mv+' años'):sv));
-      }
-      depStr='Sí ('+nd+') — '+ages.join(', ');
-    } else depStr='Sí';
-  }
+  if(V('tieneDep')==='Si'){ var nd=parseInt(V('numDep'))||0; if(nd>0){ var ages=[]; for(var i=1;i<=nd;i++){ var sv=V('depAge'+i),mv=V('depAge'+i+'M'); ages.push('Dep.'+i+': '+(sv==='manual'?(mv+' años'):sv)); } depStr='Sí ('+nd+') — '+ages.join(', '); } else depStr='Sí'; }
   var rows=[
     ['Nombre',[V('pNombre'),V('sNombre'),V('pApellido'),V('sApellido')].filter(Boolean).join(' ')],
     ['Género',V('genero')],['F. Nacimiento',V('fNac')],
-    ['Estado Civil',V('estCivil')],
-    ['Régimen',V('estCivil')==='Casado(a)'?V('regimen'):'N/A'],
-    ['Dependientes',depStr],
-    ['Teléfono',V('telPFull')||V('telP')],['Correo',V('emailP')],
-    ['RFC',V('rfc')],['CURP',V('curp')],
-    null,
-    ['Calle / Av.',V('calle')],
-    ['Número',V('numExt')+(V('numInt')?' — Int. '+V('numInt'):'')],
-    ['C.P.',V('cp')],['Colonia',V('colSel')||V('colonia')],
-    ['Municipio',V('municipio')],['Estado',V('estado')],
-    null,
-    ['Marca',marcaFinal],['Versión',V('version')],['Año',V('anio')],
-    ['Costo','MX$ '+V('costo')],['Pago Inicial',pago]
+    ['Estado Civil',V('estCivil')],['Régimen',V('estCivil')==='Casado(a)'?V('regimen'):'N/A'],
+    ['Dependientes',depStr],['Teléfono',V('telPFull')||V('telP')],['Correo',V('emailP')],
+    ['RFC',V('rfc')],['CURP',V('curp')],null,
+    ['Calle / Av.',V('calle')],['Número',V('numExt')+(V('numInt')?' — Int. '+V('numInt'):'')],
+    ['C.P.',V('cp')],['Colonia',V('colSel')||V('colonia')],['Municipio',V('municipio')],['Estado',V('estado')],null,
+    ['Marca',marcaFinal],['Versión',V('version')],['Año',V('anio')],['Costo','MX$ '+V('costo')],['Pago Inicial',pago]
   ];
   Q('sumCont').innerHTML=rows.map(function(r){
     if(!r) return '<hr class="sum-sep">';
@@ -1761,9 +1779,7 @@ function buildSummary(){
   Q('sumBox').style.display='block';
 }
 
-// ═══════════════════════════════════════════════════
-//  UPLOAD
-// ═══════════════════════════════════════════════════
+// ═══ UPLOAD ═══
 var upFiles=[];
 var upA=Q('upA'),upI=Q('upI'),fL=Q('fList');
 upA.addEventListener('dragover',function(e){ e.preventDefault(); upA.classList.add('drag'); });
@@ -1779,7 +1795,6 @@ function doFiles(fl){
     if(!['.pdf','.jpg','.jpeg','.png','.docx'].includes(ext)){ errs.push('"'+f.name+'" tipo no permitido.'); return; }
     if(f.size>5242880){ errs.push('"'+f.name+'" supera 5 MB.'); return; }
     upFiles.push(f);
-    // Limpiar error de upload si ya hay archivo
     if(upFiles.length>0){ Q('upA').classList.remove('bad-up'); var eu=Q('eupErr'); eu.textContent=''; eu.style.display='none'; }
     var d=document.createElement('div'); d.className='f-item';
     d.innerHTML='<span>📄</span><span class="f-nm">'+f.name+'</span><span class="f-sz">'+fmtSz(f.size)+'</span><span class="f-ok">✓</span><button type="button" class="f-rm" title="Eliminar">✕</button>';
@@ -1791,19 +1806,11 @@ function doFiles(fl){
 }
 function fmtSz(b){ return b<1048576?(b/1024).toFixed(0)+' KB':(b/1048576).toFixed(1)+' MB'; }
 
-// ═══════════════════════════════════════════════════
-//  SUBMIT — reCAPTCHA v3 + FormSubmit.co
-// ═══════════════════════════════════════════════════
+// ═══ SUBMIT ═══
 Q('frm').addEventListener('submit',function(e){
   e.preventDefault();
-  for(var s=1;s<=TOTAL;s++){
-    if(!validateSection(s)){
-      if(s!==cur) slideTo(s);
-      return;
-    }
-  }
-  Q('sOv').classList.add('on');
-  Q('btnSub').disabled=true;
+  for(var s=1;s<=TOTAL;s++){ if(!validateSection(s)){ if(s!==cur) slideTo(s); return; } }
+  Q('sOv').classList.add('on'); Q('btnSub').disabled=true;
   if(typeof grecaptcha!=='undefined'){
     grecaptcha.ready(function(){
       grecaptcha.execute(RECAPTCHA_SITE_KEY,{action:'submit_credito_ava'})
@@ -1818,16 +1825,13 @@ function doSubmit(){
   upFiles.forEach(function(f,i){ fd.append('adjunto_'+(i+1),f,f.name); });
   var nm=[V('pNombre'),V('sNombre'),V('pApellido'),V('sApellido')].filter(Boolean).join(' ').replace(/\s+/,' ').trim();
   fd.set('_subject','Solicitud Crédito Vehicular AVA — '+nm);
-  fetch(Q('frm').action,{ method:'POST', body:fd, redirect:'follow' })
+  fetch(Q('frm').action,{method:'POST',body:fd,redirect:'follow'})
     .then(function(r){
       Q('sOv').classList.remove('on'); Q('btnSub').disabled=false;
       if(r.ok||r.redirected||r.status===200||r.status===302){ Q('modal').classList.add('on'); }
       else{ alert('Error al enviar (código '+r.status+'). Intenta de nuevo.'); }
     })
-    .catch(function(){
-      Q('sOv').classList.remove('on'); Q('btnSub').disabled=false;
-      alert('Sin conexión. Verifica tu internet e intenta de nuevo.');
-    });
+    .catch(function(){ Q('sOv').classList.remove('on'); Q('btnSub').disabled=false; alert('Sin conexión. Verifica tu internet e intenta de nuevo.'); });
 }
 
 // MODAL
@@ -1837,24 +1841,10 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') Q('modal')
 
 // INIT
 slideTo(1);
+showProgressBar('frm');
 
 })();
 </script>
-
-<!-- ═══ WHATSAPP FLOAT ═══
-     Número: 52 55 2537 4608 (código país MX incluido)
-     Cambiar número en href si es necesario
--->
-<a href="https://wa.me/525525374608?text=Hola%20AVA%2C%20tengo%20una%20consulta%20sobre%20el%20cr%C3%A9dito%20vehicular"
-   class="wa-float"
-   target="_blank"
-   rel="noopener noreferrer"
-   aria-label="Chatear con AVA por WhatsApp">
-  <span class="wa-tip">💬 ¿Dudas? Chatea con nosotros</span>
-  <svg class="wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.67-1.612-.92-2.207-.24-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.76.982.998-3.675-.236-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.9 6.994c-.004 5.45-4.436 9.88-9.885 9.88m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.333.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.333 11.893-11.893 0-3.18-1.24-6.162-3.495-8.411"/>
-  </svg>
-</a>
 
 <!-- Elfsight AI Chatbot -->
 <script src="https://elfsightcdn.com/platform.js" async></script>
