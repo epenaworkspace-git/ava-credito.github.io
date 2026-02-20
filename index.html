@@ -1368,19 +1368,15 @@ function isTokenFilled(tok){
       return document.querySelector('input[name="'+tok.name+'"]:checked') !== null;
 
     case 'condField': {
-      var condEl = Q(tok.condId);
-      if(!condEl || condEl.value !== tok.condVal) return true; // condición no activa → no cuenta
-      var target = Q(tok.id);
-      if(!target || target.disabled) return true;
-      return target.value.trim().length > 0;
+      var targetCF = Q(tok.id);
+      if(!targetCF || targetCF.disabled) return false;
+      return targetCF.value.trim().length > 0;
     }
 
     case 'condVisible': {
-      var vis = Q(tok.visId);
-      if(!vis || vis.style.display === 'none') return true; // bloque oculto → no cuenta
-      var fld = Q(tok.id);
-      if(!fld) return true;
-      return fld.value.trim().length > 0;
+      var fldCV = Q(tok.id);
+      if(!fldCV) return false;
+      return fldCV.value.trim().length > 0;
     }
 
     case 'depAge': {
@@ -1422,11 +1418,34 @@ function isTokenFilled(tok){
   }
 }
 
+function isTokenActive(tok){
+  // Determina si el token debe CONTARSE en el total en este momento
+  switch(tok.type){
+    case 'condField': {
+      var condEl = Q(tok.condId);
+      if(!condEl || condEl.value !== tok.condVal) return false; // condición inactiva → no contar
+      var target = Q(tok.id);
+      if(!target || target.disabled) return false;
+      return true;
+    }
+    case 'condVisible': {
+      var vis = Q(tok.visId);
+      if(!vis || vis.style.display === 'none') return false; // bloque oculto → no contar
+      return true;
+    }
+    default:
+      return true; // todos los demás siempre se cuentan
+  }
+}
+
 function updateProgressBar(){
   var tokens = getStepTokens(cur);
-  var total = tokens.length;
-  var done = 0;
-  tokens.forEach(function(tok){ if(isTokenFilled(tok)) done++; });
+  var total = 0, done = 0;
+  tokens.forEach(function(tok){
+    if(!isTokenActive(tok)) return; // excluir del total si no aplica
+    total++;
+    if(isTokenFilled(tok)) done++;
+  });
 
   var pct = total > 0 ? (done / total) * 100 : 0;
   var fill = Q('formProgressFill');
