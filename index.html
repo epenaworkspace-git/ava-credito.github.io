@@ -525,6 +525,98 @@ body.dark-mode .form-progress-text strong {
 }
 
 /* ══════════════════════════════════════════════════════
+   BOTÓN FLOTANTE — INICIAR TRÁMITE
+   ══════════════════════════════════════════════════════ */
+.tramite-float {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  background: linear-gradient(135deg, #0A1F44 0%, #1a3a6e 100%);
+  color: white;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(10,31,68,.4);
+  cursor: pointer;
+  z-index: 1000;
+  transition: all .4s cubic-bezier(.4,0,.2,1);
+  text-decoration: none;
+  animation: floatPremium 3s ease-in-out infinite;
+  border: 4px solid white;
+  overflow: hidden;
+}
+.tramite-float::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,.2) 50%, transparent 70%);
+  animation: tramiteShine 3s infinite;
+}
+.tramite-float:hover {
+  transform: scale(1.2) translateY(-5px);
+  box-shadow: 0 20px 40px rgba(10,31,68,.6);
+  animation: none;
+}
+.tramite-tooltip {
+  position: absolute;
+  left: 95px;
+  background: white;
+  color: #0A1F44;
+  padding: 15px 25px;
+  border-radius: 12px;
+  white-space: nowrap;
+  box-shadow: 0 8px 25px rgba(0,0,0,.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: all .4s cubic-bezier(.4,0,.2,1);
+  font-size: 1rem;
+  font-weight: 600;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(0,0,0,.1);
+  z-index: 1001;
+}
+.tramite-float:hover .tramite-tooltip { opacity: 1; transform: translateX(10px); }
+.tramite-icon { width: 36px; height: 36px; position: relative; z-index: 1; fill: white; }
+
+@keyframes floatPremium {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%       { transform: translateY(-15px) rotate(2deg); }
+  75%       { transform: translateY(-5px) rotate(-2deg); }
+}
+@keyframes tramiteShine {
+  0%   { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+/* DARK MODE — contornos discretos y uniformes (360° parejo, opacidad mínima) */
+body.dark-mode .tramite-float { border: 2px solid rgba(255,255,255,0.09); }
+body.dark-mode .wa-float      { border: 2px solid rgba(255,255,255,0.12); }
+body.dark-mode .tramite-tooltip {
+  background: rgba(26,32,44,.95);
+  color: #e2e8f0;
+  border: 1px solid #2d3748;
+}
+
+/* Responsive — Trámite */
+@media(max-width:768px){
+  .tramite-float { width:65px; height:65px; top:30px; left:30px; }
+  .tramite-icon  { width:32px; height:32px; }
+  .tramite-tooltip { display:none; }
+}
+@media(max-width:600px){
+  .tramite-float { width:54px; height:54px; top:22px; left:14px; }
+  .tramite-icon  { width:27px; height:27px; }
+}
+@media(max-width:380px){
+  .tramite-float { width:48px; height:48px; }
+  .tramite-icon  { width:24px; height:24px; }
+}
+
+/* ══════════════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════════════ */
 @media(max-width:720px){
@@ -687,6 +779,17 @@ body.dark-mode .form-progress-text strong {
 </style>
 </head>
 <body>
+
+<!-- ===== BOTÓN FLOTANTE — INICIAR TRÁMITE ===== -->
+<a href="https://www.anpai.com.mx/iniciar-tramite"
+   class="tramite-float"
+   rel="noopener noreferrer"
+   aria-label="Iniciar trámite en ANPAI">
+  <span class="tramite-tooltip">📝 Iniciar trámite</span>
+  <svg class="tramite-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+  </svg>
+</a>
 
 <!-- ===== BOTÓN MODO CLARO / OSCURO ===== -->
 <button class="theme-toggle-btn" id="themeToggleBtn"
@@ -1258,23 +1361,10 @@ function clrErr(id){
 })();
 
 // ═══════════════════════════════════════════════════════════════════════
-// BARRA DE PROGRESO FLOTANTE — LÓGICA REESCRITA
-//
-// Estrategia: para cada paso definimos explícitamente qué "tokens"
-// deben estar llenos. Un token puede ser:
-//   { type:'field',   id:'...' }           → input/select/textarea con value
-//   { type:'tel',     numId:'...' }         → campo .tel-num (min 7 dígitos)
-//   { type:'radio',   name:'...' }          → algún radio del grupo marcado
-//   { type:'condField', id:'...', condId:'...', condVal:'...' }
-//     → campo obligatorio SOLO si condId.value === condVal
-//   { type:'upload' }                       → al menos 1 archivo subido
-//   { type:'decl' }                         → declaración aceptada
+// BARRA DE PROGRESO FLOTANTE
 // ═══════════════════════════════════════════════════════════════════════
-
-// Referencia al array de archivos (se actualizará desde el closure de upload)
 var upFiles = [];
 
-// Definición de tokens por paso (estáticos + dinámicos para dependientes)
 function getStepTokens(step){
   if(step === 1){
     var tokens = [
@@ -1284,17 +1374,14 @@ function getStepTokens(step){
       {type:'field',  id:'genero'},
       {type:'field',  id:'fNac'},
       {type:'field',  id:'estCivil'},
-      // régimen solo si casado
       {type:'condField', id:'regimen', condId:'estCivil', condVal:'Casado(a)'},
       {type:'field',  id:'rfc'},
       {type:'field',  id:'curp'},
       {type:'tel',    numId:'telP'},
       {type:'field',  id:'emailP'},
       {type:'field',  id:'tieneDep'},
-      // numDep solo si tiene dependientes
       {type:'condField', id:'numDep', condId:'tieneDep', condVal:'Si'}
     ];
-    // Agregar tokens de edades de dependientes si aplica
     if(V('tieneDep')==='Si'){
       var nd = parseInt(V('numDep'))||0;
       for(var i=1;i<=nd;i++){
@@ -1309,7 +1396,6 @@ function getStepTokens(step){
       {type:'field', id:'calle'},
       {type:'field', id:'numExt'},
       {type:'field', id:'cp'},
-      // colonia solo si el bloque está visible
       {type:'condVisible', id:'colonia', visId:'colBlk'},
       {type:'field', id:'municipio'},
       {type:'field', id:'estado'}
@@ -1330,13 +1416,11 @@ function getStepTokens(step){
   if(step === 4){
     return [
       {type:'field',  id:'marca'},
-      // otraMarca solo si marca === 'Otra'
       {type:'condField', id:'otraMarca', condId:'marca', condVal:'Otra'},
       {type:'field',  id:'version'},
       {type:'field',  id:'anio'},
       {type:'field',  id:'costo'},
       {type:'radio',  name:'tipoPago'},
-      // pago: al menos uno de los campos de valor
       {type:'pagoVal'}
     ];
   }
@@ -1353,32 +1437,26 @@ function getStepTokens(step){
 
 function isTokenFilled(tok){
   switch(tok.type){
-
     case 'field':
       var el = Q(tok.id);
-      if(!el) return true; // no existe → no contar
+      if(!el) return true;
       return el.value.trim().length > 0;
-
     case 'tel':
       var tel = Q(tok.numId);
       if(!tel) return true;
       return tel.value.replace(/\D/g,'').length >= 7;
-
     case 'radio':
       return document.querySelector('input[name="'+tok.name+'"]:checked') !== null;
-
     case 'condField': {
       var targetCF = Q(tok.id);
       if(!targetCF || targetCF.disabled) return false;
       return targetCF.value.trim().length > 0;
     }
-
     case 'condVisible': {
       var fldCV = Q(tok.id);
       if(!fldCV) return false;
       return fldCV.value.trim().length > 0;
     }
-
     case 'depAge': {
       var sEl = Q('depAge'+tok.idx);
       if(!sEl) return true;
@@ -1388,7 +1466,6 @@ function isTokenFilled(tok){
       }
       return sEl.value.trim().length > 0;
     }
-
     case 'pagoVal': {
       var tp = document.querySelector('input[name="tipoPago"]:checked');
       if(!tp) return false;
@@ -1406,35 +1483,31 @@ function isTokenFilled(tok){
         return vm.length > 0 && parseFloat(vm) > 0;
       }
     }
-
     case 'upload':
       return upFiles.length > 0;
-
     case 'decl':
       return declChecked;
-
     default:
       return true;
   }
 }
 
 function isTokenActive(tok){
-  // Determina si el token debe CONTARSE en el total en este momento
   switch(tok.type){
     case 'condField': {
       var condEl = Q(tok.condId);
-      if(!condEl || condEl.value !== tok.condVal) return false; // condición inactiva → no contar
+      if(!condEl || condEl.value !== tok.condVal) return false;
       var target = Q(tok.id);
       if(!target || target.disabled) return false;
       return true;
     }
     case 'condVisible': {
       var vis = Q(tok.visId);
-      if(!vis || vis.style.display === 'none') return false; // bloque oculto → no contar
+      if(!vis || vis.style.display === 'none') return false;
       return true;
     }
     default:
-      return true; // todos los demás siempre se cuentan
+      return true;
   }
 }
 
@@ -1442,7 +1515,7 @@ function updateProgressBar(){
   var tokens = getStepTokens(cur);
   var total = 0, done = 0;
   tokens.forEach(function(tok){
-    if(!isTokenActive(tok)) return; // excluir del total si no aplica
+    if(!isTokenActive(tok)) return;
     total++;
     if(isTokenFilled(tok)) done++;
   });
@@ -1455,7 +1528,6 @@ function updateProgressBar(){
 }
 
 function attachProgressListeners(){
-  // Escucha eventos en el formulario completo (burbujeo)
   var frm = Q('frm');
   if(frm._progressListened) return;
   frm._progressListened = true;
