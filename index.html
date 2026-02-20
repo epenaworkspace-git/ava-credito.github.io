@@ -692,49 +692,24 @@ body.dark-mode .form-progress-text strong {
 <button class="theme-toggle-btn" id="themeToggleBtn"
         aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
   <div class="toggle-icon-wrap">
-    <!-- Sol (visible en modo claro) -->
     <svg class="icon-sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="4.5" fill="#FFD700" stroke="#FFA500" stroke-width="1.4"/>
       <g stroke="#FFD700" stroke-width="2" stroke-linecap="round">
-        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(0 12 12)">
-          <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
-        </line>
-        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(45 12 12)">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
-        </line>
-        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(90 12 12)">
-          <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
-        </line>
-        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(135 12 12)">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
-        </line>
-        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(180 12 12)">
-          <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
-        </line>
-        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(225 12 12)">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
-        </line>
-        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(270 12 12)">
-          <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
-        </line>
-        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(315 12 12)">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
-        </line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(0 12 12)"><animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/></line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(45 12 12)"><animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/></line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(90 12 12)"><animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/></line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(135 12 12)"><animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/></line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(180 12 12)"><animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/></line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(225 12 12)"><animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/></line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(270 12 12)"><animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/></line>
+        <line x1="12" y1="2.5" x2="12" y2="4.5" transform="rotate(315 12 12)"><animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/></line>
       </g>
     </svg>
-    <!-- Luna (visible en modo oscuro) -->
     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-            fill="#c8d0ff" stroke="#4169E1" stroke-width="1.5"/>
-      <circle cx="15" cy="9" r="1" fill="#fff8c0" opacity="0.85">
-        <animate attributeName="opacity" values="0.85;0.3;0.85" dur="4s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="17" cy="13" r="0.7" fill="#fff8c0" opacity="0.6">
-        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="13" cy="15" r="0.55" fill="#fff8c0" opacity="0.4">
-        <animate attributeName="opacity" values="0.4;0.1;0.4" dur="5s" repeatCount="indefinite"/>
-      </circle>
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#c8d0ff" stroke="#4169E1" stroke-width="1.5"/>
+      <circle cx="15" cy="9" r="1" fill="#fff8c0" opacity="0.85"><animate attributeName="opacity" values="0.85;0.3;0.85" dur="4s" repeatCount="indefinite"/></circle>
+      <circle cx="17" cy="13" r="0.7" fill="#fff8c0" opacity="0.6"><animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite"/></circle>
+      <circle cx="13" cy="15" r="0.55" fill="#fff8c0" opacity="0.4"><animate attributeName="opacity" values="0.4;0.1;0.4" dur="5s" repeatCount="indefinite"/></circle>
     </svg>
   </div>
 </button>
@@ -768,15 +743,12 @@ body.dark-mode .form-progress-text strong {
 
 <div class="card">
 
-<!-- ═══════════════════════════════════════════════════════
-     S1 — DATOS PERSONALES
-     ═══════════════════════════════════════════════════════ -->
+<!-- ═══ S1 — DATOS PERSONALES ═══ -->
 <div class="sec active" id="s1">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v1h20v-1c0-3.3-6.7-5-10-5z"/></svg></div>
     <h1 class="sec-title">DATOS PERSONALES</h1>
   </div>
-
   <div class="grid">
     <div class="fg">
       <label class="lbl req" for="pNombre">Primer Nombre</label>
@@ -846,23 +818,23 @@ body.dark-mode .form-progress-text strong {
       <label class="lbl req" for="telP">Teléfono</label>
       <div class="tel-wr" id="telPWr">
         <select class="lada-sel" id="ladaP" name="ladaP" aria-label="Código de país">
-          <option value="+52" data-flag="🇲🇽" selected>🇲🇽 +52</option>
-          <option value="+1" data-flag="🇺🇸">🇺🇸 +1</option>
-          <option value="+1" data-flag="🇨🇦">🇨🇦 +1</option>
-          <option value="+34" data-flag="🇪🇸">🇪🇸 +34</option>
-          <option value="+54" data-flag="🇦🇷">🇦🇷 +54</option>
-          <option value="+55" data-flag="🇧🇷">🇧🇷 +55</option>
-          <option value="+56" data-flag="🇨🇱">🇨🇱 +56</option>
-          <option value="+57" data-flag="🇨🇴">🇨🇴 +57</option>
-          <option value="+58" data-flag="🇻🇪">🇻🇪 +58</option>
-          <option value="+51" data-flag="🇵🇪">🇵🇪 +51</option>
-          <option value="+44" data-flag="🇬🇧">🇬🇧 +44</option>
-          <option value="+33" data-flag="🇫🇷">🇫🇷 +33</option>
-          <option value="+49" data-flag="🇩🇪">🇩🇪 +49</option>
-          <option value="+86" data-flag="🇨🇳">🇨🇳 +86</option>
-          <option value="+81" data-flag="🇯🇵">🇯🇵 +81</option>
-          <option value="+91" data-flag="🇮🇳">🇮🇳 +91</option>
-          <option value="+61" data-flag="🇦🇺">🇦🇺 +61</option>
+          <option value="+52" selected>🇲🇽 +52</option>
+          <option value="+1">🇺🇸 +1</option>
+          <option value="+1">🇨🇦 +1</option>
+          <option value="+34">🇪🇸 +34</option>
+          <option value="+54">🇦🇷 +54</option>
+          <option value="+55">🇧🇷 +55</option>
+          <option value="+56">🇨🇱 +56</option>
+          <option value="+57">🇨🇴 +57</option>
+          <option value="+58">🇻🇪 +58</option>
+          <option value="+51">🇵🇪 +51</option>
+          <option value="+44">🇬🇧 +44</option>
+          <option value="+33">🇫🇷 +33</option>
+          <option value="+49">🇩🇪 +49</option>
+          <option value="+86">🇨🇳 +86</option>
+          <option value="+81">🇯🇵 +81</option>
+          <option value="+91">🇮🇳 +91</option>
+          <option value="+61">🇦🇺 +61</option>
         </select>
         <input class="tel-num" id="telP" name="telP" type="tel" placeholder="7771234567" maxlength="15" inputmode="numeric" autocomplete="tel">
       </div>
@@ -904,9 +876,7 @@ body.dark-mode .form-progress-text strong {
   </div>
 </div><!-- /s1 -->
 
-<!-- ═══════════════════════════════════════════════════════
-     S2 — DATOS DE DOMICILIO
-     ═══════════════════════════════════════════════════════ -->
+<!-- ═══ S2 — DATOS DE DOMICILIO ═══ -->
 <div class="sec" id="s2">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
@@ -964,9 +934,7 @@ body.dark-mode .form-progress-text strong {
   </div>
 </div><!-- /s2 -->
 
-<!-- ═══════════════════════════════════════════════════════
-     S3 — REFERENCIAS
-     ═══════════════════════════════════════════════════════ -->
+<!-- ═══ S3 — REFERENCIAS ═══ -->
 <div class="sec" id="s3">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
@@ -975,7 +943,6 @@ body.dark-mode .form-progress-text strong {
   <div class="sub-t">REFERENCIAS FAMILIARES</div>
   <div class="sub-n">No conviven con el solicitante</div>
 
-  <!-- Familiar 1 -->
   <div class="ref"><div class="ref-t">Familiar 1</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="f1n">Nombre Completo</label><input id="f1n" name="f1n" type="text" placeholder="Nombre completo"><span class="em" id="ef1n"></span></div>
     <div class="fg">
@@ -991,7 +958,6 @@ body.dark-mode .form-progress-text strong {
     <div class="fg full"><label class="lbl req" for="f1d">Dirección</label><textarea id="f1d" name="f1d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ef1d"></span></div>
   </div></div>
 
-  <!-- Familiar 2 -->
   <div class="ref"><div class="ref-t">Familiar 2</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="f2n">Nombre Completo</label><input id="f2n" name="f2n" type="text" placeholder="Nombre completo"><span class="em" id="ef2n"></span></div>
     <div class="fg">
@@ -1010,7 +976,6 @@ body.dark-mode .form-progress-text strong {
   <div class="sub-t" style="margin-top:.6rem">REFERENCIAS DE AMISTAD</div>
   <div class="sub-n">&nbsp;</div>
 
-  <!-- Amistad 1 -->
   <div class="ref"><div class="ref-t">Amistad 1</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="a1n">Nombre Completo</label><input id="a1n" name="a1n" type="text" placeholder="Nombre completo"><span class="em" id="ea1n"></span></div>
     <div class="fg">
@@ -1026,7 +991,6 @@ body.dark-mode .form-progress-text strong {
     <div class="fg full"><label class="lbl req" for="a1d">Dirección</label><textarea id="a1d" name="a1d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ea1d"></span></div>
   </div></div>
 
-  <!-- Amistad 2 -->
   <div class="ref"><div class="ref-t">Amistad 2</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="a2n">Nombre Completo</label><input id="a2n" name="a2n" type="text" placeholder="Nombre completo"><span class="em" id="ea2n"></span></div>
     <div class="fg">
@@ -1043,9 +1007,7 @@ body.dark-mode .form-progress-text strong {
   </div></div>
 </div><!-- /s3 -->
 
-<!-- ═══════════════════════════════════════════════════════
-     S4 — VEHÍCULO Y FINANCIAMIENTO
-     ═══════════════════════════════════════════════════════ -->
+<!-- ═══ S4 — VEHÍCULO Y FINANCIAMIENTO ═══ -->
 <div class="sec" id="s4">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg></div>
@@ -1160,9 +1122,7 @@ body.dark-mode .form-progress-text strong {
   </div>
 </div><!-- /s4 -->
 
-<!-- ═══════════════════════════════════════════════════════
-     S5 — DOCUMENTOS Y ENVÍO
-     ═══════════════════════════════════════════════════════ -->
+<!-- ═══ S5 — DOCUMENTOS Y ENVÍO ═══ -->
 <div class="sec" id="s5">
   <div class="sec-hdr">
     <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg></div>
@@ -1283,173 +1243,191 @@ function clrErr(id){
   var i=Q(id); if(i){ i.classList.remove('bad'); if(i.value&&i.value.trim()) i.classList.add('ok'); }
 }
 
-// ═══ THEME TOGGLE — COMPONENTE 1 ═══
+// ═══ THEME TOGGLE ═══
 (function(){
-  try {
-    if(localStorage.getItem(THEME_STORAGE_KEY)==='dark'){
-      document.body.classList.add('dark-mode');
-    }
-  } catch(e){}
-
-  var btn = Q('themeToggleBtn');
+  try { if(localStorage.getItem(THEME_STORAGE_KEY)==='dark') document.body.classList.add('dark-mode'); } catch(e){}
+  var btn=Q('themeToggleBtn');
   if(btn){
-    btn.addEventListener('click', function(){
-      var isDark = document.body.classList.toggle('dark-mode');
-      try { localStorage.setItem(THEME_STORAGE_KEY, isDark?'dark':'light'); } catch(e){}
-      btn.style.boxShadow = isDark
-        ? '0 0 24px rgba(65,105,225,0.75)'
-        : '0 0 24px rgba(255,215,0,0.75)';
-      setTimeout(function(){ btn.style.boxShadow=''; }, 400);
+    btn.addEventListener('click',function(){
+      var isDark=document.body.classList.toggle('dark-mode');
+      try{ localStorage.setItem(THEME_STORAGE_KEY,isDark?'dark':'light'); }catch(e){}
+      btn.style.boxShadow=isDark?'0 0 24px rgba(65,105,225,0.75)':'0 0 24px rgba(255,215,0,0.75)';
+      setTimeout(function(){ btn.style.boxShadow=''; },400);
     });
   }
 })();
 
-// ═══ BARRA DE PROGRESO — COMPONENTE 2 ═══
-// Estrategia: en lugar de buscar [required] (que no existe en este form),
-// definimos explícitamente los campos obligatorios de cada sección,
-// igual que lo hace validateSection(). El total varía según el estado
-// de campos condicionales (régimen, dependientes, tipo de pago, etc.).
+// ═══════════════════════════════════════════════════════════════════════
+// BARRA DE PROGRESO FLOTANTE — LÓGICA REESCRITA
+//
+// Estrategia: para cada paso definimos explícitamente qué "tokens"
+// deben estar llenos. Un token puede ser:
+//   { type:'field',   id:'...' }           → input/select/textarea con value
+//   { type:'tel',     numId:'...' }         → campo .tel-num (min 7 dígitos)
+//   { type:'radio',   name:'...' }          → algún radio del grupo marcado
+//   { type:'condField', id:'...', condId:'...', condVal:'...' }
+//     → campo obligatorio SOLO si condId.value === condVal
+//   { type:'upload' }                       → al menos 1 archivo subido
+//   { type:'decl' }                         → declaración aceptada
+// ═══════════════════════════════════════════════════════════════════════
 
-function getProgressFields(){
-  var fields = [];
+// Referencia al array de archivos (se actualizará desde el closure de upload)
+var upFiles = [];
 
-  // ── Helpers ──
-  function std(id){
-    var el = Q(id);
-    if(!el) return;
-    fields.push({ label: id, check: function(){ return el.value.trim().length > 0; } });
-  }
-  function tel(numId){
-    fields.push({ label: numId, check: function(){
-      var el = Q(numId); return el && el.value.replace(/\D/g,'').length >= 7;
-    }});
-  }
-  function radio(name){
-    fields.push({ label: 'radio_'+name, check: function(){
-      return document.querySelector('input[name="'+name+'"]:checked') !== null;
-    }});
-  }
-  function email(id){
-    fields.push({ label: id, check: function(){
-      var el = Q(id); if(!el) return false;
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
-    }});
-  }
-  function rfc(){
-    fields.push({ label: 'rfc', check: function(){
-      return /^[A-ZÑ&]{3,4}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z\d]{3}$/.test((V('rfc')||'').toUpperCase());
-    }});
-  }
-  function curp(){
-    fields.push({ label: 'curp', check: function(){
-      return /^[A-Z]{4}\d{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9]\d$/.test((V('curp')||'').toUpperCase());
-    }});
-  }
-
-  // ── S1: Datos Personales ──
-  std('pNombre');
-  std('pApellido');
-  std('sApellido');
-  std('genero');
-  std('fNac');
-  std('estCivil');
-  // Régimen: solo si casado
-  if(V('estCivil') === 'Casado(a)') std('regimen');
-  rfc();
-  curp();
-  tel('telP');
-  email('emailP');
-  std('tieneDep');
-  // Dependientes: solo si tiene
-  if(V('tieneDep') === 'Si'){
-    std('numDep');
-    var nd = parseInt(V('numDep')) || 0;
-    for(var i = 1; i <= nd; i++){
-      (function(idx){
-        fields.push({ label: 'depAge'+idx, check: function(){
-          var sel = Q('depAge'+idx);
-          if(!sel || !sel.value) return false;
-          if(sel.value === 'manual'){
-            var m = Q('depAge'+idx+'M');
-            return m && m.value.trim().length > 0;
-          }
-          return true;
-        }});
-      })(i);
-    }
-  }
-
-  // ── S2: Domicilio ──
-  std('calle');
-  std('numExt');
-  // CP: 5 dígitos
-  fields.push({ label: 'cp', check: function(){ return /^\d{5}$/.test((V('cp')||'').trim()); }});
-  // Colonia: solo si el bloque está visible
-  fields.push({ label: 'colonia', check: function(){
-    var blk = Q('colBlk');
-    if(!blk || blk.style.display === 'none') return true; // no aplica aún
-    return V('colonia').trim().length > 0;
-  }});
-  // Municipio y estado se llenan solos con el CP, los contamos cuando tengan valor
-  fields.push({ label: 'municipio', check: function(){ return V('municipio').trim().length > 0; }});
-  fields.push({ label: 'estado',    check: function(){ return V('estado').trim().length > 0; }});
-
-  // ── S3: Referencias (4 × 4 campos) ──
-  ['f1','f2','a1','a2'].forEach(function(p){
-    std(p+'n');
-    tel(p+'t');
-    email(p+'e');
-    fields.push({ label: p+'d', check: function(){ var el=Q(p+'d'); return el && el.value.trim().length>0; }});
-  });
-
-  // ── S4: Vehículo ──
-  std('marca');
-  // Otra marca: solo si seleccionó "Otra"
-  if(V('marca') === 'Otra'){
-    fields.push({ label: 'otraMarca', check: function(){ return V('otraMarca').trim().length > 0; }});
-  }
-  std('version');
-  std('anio');
-  fields.push({ label: 'costo', check: function(){
-    var c = parseFloat((V('costo')||'').replace(/[^0-9.]/g,''));
-    return !isNaN(c) && c > 0;
-  }});
-  // Tipo de pago
-  radio('tipoPago');
-  var tp = document.querySelector('input[name="tipoPago"]:checked');
-  if(tp){
-    if(tp.value === 'enganche'){
-      var ePct = document.querySelector('input[name="engTipo"]:checked');
-      if(!ePct || ePct.value === 'porcentaje'){
-        fields.push({ label: 'valEng', check: function(){
-          var r = (V('valEng')||'').replace(/[^0-9.]/g,'');
-          return r.length > 0 && parseFloat(r) > 0;
-        }});
-      } else {
-        fields.push({ label: 'valEngMonto', check: function(){
-          var m = parseFloat((V('valEngMonto')||'').replace(/[^0-9.]/g,''));
-          return !isNaN(m) && m > 0;
-        }});
+// Definición de tokens por paso (estáticos + dinámicos para dependientes)
+function getStepTokens(step){
+  if(step === 1){
+    var tokens = [
+      {type:'field',  id:'pNombre'},
+      {type:'field',  id:'pApellido'},
+      {type:'field',  id:'sApellido'},
+      {type:'field',  id:'genero'},
+      {type:'field',  id:'fNac'},
+      {type:'field',  id:'estCivil'},
+      // régimen solo si casado
+      {type:'condField', id:'regimen', condId:'estCivil', condVal:'Casado(a)'},
+      {type:'field',  id:'rfc'},
+      {type:'field',  id:'curp'},
+      {type:'tel',    numId:'telP'},
+      {type:'field',  id:'emailP'},
+      {type:'field',  id:'tieneDep'},
+      // numDep solo si tiene dependientes
+      {type:'condField', id:'numDep', condId:'tieneDep', condVal:'Si'}
+    ];
+    // Agregar tokens de edades de dependientes si aplica
+    if(V('tieneDep')==='Si'){
+      var nd = parseInt(V('numDep'))||0;
+      for(var i=1;i<=nd;i++){
+        tokens.push({type:'depAge', idx:i});
       }
-    } else {
-      fields.push({ label: 'valMon', check: function(){
-        var m = parseFloat((V('valMon')||'').replace(/[^0-9.]/g,''));
-        return !isNaN(m) && m > 0;
-      }});
     }
+    return tokens;
   }
 
-  // ── S5: Documentos y declaración ──
-  fields.push({ label: 'documentos', check: function(){ return upFiles.length > 0; }});
-  fields.push({ label: 'declaracion', check: function(){ return declChecked; }});
+  if(step === 2){
+    return [
+      {type:'field', id:'calle'},
+      {type:'field', id:'numExt'},
+      {type:'field', id:'cp'},
+      // colonia solo si el bloque está visible
+      {type:'condVisible', id:'colonia', visId:'colBlk'},
+      {type:'field', id:'municipio'},
+      {type:'field', id:'estado'}
+    ];
+  }
 
-  return fields;
+  if(step === 3){
+    var t = [];
+    ['f1','f2','a1','a2'].forEach(function(p){
+      t.push({type:'field', id:p+'n'});
+      t.push({type:'tel',   numId:p+'t'});
+      t.push({type:'field', id:p+'e'});
+      t.push({type:'field', id:p+'d'});
+    });
+    return t;
+  }
+
+  if(step === 4){
+    return [
+      {type:'field',  id:'marca'},
+      // otraMarca solo si marca === 'Otra'
+      {type:'condField', id:'otraMarca', condId:'marca', condVal:'Otra'},
+      {type:'field',  id:'version'},
+      {type:'field',  id:'anio'},
+      {type:'field',  id:'costo'},
+      {type:'radio',  name:'tipoPago'},
+      // pago: al menos uno de los campos de valor
+      {type:'pagoVal'}
+    ];
+  }
+
+  if(step === 5){
+    return [
+      {type:'upload'},
+      {type:'decl'}
+    ];
+  }
+
+  return [];
+}
+
+function isTokenFilled(tok){
+  switch(tok.type){
+
+    case 'field':
+      var el = Q(tok.id);
+      if(!el) return true; // no existe → no contar
+      return el.value.trim().length > 0;
+
+    case 'tel':
+      var tel = Q(tok.numId);
+      if(!tel) return true;
+      return tel.value.replace(/\D/g,'').length >= 7;
+
+    case 'radio':
+      return document.querySelector('input[name="'+tok.name+'"]:checked') !== null;
+
+    case 'condField': {
+      var condEl = Q(tok.condId);
+      if(!condEl || condEl.value !== tok.condVal) return true; // condición no activa → no cuenta
+      var target = Q(tok.id);
+      if(!target || target.disabled) return true;
+      return target.value.trim().length > 0;
+    }
+
+    case 'condVisible': {
+      var vis = Q(tok.visId);
+      if(!vis || vis.style.display === 'none') return true; // bloque oculto → no cuenta
+      var fld = Q(tok.id);
+      if(!fld) return true;
+      return fld.value.trim().length > 0;
+    }
+
+    case 'depAge': {
+      var sEl = Q('depAge'+tok.idx);
+      if(!sEl) return true;
+      if(sEl.value === 'manual'){
+        var mEl = Q('depAge'+tok.idx+'M');
+        return mEl && mEl.value.trim().length > 0;
+      }
+      return sEl.value.trim().length > 0;
+    }
+
+    case 'pagoVal': {
+      var tp = document.querySelector('input[name="tipoPago"]:checked');
+      if(!tp) return false;
+      if(tp.value === 'enganche'){
+        var et = document.querySelector('input[name="engTipo"]:checked');
+        if(et && et.value === 'porcentaje'){
+          var pr = V('valEng').replace(/[^0-9.]/g,'');
+          return pr.length > 0 && parseFloat(pr) > 0;
+        } else {
+          var mn = V('valEngMonto').replace(/[^0-9.]/g,'');
+          return mn.length > 0 && parseFloat(mn) > 0;
+        }
+      } else {
+        var vm = V('valMon').replace(/[^0-9.]/g,'');
+        return vm.length > 0 && parseFloat(vm) > 0;
+      }
+    }
+
+    case 'upload':
+      return upFiles.length > 0;
+
+    case 'decl':
+      return declChecked;
+
+    default:
+      return true;
+  }
 }
 
 function updateProgressBar(){
-  var fields = getProgressFields();
-  var total = fields.length, done = 0;
-  fields.forEach(function(f){ try{ if(f.check()) done++; } catch(e){} });
+  var tokens = getStepTokens(cur);
+  var total = tokens.length;
+  var done = 0;
+  tokens.forEach(function(tok){ if(isTokenFilled(tok)) done++; });
+
   var pct = total > 0 ? (done / total) * 100 : 0;
   var fill = Q('formProgressFill');
   if(fill) fill.style.width = pct + '%';
@@ -1458,24 +1436,18 @@ function updateProgressBar(){
 }
 
 function attachProgressListeners(){
-  // Escuchar cualquier cambio en todo el form
-  Q('frm').querySelectorAll('input, select, textarea').forEach(function(el){
-    el.removeEventListener('input',  updateProgressBar);
-    el.removeEventListener('change', updateProgressBar);
-    el.addEventListener('input',  updateProgressBar);
-    el.addEventListener('change', updateProgressBar);
+  // Escucha eventos en el formulario completo (burbujeo)
+  var frm = Q('frm');
+  if(frm._progressListened) return;
+  frm._progressListened = true;
+  ['input','change'].forEach(function(ev){
+    frm.addEventListener(ev, function(){ updateProgressBar(); });
   });
-}
-
-function showProgressBar(){
-  var wrap = Q('formProgressWrap');
-  if(wrap) wrap.classList.add('visible');
-  attachProgressListeners();
-  updateProgressBar();
 }
 
 // ═══ NAVEGACIÓN — 5 secciones ═══
 var cur=1, TOTAL=5;
+var declChecked=false;
 
 function slideTo(n){
   document.querySelectorAll('.sec').forEach(function(s){ s.classList.remove('active'); });
@@ -1492,8 +1464,6 @@ function slideTo(n){
   Q('btnSub').style.display=last?'inline-flex':'none';
   if(last) buildSummary();
   cur=n;
-  // Re-attach listeners al cambiar de paso (por campos dinámicos)
-  attachProgressListeners();
   updateProgressBar();
   window.scrollTo({top:Q('prog').offsetTop-20,behavior:'smooth'});
 }
@@ -1518,7 +1488,7 @@ document.querySelectorAll('.step').forEach(function(s){
   }
 })();
 
-// ═══ RFC / CURP uppercase ═══
+// ═══ RFC / CURP ═══
 ['rfc','curp'].forEach(function(id){
   Q(id).addEventListener('input',function(){ this.value=this.value.toUpperCase(); });
 });
@@ -1572,8 +1542,8 @@ function buildDepFields(n){
     })(id,id+'M');
   }
   updateProgressBar();
-  // Re-adjuntar listeners a los nuevos campos generados
-  attachProgressListeners();
+}
+Q('tieneDep').addEventListener('change',function(){
   var blk=Q('depBlk'),num=Q('numDep'); clrErr('tieneDep');
   if(this.value==='Si'){ blk.classList.add('open'); num.disabled=false; }
   else{ blk.classList.remove('open'); num.disabled=true; num.value=''; Q('depAges').innerHTML=''; num.classList.remove('ok','bad'); Q('edepAges').textContent=''; var e=Q('enumDep'); if(e) e.textContent=''; }
@@ -1631,10 +1601,12 @@ function cpClear(){
   Q('municipio').value=''; Q('municipio').classList.remove('ok','bad','autofill');
   Q('estado').value=''; Q('estado').classList.remove('ok','bad','autofill');
   Q('hCiu').value=''; clrErr('cp');
+  updateProgressBar();
 }
 function cpFail(msg){
   HIDE('cpSpin'); Q('cp').disabled=false;
   Q('cpErrBox').textContent=msg; SHOW('cpErrBox'); SHOW('cpRetry'); setErr('cp',msg);
+  updateProgressBar();
 }
 function cpFetch(cp){
   cpClear(); SHOW('cpSpin'); Q('cp').disabled=true; clrErr('cp');
@@ -1664,6 +1636,7 @@ function cpFetch(cp){
       Q('colCnt').textContent=cols.length+' colonia'+(cols.length!==1?'s':'');
       SHOW('colBlk');
       Q('cp').classList.add('ok'); Q('cp').classList.remove('bad');
+      updateProgressBar();
     })
     .catch(function(err){
       HIDE('cpSpin'); Q('cp').disabled=false;
@@ -1697,12 +1670,13 @@ Q('marca').addEventListener('change',function(){
 var ENG_MIN=0, ENG_MAX=100, ENG_STEP=5, ENG_DEFAULT=10;
 var engEsPct=true;
 function engGetPct(){ var raw=V('valEng').replace(/[^0-9.]/g,''); var n=parseFloat(raw); return isNaN(n)?ENG_DEFAULT:Math.min(ENG_MAX,Math.max(ENG_MIN,n)); }
-function engSetPct(n){ n=Math.min(ENG_MAX,Math.max(ENG_MIN,Math.round(n))); Q('valEng').value=n+'%'; Q('valEng').classList.remove('bad'); clrErr('valEng'); }
+function engSetPct(n){ n=Math.min(ENG_MAX,Math.max(ENG_MIN,Math.round(n))); Q('valEng').value=n+'%'; Q('valEng').classList.remove('bad'); clrErr('valEng'); updateProgressBar(); }
 Q('engPlus').addEventListener('click',function(){ engSetPct(engGetPct()+ENG_STEP); });
 Q('engMinus').addEventListener('click',function(){ engSetPct(engGetPct()-ENG_STEP); });
 Q('valEng').addEventListener('input',function(){
   var raw=this.value.replace(/[^0-9.]/g,''),pos=this.selectionStart;
   if(raw!==''){ this.value=raw+'%'; var np=Math.min(pos,raw.length); this.setSelectionRange(np,np); }
+  updateProgressBar();
 });
 Q('valEng').addEventListener('blur',function(){ var raw=this.value.replace(/[^0-9.]/g,''); if(raw!=='') this.value=Math.min(ENG_MAX,Math.max(ENG_MIN,parseFloat(raw)||0))+'%'; });
 Q('valEng').addEventListener('focus',function(){ var len=this.value.replace('%','').length; setTimeout(function(){ Q('valEng').setSelectionRange(len,len); },0); });
@@ -1725,12 +1699,12 @@ document.querySelectorAll('input[name=tipoPago]').forEach(function(r){
 });
 
 // ═══ DECLARACIÓN ═══
-var declChecked=false;
 function toggleDecl(){
   declChecked=!declChecked;
   var vis=Q('chkVis'),box=Q('declBox'),row=Q('declRow');
   if(declChecked){ vis.classList.add('on'); box.classList.add('ok'); box.classList.remove('bad'); Q('declVal').value='Acepto'; row.setAttribute('aria-checked','true'); var e=Q('edecl'); if(e) e.textContent=''; }
   else{ vis.classList.remove('on'); box.classList.remove('ok'); Q('declVal').value=''; row.setAttribute('aria-checked','false'); }
+  updateProgressBar();
 }
 Q('declRow').addEventListener('click',toggleDecl);
 Q('declRow').addEventListener('keydown',function(e){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggleDecl(); } });
@@ -1886,7 +1860,6 @@ function buildSummary(){
 }
 
 // ═══ UPLOAD ═══
-var upFiles=[];
 var upA=Q('upA'),upI=Q('upI'),fL=Q('fList');
 upA.addEventListener('dragover',function(e){ e.preventDefault(); upA.classList.add('drag'); });
 upA.addEventListener('dragleave',function(){ upA.classList.remove('drag'); });
@@ -1904,8 +1877,9 @@ function doFiles(fl){
     if(upFiles.length>0){ Q('upA').classList.remove('bad-up'); var eu=Q('eupErr'); eu.textContent=''; eu.style.display='none'; }
     var d=document.createElement('div'); d.className='f-item';
     d.innerHTML='<span>📄</span><span class="f-nm">'+f.name+'</span><span class="f-sz">'+fmtSz(f.size)+'</span><span class="f-ok">✓</span><button type="button" class="f-rm" title="Eliminar">✕</button>';
-    d.querySelector('.f-rm').addEventListener('click',function(){ upFiles=upFiles.filter(function(x){return x.name!==f.name;}); d.remove(); });
+    d.querySelector('.f-rm').addEventListener('click',function(){ upFiles=upFiles.filter(function(x){return x.name!==f.name;}); d.remove(); updateProgressBar(); });
     fL.appendChild(d);
+    updateProgressBar();
   });
   var eu=Q('eupErr');
   if(errs.length){ eu.textContent=errs.join(' '); eu.style.display='block'; }
@@ -1945,9 +1919,10 @@ Q('mClose').addEventListener('click',function(){ Q('modal').classList.remove('on
 Q('modal').addEventListener('click',function(e){ if(e.target===this) this.classList.remove('on'); });
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') Q('modal').classList.remove('on'); });
 
-// INIT
+// ═══ INIT ═══
+attachProgressListeners();
+Q('formProgressWrap').classList.add('visible');
 slideTo(1);
-showProgressBar();
 
 })();
 </script>
