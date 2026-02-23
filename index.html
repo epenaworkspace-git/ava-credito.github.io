@@ -12,6 +12,13 @@
 :root{--p:#0A1F44;--a:#165DFF;--e:#E53935;--bd:#E0E0E0;--bg:#F8FAFC;--mid:#666;--lt:#999}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+
+/* ── Mayúsculas automáticas en todos los campos de texto ── */
+input[type=text]:not([data-no-upper]),
+input[type=tel]:not([data-no-upper]),
+textarea:not([data-no-upper]) {
+  text-transform: uppercase;
+}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#333;min-height:100vh;transition:background-color 0.3s ease,color 0.3s ease}
 .wrap{max-width:880px;margin:0 auto;padding:2rem 1.25rem 4rem}
 
@@ -734,7 +741,7 @@ body.dark-mode .tramite-tooltip { background:rgba(26,32,44,.95); color:#e2e8f0; 
     <div class="fg"><label class="lbl req" for="rfc">RFC <span class="note">13 caracteres con homoclave</span></label><input id="rfc" name="rfc" type="text" placeholder="ABCD123456AB1" maxlength="13" style="text-transform:uppercase;letter-spacing:.06em" autocomplete="off"><span class="em" id="erfc"></span></div>
     <div class="fg"><label class="lbl req" for="curp">CURP <span class="note">18 caracteres — RENAPO</span></label><input id="curp" name="curp" type="text" placeholder="ABCD123456HDFLRN01" maxlength="18" style="text-transform:uppercase;letter-spacing:.04em" autocomplete="off"><span class="em" id="ecurp"></span></div>
     <div class="fg"><label class="lbl req" for="telP">Teléfono</label><div class="tel-wr" id="telPWr"><select class="lada-sel" id="ladaP" name="ladaP" aria-label="Código de país"><option value="+52" selected>🇲🇽 +52</option><option value="+1">🇺🇸 +1</option><option value="+1">🇨🇦 +1</option><option value="+34">🇪🇸 +34</option><option value="+54">🇦🇷 +54</option><option value="+55">🇧🇷 +55</option><option value="+56">🇨🇱 +56</option><option value="+57">🇨🇴 +57</option><option value="+58">🇻🇪 +58</option><option value="+51">🇵🇪 +51</option><option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option><option value="+49">🇩🇪 +49</option><option value="+86">🇨🇳 +86</option><option value="+81">🇯🇵 +81</option><option value="+91">🇮🇳 +91</option><option value="+61">🇦🇺 +61</option></select><input class="tel-num" id="telP" name="telP" type="tel" placeholder="7771234567" maxlength="15" inputmode="numeric" autocomplete="tel"></div><input type="hidden" id="telPFull" name="telefonoPersonal"><span class="em" id="etelP"></span></div>
-    <div class="fg"><label class="lbl req" for="emailP">Correo Electrónico</label><input id="emailP" name="emailP" type="email" placeholder="nombre@correo.com" autocomplete="email"><span class="em" id="eemailP"></span></div>
+    <div class="fg"><label class="lbl req" for="emailP">Correo Electrónico</label><input id="emailP" data-no-upper="1" name="emailP" type="email" placeholder="nombre@correo.com" autocomplete="email"><span class="em" id="eemailP"></span></div>
     <div class="fg"><label class="lbl req" for="tieneDep">¿Tiene Dependientes Económicos?</label><select id="tieneDep" name="tieneDep"><option value="" disabled selected>Selecciona una opción</option><option value="No">No</option><option value="Si">Sí</option></select><span class="em" id="etieneDep"></span></div>
     <div class="full cond-block" id="depBlk">
       <div class="grid" style="margin-bottom:.85rem">
@@ -790,14 +797,14 @@ body.dark-mode .tramite-tooltip { background:rgba(26,32,44,.95); color:#e2e8f0; 
   <div class="ref"><div class="ref-t">Familiar 1</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="f1n">Nombre Completo</label><input id="f1n" name="f1n" type="text" placeholder="Nombre completo"><span class="em" id="ef1n"></span></div>
     <div class="fg"><label class="lbl req" for="f1t">Teléfono</label><div class="tel-wr" id="f1tWr"><select class="lada-sel" id="ladaf1t" name="ladaf1t"><option value="+52" selected>🇲🇽 +52</option><option value="+1">🇺🇸 +1</option><option value="+34">🇪🇸 +34</option></select><input class="tel-num" id="f1t" name="f1t" type="tel" placeholder="2221234567" maxlength="15" inputmode="numeric"></div><input type="hidden" id="f1tFull" name="f1tFull"><span class="em" id="ef1t"></span></div>
-    <div class="fg"><label class="lbl req" for="f1e">Correo</label><input id="f1e" name="f1e" type="email" placeholder="nombre@correo.com"><span class="em" id="ef1e"></span></div>
+    <div class="fg"><label class="lbl req" for="f1e">Correo</label><input id="f1e" data-no-upper="1" name="f1e" type="email" placeholder="nombre@correo.com"><span class="em" id="ef1e"></span></div>
     <div class="fg full"><label class="lbl req" for="f1d">Dirección</label><textarea id="f1d" name="f1d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ef1d"></span></div>
   </div></div>
 
   <div class="ref"><div class="ref-t">Familiar 2</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="f2n">Nombre Completo</label><input id="f2n" name="f2n" type="text" placeholder="Nombre completo"><span class="em" id="ef2n"></span></div>
     <div class="fg"><label class="lbl req" for="f2t">Teléfono</label><div class="tel-wr" id="f2tWr"><select class="lada-sel" id="ladaf2t" name="ladaf2t"><option value="+52" selected>🇲🇽 +52</option><option value="+1">🇺🇸 +1</option><option value="+34">🇪🇸 +34</option></select><input class="tel-num" id="f2t" name="f2t" type="tel" placeholder="2221234567" maxlength="15" inputmode="numeric"></div><input type="hidden" id="f2tFull" name="f2tFull"><span class="em" id="ef2t"></span></div>
-    <div class="fg"><label class="lbl req" for="f2e">Correo</label><input id="f2e" name="f2e" type="email" placeholder="nombre@correo.com"><span class="em" id="ef2e"></span></div>
+    <div class="fg"><label class="lbl req" for="f2e">Correo</label><input id="f2e" data-no-upper="1" name="f2e" type="email" placeholder="nombre@correo.com"><span class="em" id="ef2e"></span></div>
     <div class="fg full"><label class="lbl req" for="f2d">Dirección</label><textarea id="f2d" name="f2d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ef2d"></span></div>
   </div></div>
 
@@ -807,14 +814,14 @@ body.dark-mode .tramite-tooltip { background:rgba(26,32,44,.95); color:#e2e8f0; 
   <div class="ref"><div class="ref-t">Amistad 1</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="a1n">Nombre Completo</label><input id="a1n" name="a1n" type="text" placeholder="Nombre completo"><span class="em" id="ea1n"></span></div>
     <div class="fg"><label class="lbl req" for="a1t">Teléfono</label><div class="tel-wr" id="a1tWr"><select class="lada-sel" id="ladaa1t" name="ladaa1t"><option value="+52" selected>🇲🇽 +52</option><option value="+1">🇺🇸 +1</option><option value="+34">🇪🇸 +34</option></select><input class="tel-num" id="a1t" name="a1t" type="tel" placeholder="2221234567" maxlength="15" inputmode="numeric"></div><input type="hidden" id="a1tFull" name="a1tFull"><span class="em" id="ea1t"></span></div>
-    <div class="fg"><label class="lbl req" for="a1e">Correo</label><input id="a1e" name="a1e" type="email" placeholder="nombre@correo.com"><span class="em" id="ea1e"></span></div>
+    <div class="fg"><label class="lbl req" for="a1e">Correo</label><input id="a1e" data-no-upper="1" name="a1e" type="email" placeholder="nombre@correo.com"><span class="em" id="ea1e"></span></div>
     <div class="fg full"><label class="lbl req" for="a1d">Dirección</label><textarea id="a1d" name="a1d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ea1d"></span></div>
   </div></div>
 
   <div class="ref"><div class="ref-t">Amistad 2</div><div class="grid">
     <div class="fg full"><label class="lbl req" for="a2n">Nombre Completo</label><input id="a2n" name="a2n" type="text" placeholder="Nombre completo"><span class="em" id="ea2n"></span></div>
     <div class="fg"><label class="lbl req" for="a2t">Teléfono</label><div class="tel-wr" id="a2tWr"><select class="lada-sel" id="ladaa2t" name="ladaa2t"><option value="+52" selected>🇲🇽 +52</option><option value="+1">🇺🇸 +1</option><option value="+34">🇪🇸 +34</option></select><input class="tel-num" id="a2t" name="a2t" type="tel" placeholder="2221234567" maxlength="15" inputmode="numeric"></div><input type="hidden" id="a2tFull" name="a2tFull"><span class="em" id="ea2t"></span></div>
-    <div class="fg"><label class="lbl req" for="a2e">Correo</label><input id="a2e" name="a2e" type="email" placeholder="nombre@correo.com"><span class="em" id="ea2e"></span></div>
+    <div class="fg"><label class="lbl req" for="a2e">Correo</label><input id="a2e" data-no-upper="1" name="a2e" type="email" placeholder="nombre@correo.com"><span class="em" id="ea2e"></span></div>
     <div class="fg full"><label class="lbl req" for="a2d">Dirección</label><textarea id="a2d" name="a2d" rows="2" placeholder="Calle, número, colonia, ciudad, estado, C.P."></textarea><span class="em" id="ea2d"></span></div>
   </div></div>
 </div><!-- /s3 -->
@@ -1215,6 +1222,8 @@ function handleFiles(fileList, type){
   // Limpiar error de adjunto si hay archivos
   if(state.files.length>0){ var eu=Q('eupErr'); if(eu){eu.textContent='';eu.style.display='none';} Q('attachDropzone'+type).classList.remove('attach-error'); }
   updateProgressBar();
+  // Actualizar resumen si ya está visible (paso 5)
+  if(Q('sumBox') && Q('sumBox').style.display!=='none') buildSummary();
 }
 
 function removeFile(type,idx){
@@ -1226,6 +1235,8 @@ function removeFile(type,idx){
   updateCapacityBar(type);
   if(state.files.length>=1 && typeof JSZip!=='undefined') scheduleCompression(type);
   updateProgressBar();
+  // Actualizar resumen si ya está visible (paso 5)
+  if(Q('sumBox') && Q('sumBox').style.display!=='none') buildSummary();
 }
 
 function renderFileList(type){
@@ -2083,6 +2094,21 @@ window._avaDragLeave    = onDragLeave;
 window._avaDrop         = onDrop;
 window._avaHandleFiles  = handleFiles;
 window._avaRemoveFile   = removeFile;
+
+// ── Mayúsculas automáticas en el VALOR de todos los campos de texto ──
+// El CSS ya los muestra en mayús; este listener convierte el value real
+// para que la validación, el resumen y formData reciban el texto en mayús.
+document.querySelectorAll('#frm input[type=text], #frm input[type=tel], #frm textarea').forEach(function(el){
+  if(el.hasAttribute('data-no-upper') || el.readOnly || el.disabled) return;
+  el.addEventListener('input', function(){
+    var pos = this.selectionStart;
+    var upper = this.value.toUpperCase();
+    if(this.value !== upper){
+      this.value = upper;
+      try{ this.setSelectionRange(pos, pos); } catch(e){}
+    }
+  });
+});
 
 attachProgressListeners();
 Q('formProgressWrap').classList.add('visible');
