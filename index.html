@@ -121,59 +121,107 @@ textarea{resize:vertical;min-height:76px}
 .cur-wr input{padding-left:2.85rem}
 
 /* ══════════════════════════════════════════════════════
-   COMPONENTE 1 — ZONA DE ADJUNTO (nuevo diseño con JSZip)
+   COMPONENTE 1 — ZONA DE ADJUNTO (diseño referencia)
    ══════════════════════════════════════════════════════ */
+
+/* Contenedor externo */
+.attach-wrap {
+  border: 2px solid var(--bd);
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+  transition: border-color 0.25s;
+}
+body.dark-mode .attach-wrap { background: #0d1a2e; }
+
+/* Dropzone */
 .attach-dropzone {
-  border: 2.5px dashed var(--bd);
-  border-radius: 16px;
-  padding: 28px 20px;
+  border: none;
+  border-bottom: 2px dashed var(--bd);
+  border-radius: 0;
+  padding: 32px 20px 24px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s;
-  background: var(--bg);
+  background: transparent;
   position: relative;
   overflow: hidden;
 }
 .attach-dropzone:hover,
 .attach-dropzone.drag-over {
-  border-color: var(--a);
   background: rgba(22, 93, 255, 0.04);
 }
+.attach-dropzone.drag-over { border-color: var(--a); }
 .attach-dropzone.drag-over::before {
   content: 'Suelta aquí';
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
   font-size: 18px; font-weight: 700; color: var(--a);
-  background: rgba(22, 93, 255, 0.08);
-  border-radius: 13px;
+  background: rgba(22, 93, 255, 0.06);
+  z-index: 2;
 }
-.attach-folder-icon { font-size: 44px; margin-bottom: 10px; display: block; }
-.attach-dropzone-text { font-size: 14px; color: var(--mid); line-height: 1.6; }
-.attach-dropzone-text a { color: var(--a); font-weight: 600; cursor: pointer; text-decoration: none; }
-.attach-formats-line,
-.attach-auto-compress-line,
-.attach-limit-line { font-size: 12px; color: var(--lt); margin-top: 4px; }
-.attach-auto-compress-line { color: var(--a); font-weight: 600; }
+.attach-folder-icon { font-size: 52px; margin-bottom: 12px; display: block; }
+.attach-dropzone-text { font-size: 14px; color: #555; line-height: 1.6; }
+.attach-dropzone-text a { color: var(--a); font-weight: 700; cursor: pointer; text-decoration: none; }
+.attach-dropzone-text a:hover { text-decoration: underline; }
+.attach-formats-line { font-size: 12.5px; color: var(--lt); margin-top: 5px; }
+.attach-auto-compress-line { font-size: 12.5px; color: var(--a); font-weight: 700; margin-top: 4px; }
+.attach-limit-line { font-size: 12.5px; color: var(--lt); margin-top: 2px; }
+.attach-limit-line strong { color: #333; }
+
+/* Stats row DENTRO del dropzone (contador + peso) */
 .attach-realtime-stats {
-  display: none; align-items: center; gap: 10px; justify-content: center;
-  margin-top: 8px; font-size: 12.5px; font-weight: 500; color: var(--mid);
+  display: none;
+  align-items: center; gap: 10px; justify-content: center;
+  margin: 10px auto 0;
+  font-size: 13px; font-weight: 600; color: #444;
+  background: rgba(22,93,255,0.06);
+  border-radius: 8px; padding: 8px 20px;
+  width: fit-content; min-width: 220px;
 }
-.attach-stats-sep { color: var(--bd); }
+.attach-realtime-stats.visible { display: flex; }
+.attach-stats-sep { color: var(--bd); font-weight: 300; }
 .attach-limit-exceeded {
-  display: none; margin-top: 8px; font-size: 12px;
+  display: none;
+  margin-top: 8px; font-size: 12px;
   color: #d93546; font-weight: 700;
   background: rgba(229,57,53,.08); border-radius: 6px;
-  padding: 4px 10px; display: inline-block;
+  padding: 5px 12px;
 }
+.attach-limit-exceeded.visible { display: inline-block; }
+
+/* Ejemplos de legibilidad */
+.attach-legibility {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; padding: 14px 16px 0;
+}
+.attach-leg-card {
+  display: flex; align-items: flex-start; gap: 10px;
+  border-radius: 10px; padding: 11px 13px;
+  font-size: 12px; line-height: 1.5;
+}
+.attach-leg-card.ok  { background: #f0faf5; border: 1.5px solid #a7e8c7; }
+.attach-leg-card.bad { background: #fff5f5; border: 1.5px solid #fca5a5; }
+.attach-leg-icon {
+  width: 26px; height: 26px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; flex-shrink: 0; margin-top: 1px;
+}
+.attach-leg-card.ok  .attach-leg-icon { background: #0FC373; color: #fff; }
+.attach-leg-card.bad .attach-leg-icon { background: #EF4444; color: #fff; }
+.attach-leg-title { font-weight: 800; font-size: 12px; letter-spacing: .4px; text-transform: uppercase; margin-bottom: 2px; }
+.attach-leg-card.ok  .attach-leg-title { color: #065f46; }
+.attach-leg-card.bad .attach-leg-title { color: #991b1b; }
+.attach-leg-desc { color: #666; font-size: 11.5px; }
 
 /* Barra de capacidad */
-.attach-capacity-wrap { margin-top: 16px; display: none; }
+.attach-capacity-wrap { padding: 14px 16px 0; display: none; }
 .attach-capacity-wrap.visible { display: block; }
-.attach-capacity-header { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12.5px; font-weight: 600; color: #333; }
+.attach-capacity-header { display: flex; justify-content: space-between; margin-bottom: 7px; }
+.attach-capacity-label { font-size: 11px; font-weight: 800; color: var(--p); text-transform: uppercase; letter-spacing: .5px; }
 .attach-capacity-value { font-size: 12px; color: var(--mid); font-weight: 500; }
-.attach-capacity-label { color: var(--p); }
 .attach-bar-track {
-  height: 10px; background: var(--bd);
+  height: 9px; background: var(--bd);
   border-radius: 99px; overflow: hidden;
 }
 .attach-bar-fill {
@@ -185,8 +233,8 @@ textarea{resize:vertical;min-height:76px}
   content: '';
   position: absolute; top: 0; left: -60px;
   width: 50px; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  animation: barShine2 2s infinite;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+  animation: barShine2 1.8s infinite;
 }
 @keyframes barShine2 { 0%{left:-60px} 100%{left:calc(100% + 20px)} }
 .attach-bar-fill.green  { background: linear-gradient(90deg, #0FC373, #12e080); }
@@ -194,7 +242,7 @@ textarea{resize:vertical;min-height:76px}
 .attach-bar-fill.red    { background: linear-gradient(90deg, #FF4757, #ff6370); animation: none; }
 .attach-bar-fill.red::after { display: none; }
 
-.attach-status { margin-top: 6px; font-size: 12.5px; display: flex; align-items: center; gap: 6px; }
+.attach-status { margin-top: 6px; font-size: 12.5px; display: flex; align-items: center; gap: 6px; padding-bottom: 14px; }
 .attach-status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .attach-status-dot.green  { background: #0FC373; }
 .attach-status-dot.yellow { background: #F59E0B; }
@@ -206,26 +254,34 @@ textarea{resize:vertical;min-height:76px}
   border: 1.5px solid rgba(255,71,87,0.3);
   border-radius: 10px; padding: 10px 14px;
   font-size: 12.5px; color: #d93546;
-  margin-top: 10px; display: none;
+  margin: 10px 16px 0; display: none;
   align-items: center; gap: 8px;
 }
 .attach-error-msg.show { display: flex; }
 
-.attach-file-list { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+/* Lista de archivos */
+.attach-file-list { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+.attach-file-list:empty { padding: 0; }
 .attach-file-item {
   display: flex; align-items: center; gap: 10px;
-  background: var(--bg); border: 1px solid var(--bd);
-  border-radius: 10px; padding: 9px 12px;
+  background: #fafbfc; border: 1px solid var(--bd);
+  border-radius: 10px; padding: 10px 13px;
+  transition: border-color .15s;
 }
-.attach-file-icon { font-size: 16px; flex-shrink: 0; }
-.attach-file-name  { flex:1; font-size:13px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.attach-file-size  { font-size:12px; color: var(--lt); flex-shrink:0; }
+.attach-file-item:hover { border-color: #c0cce0; }
+body.dark-mode .attach-file-item { background: #0f1c32; }
+.attach-file-icon { font-size: 18px; flex-shrink: 0; }
+.attach-file-name  { flex:1; font-size:13px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#333; }
+body.dark-mode .attach-file-name { color:#c8d6f0; }
+.attach-file-size  { font-size:12px; color: var(--lt); flex-shrink:0; margin-right: 4px; }
 .attach-file-remove {
-  width:24px; height:24px; border-radius:50%; border:none;
+  width:26px; height:26px; border-radius:50%; border:none;
   background: rgba(255,71,87,0.1); color:#FF4757;
-  cursor:pointer; font-size:14px; transition: all 0.2s; line-height:1;
+  cursor:pointer; font-size:15px; font-weight:700;
+  transition: all 0.2s; display:flex; align-items:center; justify-content:center;
+  flex-shrink: 0; line-height: 1;
 }
-.attach-file-remove:hover { background:#FF4757; color:#fff; }
+.attach-file-remove:hover { background:#FF4757; color:#fff; transform:scale(1.1); }
 
 .offline-msg {
   background: rgba(255,71,87,0.08);
@@ -381,15 +437,24 @@ body.dark-mode .rlbl:has(input:checked) { background:rgba(22,93,255,0.15); color
 body.dark-mode .rc { border-color:#3a4e70; }
 body.dark-mode .cur-pre { color:#4a5878; }
 /* Dark mode — adjuntos */
+body.dark-mode .attach-wrap { border-color:#1e2d50; }
 body.dark-mode .attach-dropzone { background:#0e1a30; border-color:#2a3a5c; }
 body.dark-mode .attach-dropzone:hover { background:rgba(22,93,255,0.05); border-color:var(--a); }
 body.dark-mode .attach-dropzone-text { color:#7a8fb0; }
 body.dark-mode .attach-formats-line, body.dark-mode .attach-limit-line { color:#3a4e70; }
+body.dark-mode .attach-limit-line strong { color:#8fa3c8; }
 body.dark-mode .attach-capacity-header { color:#c8d6f0; }
 body.dark-mode .attach-capacity-value { color:#7a8fb0; }
+body.dark-mode .attach-capacity-label { color:#8fa3c8; }
 body.dark-mode .attach-bar-track { background:#243660; }
 body.dark-mode .attach-file-item { background:#162040; border-color:#243660; color:#c8d6f0; }
 body.dark-mode .attach-file-size { color:#4a5878; }
+body.dark-mode .attach-realtime-stats { background:rgba(22,93,255,0.1); color:#c8d6f0; }
+body.dark-mode .attach-leg-card.ok  { background:#0d2218; border-color:#166534; }
+body.dark-mode .attach-leg-card.bad { background:#2a0e0e; border-color:#7f1d1d; }
+body.dark-mode .attach-leg-card.ok  .attach-leg-title { color:#86efac; }
+body.dark-mode .attach-leg-card.bad .attach-leg-title { color:#fca5a5; }
+body.dark-mode .attach-leg-desc { color:#6b7a99; }
 body.dark-mode .compress-body { background:#111f3a; }
 body.dark-mode .compress-header { background:#0a1535; }
 body.dark-mode .compress-stat-val { color:#c8d6f0; }
@@ -447,12 +512,16 @@ body.dark-mode .form-progress-text strong { color:#78b0ff; font-weight:800; }
   background:rgba(8,18,42,0.65);
   backdrop-filter:blur(8px);
   z-index:8000;
-  display:flex; align-items:center; justify-content:center;
+  display:none; align-items:center; justify-content:center;
   padding:20px;
   opacity:0; pointer-events:none;
   transition:opacity 0.3s;
 }
-.motiv-overlay.show { opacity:1; pointer-events:all; }
+.motiv-overlay.show {
+  display:flex;
+  opacity:1;
+  pointer-events:all;
+}
 .motiv-card {
   background:#ffffff; border-radius:28px;
   width:100%; max-width:400px;
@@ -822,58 +891,85 @@ body.dark-mode .tramite-tooltip { background:rgba(26,32,44,.95); color:#e2e8f0; 
     <h2 class="sec-title">DOCUMENTOS Y ENVÍO</h2>
   </div>
 
-  <!-- COMPONENTE 1: Nueva zona de adjuntos con JSZip -->
+  <!-- COMPONENTE 1 + 2: Zona de adjuntos rediseñada con JSZip -->
   <div class="fg" style="margin-bottom:1.5rem">
     <label class="lbl req">Adjuntar Documentos</label>
-    <div class="attach-dropzone" id="attachDropzoneAVA"
-         ondragover="onDragOver(event,'AVA')"
-         ondragleave="onDragLeave(event,'AVA')"
-         ondrop="onDrop(event,'AVA')"
-         onclick="document.getElementById('fileInputAVA').click()">
-      <span class="attach-folder-icon">📁</span>
-      <div class="attach-dropzone-text">
-        Arrastra tus archivos aquí o
-        <a onclick="event.stopPropagation();document.getElementById('fileInputAVA').click()">haz clic para seleccionarlos</a>
-      </div>
-      <div class="attach-formats-line">Formatos: <strong>PDF, JPG, PNG, DOCX</strong></div>
-      <div class="attach-auto-compress-line">✨ Compresión automática incluida</div>
-      <div class="attach-limit-line">📏 Límite total del ZIP: <strong>5 MB</strong></div>
-      <div class="attach-ine-note" style="font-size:.76rem;font-weight:600;color:var(--p);background:rgba(10,31,68,.05);border-radius:6px;padding:.42rem .75rem;margin-top:.55rem;display:flex;align-items:center;gap:.4rem">
-        🪪 INE frente y reverso — legible (texto claro, sin reflejos)
-      </div>
-      <div class="attach-realtime-stats" id="attachRealtimeAVA">
-        <span>📦 <strong id="attachCountAVA">0</strong> archivo(s)</span>
-        <span class="attach-stats-sep">|</span>
-        <span>ZIP: <strong id="attachWeightAVA">—</strong></span>
-      </div>
-      <div class="attach-limit-exceeded" id="attachLimitExcAVA">¡Límite de 5 MB superado!</div>
-      <input type="file" id="fileInputAVA" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display:none" onchange="handleFiles(this.files,'AVA')">
-    </div>
 
-    <!-- Barra de capacidad -->
-    <div class="attach-capacity-wrap" id="capacityWrapAVA">
-      <div class="attach-capacity-header">
-        <span class="attach-capacity-label">Capacidad utilizada del ZIP</span>
-        <span class="attach-capacity-value" id="capacityValueAVA">0 MB de 5 MB</span>
+    <div class="attach-wrap">
+
+      <!-- ── Zona de arrastre / clic ── -->
+      <div class="attach-dropzone" id="attachDropzoneAVA"
+           ondragover="onDragOver(event,'AVA')"
+           ondragleave="onDragLeave(event,'AVA')"
+           ondrop="onDrop(event,'AVA')"
+           onclick="document.getElementById('fileInputAVA').click()">
+        <span class="attach-folder-icon">📁</span>
+        <div class="attach-dropzone-text">
+          Arrastra tus archivos aquí o
+          <a onclick="event.stopPropagation();document.getElementById('fileInputAVA').click()">haz clic para seleccionarlos</a>
+        </div>
+        <div class="attach-formats-line">Formatos: <strong>PDF, JPG, PNG</strong></div>
+        <div class="attach-auto-compress-line">✨ Compresión automática incluida</div>
+        <div class="attach-limit-line">📏 Límite total: <strong>5 MB</strong></div>
+        <!-- Contador de archivos (visible tras seleccionar) -->
+        <div class="attach-realtime-stats" id="attachRealtimeAVA">
+          <span>📦 <strong id="attachCountAVA">0</strong> archivo(s)</span>
+          <span class="attach-stats-sep">|</span>
+          <span>Peso: <strong id="attachWeightAVA">—</strong></span>
+        </div>
+        <input type="file" id="fileInputAVA" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+               style="display:none" onchange="handleFiles(this.files,'AVA')">
       </div>
-      <div class="attach-bar-track">
-        <div class="attach-bar-fill green" id="attachBarAVA" style="width:0%"></div>
+
+      <!-- ── Barra de capacidad (aparece cuando hay archivos) ── -->
+      <div class="attach-capacity-wrap" id="capacityWrapAVA">
+        <div class="attach-capacity-header">
+          <span class="attach-capacity-label">Capacidad Utilizada</span>
+          <span class="attach-capacity-value" id="capacityValueAVA">0 KB de 5 MB (ZIP comprimido)</span>
+        </div>
+        <div class="attach-bar-track">
+          <div class="attach-bar-fill green" id="attachBarAVA" style="width:0%"></div>
+        </div>
+        <div class="attach-status" id="attachStatusAVA">
+          <span class="attach-status-dot green" id="attachDotAVA"></span>
+          <span id="attachStatusTextAVA">ZIP listo — capacidad disponible</span>
+        </div>
       </div>
-      <div class="attach-status" id="attachStatusAVA">
-        <span class="attach-status-dot green" id="attachDotAVA"></span>
-        <span id="attachStatusTextAVA">Capacidad disponible</span>
-      </div>
-      <div class="attach-error-msg" id="attachErrAVA">
+
+      <!-- ── Lista de archivos ── -->
+      <div class="attach-file-list" id="fileListAVA"></div>
+
+      <!-- ── Mensaje de error de capacidad ── -->
+      <div class="attach-error-msg" id="attachErrAVA" style="margin-bottom:12px">
         <span>⚠️</span>
-        <span id="attachErrTextAVA">El archivo supera el límite de 5 MB.</span>
+        <span id="attachErrTextAVA">El ZIP excede el límite de 5 MB. Elimina algunos archivos.</span>
+      </div>
+
+    </div><!-- /.attach-wrap -->
+
+    <!-- ── Ejemplos de legibilidad (FUERA del wrap, debajo) ── -->
+    <div class="attach-legibility" style="margin-top:10px">
+      <div class="attach-leg-card ok">
+        <div class="attach-leg-icon">✓</div>
+        <div>
+          <div class="attach-leg-title">Legible</div>
+          <div class="attach-leg-desc">Foto nítida, bien iluminada, encuadre completo. Sin sombras ni reflejos que cubran datos.</div>
+        </div>
+      </div>
+      <div class="attach-leg-card bad">
+        <div class="attach-leg-icon">✕</div>
+        <div>
+          <div class="attach-leg-title">No Legible</div>
+          <div class="attach-leg-desc">Imagen borrosa, oscura, con dedos tapando datos, o recortada. No puede procesarse.</div>
+        </div>
       </div>
     </div>
 
     <!-- COMPONENTE 2: Panel de progreso de compresión -->
-    <div class="compress-progress" id="compressProgressAVA">
+    <div class="compress-progress" id="compressProgressAVA" style="margin-top:12px">
       <div class="compress-header">
         <span style="font-size:16px;">⚡</span>
-        <span class="compress-header-text">Comprimiendo...</span>
+        <span class="compress-header-text">COMPRIMIENDO...</span>
         <span id="compressPctAVA" class="compress-pct">0%</span>
       </div>
       <div class="compress-body">
@@ -894,11 +990,8 @@ body.dark-mode .tramite-tooltip { background:rgba(26,32,44,.95); color:#e2e8f0; 
       </div>
     </div>
 
-    <!-- Lista de archivos -->
-    <div class="attach-file-list" id="fileListAVA"></div>
-
     <!-- Aviso offline -->
-    <div class="offline-msg" id="offlineMsgAVA">
+    <div class="offline-msg" id="offlineMsgAVA" style="margin-top:10px">
       <span>📡</span><span>Sin conexión. La compresión se reanudará automáticamente.</span>
     </div>
 
@@ -1160,26 +1253,30 @@ function updateCapacityBar(type){
   var rtStats=Q('attachRealtime'+type);
   var rtCount=Q('attachCount'+type);
   var rtWeight=Q('attachWeight'+type);
-  var limitExc=Q('attachLimitExc'+type);
+  var errEl=Q('attachErr'+type);
 
   if(state.files.length===0){
-    wrap.classList.remove('visible');
-    if(rtStats) rtStats.style.display='none';
-    if(limitExc) limitExc.style.display='none';
+    if(wrap) wrap.classList.remove('visible');
+    if(rtStats) rtStats.classList.remove('visible');
+    if(errEl) errEl.classList.remove('show');
     if(bar){ bar.className='attach-bar-fill green'; bar.style.width='0%'; }
     return;
   }
-  wrap.classList.add('visible');
-  if(rtStats) rtStats.style.display='flex';
+
+  if(wrap) wrap.classList.add('visible');
+  if(rtStats) rtStats.classList.add('visible');
   if(rtCount) rtCount.textContent=state.files.length;
 
   if(!state.zipBlob){
-    if(bar){ bar.className='attach-bar-fill green'; bar.style.width='0%'; }
+    // Mostrar suma de tamaños originales mientras comprime
+    var rawSize=state.files.reduce(function(s,f){return s+f.size;},0);
+    var rawPct=Math.min(100,(rawSize/MAX_ZIP_BYTES)*100);
+    if(bar){ bar.className='attach-bar-fill green'; bar.style.width=rawPct+'%'; }
     if(dot){ dot.className='attach-status-dot green'; }
-    if(statusTxt) statusTxt.textContent=state.compressing?'Comprimiendo archivos…':'En espera de compresión…';
-    if(valEl) valEl.textContent='— de 5 MB (ZIP pendiente)';
-    if(rtWeight) rtWeight.textContent='—';
-    if(limitExc) limitExc.style.display='none';
+    if(statusTxt) statusTxt.textContent=state.compressing?'Comprimiendo archivos…':'ZIP listo — quedan '+fmtBytes(Math.max(0,MAX_ZIP_BYTES-rawSize))+' disponibles';
+    if(valEl) valEl.textContent=fmtBytes(rawSize)+' de 5 MB (ZIP comprimido)';
+    if(rtWeight) rtWeight.textContent=fmtBytes(rawSize);
+    if(errEl) errEl.classList.remove('show');
     return;
   }
 
@@ -1195,18 +1292,15 @@ function updateCapacityBar(type){
   if(zSize>=MAX_ZIP_BYTES){
     if(bar) bar.classList.add('red'); if(dot) dot.classList.add('red');
     if(statusTxt) statusTxt.textContent='ZIP supera 5 MB — elimina archivos';
-    showAttachMsg(type,'error','El ZIP pesa '+zStr+' y supera el límite. Elimina archivos.');
-    if(limitExc) limitExc.style.display='block';
+    if(errEl){ Q('attachErrText'+type).textContent='El ZIP pesa '+zStr+' y supera el límite. Elimina archivos.'; errEl.classList.add('show'); }
   } else if(zSize>=MAX_ZIP_BYTES*0.80){
     if(bar) bar.classList.add('yellow'); if(dot) dot.classList.add('yellow');
     if(statusTxt) statusTxt.textContent='Casi lleno — quedan '+fmtBytes(MAX_ZIP_BYTES-zSize)+' en el ZIP';
-    hideAttachMsg(type);
-    if(limitExc) limitExc.style.display='none';
+    if(errEl) errEl.classList.remove('show');
   } else {
     if(bar) bar.classList.add('green'); if(dot) dot.classList.add('green');
     if(statusTxt) statusTxt.textContent='ZIP listo — quedan '+fmtBytes(MAX_ZIP_BYTES-zSize)+' disponibles';
-    hideAttachMsg(type);
-    if(limitExc) limitExc.style.display='none';
+    if(errEl) errEl.classList.remove('show');
   }
 }
 
@@ -1981,12 +2075,30 @@ document.addEventListener('keydown',function(e){
 });
 
 // ═══ INIT ═══
+// Registrar funciones en el scope global para que onclick inline las encuentre
+window._avaCloseMotiv   = closeMotivModal;
+window._avaCloseSuccess = closeSuccessModal;
+window._avaDragOver     = onDragOver;
+window._avaDragLeave    = onDragLeave;
+window._avaDrop         = onDrop;
+window._avaHandleFiles  = handleFiles;
+window._avaRemoveFile   = removeFile;
+
 attachProgressListeners();
 Q('formProgressWrap').classList.add('visible');
 syncSubmitBtn(); // boton de envio inicia deshabilitado hasta marcar la declaracion
 slideTo(1);
 
 })();
+
+// ── Exponer funciones globales necesarias para onclick inline ──
+window.closeMotivModal   = function(id){ if(window._avaCloseMotiv) window._avaCloseMotiv(id); };
+window.closeSuccessModal = function(){   if(window._avaCloseSuccess) window._avaCloseSuccess(); };
+window.onDragOver  = function(e,t){ if(window._avaDragOver)  window._avaDragOver(e,t); };
+window.onDragLeave = function(e,t){ if(window._avaDragLeave) window._avaDragLeave(e,t); };
+window.onDrop      = function(e,t){ if(window._avaDrop)      window._avaDrop(e,t); };
+window.handleFiles = function(fl,t){ if(window._avaHandleFiles) window._avaHandleFiles(fl,t); };
+window.removeFile  = function(t,i){ if(window._avaRemoveFile)   window._avaRemoveFile(t,i); };
 </script>
 
 <!-- Elfsight AI Chatbot -->
