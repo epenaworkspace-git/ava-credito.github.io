@@ -221,6 +221,62 @@ body.dark-mode .attach-wrap { background: #0d1a2e; }
 .attach-leg-card.bad .attach-leg-title { color: #991b1b; }
 .attach-leg-desc { color: #666; font-size: 11.5px; }
 
+/* ── DOCUMENTOS REQUERIDOS ── */
+.attach-docs-required {
+  border: 2px solid #dbeafe;
+  border-radius: 12px;
+  background: #eff6ff;
+  padding: 14px 18px 12px;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+.attach-docs-title {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12.5px; font-weight: 800;
+  color: #1e40af; letter-spacing: .5px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.attach-docs-icon { font-size: 15px; }
+.attach-docs-list {
+  list-style: none; display: flex; flex-direction: column; gap: 6px;
+  margin-bottom: 10px;
+}
+.attach-docs-list li {
+  display: flex; align-items: flex-start; flex-wrap: wrap; gap: 6px;
+  font-size: 13px; line-height: 1.5;
+}
+.attach-docs-badge {
+  display: inline-flex; align-items: center;
+  background: #165DFF; color: #fff;
+  font-size: 10.5px; font-weight: 700;
+  border-radius: 4px; padding: 1px 7px;
+  letter-spacing: .3px; text-transform: uppercase;
+  flex-shrink: 0; margin-top: 2px;
+}
+.attach-docs-name {
+  font-weight: 700; color: #1e3a8a;
+}
+.attach-docs-desc {
+  font-size: 12px; color: #4b6cb0; flex-basis: 100%; padding-left: 1px;
+}
+.attach-docs-note {
+  font-size: 12px; color: #374151; line-height: 1.6;
+  background: rgba(255,255,255,0.65); border-radius: 8px;
+  padding: 8px 12px;
+  display: flex; align-items: flex-start; gap: 6px;
+  border: 1px solid #c7d8f7;
+}
+.attach-docs-note-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+.attach-docs-note strong { color: #1e40af; }
+
+/* Dark mode — documentos requeridos */
+body.dark-mode .attach-docs-required { background: #0d1f40; border-color: #1e3a6e; }
+body.dark-mode .attach-docs-title { color: #93c5fd; }
+body.dark-mode .attach-docs-name { color: #bfdbfe; }
+body.dark-mode .attach-docs-desc { color: #7aa3d4; }
+body.dark-mode .attach-docs-note { background: rgba(30,58,138,0.25); border-color: #1e3a6e; color: #c8d6f0; }
+body.dark-mode .attach-docs-note strong { color: #93c5fd; }
+
 /* Barra de capacidad */
 .attach-capacity-wrap { padding: 14px 16px 0; display: none; }
 .attach-capacity-wrap.visible { display: block; }
@@ -646,6 +702,7 @@ body.dark-mode .tramite-tooltip { background:rgba(26,32,44,.95); color:#e2e8f0; 
 @media(max-width:640px){ .theme-toggle-btn{top:14px;right:14px;width:44px;height:44px} .icon-sun,.icon-moon{width:22px;height:22px} .form-progress-wrap{width:calc(100% - 24px);bottom:16px} .form-progress-pill{padding:8px 14px 8px 12px;gap:10px} .form-progress-text{font-size:11.5px;min-width:110px} }
 @media(max-width:600px){ .wrap{padding:.85rem .65rem 3rem} .hdr{padding:1.3rem 1rem;border-radius:7px;margin-bottom:1.2rem} .hdr-logo{font-size:1.5rem} .hdr-sub{font-size:.8rem;letter-spacing:.04em} .prog{padding:.6rem .4rem;border-radius:7px;margin-bottom:1.2rem;gap:0} .sc{width:25px;height:25px;font-size:.64rem} .sl{font-size:.5rem;line-height:1.1} .step:not(:last-child)::after{left:calc(50% + 13px);width:calc(100% - 26px);top:12px} .card{border-radius:7px} .sec{padding:1rem} .sec-hdr{padding-top:.65rem;padding-bottom:.85rem;margin-bottom:1.1rem;gap:.5rem} .sec-ico{width:29px;height:29px;border-radius:6px} .sec-ico svg{width:16px;height:16px} .sec-title{font-size:.95rem} .grid,.grid3{grid-template-columns:1fr;gap:1rem} .full{grid-column:1/-1} input,select,textarea{font-size:.84rem;padding:.5rem .7rem} .lbl{font-size:.76rem} .em{font-size:.7rem} .note{font-size:.68rem} #rfc,#curp{letter-spacing:.02em} .dep-grid{grid-template-columns:1fr 1fr;gap:.6rem} .cond-block.open{max-height:800px} .ref{padding:.9rem;border-radius:8px} .ref-t{font-size:.82rem;margin-bottom:.7rem} .sub-t{font-size:.98rem} .pay-box{padding:.9rem} .pay-ttl{font-size:.79rem;margin-bottom:.7rem} .pay-row{flex-direction:column;gap:.75rem} .radios{flex-direction:row;flex-wrap:wrap;min-width:unset;gap:.45rem} .rlbl{font-size:.79rem;padding:.36rem .58rem;border-radius:5px} .pay-in{min-width:unset;width:100%} #payH{font-size:.79rem} #engMinus,#engPlus{width:40px;height:40px;font-size:1.25rem;border-radius:8px} #valEng{font-size:.88rem} #engPctSym{font-size:.88rem} .sumbox{padding:.9rem} .sum-ttl{font-size:.8rem} .sum-row{flex-direction:column;gap:.04rem;line-height:1.55;padding:.15rem 0} .sum-k{min-width:unset;font-size:.74rem;color:var(--a)} .decl-box{padding:.95rem 1rem;margin-top:1.2rem;border-radius:8px} .decl-head{font-size:.74rem;margin-bottom:.6rem} .decl-text{font-size:.78rem;line-height:1.65} .chk-vis{width:22px;height:22px;min-width:22px;border-radius:5px} .decl-row{gap:.75rem} .nav{padding:.85rem .9rem;gap:.55rem;flex-wrap:wrap} .step-ind{font-size:.72rem;order:-1;width:100%;text-align:center;margin-bottom:.1rem} .btn{padding:.5rem 1rem;font-size:.81rem} .btn-s{padding:.55rem 1.2rem;font-size:.81rem;letter-spacing:.02em} }
 @media(max-width:380px){ .wrap{padding:.65rem .5rem 2.5rem} .hdr-logo{font-size:1.35rem} .sl{font-size:.46rem} .sc{width:23px;height:23px;font-size:.6rem} .step:not(:last-child)::after{left:calc(50% + 12px);width:calc(100% - 24px)} .sec{padding:.85rem} .sec-title{font-size:.9rem} .dep-grid{grid-template-columns:1fr} .nav{padding:.75rem .8rem} .btn{padding:.45rem .85rem;font-size:.78rem} }
+@media(max-width:600px){ .attach-legibility{grid-template-columns:1fr} .attach-docs-list li{flex-direction:column;gap:3px} }
 
 /* WHATSAPP FLOAT */
 .wa-float{position:fixed;bottom:40px;left:40px;width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,#25d366 0%,#128c7e 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(37,211,102,.42);cursor:pointer;z-index:9990;text-decoration:none;border:3px solid #fff;overflow:hidden;animation:waFloat 3s ease-in-out infinite;transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s ease;}
@@ -954,7 +1011,26 @@ body.dark-mode .tramite-tooltip { background:rgba(26,32,44,.95); color:#e2e8f0; 
 
     </div><!-- /.attach-wrap -->
 
-    <!-- ── Ejemplos de legibilidad (FUERA del wrap, debajo) ── -->
+    <!-- ── Documentos requeridos (FUERA del wrap, encima de legibilidad) ── -->
+    <div class="attach-docs-required" id="attachDocsRequired">
+      <div class="attach-docs-title">
+        <span class="attach-docs-icon">📋</span>
+        Documentos Requeridos
+      </div>
+      <ul class="attach-docs-list">
+        <li>
+          <span class="attach-docs-badge">Obligatorio</span>
+          <span class="attach-docs-name">Identificación Oficial Vigente</span>
+          <span class="attach-docs-desc">(INE, Pasaporte o FM2) — en formato PDF, completa o por ambos lados si se trata de una identificación física</span>
+        </li>
+      </ul>
+      <p class="attach-docs-note">
+        <span class="attach-docs-note-icon">ℹ️</span>
+        En la mayoría de los casos, con la documentación solicitada es suficiente. Sin embargo, si fuera necesario, podría requerirse documentación adicional como <strong>comprobante de ingresos</strong> y <strong>comprobante de domicilio</strong>.
+      </p>
+    </div>
+
+    <!-- ── Ejemplos de legibilidad (FUERA del wrap, debajo de documentos) ── -->
     <div class="attach-legibility" style="margin-top:10px">
       <div class="attach-leg-card ok">
         <div class="attach-leg-icon">✓</div>
@@ -1219,10 +1295,8 @@ function handleFiles(fileList, type){
   renderFileList(type);
   updateCapacityBar(type);
   if(state.files.length>=1 && typeof JSZip!=='undefined') scheduleCompression(type);
-  // Limpiar error de adjunto si hay archivos
   if(state.files.length>0){ var eu=Q('eupErr'); if(eu){eu.textContent='';eu.style.display='none';} Q('attachDropzone'+type).classList.remove('attach-error'); }
   updateProgressBar();
-  // Actualizar resumen si ya está visible (paso 5)
   if(Q('sumBox') && Q('sumBox').style.display!=='none') buildSummary();
 }
 
@@ -1235,7 +1309,6 @@ function removeFile(type,idx){
   updateCapacityBar(type);
   if(state.files.length>=1 && typeof JSZip!=='undefined') scheduleCompression(type);
   updateProgressBar();
-  // Actualizar resumen si ya está visible (paso 5)
   if(Q('sumBox') && Q('sumBox').style.display!=='none') buildSummary();
 }
 
@@ -1279,7 +1352,6 @@ function updateCapacityBar(type){
   if(rtCount) rtCount.textContent=state.files.length;
 
   if(!state.zipBlob){
-    // Mostrar suma de tamaños originales mientras comprime
     var rawSize=state.files.reduce(function(s,f){return s+f.size;},0);
     var rawPct=Math.min(100,(rawSize/MAX_ZIP_BYTES)*100);
     if(bar){ bar.className='attach-bar-fill green'; bar.style.width=rawPct+'%'; }
@@ -1479,11 +1551,7 @@ function showSuccessModal(){
 function closeSuccessModal(){
   Q('successOverlay').classList.remove('show');
   document.body.style.overflow='';
-
-  // Limpiar formulario
   resetForm();
-
-  // Reiniciar adjuntos
   Object.keys(attachState).forEach(function(type){
     attachState[type]={ files:[], zipBlob:null, compressing:false, paused:false, startTime:null, elapsed:0, _runId:null };
     var fl=Q('fileList'+type); if(fl) fl.innerHTML='';
@@ -1491,20 +1559,15 @@ function closeSuccessModal(){
     var om=Q('offlineMsg'+type); if(om) om.classList.remove('show');
     updateCapacityBar(type);
   });
-
-  // Reiniciar contadores motivacionales
   motivShown={ 25:false, 50:false, 75:false, 100:false };
   lastPct=0;
-
   window.scrollTo({ top:0, behavior:'smooth' });
 }
 
 function resetForm(){
   Q('frm').reset();
-  // Limpiar estados visuales
   document.querySelectorAll('.ok,.bad').forEach(function(el){ el.classList.remove('ok','bad'); });
   document.querySelectorAll('.em').forEach(function(el){ el.textContent=''; });
-  // Cerrar bloques condicionales
   Q('regimenBlk').classList.remove('open');
   Q('depBlk').classList.remove('open');
   Q('depAges').innerHTML='';
@@ -1512,18 +1575,15 @@ function resetForm(){
   Q('municipio').value=''; Q('estado').value=''; Q('hCiu').value='';
   Q('colSel').value=''; HIDE('colRegLbl'); HIDE('colSel');
   Q('colonia').innerHTML='<option value="" disabled selected>Selecciona tu colonia</option>';
-  // Reset declaración
   declChecked=false;
   Q('chkVis').classList.remove('on');
   Q('declBox').classList.remove('ok','bad');
   Q('declVal').value='';
   syncSubmitBtn();
-  // Volver al paso 1
   slideTo(1);
   updateProgressBar();
 }
 
-// Cerrar modal de éxito al hacer clic en el fondo
 document.addEventListener('click',function(e){
   if(e.target&&e.target.id==='successOverlay') closeSuccessModal();
 });
@@ -1595,7 +1655,6 @@ function isTokenActive(tok){
 }
 
 function updateProgressBar(){
-  // Calcular progreso del paso actual
   var tokens=getStepTokens(cur);
   var total=0,done=0;
   tokens.forEach(function(tok){ if(!isTokenActive(tok)) return; total++; if(isTokenFilled(tok)) done++; });
@@ -1604,7 +1663,6 @@ function updateProgressBar(){
   var doneEl=Q('formProgressDone'); if(doneEl) doneEl.textContent=done;
   var totEl=Q('formProgressTotal'); if(totEl) totEl.textContent=total;
 
-  // Calcular progreso global para modales motivacionales
   var allTotal=0,allDone=0;
   for(var s=1;s<=TOTAL;s++){
     var st=getStepTokens(s);
@@ -1612,7 +1670,6 @@ function updateProgressBar(){
   }
   var globalPct=allTotal>0?Math.floor((allDone/allTotal)*100):0;
 
-  // Disparar modales motivacionales
   if(globalPct>=100&&lastPct<100&&!motivShown[100]){ motivShown[100]=true; setTimeout(function(){ showMotivModal('motivModal100'); },400); }
   else if(globalPct>=75&&lastPct<75&&!motivShown[75]){ motivShown[75]=true; setTimeout(function(){ showMotivModal('motivModal75'); },400); }
   else if(globalPct>=50&&lastPct<50&&!motivShown[50]){ motivShown[50]=true; setTimeout(function(){ showMotivModal('motivModal50'); },400); }
@@ -1850,18 +1907,14 @@ function focusFirstInvalid(){
   for(var s=1;s<=TOTAL;s++){
     var sec=Q('s'+s); if(!sec) continue;
     var candidates=[];
-    // Campos con clase .bad
     sec.querySelectorAll('input.bad,select.bad,textarea.bad').forEach(function(el){
       if(!el.disabled && el.type!=='hidden' && el.type!=='radio' && el.type!=='checkbox')
         candidates.push(el);
     });
-    // Wrapper de teléfono con .bad → tomar el input numérico
     sec.querySelectorAll('.tel-wr.bad .tel-num').forEach(function(el){ candidates.push(el); });
-    // Zona de adjuntos con error (sección 5)
     if(s===5){
       var dropErr=Q('eupErr');
       if(dropErr && dropErr.textContent.trim()) candidates.push(Q('attachDropzoneAVA'));
-      // Declaración sin marcar
       if(!declChecked){ var dr=Q('declRow'); if(dr) candidates.push(dr); }
     }
     if(candidates.length>0){
@@ -1872,7 +1925,6 @@ function focusFirstInvalid(){
         return function(){
           el.scrollIntoView({behavior:'smooth',block:'center'});
           if(typeof el.focus==='function') el.focus({preventScroll:true});
-          // Parpadeo rojo de énfasis
           var origBox=el.style.boxShadow, origTrans=el.style.transition;
           el.style.transition='box-shadow .12s';
           el.style.boxShadow='0 0 0 5px rgba(229,57,53,.5)';
@@ -1984,7 +2036,6 @@ function vSec4(){
 
 function vSec5(){
   var ok=true;
-  // Validar adjunto (debe tener al menos un archivo)
   if(attachState['AVA'].files.length===0){
     var eu=Q('eupErr'); eu.textContent='Debes adjuntar al menos un documento (INE requerido).'; eu.style.display='block';
     Q('attachDropzoneAVA').style.borderColor='var(--e)';
@@ -1993,7 +2044,6 @@ function vSec5(){
     var eu2=Q('eupErr'); eu2.textContent=''; eu2.style.display='none';
     Q('attachDropzoneAVA').style.borderColor='';
   }
-  // Validar ZIP no excede límite
   var state=attachState['AVA'];
   if(state.zipBlob&&state.zipBlob.size>=MAX_ZIP_BYTES){
     var eu3=Q('eupErr'); eu3.textContent='El ZIP excede 5 MB. Elimina algunos archivos antes de enviar.'; eu3.style.display='block'; ok=false;
@@ -2034,11 +2084,9 @@ function buildSummary(){
 // ═══ SUBMIT ═══
 Q('frm').addEventListener('submit',function(e){
   e.preventDefault();
-  // Validar todas las secciones y recopilar errores
   var allValid=true;
   for(var s=1;s<=TOTAL;s++){ if(!validateSection(s)) allValid=false; }
   if(!allValid){
-    // Mover el foco al primer campo obligatorio inválido
     focusFirstInvalid();
     return;
   }
@@ -2054,11 +2102,9 @@ Q('frm').addEventListener('submit',function(e){
 
 function doSubmit(){
   var fd=new FormData(Q('frm'));
-  // Adjuntar el ZIP generado si existe, o los archivos individuales
   var state=attachState['AVA'];
   if(state.zipBlob){
     fd.append('documentos_zip','archivos-credito-'+getToday()+'.zip');
-    // No se puede adjuntar el blob directamente a formsubmit, pero registramos la info
   } else {
     state.files.forEach(function(f,i){ fd.append('adjunto_'+(i+1),f,f.name); });
   }
@@ -2071,7 +2117,7 @@ function doSubmit(){
     })
     .catch(function(){
       Q('sOv').classList.remove('on'); Q('btnSub').disabled=false;
-      showSuccessModal(); // Se muestra igualmente al usuario
+      showSuccessModal();
     });
 }
 
@@ -2086,7 +2132,6 @@ document.addEventListener('keydown',function(e){
 });
 
 // ═══ INIT ═══
-// Registrar funciones en el scope global para que onclick inline las encuentre
 window._avaCloseMotiv   = closeMotivModal;
 window._avaCloseSuccess = closeSuccessModal;
 window._avaDragOver     = onDragOver;
@@ -2095,9 +2140,6 @@ window._avaDrop         = onDrop;
 window._avaHandleFiles  = handleFiles;
 window._avaRemoveFile   = removeFile;
 
-// ── Mayúsculas automáticas en el VALOR de todos los campos de texto ──
-// El CSS ya los muestra en mayús; este listener convierte el value real
-// para que la validación, el resumen y formData reciban el texto en mayús.
 document.querySelectorAll('#frm input[type=text], #frm input[type=tel], #frm textarea').forEach(function(el){
   if(el.hasAttribute('data-no-upper') || el.readOnly || el.disabled) return;
   el.addEventListener('input', function(){
@@ -2112,7 +2154,7 @@ document.querySelectorAll('#frm input[type=text], #frm input[type=tel], #frm tex
 
 attachProgressListeners();
 Q('formProgressWrap').classList.add('visible');
-syncSubmitBtn(); // boton de envio inicia deshabilitado hasta marcar la declaracion
+syncSubmitBtn();
 slideTo(1);
 
 })();
