@@ -204,7 +204,6 @@ body.dark-mode .attach-file-name{color:#c8d6f0}
 
 /* ══════════════════════════════════════════════════════
    NUEVO SUMBOX — Resumen de Solicitud
-   Basado en resumen-formulario.html
 ══════════════════════════════════════════════════════ */
 .sumbox {
   background: var(--card-bg);
@@ -261,7 +260,7 @@ body.dark-mode .attach-file-name{color:#c8d6f0}
   font-size: 11px; color: rgba(255,255,255,.55); margin-top: 2px;
 }
 
-/* Badge de estado — 3 variantes */
+/* Badge de estado */
 .sum-badge {
   display: inline-flex;
   align-items: center;
@@ -614,7 +613,7 @@ body.dark-mode .success-divider{background:#1e2d50}
 body.dark-mode .tramite-float{border:2px solid rgba(255,255,255,.09)}
 body.dark-mode .tramite-tooltip{background:rgba(26,32,44,.95);color:#e2e8f0;border:1px solid #2d3748}
 
-/* ══ WHATSAPP — alineado con Iniciar Trámite, mismo tamaño ══ */
+/* ══ WHATSAPP ══ */
 .wa-float{position:fixed;bottom:40px;left:50px;width:75px;height:75px;border-radius:50%;background:linear-gradient(135deg,#25d366 0%,#128c7e 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(37,211,102,.42);cursor:pointer;z-index:9990;text-decoration:none;border:4px solid #fff;overflow:hidden;animation:waFloat 3s ease-in-out infinite;transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s ease}
 .wa-float::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);animation:waShine 3.2s infinite;pointer-events:none}
 .wa-float:hover{transform:scale(1.15) translateY(-4px);box-shadow:0 16px 38px rgba(37,211,102,.58);animation:none}
@@ -750,7 +749,7 @@ body.dark-mode .wa-float{border:2px solid rgba(255,255,255,.12)}
     <div class="fg">
       <label class="lbl req" for="cp">Código Postal</label>
       <div class="cp-wr" id="cpWr"><input id="cp" name="codigoPostal" type="text" placeholder="12345" maxlength="5" inputmode="numeric" autocomplete="postal-code"><div class="cp-spin" id="cpSpin" style="display:none"></div></div>
-      <small style="color:var(--mid);font-size:.68rem;margin-top:.1rem">Escribe el C.P. y presiona Tab o Enter para buscar</small>
+      <small style="color:var(--mid);font-size:.68rem;margin-top:.1rem">Escribe el C.P. (5 dígitos) y se autocompletará</small>
       <span class="em" id="ecp"></span>
       <div id="cpErrBox" style="display:none;font-size:.75rem;color:var(--e);font-weight:500;padding:.42rem .68rem;background:rgba(229,57,53,.05);border:1px solid rgba(229,57,53,.18);border-radius:6px;margin-top:.32rem"></div>
       <button type="button" id="cpRetry" style="display:none;margin-top:.38rem;padding:.32rem .85rem;border-radius:6px;background:var(--p);color:#fff;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600">↺ Reintentar</button>
@@ -1154,8 +1153,16 @@ body.dark-mode .wa-float{border:2px solid rgba(255,255,255,.12)}
 (function(){
 'use strict';
 var RECAPTCHA_SITE_KEY='6Lc9zGUsAAAAAG2K5TAav3VrS9obGfFqXO5cnOkV';
-var CP_TOKEN='36da398a-1848-44f3-a952-06c9bfb02cc8';
 var THEME_STORAGE_KEY='ava-credito-theme';
+
+// ══════════════════════════════════════════════════
+// NUEVO SERVICIO DE CÓDIGO POSTAL
+// API: https://mexico-api.devaleff.com/api/codigo-postal/{CP}
+// Sin API key, CORS abierto, debounce 400ms
+// ══════════════════════════════════════════════════
+var CP_URL = 'https://mexico-api.devaleff.com/api/codigo-postal/';
+var _cpTimer = null;
+
 function Q(id){return document.getElementById(id);}
 function V(id){var e=Q(id);return e?e.value:'';}
 function SHOW(id){var e=Q(id);if(e)e.style.display='';}
@@ -1186,17 +1193,14 @@ function handleFiles(fileList,type){var state=attachState[type];Array.from(fileL
 function removeFile(type,idx){var state=attachState[type];state.files.splice(idx,1);state.zipBlob=null;renderFileList(type);hideAttachMsg(type);updateCapacityBar(type);if(state.files.length>=1&&typeof JSZip!=='undefined')scheduleCompression(type);updateProgressBar();if(Q('sumBox')&&Q('sumBox').style.display!=='none')buildSummary();}
 function renderFileList(type){var list=Q('fileList'+type);list.innerHTML='';attachState[type].files.forEach(function(f,i){var item=document.createElement('div');item.className='attach-file-item';item.innerHTML='<span class="attach-file-icon">'+getFileIcon(f.name)+'</span><span class="attach-file-name">'+f.name+'</span><span class="attach-file-size">'+fmtBytes(f.size)+'</span><button type="button" class="attach-file-remove" onclick="removeFile(\''+type+'\','+i+')">\u00d7</button>';list.appendChild(item);});}
 function updateCapacityBar(type){var state=attachState[type];var wrap=Q('capacityWrap'+type);var bar=Q('attachBar'+type);var valEl=Q('capacityValue'+type);var dot=Q('attachDot'+type);var statusTxt=Q('attachStatusText'+type);var rtStats=Q('attachRealtime'+type);var rtCount=Q('attachCount'+type);var rtWeight=Q('attachWeight'+type);var errEl=Q('attachErr'+type);if(state.files.length===0){if(wrap)wrap.classList.remove('visible');if(rtStats)rtStats.classList.remove('visible');if(errEl)errEl.classList.remove('show');if(bar){bar.className='attach-bar-fill green';bar.style.width='0%';}return;}if(wrap)wrap.classList.add('visible');if(rtStats)rtStats.classList.add('visible');if(rtCount)rtCount.textContent=state.files.length;if(!state.zipBlob){var rawSize=state.files.reduce(function(s,f){return s+f.size;},0);var rawPct=Math.min(100,(rawSize/MAX_ZIP_BYTES)*100);if(bar){bar.className='attach-bar-fill green';bar.style.width=rawPct+'%';}if(dot){dot.className='attach-status-dot green';}if(statusTxt)statusTxt.textContent=state.compressing?'Comprimiendo archivos…':'ZIP listo — quedan '+fmtBytes(Math.max(0,MAX_ZIP_BYTES-rawSize))+' disponibles';if(valEl)valEl.textContent=fmtBytes(rawSize)+' de 5 MB (ZIP comprimido)';if(rtWeight)rtWeight.textContent=fmtBytes(rawSize);if(errEl)errEl.classList.remove('show');return;}var zSize=state.zipBlob.size;var pct=Math.min(100,(zSize/MAX_ZIP_BYTES)*100);var zStr=fmtBytes(zSize);if(bar)bar.style.width=pct+'%';if(valEl)valEl.textContent=zStr+' de 5 MB (ZIP comprimido)';if(rtWeight)rtWeight.textContent=zStr;if(bar)bar.className='attach-bar-fill';if(dot)dot.className='attach-status-dot';if(zSize>=MAX_ZIP_BYTES){if(bar)bar.classList.add('red');if(dot)dot.classList.add('red');if(statusTxt)statusTxt.textContent='ZIP supera 5 MB — elimina archivos';if(errEl){Q('attachErrText'+type).textContent='El ZIP pesa '+zStr+' y supera el límite. Elimina archivos.';errEl.classList.add('show');}}else if(zSize>=MAX_ZIP_BYTES*0.80){if(bar)bar.classList.add('yellow');if(dot)dot.classList.add('yellow');if(statusTxt)statusTxt.textContent='Casi lleno — quedan '+fmtBytes(MAX_ZIP_BYTES-zSize)+' en el ZIP';if(errEl)errEl.classList.remove('show');}else{if(bar)bar.classList.add('green');if(dot)dot.classList.add('green');if(statusTxt)statusTxt.textContent='ZIP listo — quedan '+fmtBytes(MAX_ZIP_BYTES-zSize)+' disponibles';if(errEl)errEl.classList.remove('show');}}
-function showAttachMsg(type,level,msg){var el=Q('attachErr'+type);var tx=Q('attachErrText'+type);if(tx)tx.textContent=msg;if(el)el.classList.add('show');}
 function hideAttachMsg(type){var el=Q('attachErr'+type);if(el)el.classList.remove('show');}
 function scheduleCompression(type){clearTimeout(compressionTimers[type]);compressionTimers[type]=setTimeout(function(){startCompression(type);},80);}
-function startCompression(type){var state=attachState[type];if(state.compressing){state.compressing=false;}if(state.files.length===0)return;if(!navigator.onLine){Q('offlineMsg'+type).classList.add('show');state.paused=true;Q('compressResume'+type).classList.add('show');Q('compressProgress'+type).classList.add('show');return;}var snapshot=state.files.slice();var runId=Date.now();var zip=new JSZip();var totalRaw=snapshot.reduce(function(a,f){return a+f.size;},0);var processed=0;state.compressing=true;state.paused=false;state.startTime=Date.now();state.elapsed=0;state._runId=runId;Q('compressProgress'+type).classList.add('show');updateCapacityBar(type);var ticker=setInterval(function(){if(!state.compressing||state._runId!==runId){clearInterval(ticker);return;}state.elapsed=Date.now()-state.startTime;var el=Q('compressElapsed'+type);if(el)el.textContent=fmtSec(state.elapsed/1000);},300);function abort(){clearInterval(ticker);state.compressing=false;Q('compressProgress'+type).classList.remove('show');}function processFile(idx){if(state._runId!==runId||!state.compressing){abort();return;}if(idx>=snapshot.length){Q('compressInfo'+type).textContent='Generando ZIP…';zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}},function(meta){if(state._runId!==runId)return;updateCompressUI(type,Math.round(meta.percent),processed,0,(Date.now()-state.startTime)/1000,totalRaw);}).then(function(blob){clearInterval(ticker);if(state._runId!==runId){abort();return;}state.compressing=false;state.zipBlob=blob;Q('compressProgress'+type).classList.remove('show');updateCapacityBar(type);var h=Q('attachHidden'+type);if(h)h.value='ZIP: archivos-'+getToday()+'.zip ('+fmtBytes(blob.size)+')';updateProgressBar();}).catch(function(){abort();showAttachMsg(type,'error','Error al comprimir. Intenta de nuevo.');});return;}var f=snapshot[idx];var reader=new FileReader();reader.onload=function(ev){if(state._runId!==runId){abort();return;}zip.file(f.name,ev.target.result);processed+=f.size;var pct=Math.round((processed/totalRaw)*70);updateCompressUI(type,pct,processed,totalRaw-processed,(Date.now()-state.startTime)/1000,totalRaw);if(!navigator.onLine){clearInterval(ticker);state.paused=true;state.compressing=false;Q('offlineMsg'+type).classList.add('show');Q('compressResume'+type).classList.add('show');return;}setTimeout(function(){processFile(idx+1);},0);};reader.onerror=function(){setTimeout(function(){processFile(idx+1);},0);};reader.readAsArrayBuffer(f);}processFile(0);}
+function startCompression(type){var state=attachState[type];if(state.compressing){state.compressing=false;}if(state.files.length===0)return;if(!navigator.onLine){Q('offlineMsg'+type).classList.add('show');state.paused=true;Q('compressResume'+type).classList.add('show');Q('compressProgress'+type).classList.add('show');return;}var snapshot=state.files.slice();var runId=Date.now();var zip=new JSZip();var totalRaw=snapshot.reduce(function(a,f){return a+f.size;},0);var processed=0;state.compressing=true;state.paused=false;state.startTime=Date.now();state.elapsed=0;state._runId=runId;Q('compressProgress'+type).classList.add('show');updateCapacityBar(type);var ticker=setInterval(function(){if(!state.compressing||state._runId!==runId){clearInterval(ticker);return;}state.elapsed=Date.now()-state.startTime;var el=Q('compressElapsed'+type);if(el)el.textContent=fmtSec(state.elapsed/1000);},300);function abort(){clearInterval(ticker);state.compressing=false;Q('compressProgress'+type).classList.remove('show');}function processFile(idx){if(state._runId!==runId||!state.compressing){abort();return;}if(idx>=snapshot.length){Q('compressInfo'+type).textContent='Generando ZIP…';zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}},function(meta){if(state._runId!==runId)return;updateCompressUI(type,Math.round(meta.percent),processed,0,(Date.now()-state.startTime)/1000,totalRaw);}).then(function(blob){clearInterval(ticker);if(state._runId!==runId){abort();return;}state.compressing=false;state.zipBlob=blob;Q('compressProgress'+type).classList.remove('show');updateCapacityBar(type);var h=Q('attachHidden'+type);if(h)h.value='ZIP: archivos-'+getToday()+'.zip ('+fmtBytes(blob.size)+')';updateProgressBar();}).catch(function(){abort();});return;}var f=snapshot[idx];var reader=new FileReader();reader.onload=function(ev){if(state._runId!==runId){abort();return;}zip.file(f.name,ev.target.result);processed+=f.size;var pct=Math.round((processed/totalRaw)*70);updateCompressUI(type,pct,processed,totalRaw-processed,(Date.now()-state.startTime)/1000,totalRaw);if(!navigator.onLine){clearInterval(ticker);state.paused=true;state.compressing=false;Q('offlineMsg'+type).classList.add('show');Q('compressResume'+type).classList.add('show');return;}setTimeout(function(){processFile(idx+1);},0);};reader.onerror=function(){setTimeout(function(){processFile(idx+1);},0);};reader.readAsArrayBuffer(f);}processFile(0);}
 function updateCompressUI(type,pct,done,remaining,elapsedSec,total){var ids={pct:'compressPct',bar:'compressBarFill',done:'compressDoneMB',rem:'compressRemMB',donePct:'compressDonePct',elapsed:'compressElapsed',eta:'compressEta',info:'compressInfo'};Object.keys(ids).forEach(function(k){var el=Q(ids[k]+type);if(!el)return;if(k==='pct')el.textContent=pct+'%';if(k==='bar')el.style.width=pct+'%';if(k==='done')el.textContent=fmtBytes(done);if(k==='rem')el.textContent=fmtBytes(remaining);if(k==='donePct')el.textContent=pct+'% completado';if(k==='elapsed')el.textContent=fmtSec(elapsedSec);if(k==='eta')el.textContent=(pct>5&&elapsedSec>0)?fmtSec((elapsedSec/pct)*(100-pct)):'—';if(k==='info')el.textContent='Procesando '+attachState[type].files.length+' archivo(s)…';});}
 window.addEventListener('online',function(){Object.keys(attachState).forEach(function(type){var state=attachState[type];Q('offlineMsg'+type).classList.remove('show');if(state.paused&&state.files.length>=1){state.paused=false;startCompression(type);}});});
 window.addEventListener('offline',function(){Object.keys(attachState).forEach(function(type){var state=attachState[type];Q('offlineMsg'+type).classList.add('show');if(state.compressing){state.paused=true;state.compressing=false;state.elapsed=Date.now()-state.startTime;Q('compressResume'+type).classList.add('show');}});});
 
 function setSumBadge(state){var badge=Q('sumBadge');var txt=Q('sumBadgeTxt');if(!badge||!txt)return;badge.classList.remove('pending','warn','ok');badge.classList.add(state);var labels={pending:'Pendiente',warn:'Incompleto',ok:'Listo'};txt.textContent=labels[state]||state;}
-function updateSumRow(id,value){var el=Q('val-'+id);if(!el)return;var empty=!value||!String(value).trim();el.textContent=empty?'—':String(value).toUpperCase();el.className='sum-v'+(empty?' empty':'');var row=el.closest('.sum-row');if(row){row.classList.remove('row-updated');void row.offsetWidth;row.classList.add('row-updated');}}
-function updateSumRowChip(id,value,chipClass){var container=Q('val-'+id);if(!container)return;var empty=!value||!String(value).trim();var parent=container.parentNode;var newEl=document.createElement('span');newEl.id='val-'+id;if(empty){newEl.className='sum-v empty';newEl.textContent='—';}else{newEl.className='sum-chip'+(chipClass?' '+chipClass:'');newEl.textContent=value;}parent.replaceChild(newEl,container);var row=newEl.closest('.sum-row');if(row){row.classList.remove('row-updated');void row.offsetWidth;row.classList.add('row-updated');}}
 
 var motivShown={25:false,50:false,75:false,100:false};
 var lastPct=0;
@@ -1204,7 +1208,7 @@ function showMotivModal(id){var el=Q(id);if(el)el.classList.add('show');document
 function closeMotivModal(id){var el=Q(id);if(el)el.classList.remove('show');var modals=['motivModal25','motivModal50','motivModal75','motivModal100','successOverlay'];var anyOpen=modals.some(function(mid){var e=Q(mid);return e&&e.classList.contains('show');});if(!anyOpen)document.body.style.overflow='';}
 function showSuccessModal(){Q('successOverlay').classList.add('show');document.body.style.overflow='hidden';}
 function closeSuccessModal(){Q('successOverlay').classList.remove('show');document.body.style.overflow='';resetForm();Object.keys(attachState).forEach(function(type){attachState[type]={files:[],zipBlob:null,compressing:false,paused:false,startTime:null,elapsed:0,_runId:null};var fl=Q('fileList'+type);if(fl)fl.innerHTML='';var cp=Q('compressProgress'+type);if(cp)cp.classList.remove('show');var om=Q('offlineMsg'+type);if(om)om.classList.remove('show');updateCapacityBar(type);});motivShown={25:false,50:false,75:false,100:false};lastPct=0;window.scrollTo({top:0,behavior:'smooth'});}
-function resetForm(){Q('frm').reset();document.querySelectorAll('.ok,.bad').forEach(function(el){el.classList.remove('ok','bad');});document.querySelectorAll('.em').forEach(function(el){el.textContent='';});Q('regimenBlk').classList.remove('open');Q('depBlk').classList.remove('open');Q('depAges').innerHTML='';HIDE('colBlk');Q('municipio').value='';Q('estado').value='';Q('hCiu').value='';Q('colSel').value='';HIDE('colRegLbl');HIDE('colSel');Q('colonia').innerHTML='<option value="" disabled selected>Selecciona tu colonia</option>';declChecked=false;Q('chkVis').classList.remove('on');Q('declBox').classList.remove('ok','bad');Q('declVal').value='';syncSubmitBtn();slideTo(1);updateProgressBar();}
+function resetForm(){clearTimeout(_cpTimer);Q('frm').reset();document.querySelectorAll('.ok,.bad').forEach(function(el){el.classList.remove('ok','bad');});document.querySelectorAll('.em').forEach(function(el){el.textContent='';});Q('regimenBlk').classList.remove('open');Q('depBlk').classList.remove('open');Q('depAges').innerHTML='';HIDE('colBlk');Q('municipio').value='';Q('estado').value='';Q('hCiu').value='';Q('colSel').value='';HIDE('colRegLbl');HIDE('colSel');Q('colonia').innerHTML='<option value="" disabled selected>Selecciona tu colonia</option>';HIDE('cpErrBox');HIDE('cpRetry');declChecked=false;Q('chkVis').classList.remove('on');Q('declBox').classList.remove('ok','bad');Q('declVal').value='';syncSubmitBtn();slideTo(1);updateProgressBar();}
 document.addEventListener('click',function(e){if(e.target&&e.target.id==='successOverlay')closeSuccessModal();});
 
 var cur=1,TOTAL=5;
@@ -1240,15 +1244,156 @@ initTelField('f2t','ladaf2t','f2tFull','f2tWr');
 initTelField('a1t','ladaa1t','a1tFull','a1tWr');
 initTelField('a2t','ladaa2t','a2tFull','a2tWr');
 
-function cpClear(){HIDE('cpSpin');Q('cp').disabled=false;HIDE('cpErrBox');Q('cpErrBox').textContent='';HIDE('cpRetry');HIDE('colBlk');Q('colonia').innerHTML='<option value="" disabled selected>Selecciona tu colonia</option>';Q('colonia').classList.remove('ok','bad');Q('colCnt').textContent='';HIDE('colRegLbl');HIDE('colSel');Q('colSel').value='';Q('municipio').value='';Q('municipio').classList.remove('ok','bad','autofill');Q('estado').value='';Q('estado').classList.remove('ok','bad','autofill');Q('hCiu').value='';clrErr('cp');updateProgressBar();}
-function cpFail(msg){HIDE('cpSpin');Q('cp').disabled=false;Q('cpErrBox').textContent=msg;SHOW('cpErrBox');SHOW('cpRetry');setErr('cp',msg);updateProgressBar();}
-function cpFetch(cp){cpClear();SHOW('cpSpin');Q('cp').disabled=true;clrErr('cp');fetch('https://api.copomex.com/query/info_cp/'+cp+'?token='+CP_TOKEN).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(function(data){HIDE('cpSpin');Q('cp').disabled=false;if(!Array.isArray(data)||data.length===0){cpFail('Código postal no encontrado.');return;}var first=data[0];if(first.error===true||first.error==='true'){cpFail(first.error_message||'C.P. no encontrado.');return;}var resp=first.response||{};var mun=resp.municipio||'',est=resp.estado||'',ciu=resp.ciudad||'';if(mun){Q('municipio').value=mun;Q('municipio').classList.add('ok','autofill');}if(est){Q('estado').value=est;Q('estado').classList.add('ok','autofill');}if(ciu)Q('hCiu').value=ciu;var seen={},cols=[];data.forEach(function(item){if(!item.error&&item.response&&item.response.asentamiento){var c=(item.response.asentamiento||'').trim();if(c&&!seen[c]){seen[c]=1;cols.push(c);}}});cols.sort(function(a,b){return a.localeCompare(b,'es',{sensitivity:'base'});});if(cols.length===0){cpFail('No se encontraron colonias para este C.P.');return;}var sel=Q('colonia');cols.forEach(function(c){var o=document.createElement('option');o.value=c;o.textContent=c;sel.appendChild(o);});Q('colCnt').textContent=cols.length+' colonia'+(cols.length!==1?'s':'');SHOW('colBlk');Q('cp').classList.add('ok');Q('cp').classList.remove('bad');updateProgressBar();}).catch(function(err){HIDE('cpSpin');Q('cp').disabled=false;cpFail(err.message&&err.message.indexOf('HTTP')===0?'Error '+err.message+' al consultar COPOMEX.':'Sin conexión con COPOMEX.');});}
-function cpTrigger(){var v=Q('cp').value.replace(/\D/g,'');Q('cp').value=v;if(v.length===5)cpFetch(v);else if(v.length>0)setErr('cp','El código postal debe tener 5 dígitos.');}
-Q('cp').addEventListener('blur',cpTrigger);
-Q('cp').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();cpTrigger();}});
-Q('cp').addEventListener('input',function(){var raw=this.value.replace(/\D/g,'').slice(0,5);if(this.value!==raw)this.value=raw;cpClear();this.classList.remove('ok','bad');});
-Q('cpRetry').addEventListener('click',function(){var v=Q('cp').value.replace(/\D/g,'');if(v.length===5)cpFetch(v);});
-Q('colonia').addEventListener('change',function(){if(this.value){this.classList.add('ok');this.classList.remove('bad');Q('colSel').value=this.value;SHOW('colRegLbl');SHOW('colSel');clrErr('colonia');}else{Q('colSel').value='';HIDE('colRegLbl');HIDE('colSel');}updateProgressBar();});
+// ══════════════════════════════════════════════════════════════
+// FUNCIÓN DE CÓDIGO POSTAL — Nueva API: mexico-api.devaleff.com
+// ══════════════════════════════════════════════════════════════
+function cpReset(){
+  clearTimeout(_cpTimer);
+  Q('municipio').value='';
+  Q('municipio').classList.remove('ok','bad','autofill');
+  Q('estado').value='';
+  Q('estado').classList.remove('ok','bad','autofill');
+  Q('hCiu').value='';
+  Q('colonia').innerHTML='<option value="" disabled selected>Selecciona tu colonia</option>';
+  Q('colonia').classList.remove('ok','bad');
+  Q('colCnt').textContent='';
+  HIDE('colBlk');
+  HIDE('colRegLbl');
+  HIDE('colSel');
+  Q('colSel').value='';
+  HIDE('cpErrBox');
+  Q('cpErrBox').textContent='';
+  HIDE('cpRetry');
+  HIDE('cpSpin');
+  Q('cp').disabled=false;
+  clrErr('cp');
+  updateProgressBar();
+}
+
+function cpShowErr(msg){
+  HIDE('cpSpin');
+  Q('cp').disabled=false;
+  Q('cpErrBox').textContent=msg;
+  SHOW('cpErrBox');
+  SHOW('cpRetry');
+  setErr('cp',msg);
+  updateProgressBar();
+}
+
+function cpFetch(cpVal){
+  cpReset();
+  SHOW('cpSpin');
+  Q('cp').disabled=true;
+  clrErr('cp');
+
+  fetch(CP_URL + encodeURIComponent(cpVal))
+    .then(function(res){
+      if(res.status===404) throw {handled:true,msg:'Código postal no encontrado.'};
+      if(!res.ok) throw {handled:true,msg:'Error del servidor. Intenta de nuevo.'};
+      return res.json();
+    })
+    .then(function(json){
+      HIDE('cpSpin');
+      Q('cp').disabled=false;
+      var rows=json.data;
+      if(!Array.isArray(rows)||rows.length===0){
+        cpShowErr('Código postal no encontrado.');
+        return;
+      }
+      // Rellenar estado y municipio
+      // CRÍTICO: D_mnpio tiene la D en MAYÚSCULA
+      var est=(rows[0].d_estado||'').trim();
+      var mun=(rows[0].D_mnpio||rows[0].d_ciudad||'').trim();
+      var ciu=(rows[0].d_ciudad||'').trim();
+
+      if(est){Q('estado').value=est;Q('estado').classList.add('ok','autofill');}
+      if(mun){Q('municipio').value=mun;Q('municipio').classList.add('ok','autofill');}
+      if(ciu) Q('hCiu').value=ciu;
+
+      // Recolectar colonias únicas y ordenadas
+      var seen={},colonias=[];
+      rows.forEach(function(r){
+        var c=(r.d_asenta||'').trim();
+        if(c&&!seen[c]){seen[c]=true;colonias.push(c);}
+      });
+      colonias.sort(function(a,b){return a.localeCompare(b,'es',{sensitivity:'base'});});
+
+      if(colonias.length===0){
+        cpShowErr('No se encontraron colonias para este C.P.');
+        return;
+      }
+
+      // Poblar el selector — visible siempre que haya >= 1 colonia
+      var sel=Q('colonia');
+      sel.innerHTML = colonias.length>1
+        ? '<option value="" disabled selected>Selecciona tu colonia</option>'
+        : '';
+      colonias.forEach(function(c){
+        var o=document.createElement('option');
+        o.value=o.textContent=c;
+        sel.appendChild(o);
+      });
+      // Si sólo hay 1 colonia, preseleccionarla
+      if(colonias.length===1){
+        sel.value=colonias[0];
+        Q('colSel').value=colonias[0];
+        SHOW('colRegLbl');
+        SHOW('colSel');
+      }
+
+      Q('colCnt').textContent=colonias.length+' colonia'+(colonias.length!==1?'s':'');
+      SHOW('colBlk');
+      Q('cp').classList.add('ok');
+      Q('cp').classList.remove('bad');
+      clrErr('cp');
+      updateProgressBar();
+    })
+    .catch(function(err){
+      HIDE('cpSpin');
+      Q('cp').disabled=false;
+      var msg=(err&&err.handled)
+        ? err.msg
+        : (navigator.onLine
+            ? 'No se pudo consultar el C.P. Intenta de nuevo.'
+            : 'Sin conexión a internet.');
+      cpShowErr(msg);
+    });
+}
+
+// Disparar con debounce al completar 5 dígitos (sólo dígitos)
+Q('cp').addEventListener('input',function(){
+  var raw=this.value.replace(/\D/g,'').slice(0,5);
+  if(this.value!==raw) this.value=raw;
+  cpReset();
+  this.classList.remove('ok','bad');
+  if(raw.length===5){
+    clearTimeout(_cpTimer);
+    _cpTimer=setTimeout(function(){cpFetch(raw);},400);
+  }
+});
+
+// Reintentar manualmente
+Q('cpRetry').addEventListener('click',function(){
+  var v=Q('cp').value.replace(/\D/g,'');
+  if(v.length===5) cpFetch(v);
+});
+
+Q('colonia').addEventListener('change',function(){
+  if(this.value){
+    this.classList.add('ok');
+    this.classList.remove('bad');
+    Q('colSel').value=this.value;
+    SHOW('colRegLbl');
+    SHOW('colSel');
+    clrErr('colonia');
+  }else{
+    Q('colSel').value='';
+    HIDE('colRegLbl');
+    HIDE('colSel');
+  }
+  updateProgressBar();
+});
+// ══════════════════════════════════════════════════════════════
 
 Q('marca').addEventListener('change',function(){var blk=Q('otraMarcaBlk'),inp=Q('otraMarca');if(this.value==='Otra'){blk.style.display='';inp.disabled=false;inp.focus();}else{blk.style.display='none';inp.disabled=true;inp.value='';inp.classList.remove('ok','bad');var e=Q('eotraMarca');if(e)e.textContent='';}clrErr('marca');updateProgressBar();});
 
