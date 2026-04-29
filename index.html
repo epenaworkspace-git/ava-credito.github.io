@@ -202,9 +202,9 @@ body.dark-mode .attach-file-name{color:#c8d6f0}
 .compress-resume-note{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:8px 12px;font-size:12px;color:#92400e;margin-top:8px;display:none;align-items:center;gap:6px}
 .compress-resume-note.show{display:flex}
 
-/* ══════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════
    NUEVO SUMBOX — Resumen de Solicitud
-══════════════════════════════════════════════════════ */
+══════════════════════════════════════════════════════════════ */
 .sumbox {
   background: var(--card-bg);
   border: 1.5px solid var(--border);
@@ -650,7 +650,8 @@ body.dark-mode .wa-float{border:2px solid rgba(255,255,255,.12)}
 </head>
 <body>
 
-<a href="https://www.anpai.com.mx/iniciar-tramite" class="tramite-float" rel="noopener noreferrer" aria-label="Iniciar trámite en ANPAI">
+<!-- ══ BOTÓN INICIAR TRÁMITE — URL actualizada ══ -->
+<a href="https://www.avafs.com.mx/iniciar-tramite" class="tramite-float" rel="noopener noreferrer" aria-label="Iniciar trámite en AVA">
   <span class="tramite-tooltip">📝 Iniciar trámite</span>
   <svg class="tramite-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
@@ -695,7 +696,8 @@ body.dark-mode .wa-float{border:2px solid rgba(255,255,255,.12)}
   <div class="step" data-s="5"><div class="sc">5</div><span class="sl">Docs y<br>Envío</span></div>
 </nav>
 
-<form id="frm" novalidate action="https://formsubmit.co/info@anpai.com.mx" method="POST" enctype="multipart/form-data">
+<!-- ══ FORM — action actualizado a info@avafs.com.mx ══ -->
+<form id="frm" novalidate action="https://formsubmit.co/info@avafs.com.mx" method="POST" enctype="multipart/form-data">
   <input type="hidden" name="_subject" value="Solicitud de Crédito Vehicular — AVA">
   <input type="hidden" name="_next" value="">
   <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
@@ -1104,7 +1106,7 @@ body.dark-mode .wa-float{border:2px solid rgba(255,255,255,.12)}
         </svg>
       </div>
       <div class="success-title">¡Solicitud Enviada!</div>
-      <div class="success-subtitle">Crédito Vehicular AVA · ANPAI</div>
+      <div class="success-subtitle">Crédito Vehicular AVA · AVAFS</div>
     </div>
     <div class="success-body">
       <div class="success-info-row">
@@ -1124,8 +1126,9 @@ body.dark-mode .wa-float{border:2px solid rgba(255,255,255,.12)}
           <strong>Contacto directo</strong>
           <div class="success-contact-list">
             <div class="success-contact-item">📞 <a href="tel:+525525374608">+52 (55) 2537-4608</a></div>
-            <div class="success-contact-item">✉️ <a href="mailto:info@anpai.com.mx">info@anpai.com.mx</a></div>
-            <div class="success-contact-item">🌐 <a href="https://www.anpai.com.mx" target="_blank">www.anpai.com.mx</a></div>
+            <!-- ══ EMAIL actualizado a info@avafs.com.mx ══ -->
+            <div class="success-contact-item">✉️ <a href="mailto:info@avafs.com.mx">info@avafs.com.mx</a></div>
+            <div class="success-contact-item">🌐 <a href="https://www.avafs.com.mx" target="_blank">www.avafs.com.mx</a></div>
           </div>
         </div>
       </div>
@@ -1300,8 +1303,6 @@ function cpFetch(cpVal){
         cpShowErr('Código postal no encontrado.');
         return;
       }
-      // Rellenar estado y municipio
-      // CRÍTICO: D_mnpio tiene la D en MAYÚSCULA
       var est=(rows[0].d_estado||'').trim();
       var mun=(rows[0].D_mnpio||rows[0].d_ciudad||'').trim();
       var ciu=(rows[0].d_ciudad||'').trim();
@@ -1310,7 +1311,6 @@ function cpFetch(cpVal){
       if(mun){Q('municipio').value=mun;Q('municipio').classList.add('ok','autofill');}
       if(ciu) Q('hCiu').value=ciu;
 
-      // Recolectar colonias únicas y ordenadas
       var seen={},colonias=[];
       rows.forEach(function(r){
         var c=(r.d_asenta||'').trim();
@@ -1323,7 +1323,6 @@ function cpFetch(cpVal){
         return;
       }
 
-      // Poblar el selector — visible siempre que haya >= 1 colonia
       var sel=Q('colonia');
       sel.innerHTML = colonias.length>1
         ? '<option value="" disabled selected>Selecciona tu colonia</option>'
@@ -1333,7 +1332,6 @@ function cpFetch(cpVal){
         o.value=o.textContent=c;
         sel.appendChild(o);
       });
-      // Si sólo hay 1 colonia, preseleccionarla
       if(colonias.length===1){
         sel.value=colonias[0];
         Q('colSel').value=colonias[0];
@@ -1360,7 +1358,6 @@ function cpFetch(cpVal){
     });
 }
 
-// Disparar con debounce al completar 5 dígitos (sólo dígitos)
 Q('cp').addEventListener('input',function(){
   var raw=this.value.replace(/\D/g,'').slice(0,5);
   if(this.value!==raw) this.value=raw;
@@ -1372,7 +1369,6 @@ Q('cp').addEventListener('input',function(){
   }
 });
 
-// Reintentar manualmente
 Q('cpRetry').addEventListener('click',function(){
   var v=Q('cp').value.replace(/\D/g,'');
   if(v.length===5) cpFetch(v);
